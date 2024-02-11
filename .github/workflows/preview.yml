@@ -21,9 +21,10 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 6
           run_install: false
       - uses: actions/checkout@v2
+      
       - name: Install Vite
         run: pnpm --global add vite
 
