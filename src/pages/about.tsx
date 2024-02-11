@@ -1,5 +1,11 @@
+import Coutner from '@/components/Coutner'
+
 function about() {
-  return <div>about</div>
+  return (
+    <div>
+      <Coutner />
+    </div>
+  )
 }
 
 export default about
