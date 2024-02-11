@@ -1,4 +1,5 @@
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
+import { Toaster, toast } from 'sonner'
 import { Button } from './components/ui/button'
 import Home from '@/pages/home'
 import About from '@/pages/about'
@@ -6,7 +7,7 @@ import About from '@/pages/about'
 function App() {
   return (
     <div className=" h-screen">
-      <Button>Click me</Button>
+      <Button onClick={() => toast('This is a sonner toast')}>Click me</Button>
       <NavLink to="/" className="text-pink-400">
         hello
       </NavLink>
@@ -25,6 +26,7 @@ function WrappedApp() {
   return (
     <BrowserRouter>
       <App />
+      <Toaster />
     </BrowserRouter>
   )
 }
