@@ -1,10 +1,12 @@
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
+import { Button } from './components/ui/button'
 import Home from '@/pages/home'
 import About from '@/pages/about'
 
 function App() {
   return (
-    <>
+    <div className=" h-screen">
+      <Button>Click me</Button>
       <NavLink to="/" className="text-pink-400">
         hello
       </NavLink>
@@ -15,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
       </Routes>
-    </>
+    </div>
   )
 }
 
