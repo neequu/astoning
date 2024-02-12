@@ -1,21 +1,10 @@
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
-import Home from '@/pages/home'
-import About from '@/pages/about'
+import { BrowserRouter } from 'react-router-dom'
+import { Toaster } from 'sonner'
+import { Layout } from '@/components/Layout'
 
 function App() {
   return (
-    <>
-      <NavLink to="/" className="text-pink-400">
-        hello
-      </NavLink>
-      <NavLink to="/about" className="text-pink-400">
-        ab
-      </NavLink>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </>
+    <Layout />
   )
 }
 
@@ -23,6 +12,7 @@ function WrappedApp() {
   return (
     <BrowserRouter>
       <App />
+      <Toaster />
     </BrowserRouter>
   )
 }
