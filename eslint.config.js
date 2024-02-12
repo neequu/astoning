@@ -6,5 +6,6 @@ export default antfu({
     'import/prefer-default-export': 'off',
     'react/jsx-no-useless-fragment': 'error',
     'no-unused-expressions': 'error',
+    'ts/no-explicit-any': 'warn',
   },
 })

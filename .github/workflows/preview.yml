@@ -36,6 +36,6 @@ jobs:
 
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-        
+
       - name: Deploy to Vercel
         run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
