@@ -1,5 +1,3 @@
-function home() {
+export function Home() {
   return <div>home</div>
 }
-
-export default home
