@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { HiddenTextBlock } from '@/components/utils/HiddenTextBlock'
+import { HiddenTextBlock } from '@/components/misc/HiddenTextBlock'
 import type { Anime } from '@/types/anime'
 
 interface Props {

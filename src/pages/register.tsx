@@ -1,10 +1,10 @@
 import { AuthForm } from '@/components/AuthForm'
-import { PageContent } from '@/components/PageContent'
+import { PageWrapper } from '@/components/wrappers/PageWrapper'
 
 export default function Register() {
   return (
-    <PageContent className="mt-28">
+    <PageWrapper className="mt-28">
       <AuthForm />
-    </PageContent>
+    </PageWrapper>
   )
 }

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Logo } from '@/components/Logo'
+import { Logo } from '@/components/misc/Logo'
 import { TheNav } from '@/components/TheNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
 

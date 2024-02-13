@@ -10,20 +10,16 @@ import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { SearchResults } from '@/components/search/SearchResults'
-import { PageContent } from '@/components/PageContent'
+import { PageWrapper } from '@/components/wrappers/PageWrapper'
 
 export default function Search() {
+  const navigate = useNavigate()
+
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const debouncedQuery = useDebounce(query)
 
   const { data: animeData, isLoading, isError, isSuccess } = useGetAnimeSearchQuery(debouncedQuery)
-
-  const navigate = useNavigate()
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-  }
 
   function handleQueryChange(newQuery: string) {
     setQuery(newQuery)
@@ -38,8 +34,8 @@ export default function Search() {
   }, [debouncedQuery, navigate])
 
   return (
-    <PageContent>
-      <SearchForm value={query} handleSubmit={handleSubmit} changeQuery={handleQueryChange} autoFocus />
+    <PageWrapper>
+      <SearchForm value={query} handleSubmit={e => e.preventDefault()} changeQuery={handleQueryChange} autoFocus />
 
       {isLoading && <LoadingSkeleton />}
       {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
@@ -55,6 +51,6 @@ export default function Search() {
         </SearchResults>
       )}
 
-    </PageContent>
+    </PageWrapper>
   )
 }

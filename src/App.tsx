@@ -1,15 +1,15 @@
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { ErrorBoundary } from '@/components/error/ErrorBoundary'
-import { Layout } from '@/components/Layout'
+import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
 import Router from '@/router'
 import { ThemeProvider } from '@/providers/theme-provider'
 
 function App() {
   return (
-    <Layout>
+    <LayoutWrapper>
       <Router />
-    </Layout>
+    </LayoutWrapper>
   )
 }
 

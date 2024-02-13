@@ -5,7 +5,7 @@ interface Props {
   className?: string
 }
 
-export function PageContent({ children, className }: Props) {
+export function PageWrapper({ children, className }: Props) {
   return (
     <section className={cn('py-12 flex-1 flex flex-col', className)}>
       {children}

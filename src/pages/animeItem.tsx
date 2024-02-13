@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { PageContent } from '@/components/PageContent'
+import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useGetAnimeByIdQuery } from '@/redux/apis/animeApi'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
@@ -20,7 +20,7 @@ export default function AnimeItem() {
   const { isError, isLoading, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
   return (
-    <PageContent>
+    <PageWrapper>
       <section>
         {isLoading && <LoadingSkeleton className="mt-6" />}
         {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
@@ -28,6 +28,6 @@ export default function AnimeItem() {
         {isSuccess && <AnimeCard item={animeData.data} />}
 
       </section>
-    </PageContent>
+    </PageWrapper>
   )
 }

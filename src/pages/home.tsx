@@ -7,7 +7,7 @@ import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
-import { PageContent } from '@/components/PageContent'
+import { PageWrapper } from '@/components/wrappers/PageWrapper'
 
 export default function Home() {
   const { data: animeData, isError, isLoading, isSuccess } = useGetAnimeQuery()
@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   return (
-    <PageContent>
+    <PageWrapper>
       <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange} />
 
       {isLoading && <LoadingSkeleton />}
@@ -41,6 +41,6 @@ export default function Home() {
         </MediaGrid>
       )}
 
-    </PageContent>
+    </PageWrapper>
   )
 }
