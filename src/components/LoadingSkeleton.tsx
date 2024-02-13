@@ -1,8 +1,13 @@
 import { Spinner } from '@/components/ui/spinner'
+import { cn } from '@/lib/utils'
 
-export function LoadingSkeleton() {
+interface Props {
+  className?: string
+}
+
+export function LoadingSkeleton({ className }: Props) {
   return (
-    <div className="flex items-center justify-center">
+    <div className={cn('flex items-center justify-center', className)}>
       <Spinner />
     </div>
   )

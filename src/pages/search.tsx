@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useDebounce } from '@/hooks/useDebounce'
 import { useGetAnimeSearchQuery } from '@/redux/apis/animeApi'
-import { SearchForm } from '@/components/SearchForm'
+import { useDebounce } from '@/hooks/useDebounce'
 import { transformQuery } from '@/lib/utils'
+
+import { SearchForm } from '@/components/SearchForm'
+import { MediaGrid } from '@/components/MediaGrid'
+import { MediaCard } from '@/components/MediaCard'
+import { LoadingSkeleton } from '@/components/LoadingSkeleton'
+import { SearchMessage } from '@/components/SearchMessage'
+import { SearchResults } from '@/components/SearchResults'
+import { PageContent } from '@/components/PageContent'
 
 export default function Search() {
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
-  const debouncedQuery = useDebounce(query, 500)
+  const debouncedQuery = useDebounce(query)
 
   const { data: animeData, isLoading, isError, isSuccess } = useGetAnimeSearchQuery(debouncedQuery)
 
@@ -31,35 +38,25 @@ export default function Search() {
   }, [debouncedQuery, navigate])
 
   return (
-    <div>
-      <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange} />
+    <PageContent>
+      <SearchForm value={query} handleSubmit={handleSubmit} changeQuery={handleQueryChange} autoFocus />
 
-      {/* todo: move to comp Loader */}
-      {isLoading && <p>loading...</p>}
+      <section>
+        {isLoading && <LoadingSkeleton className="mt-6" />}
+        {isError && <SearchMessage message="There was an error :(" className="mt-10 text-red-600" />}
+        {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
 
-      {/* todo: move to comp Error */}
-      {isError && <p>there was an error</p>}
+        {isSuccess && (
+          <SearchResults>
+            <MediaGrid>
+              {animeData.data.map(item => (
+                <MediaCard key={item.mal_id} item={item} />
+              ))}
+            </MediaGrid>
+          </SearchResults>
+        )}
 
-      {/* todo: move to comp NoResults */}
-      {isSuccess && animeData.pagination.items.count === 0 && <p>no results</p>}
-
-      {/* todo: move to comp Grid */}
-      {isSuccess && (
-        <div>
-          <p>
-            Results:
-            {animeData.pagination.items.count}
-          </p>
-
-          {animeData.data.map(anime => (
-            <div key={anime.mal_id}>
-              {anime.title_japanese}
-            </div>
-          ))}
-
-        </div>
-      )}
-
-    </div>
+      </section>
+    </PageContent>
   )
 }
