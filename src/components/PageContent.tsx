@@ -4,7 +4,7 @@ interface Props {
 
 export function PageContent({ children }: Props) {
   return (
-    <div className="py-6">
+    <div className="py-12">
       {children}
     </div>
   )

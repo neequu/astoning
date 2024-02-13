@@ -12,8 +12,8 @@ export function MediaCard({ item }: Props) {
   return (
     <div className="shadow-lg rounded-md overflow-hidden p-4 flex flex-col">
       <div className="mb-4">
-        <p className="text-zinc-800 font-semibold text-xl line-clamp-1">{item.title}</p>
-        <div className="flex gap-1 items-center text-zinc-400 ">
+        <p className="font-semibold text-xl line-clamp-1">{item.title}</p>
+        <div className="flex gap-1 items-center text-muted-foreground ">
           <p className="line-clamp-1 text-sm">{item.type}</p>
           <p className="line-clamp-1 text-sm">{item.year}</p>
         </div>

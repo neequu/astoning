@@ -7,7 +7,7 @@ interface Props {
 
 export function SearchMessage({ message, className }: Props) {
   return (
-    <div className={cn('text-zinc-400 flex justify-center font-semibold', className)}>
+    <div className={cn('text-muted-foreground flex justify-center font-semibold', className)}>
       <p>{message}</p>
     </div>
   )

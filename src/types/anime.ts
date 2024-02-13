@@ -24,6 +24,7 @@ export interface Anime {
   year: number | null
   rating: string
   type: string
+  synopsis: string
 }
 
 export interface ApiResponse {

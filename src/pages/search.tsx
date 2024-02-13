@@ -43,7 +43,7 @@ export default function Search() {
 
       <section>
         {isLoading && <LoadingSkeleton className="mt-6" />}
-        {isError && <SearchMessage message="There was an error :(" className="mt-10 text-red-600" />}
+        {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
         {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
 
         {isSuccess && (
