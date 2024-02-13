@@ -12,14 +12,19 @@ export interface Pagination {
 export interface Anime {
   mal_id: number
   url: string
-  images: { [key: string]: Image }
-  title_english: string
+  images: {
+    jpg: Image
+    webp: Image
+  }
+  title: string
   title_japanese: string
   episodes: number
   duration: string
   score: number
-  year: number
+  year: number | null
   rating: string
+  type: string
+  synopsis: string
 }
 
 export interface ApiResponse {

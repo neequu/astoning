@@ -5,7 +5,7 @@ import { TheNav } from '@/components/TheNav'
 export function TheHeader() {
   return (
     <header>
-      <div className="container py-2 mx-auto px-4 flex justify-between items-center">
+      <div className="container py-3 mx-auto px-4 flex justify-between items-center">
         <NavLink to="/">
           <Logo />
         </NavLink>
