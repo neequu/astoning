@@ -3,6 +3,7 @@ import { Toaster } from 'sonner'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Layout } from '@/components/Layout'
 import Router from '@/router'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function WrappedApp() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
-        <App />
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <App />
+        </ThemeProvider>
       </ErrorBoundary>
       <Toaster />
     </BrowserRouter>

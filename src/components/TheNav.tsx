@@ -8,7 +8,11 @@ import { Button } from '@/components/ui/button'
 import { disauthorize } from '@/redux/slices/authSlice'
 import type { RootState } from '@/redux'
 
-export function TheNav() {
+interface Props {
+  children?: React.ReactNode
+}
+
+export function TheNav({ children }: Props) {
   // todo: change to get session from backend
   const isAuth = useSelector((state: RootState) => state.auth.isAuth)
   const dispatch = useDispatch()
@@ -21,22 +25,25 @@ export function TheNav() {
 
   return (
     <nav className="flex items-center gap-2">
+      {children}
+
       {isAuth
         ? (
           <>
-            <Button asChild variant="ghost" size="icon">
+            <Button asChild variant="outline" size="icon">
               <NavLink to="/favorites">
-                <HeartIcon />
+                <HeartIcon className="h-[1.2rem] w-[1.2rem] scale-100 transition-all " />
               </NavLink>
             </Button>
-            <Button asChild variant="ghost" size="icon">
+            <Button asChild variant="outline" size="icon">
               <NavLink to="/history">
-                <Clock8Icon />
+                <Clock8Icon className="h-[1.2rem] w-[1.2rem] scale-100 transition-all " />
               </NavLink>
             </Button>
-            <Button onClick={signOut} size="icon">
-              <LogOutIcon />
+            <Button onClick={signOut} variant="outline" size="icon">
+              <LogOutIcon className="h-[1.2rem] w-[1.2rem] scale-100 transition-all " />
             </Button>
+
           </>
           )
         : (
@@ -53,6 +60,7 @@ export function TheNav() {
             </Button>
           </>
           )}
+
     </nav>
   )
 }

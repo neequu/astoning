@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { Logo } from '@/components/Logo'
 import { TheNav } from '@/components/TheNav'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 export function TheHeader() {
   return (
@@ -9,7 +10,9 @@ export function TheHeader() {
         <NavLink to="/">
           <Logo />
         </NavLink>
-        <TheNav />
+        <TheNav>
+          <ThemeToggle />
+        </TheNav>
       </div>
     </header>
   )
