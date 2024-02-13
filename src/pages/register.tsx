@@ -1,6 +1,6 @@
 import { Auth } from '@/components/Auth'
 
-export function Register() {
+export default function Register() {
   return (
     <Auth />
   )

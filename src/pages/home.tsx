@@ -4,7 +4,7 @@ import { useGetAnimeQuery } from '@/redux/apis/animeApi'
 import { SearchForm } from '@/components/SearchForm'
 import { transformQuery } from '@/lib/utils'
 
-export function Home() {
+export default function Home() {
   const { data: animeData, isError, isLoading, isSuccess } = useGetAnimeQuery()
 
   const [query, setQuery] = useState('')

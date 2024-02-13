@@ -1,5 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'sonner'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Layout } from '@/components/Layout'
 
 function App() {
@@ -11,7 +12,9 @@ function App() {
 function WrappedApp() {
   return (
     <BrowserRouter>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
       <Toaster />
     </BrowserRouter>
   )

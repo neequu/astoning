@@ -1,6 +1,6 @@
 import { Auth } from '@/components/Auth'
 
-export function Login() {
+export default function Login() {
   return (
     <Auth />
   )

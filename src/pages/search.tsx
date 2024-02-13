@@ -5,7 +5,7 @@ import { useGetAnimeSearchQuery } from '@/redux/apis/animeApi'
 import { SearchForm } from '@/components/SearchForm'
 import { transformQuery } from '@/lib/utils'
 
-export function Search() {
+export default function Search() {
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const debouncedQuery = useDebounce(query, 500)
