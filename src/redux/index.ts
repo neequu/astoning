@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import authSlice from '@/store/auth/authSlice'
-import { apiSlice } from '@/store/api/apiSlice'
+import authSlice from '@/redux/slices/authSlice'
+import { animeApi } from '@/redux/apis/animeApi'
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
-    [apiSlice.reducerPath]: apiSlice.reducer,
+    [animeApi.reducerPath]: animeApi.reducer,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(animeApi.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

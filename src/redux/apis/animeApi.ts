@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { ApiResponse, ApiResponseSingle } from '@/types/anime'
 import { baseUrl } from '@/lib/constants'
 
-export const apiSlice = createApi({
+export const animeApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: builder => ({
@@ -21,4 +21,4 @@ export const apiSlice = createApi({
   }),
 })
 
-export const { useGetAnimeQuery, useGetAnimeSearchQuery, useGetAnimeByIdQuery } = apiSlice
+export const { useGetAnimeQuery, useGetAnimeSearchQuery, useGetAnimeByIdQuery } = animeApi

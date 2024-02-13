@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Clock8Icon, HeartIcon, LogOutIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-import { disauthorize } from '@/store/auth/authSlice'
-import type { RootState } from '@/store/store'
+import { disauthorize } from '@/redux/slices/authSlice'
+import type { RootState } from '@/redux'
 
 export function TheNav() {
   // todo: change to get session from backend

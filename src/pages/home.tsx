@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useGetAnimeQuery } from '@/store/api/apiSlice'
+import { useGetAnimeQuery } from '@/redux/apis/animeApi'
 import { SearchForm } from '@/components/SearchForm'
 import { transformQuery } from '@/lib/utils'
 
