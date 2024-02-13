@@ -11,7 +11,7 @@ export function AnimeCard({ item }: Props) {
     <section className="grid md:grid-cols-2 gap-10">
       <div className="flex flex-col items-center gap-5">
         <div className="h-[500px] rounded-md overflow-hidden">
-          <img className="block object-contain w-full h-full max-h-[500px]" src={item.images.webp.large_image_url} alt={item.title} />
+          <img className="block w-full h-full max-h-[500px]" src={item.images.webp.large_image_url} alt={item.title} />
         </div>
         <div className="border-2 border-muted-foreground rounded-full h-20 aspect-square grid place-content-center">
           <p className="text-3xl font-bold text-muted-foreground">{item.score ?? 'N/D'}</p>
