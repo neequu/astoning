@@ -1,4 +1,4 @@
-import { TheHeader } from './TheHeader'
+import { TheHeader } from '@/components/TheHeader'
 
 interface Props {
   children: React.ReactNode

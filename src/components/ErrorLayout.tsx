@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 
 export function ErrorLayout() {
   return (

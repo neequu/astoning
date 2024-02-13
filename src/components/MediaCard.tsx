@@ -1,8 +1,7 @@
 import { HeartIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { Button } from './ui/button'
-
 import type { Anime } from '@/types/anime'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   item: Anime
