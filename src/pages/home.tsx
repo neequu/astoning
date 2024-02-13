@@ -1,28 +1,46 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useGetAnimeQuery } from '@/store/api/apiSlice'
+import { SearchForm } from '@/components/SearchForm'
+import { transformQuery } from '@/lib/utils'
 
 export function Home() {
-  const { data, isError, isLoading, isSuccess, refetch } = useGetAnimeQuery()
+  const { data: animeData, isError, isLoading, isSuccess } = useGetAnimeQuery()
 
-  function handleClick() {
-    refetch()
+  const [query, setQuery] = useState('')
+  const navigate = useNavigate()
+
+  function handleQueryChange(newQuery: string) {
+    setQuery(newQuery)
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const encodedQuery = transformQuery(query)
+    navigate(`/search?q=${encodedQuery}`, { replace: true })
   }
 
   return (
-    <div onClick={handleClick}>
-      {data?.data.map(anime => (
+    <div>
+      <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange} />
+
+      {/* todo: move to comp Loader */}
+      {isLoading && <p>loading...</p>}
+
+      {/* todo: move to comp Error */}
+      {isError && <p>there was an error</p>}
+
+      {/* todo: move to comp NoResults */}
+      {isSuccess && animeData.pagination.items.count === 0 && <p>no results</p>}
+
+      {/* todo: move to comp Grid */}
+      {isSuccess && animeData.data.map(anime => (
         <div key={anime.mal_id}>
           <p>{anime.title_english}</p>
-          <p>{anime.title_japanese}</p>
-          <p>{anime.score}</p>
-          <p>{anime.episodes}</p>
-          <p>{anime.duration}</p>
-          <p>{anime.year}</p>
-          <p>{anime.url}</p>
+
         </div>
       ))}
-      {isLoading && 'loading'}
-      {isError && 'error'}
-      {isSuccess && 'all good '}
+
     </div>
   )
 }
