@@ -1,12 +1,15 @@
 import { TheHeader } from './TheHeader'
-import Router from '@/router'
 
-export function Layout() {
+interface Props {
+  children: React.ReactNode
+}
+
+export function Layout({ children }: Props) {
   return (
     <>
       <TheHeader />
       <main className="container mx-auto px-4">
-        <Router />
+        {children}
       </main>
     </>
   )

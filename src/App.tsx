@@ -2,10 +2,13 @@ import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Layout } from '@/components/Layout'
+import Router from '@/router'
 
 function App() {
   return (
-    <Layout />
+    <Layout>
+      <Router />
+    </Layout>
   )
 }
 
