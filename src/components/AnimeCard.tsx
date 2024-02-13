@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { HiddenTextBlock } from '@/components/HiddenTextBlock'
+import { HiddenTextBlock } from '@/components/utils/HiddenTextBlock'
 import type { Anime } from '@/types/anime'
 
 interface Props {
@@ -51,7 +51,7 @@ export function AnimeCard({ item }: Props) {
           &nbsp;
           {item.episodes}
         </p>
-        <div className="flex-1 flex place-items-end mt-6 ">
+        <div className="flex-1 flex place-items-end my-5">
           <Button className="w-full font-bold">
             Add to favorites
           </Button>

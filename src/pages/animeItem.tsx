@@ -2,8 +2,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { PageContent } from '@/components/PageContent'
 import { useGetAnimeByIdQuery } from '@/redux/apis/animeApi'
-import { LoadingSkeleton } from '@/components/LoadingSkeleton'
-import { SearchMessage } from '@/components/SearchMessage'
+import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
+import { SearchMessage } from '@/components/search/SearchMessage'
 import { AnimeCard } from '@/components/AnimeCard'
 
 export default function AnimeItem() {

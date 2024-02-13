@@ -1,11 +1,14 @@
+import { cn } from '@/lib/utils'
+
 interface Props {
   children: React.ReactNode
+  className?: string
 }
 
-export function PageContent({ children }: Props) {
+export function PageContent({ children, className }: Props) {
   return (
-    <div className="py-12">
+    <section className={cn('py-12 flex-1 flex flex-col', className)}>
       {children}
-    </div>
+    </section>
   )
 }

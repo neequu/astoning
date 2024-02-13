@@ -1,7 +1,10 @@
-import { Auth } from '@/components/Auth'
+import { AuthForm } from '@/components/AuthForm'
+import { PageContent } from '@/components/PageContent'
 
 export default function Register() {
   return (
-    <Auth />
+    <PageContent className="mt-28">
+      <AuthForm />
+    </PageContent>
   )
 }

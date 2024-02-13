@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { LoadingSkeleton } from '@/components/LoadingSkeleton'
+import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 
 const Home = lazy(() => import('@/pages/home'))
 const Search = lazy(() => import('@/pages/search'))

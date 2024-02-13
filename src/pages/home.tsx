@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGetAnimeQuery } from '@/redux/apis/animeApi'
-import { SearchForm } from '@/components/SearchForm'
+import { SearchForm } from '@/components/search/SearchForm'
 import { transformQuery } from '@/lib/utils'
-import { MediaGrid } from '@/components/MediaGrid'
-import { MediaCard } from '@/components/MediaCard'
-import { LoadingSkeleton } from '@/components/LoadingSkeleton'
-import { SearchMessage } from '@/components/SearchMessage'
+import { MediaGrid } from '@/components/media/MediaGrid'
+import { MediaCard } from '@/components/media/MediaCard'
+import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
+import { SearchMessage } from '@/components/search/SearchMessage'
 import { PageContent } from '@/components/PageContent'
 
 export default function Home() {
@@ -29,20 +29,18 @@ export default function Home() {
     <PageContent>
       <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange} />
 
-      <section>
-        {isLoading && <LoadingSkeleton className="mt-6" />}
-        {isError && <SearchMessage message="There was an error :(" className="mt-10 text-destructive" />}
-        {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
+      {isLoading && <LoadingSkeleton />}
+      {isError && <SearchMessage message="There was an error :(" className="mt-10 text-destructive" />}
+      {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
 
-        {isSuccess && (
-          <MediaGrid>
-            {animeData.data.map(item => (
-              <MediaCard key={item.mal_id} item={item} />
-            ))}
-          </MediaGrid>
-        )}
+      {isSuccess && (
+        <MediaGrid>
+          {animeData.data.map(item => (
+            <MediaCard key={item.mal_id} item={item} />
+          ))}
+        </MediaGrid>
+      )}
 
-      </section>
     </PageContent>
   )
 }

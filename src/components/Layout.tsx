@@ -8,7 +8,7 @@ export function Layout({ children }: Props) {
   return (
     <>
       <TheHeader />
-      <main className="container mx-auto px-4">
+      <main className="container mx-auto px-4 flex-1 flex flex-col">
         {children}
       </main>
     </>

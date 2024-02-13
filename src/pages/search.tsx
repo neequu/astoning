@@ -4,12 +4,12 @@ import { useGetAnimeSearchQuery } from '@/redux/apis/animeApi'
 import { useDebounce } from '@/hooks/useDebounce'
 import { transformQuery } from '@/lib/utils'
 
-import { SearchForm } from '@/components/SearchForm'
-import { MediaGrid } from '@/components/MediaGrid'
-import { MediaCard } from '@/components/MediaCard'
-import { LoadingSkeleton } from '@/components/LoadingSkeleton'
-import { SearchMessage } from '@/components/SearchMessage'
-import { SearchResults } from '@/components/SearchResults'
+import { SearchForm } from '@/components/search/SearchForm'
+import { MediaGrid } from '@/components/media/MediaGrid'
+import { MediaCard } from '@/components/media/MediaCard'
+import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
+import { SearchMessage } from '@/components/search/SearchMessage'
+import { SearchResults } from '@/components/search/SearchResults'
 import { PageContent } from '@/components/PageContent'
 
 export default function Search() {
@@ -41,22 +41,20 @@ export default function Search() {
     <PageContent>
       <SearchForm value={query} handleSubmit={handleSubmit} changeQuery={handleQueryChange} autoFocus />
 
-      <section>
-        {isLoading && <LoadingSkeleton className="mt-6" />}
-        {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
-        {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
+      {isLoading && <LoadingSkeleton />}
+      {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
+      {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
 
-        {isSuccess && (
-          <SearchResults>
-            <MediaGrid>
-              {animeData.data.map(item => (
-                <MediaCard key={item.mal_id} item={item} />
-              ))}
-            </MediaGrid>
-          </SearchResults>
-        )}
+      {isSuccess && (
+        <SearchResults>
+          <MediaGrid>
+            {animeData.data.map(item => (
+              <MediaCard key={item.mal_id} item={item} />
+            ))}
+          </MediaGrid>
+        </SearchResults>
+      )}
 
-      </section>
     </PageContent>
   )
 }

@@ -71,6 +71,15 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground min-h-screen min-w-[450px];
+    @apply bg-background text-foreground min-w-[280px];
   }
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-flow: column;
 }
