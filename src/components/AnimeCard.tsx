@@ -8,8 +8,8 @@ interface Props {
 
 export function AnimeCard({ item }: Props) {
   return (
-    <section className="grid md:grid-cols-2 gap-10">
-      <div className="flex flex-col items-center gap-5">
+    <section className="flex flex-column sm:flex-row gap-6 flex-wrap">
+      <div className="flex flex-1 flex-col items-center gap-5 min-w-[300px]">
         <div className="h-[500px] rounded-md overflow-hidden">
           <img className="block w-full h-full max-h-[500px]" src={item.images.webp.large_image_url} alt={item.title} />
         </div>
@@ -17,12 +17,14 @@ export function AnimeCard({ item }: Props) {
           <p className="text-3xl font-bold text-muted-foreground">{item.score ?? 'N/D'}</p>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col  flex-1">
         <div className="mb-4">
           <Button asChild variant="link" className="font-bold mb-1 text-2xl p-0">
-            <a href={item.url} target="_blank" rel="noreferrer"><h1>{item.title}</h1></a>
+            <a href={item.url} target="_blank" rel="noreferrer">
+              <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
+            </a>
           </Button>
-          <p className="text-muted-foreground">{item.title_japanese}</p>
+          <p className="text-muted-foreground line-clamp-1" title={item.title_japanese}>{item.title_japanese}</p>
         </div>
 
         <HiddenTextBlock text={item.synopsis} className="mb-4" />
@@ -52,7 +54,7 @@ export function AnimeCard({ item }: Props) {
           {item.episodes}
         </p>
         <div className="flex-1 flex place-items-end my-5">
-          <Button className="w-full font-bold">
+          <Button className="font-bold w-full">
             Add to favorites
           </Button>
         </div>
