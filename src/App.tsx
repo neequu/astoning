@@ -4,7 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
 import Router from '@/router'
 import { ThemeProvider } from '@/providers/theme-provider'
-import Error from '@/pages/error'
+import { ErrorLayout } from '@/components/ErrorLayout'
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
 function WrappedApp() {
   return (
     <BrowserRouter>
-      <ErrorBoundary FallbackComponent={Error}>
+      <ErrorBoundary FallbackComponent={ErrorLayout}>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <App />
         </ThemeProvider>
