@@ -102,5 +102,6 @@ pnpm run dev
 - styled with [tailwind](https://tailwindcss.com)
 - ui library [shadcn](https://ui.shadcn.com)
 - input validatoin with [zod](https://zod.dev/)
-- for forms [useForm](https://react-hook-form.com/docs/useform)
-- baas [supabase](https://supabase.com/) (instead of firebase)
+- forms with [useForm](https://react-hook-form.com/docs/useform)
+- backend service [supabase](https://supabase.com/) (alt to firebase)
+- [mobile responsive](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
