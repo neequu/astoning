@@ -13,7 +13,7 @@ import { OAuth } from '@/components/OAuth'
 import { authService } from '@/services/auth'
 import { handleAuthSuccess } from '@/lib/utils'
 
-import { GithubIcon } from '@/components/icons'
+import { GithubIcon } from '@/components/icons/github'
 
 interface Props {
   handleAuth: (data: Credentials) => Promise<User | null>
