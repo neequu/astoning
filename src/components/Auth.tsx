@@ -41,6 +41,7 @@ export function Auth({ handleAuth }: Props) {
 
   return (
     <AuthForm handleSubmit={onSubmit} form={authForm} fields={validationFields}>
+      {/* wip: this does not return user; needs a workaround */}
       {/* <OAuth provider="github" Icon={GithubIcon} /> */}
     </AuthForm>
   )
