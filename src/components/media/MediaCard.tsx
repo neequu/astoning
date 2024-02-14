@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/button'
 
 interface Props {
   item: Anime
+  isAuth: boolean
+  handleLike: (auth: boolean, id: number) => void
 }
 
-export function MediaCard({ item }: Props) {
+export function MediaCard({ item, isAuth, handleLike }: Props) {
   return (
     <div className="shadow-lg border rounded-md overflow-hidden p-4 flex flex-col">
       <div className="mb-4">
@@ -23,7 +25,7 @@ export function MediaCard({ item }: Props) {
         </div>
       </Link>
       <div className="flex justify-end flex-1 place-items-end mt-4">
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost" onClick={() => handleLike(isAuth, item.mal_id)}>
           <HeartIcon />
         </Button>
       </div>
