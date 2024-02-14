@@ -21,13 +21,11 @@ export default function AnimeItem() {
 
   return (
     <PageWrapper>
-      <section>
-        {isLoading && <LoadingSkeleton className="mt-6" />}
-        {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
+      {isLoading && <LoadingSkeleton />}
+      {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
 
-        {isSuccess && <AnimeCard item={animeData.data} />}
+      {isSuccess && <AnimeCard item={animeData.data} />}
 
-      </section>
     </PageWrapper>
   )
 }
