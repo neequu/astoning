@@ -24,7 +24,7 @@ interface Props {
 export function AuthForm({ handleSubmit, form, fields, children }: Props) {
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4" autoComplete="off">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
 
         { fields.map(item => (
           <FormField
@@ -43,10 +43,12 @@ export function AuthForm({ handleSubmit, form, fields, children }: Props) {
           />
         ),
         )}
-
-        <Button className="font-bold" disabled={form.formState.isSubmitting} type="submit">Submit</Button>
+        <div className="flex flex-col">
+          <Button className="font-bold mt-10" disabled={form.formState.isSubmitting} type="submit">Submit</Button>
+          <span className="inline-block my-2 text-center text-muted-foreground">or</span>
+          {children}
+        </div>
       </form>
-      {children}
     </Form>
   )
 }

@@ -1,6 +1,10 @@
 import { type ClassValue, clsx } from 'clsx'
 import { toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
+import type { User } from '@supabase/supabase-js'
+import type { NavigateFunction } from 'react-router-dom'
+import { setUser } from '@/redux/slices/authSlice'
+import type { AppDispatch } from '@/redux'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -17,4 +21,10 @@ export function capitalizeWord(word: string) {
 export function handleError(errorMsg = 'There was an error') {
   toast.error(errorMsg)
   return null
+}
+
+export function handleAuthSuccess(user: User, navigate: NavigateFunction, dispatch: AppDispatch, successMsg = 'Success!', redirectUrl = '/') {
+  dispatch(setUser(user))
+  navigate(redirectUrl)
+  toast.success(successMsg)
 }

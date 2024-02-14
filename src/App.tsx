@@ -6,9 +6,10 @@ import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
 import { ErrorLayout } from '@/components/ErrorLayout'
 import Router from '@/router'
+import { authService } from '@/services/auth'
 
 function App() {
-  useInitializeUser()
+  useInitializeUser(authService.getUser)
 
   return (
     <LayoutWrapper>

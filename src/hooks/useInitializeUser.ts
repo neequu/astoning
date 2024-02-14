@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
+import type { User } from '@supabase/supabase-js'
 import { useAppDispatch } from '@/hooks/reduxHooks'
 import { setUser } from '@/redux/slices/authSlice'
-import supabase from '@/services/supabase'
 
-export function useInitializeUser() {
+export function useInitializeUser(getUser: () => Promise<User | null>) {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     let isMounted = true
 
-    const getUser = async () => {
+    const getInitialUser = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser()
+        const user = await getUser()
         if (isMounted)
           dispatch(setUser(user))
       }
@@ -20,7 +20,7 @@ export function useInitializeUser() {
       }
     }
 
-    getUser()
+    getInitialUser()
 
     return () => {
       isMounted = false

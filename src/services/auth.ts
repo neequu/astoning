@@ -1,10 +1,11 @@
+import type { Provider } from '@supabase/supabase-js'
 import supabase from '@/services/supabase'
 import type { Credentials } from '@/types/auth'
 import { handleError } from '@/lib/utils'
 
 export const authService = {
 
-  login: async (cred: Credentials) => {
+  loginWithCredentials: async (cred: Credentials) => {
     const { data: { user }, error } = await supabase.auth.signInWithPassword(cred)
 
     if (error || !user)
@@ -29,4 +30,20 @@ export const authService = {
       return handleError(error?.message)
   },
 
+  getUser: async () => {
+    const { data: { session }, error } = await supabase.auth.getSession()
+
+    const user = session?.user ?? null
+
+    if (error)
+      return handleError(error?.message)
+
+    return user
+  },
+
+  loginWithOath: async (provider: Provider) => {
+    await supabase.auth.signInWithOAuth({
+      provider,
+    })
+  },
 }
