@@ -18,9 +18,10 @@ interface Props {
   handleSubmit: (values: z.infer<typeof formSchema>) => void
   form: UseFormReturn<{ [key in ValidAuthFormFields]: string }>
   fields: ValidAuthFormFields[]
+  children?: React.ReactNode
 }
 
-export function AuthForm({ handleSubmit, form, fields }: Props) {
+export function AuthForm({ handleSubmit, form, fields, children }: Props) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4" autoComplete="off">
@@ -45,6 +46,7 @@ export function AuthForm({ handleSubmit, form, fields }: Props) {
 
         <Button className="font-bold" disabled={form.formState.isSubmitting} type="submit">Submit</Button>
       </form>
+      {children}
     </Form>
   )
 }

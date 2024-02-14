@@ -3,11 +3,13 @@ import type { z } from 'zod'
 import { useDispatch } from 'react-redux'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { GithubIcon } from 'lucide-react'
 import { AuthForm } from '@/components/AuthForm'
 import { authorize } from '@/redux/slices/authSlice'
 import { formSchema } from '@/lib/validations'
 import { validationFields } from '@/lib/constants'
 import type { Credentials } from '@/types/auth'
+import { OAuth } from '@/components/OAuth'
 
 interface Props {
   handleAuth: (data: Credentials) => void
@@ -27,7 +29,9 @@ export function Auth({ handleAuth }: Props) {
 
   return (
     <div>
-      <AuthForm handleSubmit={onSubmit} form={authForm} fields={validationFields} />
+      <AuthForm handleSubmit={onSubmit} form={authForm} fields={validationFields}>
+        <OAuth provider="github" Icon={GithubIcon} />
+      </AuthForm>
     </div>
   )
 }
