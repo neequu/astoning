@@ -1,14 +1,20 @@
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 import { Auth } from '@/components/Auth'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
+import { useAppDispatch } from '@/hooks/reduxHooks'
 import supabase from '@/services/supabase'
 import type { Credentials } from '@/types/auth'
+import { setUser } from '@/redux/slices/authSlice'
 
 export default function Login() {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const handleLogin = async ({ email, password }: Credentials) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-
-    if (error)
-      console.error(error.message)
+    const { data: { user } } = await supabase.auth.signUp({ email, password })
+    dispatch(setUser(!!user))
+    navigate('/')
+    toast.success('logged in!')
   }
 
   return (
