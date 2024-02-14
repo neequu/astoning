@@ -44,7 +44,7 @@ export function AuthForm({ handleSubmit, form, fields, children }: Props) {
         ),
         )}
         <div className="flex flex-col">
-          <Button className="font-bold mt-10" disabled={form.formState.isSubmitting} type="submit">Submit</Button>
+          <Button className="font-bold mt-6" disabled={form.formState.isSubmitting} type="submit">Submit</Button>
           <span className="inline-block my-2 text-center text-muted-foreground">or</span>
           {children}
         </div>
