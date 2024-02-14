@@ -1,13 +1,14 @@
 import { Loader2Icon } from 'lucide-react'
+import PropTypes from 'prop-types'
 
-interface Props {
-  size?: number
-}
-
-export function Spinner({ size = 48 }: Props) {
+export function Spinner({ size = 36 }) {
   return (
     <div className="animate-spin w-min h-min">
       <Loader2Icon size={size} />
     </div>
   )
+}
+
+Spinner.propTypes = {
+  size: PropTypes.number,
 }
