@@ -15,8 +15,6 @@ export default function Home() {
   // get user
   const user = useAppSelector(state => state.auth.user)
 
-  // like button
-
   // rtk data fetch
   const { data: animeData, isError, isLoading, isSuccess } = useGetAnimeQuery()
 
