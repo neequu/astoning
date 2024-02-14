@@ -3,9 +3,9 @@ import { toast } from 'sonner'
 import { Logo } from '@/components/misc/Logo'
 import { TheNav } from '@/components/TheNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { setUser } from '@/redux/slices/authSlice'
+import { setUser } from '@/redux/slices/auth-slice'
 import { Button } from '@/components/ui/button'
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux-hooks'
 import { authService } from '@/services/auth'
 
 export function TheHeader() {

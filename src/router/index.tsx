@@ -4,7 +4,7 @@ import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 
 const Home = lazy(() => import('@/pages/home'))
 const Search = lazy(() => import('@/pages/search'))
-const AnimeItem = lazy(() => import('@/pages/animeItem'))
+const AnimeItem = lazy(() => import('@/pages/anime-item'))
 const History = lazy(() => import('@/pages/history'))
 const Register = lazy(() => import('@/pages/register'))
 const Login = lazy(() => import('@/pages/login'))

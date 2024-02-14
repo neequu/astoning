@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useGetAnimeQuery } from '@/redux/apis/animeApi'
+import { useGetAnimeQuery } from '@/redux/apis/anime-api'
 import { SearchForm } from '@/components/search/SearchForm'
 import { transformQuery } from '@/lib/utils'
 import { MediaGrid } from '@/components/media/MediaGrid'
@@ -8,7 +8,7 @@ import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { useAppSelector } from '@/hooks/redux-hooks'
 import { handleLike } from '@/services/like'
 
 export default function Home() {

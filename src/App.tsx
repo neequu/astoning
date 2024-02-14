@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Toaster } from 'sonner'
-import { useInitializeUser } from '@/hooks/useInitializeUser'
+import { useInitializeUser } from '@/hooks/use-initialize-user'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
 import { ErrorLayout } from '@/components/ErrorLayout'

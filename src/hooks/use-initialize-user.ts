@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import type { User } from '@supabase/supabase-js'
-import { useAppDispatch } from '@/hooks/reduxHooks'
-import { setUser } from '@/redux/slices/authSlice'
+import { useAppDispatch } from '@/hooks/redux-hooks'
+import { setUser } from '@/redux/slices/auth-slice'
 
 export function useInitializeUser(getUser: () => Promise<User | null>) {
   const dispatch = useAppDispatch()

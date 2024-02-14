@@ -8,7 +8,7 @@ import { formSchema } from '@/lib/validations'
 import { validationFields } from '@/lib/constants'
 import type { Credentials } from '@/types/auth'
 
-import { useAppDispatch } from '@/hooks/reduxHooks'
+import { useAppDispatch } from '@/hooks/redux-hooks'
 import { OAuth } from '@/components/OAuth'
 import { authService } from '@/services/auth'
 import { handleAuthSuccess } from '@/lib/utils'

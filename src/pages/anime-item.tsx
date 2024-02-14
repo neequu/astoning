@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
-import { useGetAnimeByIdQuery } from '@/redux/apis/animeApi'
+import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { AnimeCard } from '@/components/AnimeCard'

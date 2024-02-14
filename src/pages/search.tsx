@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useGetAnimeSearchQuery } from '@/redux/apis/animeApi'
-import { useDebounce } from '@/hooks/useDebounce'
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
+import { useDebounce } from '@/hooks/use-debounce'
+import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformQuery } from '@/lib/utils'
 import { handleLike } from '@/services/like'
 
