@@ -22,7 +22,7 @@ export function MediaCard({ item }: Props) {
           <img src={item.images.webp.image_url} className="w-full min-w-[240px] max-h-[20rem] rounded" alt={item.title} />
         </div>
       </Link>
-      <div className="flex justify-end flex-1 place-items-end">
+      <div className="flex justify-end flex-1 place-items-end mt-4">
         <Button size="icon" variant="ghost">
           <HeartIcon />
         </Button>
