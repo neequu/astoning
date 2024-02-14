@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from 'clsx'
+import { toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -11,4 +12,9 @@ export function transformQuery(value: string) {
 
 export function capitalizeWord(word: string) {
   return `${word[0].toUpperCase()}${word.slice(1)}`
+}
+
+export function handleError(errorMsg = 'There was an error') {
+  toast.error(errorMsg)
+  return null
 }

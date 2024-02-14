@@ -3,10 +3,10 @@ import { toast } from 'sonner'
 import { Logo } from '@/components/misc/Logo'
 import { TheNav } from '@/components/TheNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import supabase from '@/services/supabase'
 import { setUser } from '@/redux/slices/authSlice'
 import { Button } from '@/components/ui/button'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { authService } from '@/services/auth'
 
 export function TheHeader() {
   const user = useAppSelector(state => state.auth.user)
@@ -15,10 +15,10 @@ export function TheHeader() {
   const navigate = useNavigate()
 
   async function handleSignOut() {
-    await supabase.auth.signOut()
+    await authService.signOut()
     dispatch(setUser(null))
-    navigate('/login')
-    toast.success('signed out!')
+    navigate('/')
+    toast.success('Signed out!')
   }
 
   return (
