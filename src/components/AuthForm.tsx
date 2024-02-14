@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,7 +24,6 @@ export function AuthForm() {
     defaultValues: {
       email: '',
       password: '',
-
     },
   })
 
@@ -37,7 +35,7 @@ export function AuthForm() {
   return (
 
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:w-1/3 sm:min-w-80 sm:mx-auto">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="email"
@@ -47,7 +45,6 @@ export function AuthForm() {
               <FormControl>
                 <Input type="email" placeholder="Enter email" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -61,14 +58,11 @@ export function AuthForm() {
               <FormControl>
                 <Input type="password" placeholder="Enter password" {...field} />
               </FormControl>
-              <FormDescription>
-                You will also need a password.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button disabled={form.formState.isSubmitting} type="submit">Submit</Button>
       </form>
     </Form>
   )

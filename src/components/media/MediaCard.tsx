@@ -19,7 +19,7 @@ export function MediaCard({ item }: Props) {
       </div>
       <Link to={`/anime/${item.mal_id}`}>
         <div className="pb-2 h-[20rem]">
-          <img src={item.images.webp.image_url} className="w-full min-w-[240px] max-h-[20rem] rounded" alt={item.title} />
+          <img src={item.images.webp.image_url} className="max-h-full max-w-full mx-auto rounded" alt={item.title} />
         </div>
       </Link>
       <div className="flex justify-end flex-1 place-items-end mt-4">
