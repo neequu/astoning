@@ -1,7 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { PageWrapper } from '@/components/wrappers/PageWrapper'
+import { handleLike } from '@/services/like'
+import { useAppSelector } from '@/hooks/redux-hooks'
 import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
+import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { AnimeCard } from '@/components/AnimeCard'
@@ -17,6 +19,7 @@ export default function AnimeItem() {
       navigate('/not-found', { replace: true })
   }, [animeId, navigate])
 
+  const user = useAppSelector(state => state.auth.user)
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
   return (
@@ -25,7 +28,7 @@ export default function AnimeItem() {
 
       {isFetching
         ? <LoadingSkeleton />
-        : isSuccess && <AnimeCard item={animeData.data} />}
+        : isSuccess && <AnimeCard item={animeData.data} handleLike={handleLike} isAuth={!!user} />}
 
     </PageWrapper>
   )

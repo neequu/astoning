@@ -1,7 +1,6 @@
-import { HeartIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Anime } from '@/types/anime'
-import { Button } from '@/components/ui/button'
+import { LikeButton } from '@/components/LikeButton'
 
 interface Props {
   item: Anime
@@ -22,11 +21,8 @@ export function MediaCard({ item, isAuth, handleLike }: Props) {
       <Link to={`/anime/${item.mal_id}`} className="max-h-72">
         <img src={item.images.webp.image_url} className="h-72 min-w-30 w-full max-w-56 mx-auto rounded" alt={item.title} />
       </Link>
-      <div className="flex justify-end flex-1 place-items-end mt-4">
-        <Button size="icon" variant="ghost" onClick={() => handleLike(isAuth, item.mal_id)}>
-          <HeartIcon />
-        </Button>
-      </div>
+      <LikeButton className="justify-end flex-1 place-items-end mt-4" isAuth={isAuth} handleLike={handleLike} id={item.mal_id} />
+
     </div>
   )
 }

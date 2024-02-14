@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button'
 import { HiddenTextBlock } from '@/components/misc/HiddenTextBlock'
 import type { Anime } from '@/types/anime'
+import { LikeButton } from '@/components/LikeButton'
 
 interface Props {
   item: Anime
+  isAuth: boolean
+  handleLike: (auth: boolean, id: number) => void
 }
 
-export function AnimeCard({ item }: Props) {
+export function AnimeCard({ item, handleLike, isAuth }: Props) {
   return (
     <section className="flex flex-column sm:flex-row gap-6 flex-wrap">
       <div className="flex flex-1 flex-col items-center gap-5 min-w-[300px]">
@@ -53,11 +56,7 @@ export function AnimeCard({ item }: Props) {
           &nbsp;
           {item.episodes}
         </p>
-        <div className="flex-1 flex place-items-end my-5">
-          <Button className="font-bold w-full">
-            Add to favorites
-          </Button>
-        </div>
+        <LikeButton className="flex-1 place-items-end my-5" isAuth={isAuth} handleLike={handleLike} id={item.mal_id} />
       </div>
     </section>
   )
