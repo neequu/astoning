@@ -15,17 +15,16 @@ import { SearchResults } from '@/components/search/SearchResults'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 
 export default function Search() {
-  // get user
   const user = useAppSelector(state => state.auth.user)
-
-  // rtk data fetch
   const navigate = useNavigate()
 
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const debouncedQuery = useDebounce(query)
 
-  const { data: animeData, isLoading, isError, isSuccess } = useGetAnimeSearchQuery(debouncedQuery)
+  // rtk data fetch
+  const { data: animeData, isError, isSuccess, isFetching } = useGetAnimeSearchQuery(debouncedQuery)
+  const successNoItems = isSuccess && animeData.pagination.items.count === 0
 
   function handleQueryChange(newQuery: string) {
     setQuery(newQuery)
@@ -42,21 +41,24 @@ export default function Search() {
   return (
     <PageWrapper>
       <SearchForm value={query} handleSubmit={e => e.preventDefault()} changeQuery={handleQueryChange} autoFocus />
-
-      {isLoading && <LoadingSkeleton />}
       {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
-      {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
 
-      {isSuccess && (
-        <SearchResults>
-          <MediaGrid>
-            {animeData.data.map(item => (
-              <MediaCard key={item.mal_id} item={item} isAuth={!!user} handleLike={handleLike} />
-            ))}
-          </MediaGrid>
-        </SearchResults>
-      )}
-
+      {/* if fetching show skeleton → */}
+      {isFetching
+        ? <LoadingSkeleton />
+        //  if success & nothing found show message →
+        : successNoItems
+          ? <SearchMessage message="No results were found!" className="mt-10" />
+          // show results
+          : isSuccess && (
+            <SearchResults>
+              <MediaGrid>
+                {animeData.data.map(item => (
+                  <MediaCard key={item.mal_id} item={item} isAuth={!!user} handleLike={handleLike} />
+                ))}
+              </MediaGrid>
+            </SearchResults>
+          )}
     </PageWrapper>
   )
 }

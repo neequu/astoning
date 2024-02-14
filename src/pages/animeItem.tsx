@@ -17,14 +17,15 @@ export default function AnimeItem() {
       navigate('/not-found', { replace: true })
   }, [animeId, navigate])
 
-  const { isError, isLoading, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
+  const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
   return (
     <PageWrapper>
-      {isLoading && <LoadingSkeleton />}
       {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
 
-      {isSuccess && <AnimeCard item={animeData.data} />}
+      {isFetching
+        ? <LoadingSkeleton />
+        : isSuccess && <AnimeCard item={animeData.data} />}
 
     </PageWrapper>
   )
