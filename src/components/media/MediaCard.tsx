@@ -11,7 +11,7 @@ interface Props {
 
 export function MediaCard({ item, isAuth, handleLike }: Props) {
   return (
-    <div className="shadow-lg border rounded-md overflow-hidden sm:p-4 p-2 flex flex-col">
+    <div className="shadow-lg border rounded-md overflow-hidden p-4 flex flex-col">
       <div className="mb-4">
         <p className="font-semibold text-xl line-clamp-1" title={item.title}>{item.title}</p>
         <div className="flex gap-1 items-center text-muted-foreground ">
