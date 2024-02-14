@@ -7,20 +7,21 @@ import { AuthForm } from '@/components/AuthForm'
 import { authorize } from '@/redux/slices/authSlice'
 import { formSchema } from '@/lib/validations'
 import { validationFields } from '@/lib/constants'
+import type { Credentials } from '@/types/auth'
 
-export function Auth() {
+interface Props {
+  handleAuth: (data: Credentials) => void
+}
+
+export function Auth({ handleAuth }: Props) {
   const dispatch = useDispatch()
-
   const authForm = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     dispatch(authorize())
+    handleAuth({ ...values })
     toast.success(values.email)
   }
 

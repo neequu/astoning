@@ -43,7 +43,7 @@ export function AuthForm({ handleSubmit, form, fields }: Props) {
         ),
         )}
 
-        <Button disabled={form.formState.isSubmitting} type="submit">Submit</Button>
+        <Button className="font-bold" disabled={form.formState.isSubmitting} type="submit">Submit</Button>
       </form>
     </Form>
   )
