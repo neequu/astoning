@@ -37,7 +37,7 @@ pnpm run dev
 
 - [x] Реализованы **Требования к функциональности**
 
-- [ ] Для хранения учетных записей пользователей, их Избранного и Истории поиска, используется **Firebase**
+- [x] Для хранения учетных записей пользователей, их Избранного и Истории поиска, используется [**Supabase**](https://github.com/neequu/astoning/blob/main/src/services/supabase.ts)
 
 **React**
 
@@ -48,7 +48,7 @@ pnpm run dev
 
 - [x] Реализована хотя бы одна **форма**
 
-- [ ] Есть применение Контекст API
+- [x] Есть применение Контекст API
 
 - [x] Есть применение **предохранителя**
 
@@ -75,7 +75,7 @@ pnpm run dev
 
 - [x] Использование **TypeScript**
 - [ ] Подключен **storybook** и созданы два, три сториса с knobs, которые показывают разные состояния компонента
-- [ ] Использование Firebase для учетных записей и их Избранного и Истории поиска
+- [x] Использование Supabase для учетных записей и их Избранного и Истории поиска
 
 - [ ] **Низная связанность клиентского кода**, использующего апи кода, работающего с внешним стором
 - [x] Настроен CI/CD:
@@ -101,3 +101,6 @@ pnpm run dev
 
 - styled with [tailwind](https://tailwindcss.com)
 - ui library [shadcn](https://ui.shadcn.com)
+- input validatoin with [zod](https://zod.dev/)
+- for forms [useForm](https://react-hook-form.com/docs/useform)
+- baas [supabase](https://supabase.com/) (instead of firebase)
