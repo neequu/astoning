@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useGetAnimeSearchQuery } from '@/redux/apis/animeApi'
 import { useDebounce } from '@/hooks/useDebounce'
+import { useAppSelector } from '@/hooks/reduxHooks'
 import { transformQuery } from '@/lib/utils'
+import { handleLike } from '@/services/like'
 
 import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
@@ -13,6 +15,10 @@ import { SearchResults } from '@/components/search/SearchResults'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 
 export default function Search() {
+  // get user
+  const user = useAppSelector(state => state.auth.user)
+
+  // rtk data fetch
   const navigate = useNavigate()
 
   const [searchParams] = useSearchParams()
@@ -45,7 +51,7 @@ export default function Search() {
         <SearchResults>
           <MediaGrid>
             {animeData.data.map(item => (
-              <MediaCard key={item.mal_id} item={item} />
+              <MediaCard key={item.mal_id} item={item} isAuth={!!user} handleLike={handleLike} />
             ))}
           </MediaGrid>
         </SearchResults>

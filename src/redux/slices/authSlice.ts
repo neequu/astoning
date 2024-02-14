@@ -1,26 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import type { User } from '@supabase/supabase-js'
+
+type UserOptional = User | null
 
 interface AuthSlice {
-  isAuth: boolean
+  user: UserOptional
 }
 
 const initialState: AuthSlice = {
-  isAuth: false,
+  user: null,
 }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    authorize: (state) => {
-      state.isAuth = true
+    setUser(state, action: PayloadAction<UserOptional>) {
+      state.user = action.payload
     },
-    disauthorize: (state) => {
-      state.isAuth = false
-    },
+
   },
 })
 
-export const { authorize, disauthorize } = authSlice.actions
+export const { setUser } = authSlice.actions
 
 export default authSlice.reducer

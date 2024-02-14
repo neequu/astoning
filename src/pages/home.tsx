@@ -8,8 +8,14 @@ import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import { handleLike } from '@/services/like'
 
 export default function Home() {
+  // get user
+  const user = useAppSelector(state => state.auth.user)
+
+  // rtk data fetch
   const { data: animeData, isError, isLoading, isSuccess } = useGetAnimeQuery()
 
   const [query, setQuery] = useState('')
@@ -36,7 +42,7 @@ export default function Home() {
       {isSuccess && (
         <MediaGrid>
           {animeData.data.map(item => (
-            <MediaCard key={item.mal_id} item={item} />
+            <MediaCard key={item.mal_id} item={item} isAuth={!!user} handleLike={handleLike} />
           ))}
         </MediaGrid>
       )}

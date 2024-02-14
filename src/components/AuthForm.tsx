@@ -1,10 +1,6 @@
-import { useDispatch } from 'react-redux'
-import { toast } from 'sonner'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
 import type { z } from 'zod'
-import { authorize } from '@/redux/slices/authSlice'
-import { formSchema } from '@/lib/validations'
+import type { UseFormReturn } from 'react-hook-form'
+import type { formSchema } from '@/lib/validations'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -15,55 +11,42 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { capitalizeWord } from '@/lib/utils'
+import type { ValidAuthFormFields } from '@/types/auth'
 
-export function AuthForm() {
-  const dispatch = useDispatch()
+interface Props {
+  handleSubmit: (values: z.infer<typeof formSchema>) => void
+  form: UseFormReturn<{ [key in ValidAuthFormFields]: string }>
+  fields: ValidAuthFormFields[]
+  children?: React.ReactNode
+}
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    dispatch(authorize())
-    toast.success(values.email)
-  }
-
+export function AuthForm({ handleSubmit, form, fields, children }: Props) {
   return (
-
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input type="email" placeholder="Enter email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="Enter password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button disabled={form.formState.isSubmitting} type="submit">Submit</Button>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4" autoComplete="off">
+
+        { fields.map(item => (
+          <FormField
+            key={item}
+            control={form.control}
+            name={item}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{capitalizeWord(item)}</FormLabel>
+                <FormControl>
+                  <Input type={item} placeholder={`Enter ${item}`} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ),
+        )}
+
+        <Button className="font-bold" disabled={form.formState.isSubmitting} type="submit">Submit</Button>
       </form>
+      {children}
     </Form>
   )
 }
