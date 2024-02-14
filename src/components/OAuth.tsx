@@ -4,16 +4,15 @@ import { capitalizeWord } from '@/lib/utils'
 
 interface Props {
   provider: Provider
-  Icon: string
   handleOAuth: (p: Provider) => Promise<void>
+  children: React.ReactNode
 }
 
-export function OAuth({ provider, Icon, handleOAuth }: Props) {
+export function OAuth({ provider, handleOAuth, children }: Props) {
   return (
     <Button onClick={() => handleOAuth(provider)}>
       <span className="font-bold">{`Sign In with ${capitalizeWord(provider)}`}</span>
-      &nbsp;&nbsp;
-      <img src={Icon} alt={`Sign in with ${provider}`} />
+      {children}
     </Button>
   )
 }

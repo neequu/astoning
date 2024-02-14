@@ -13,7 +13,7 @@ import { OAuth } from '@/components/OAuth'
 import { authService } from '@/services/auth'
 import { handleAuthSuccess } from '@/lib/utils'
 
-import GithubIcon from '@/assets/github.svg'
+import { GithubIcon } from '@/components/icons'
 
 interface Props {
   handleAuth: (data: Credentials) => Promise<User | null>
@@ -36,7 +36,9 @@ export function Auth({ handleAuth, message }: Props) {
 
   return (
     <AuthForm handleSubmit={onSubmit} form={authForm} fields={validationFields}>
-      <OAuth provider="github" Icon={GithubIcon} handleOAuth={authService.loginWithOath} />
+      <OAuth provider="github" handleOAuth={authService.loginWithOath}>
+        <GithubIcon className="ml-2 text-xl" />
+      </OAuth>
     </AuthForm>
   )
 }
