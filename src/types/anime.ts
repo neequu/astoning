@@ -21,7 +21,7 @@ export interface Anime {
   episodes: number
   duration: string
   score: number
-  year: number | null
+  year: number | null | string
   rating: string
   type: string
   synopsis: string
