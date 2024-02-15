@@ -2,7 +2,7 @@ import { HeartCrackIcon, HeartIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useCheckFavorite } from '@/hooks/use-set-like'
-import { changeLike } from '@/services/like'
+import { likeService } from '@/services/like'
 
 interface Props {
   className?: string
@@ -19,7 +19,7 @@ export function LikeButton({ className, isAuth, id }: Props) {
     // optimistically change state
     setIsActive(!initialLikeState)
 
-    const res = await changeLike(isAuth, id, initialLikeState)
+    const res = await likeService.changeLike(isAuth, id, initialLikeState)
 
     // if res is ok do nothing → otherwise set to initial state
     if (res?.success)

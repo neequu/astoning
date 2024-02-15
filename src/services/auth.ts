@@ -1,49 +1,16 @@
 import type { Provider } from '@supabase/supabase-js'
-import supabase from '@/services/supabase'
+import { _getUser, _loginWithCredentials, _loginWithOath, _register, _signOut } from './db/db-methods'
 import type { Credentials } from '@/types/auth'
-import { handleError } from '@/lib/utils'
 
 export const authService = {
 
-  loginWithCredentials: async (cred: Credentials) => {
-    const { data: { user }, error } = await supabase.auth.signInWithPassword(cred)
+  loginWithCredentials: (cred: Credentials) => _loginWithCredentials(cred),
 
-    if (error || !user)
-      return handleError(error?.message)
+  register: (cred: Credentials) => _register(cred),
 
-    return user
-  },
+  signOut: _signOut,
 
-  register: async (cred: Credentials) => {
-    const { data: { user }, error } = await supabase.auth.signUp(cred)
+  getUser: _getUser,
 
-    if (error || !user)
-      return handleError(error?.message)
-
-    return user
-  },
-
-  signOut: async () => {
-    const { error } = await supabase.auth.signOut()
-
-    if (error)
-      return handleError(error?.message)
-  },
-
-  getUser: async () => {
-    const { data: { session }, error } = await supabase.auth.getSession()
-
-    const user = session?.user ?? null
-
-    if (error)
-      return handleError(error?.message)
-
-    return user
-  },
-
-  loginWithOath: async (provider: Provider) => {
-    await supabase.auth.signInWithOAuth({
-      provider,
-    })
-  },
+  loginWithOath: (provider: Provider) => _loginWithOath(provider),
 }

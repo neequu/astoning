@@ -1,3 +1,5 @@
 export default function Favorites() {
-  return <div>likeeee</div>
+  return (
+    <div>hello</div>
+  )
 }

@@ -1,15 +1,15 @@
-import { toast } from 'sonner'
-import { addFavorite, removeFavorite } from './db'
+import { _addFavorite, _getFavoriteById, _getFavorites, _removeFavorite } from '@/services/db/db-methods'
+import { handleError } from '@/lib/utils'
 
-export async function changeLike(isAuth: boolean, itemId: number, isCurrentStateActive: boolean) {
-  if (!isAuth) {
-    toast.error('You need to be logged in')
-    return null
-  }
+export const likeService = {
 
-  // todo: remove this; for testing
-  if (itemId > 7 || itemId < 7)
-    return null
+  changeLike: async (isAuth: boolean, itemId: number, isCurrentStateActive: boolean) => {
+    if (!isAuth)
+      return handleError('You need to be logged in')
 
-  return isCurrentStateActive ? removeFavorite(itemId) : addFavorite(itemId)
+    return isCurrentStateActive ? _removeFavorite(itemId) : _addFavorite(itemId)
+  },
+
+  getFavorites: () => _getFavorites(),
+  getFavoriteById: (itemId: number) => _getFavoriteById(itemId),
 }

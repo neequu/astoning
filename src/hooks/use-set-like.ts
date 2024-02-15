@@ -1,35 +1,41 @@
 import { useEffect, useState } from 'react'
-import { getFavorite } from '@/services/db'
+import { likeService } from '@/services/like'
 
 export function useCheckFavorite(itemId: number, isAuth: boolean) {
   const [isActive, setIsActive] = useState(false)
   const [isLoadingLike, setIsLoadingLike] = useState(false)
 
   useEffect(() => {
+    let isMounted = true
     const checkInitialLike = async () => {
       // skip check if no user
       if (!isAuth)
         return null
+      if (isMounted) {
+        setIsLoadingLike(true)
+        try {
+          const likedItem = await likeService.getFavoriteById(itemId)
 
-      setIsLoadingLike(true)
-      try {
-        const likedItem = await getFavorite(itemId)
+          if (!likedItem)
+            return null
 
-        if (!likedItem || !likedItem.length)
+          setIsActive(!!likedItem)
+        }
+        catch (e) {
+          console.error(e)
           return null
-
-        setIsActive(!!likedItem)
-      }
-      catch (e) {
-        console.error(e)
-        return null
-      }
-      finally {
-        setIsLoadingLike(false)
+        }
+        finally {
+          setIsLoadingLike(false)
+        }
       }
     }
 
     checkInitialLike()
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   return { isActive, setIsActive, isLoadingLike }
