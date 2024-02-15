@@ -9,6 +9,7 @@ import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
+import { LikeButton } from '@/components/LikeButton'
 
 export default function Home() {
   const user = useAppSelector(state => state.auth.user)
@@ -47,7 +48,9 @@ export default function Home() {
           : isSuccess && (
             <MediaGrid>
               {animeData.data.map(item => (
-                <MediaCard key={item.mal_id} item={item} isAuth={!!user} />
+                <MediaCard key={item.mal_id} item={item}>
+                  <LikeButton className="justify-end flex-1 place-items-end mt-4" isAuth={!!user} id={item.mal_id} />
+                </MediaCard>
               ))}
             </MediaGrid>
           )}

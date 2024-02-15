@@ -8,9 +8,10 @@ interface Props {
   className?: string
   isAuth: boolean
   id: number
+  handleClick?: () => void
 }
 
-export function LikeButton({ className, isAuth, id }: Props) {
+export function LikeButton({ className, isAuth, id, handleClick }: Props) {
   const { isActive, setIsActive, isLoadingLike } = useCheckFavorite(id, isAuth)
 
   async function handleLike() {
@@ -22,10 +23,16 @@ export function LikeButton({ className, isAuth, id }: Props) {
     const res = await likeService.changeLike(isAuth, id, initialLikeState)
 
     // if res is ok do nothing → otherwise set to initial state
-    if (res?.success)
+    if (res?.success) {
+      // if custom method needed → perform
+      if (handleClick)
+        handleClick()
+
       return null
-    else
+    }
+    else {
       setIsActive(initialLikeState)
+    }
   }
 
   return (

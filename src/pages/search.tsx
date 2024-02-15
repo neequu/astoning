@@ -4,7 +4,6 @@ import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
 import { useDebounce } from '@/hooks/use-debounce'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformQuery } from '@/lib/utils'
-import { handleLike } from '@/services/like'
 
 import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
@@ -13,6 +12,7 @@ import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { SearchResults } from '@/components/search/SearchResults'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
+import { LikeButton } from '@/components/LikeButton'
 
 export default function Search() {
   const user = useAppSelector(state => state.auth.user)
@@ -54,7 +54,9 @@ export default function Search() {
             <SearchResults>
               <MediaGrid>
                 {animeData.data.map(item => (
-                  <MediaCard key={item.mal_id} item={item} isAuth={!!user} handleLike={handleLike} />
+                  <MediaCard key={item.mal_id} item={item}>
+                    <LikeButton className="justify-end flex-1 place-items-end mt-4" isAuth={!!user} id={item.mal_id} />
+                  </MediaCard>
                 ))}
               </MediaGrid>
             </SearchResults>
