@@ -1,36 +1,20 @@
 import { useEffect, useState } from 'react'
-import { likeService } from '@/services/like'
+import { useGetFavoritesByIdQuery } from '@/redux/apis/db-api'
 
-export function useCheckFavorite(itemId: number, isAuth: boolean) {
+export function useSetLike(itemId: number, isAuth: boolean) {
   const [isActive, setIsActive] = useState(false)
-  const [isLoadingLike, setIsLoadingLike] = useState(false)
+
+  const { isLoading, data, refetch } = useGetFavoritesByIdQuery(itemId, {
+    skip: !isAuth,
+  })
 
   useEffect(() => {
-    const checkInitialLike = async () => {
-      // skip check if no user
-      if (!isAuth)
-        return null
+    // only change the state if liked state is different from the current state
+    // @ts-expect-error database types currently not working todo: fix
+    const isLiked = !!data?.length
+    if (isLiked !== isActive)
+      setIsActive(isLiked)
+  }, [data])
 
-      try {
-        setIsLoadingLike(true)
-        const likedItem = await likeService.getFavoriteById(itemId)
-
-        if (!likedItem || !likedItem.length)
-          return null
-
-        setIsActive(!!likedItem)
-      }
-      catch (e) {
-        console.error(e)
-        return null
-      }
-      finally {
-        setIsLoadingLike(false)
-      }
-    }
-
-    checkInitialLike()
-  }, [])
-
-  return { isActive, setIsActive, isLoadingLike }
+  return { isActive, setIsActive, isLoadingLike: isLoading, refetch }
 }

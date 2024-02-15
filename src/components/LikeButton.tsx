@@ -1,37 +1,35 @@
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { useCheckFavorite } from '@/hooks/use-set-like'
 import { likeService } from '@/services/like'
+import { useSetLike } from '@/hooks/use-set-like'
 
 interface Props {
   className?: string
   isAuth: boolean
   id: number
-  handleClick?: () => void
+  customMethod?: () => void
 }
 
-export function LikeButton({ className, isAuth, id, handleClick }: Props) {
-  const { isActive, setIsActive, isLoadingLike } = useCheckFavorite(id, isAuth)
+export function LikeButton({ className, isAuth, id, customMethod }: Props) {
+  const { isActive, setIsActive, isLoadingLike, refetch } = useSetLike(id, isAuth)
 
   async function handleLike() {
-    const initialLikeState = isActive
-
+    const initialState = isActive
     // optimistically change state
-    setIsActive(!initialLikeState)
+    setIsActive(!initialState)
 
-    const res = await likeService.changeLike(isAuth, id, initialLikeState)
+    const res = await likeService.changeLike(isAuth, id, initialState)
 
     // if res is ok do nothing → otherwise set to initial state
     if (res?.success) {
+      refetch()
       // if custom method needed → perform
-      if (handleClick)
-        handleClick()
-
-      return null
+      if (customMethod)
+        customMethod()
     }
     else {
-      setIsActive(initialLikeState)
+      setIsActive(initialState)
     }
   }
 
