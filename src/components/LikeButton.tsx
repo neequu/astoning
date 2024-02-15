@@ -1,36 +1,37 @@
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { likeService } from '@/services/like'
 import { useSetLike } from '@/hooks/use-set-like'
+import { useChangeLikeMutation } from '@/redux/apis/db-api'
 
 interface Props {
   className?: string
   isAuth: boolean
   id: number
-  customMethod?: () => void
 }
 
-export function LikeButton({ className, isAuth, id, customMethod }: Props) {
-  const { isActive, setIsActive, isLoadingLike, refetch } = useSetLike(id, isAuth)
+// review: too much code for this component?
+
+export function LikeButton({ className, isAuth, id }: Props) {
+  const { isActive, setIsActive, isLoadingLike } = useSetLike(id, isAuth)
+  const [changeLike] = useChangeLikeMutation()
+
+  function handleLikeChange(initialState: boolean) {
+    return changeLike({ id, initialState })
+  }
 
   async function handleLike() {
+    if (!isAuth)
+      return handleError('You need to be logged in')
+
     const initialState = isActive
+
     // optimistically change state
     setIsActive(!initialState)
-
-    const res = await likeService.changeLike(isAuth, id, initialState)
-
-    // if res is ok do nothing → otherwise set to initial state
-    if (res?.success) {
-      refetch()
-      // if custom method needed → perform
-      if (customMethod)
-        customMethod()
-    }
-    else {
+    const res = await handleLikeChange(initialState)
+    // if no res → set to initial state
+    if (!res)
       setIsActive(initialState)
-    }
   }
 
   return (

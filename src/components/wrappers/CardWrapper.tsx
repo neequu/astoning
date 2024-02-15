@@ -3,8 +3,6 @@ import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
 
 interface Props {
   itemId: number
-  isAuth: boolean
-  customMethod: () => void
   children: React.ReactNode
 }
 

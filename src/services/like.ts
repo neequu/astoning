@@ -1,12 +1,7 @@
 import { _addFavorite, _getFavoriteById, _getFavorites, _removeFavorite } from '@/services/db/db-methods'
-import { handleError } from '@/lib/utils'
 
 export const likeService = {
-
-  changeLike: async (isAuth: boolean, itemId: number, isCurrentStateActive: boolean) => {
-    if (!isAuth)
-      return handleError('You need to be logged in')
-
+  changeLike: async (itemId: number, isCurrentStateActive: boolean) => {
     return isCurrentStateActive ? _removeFavorite(itemId) : _addFavorite(itemId)
   },
 
