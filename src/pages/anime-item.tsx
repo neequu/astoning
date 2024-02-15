@@ -4,7 +4,7 @@ import { useAppSelector } from '@/hooks/redux-hooks'
 import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
-import { SearchMessage } from '@/components/search/SearchMessage'
+import { Message } from '@/components/search/Message'
 import { AnimeCard } from '@/components/AnimeCard'
 
 export default function AnimeItem() {
@@ -24,7 +24,7 @@ export default function AnimeItem() {
 
   return (
     <PageWrapper>
-      {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
+      {isError && <Message message="There was an error!" className="mt-10 text-destructive" />}
 
       {isFetching
         ? <LoadingSkeleton />

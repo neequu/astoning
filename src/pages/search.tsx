@@ -9,7 +9,7 @@ import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
-import { SearchMessage } from '@/components/search/SearchMessage'
+import { Message } from '@/components/search/Message'
 import { SearchResults } from '@/components/search/SearchResults'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
@@ -41,14 +41,14 @@ export default function Search() {
   return (
     <PageWrapper>
       <SearchForm value={query} handleSubmit={e => e.preventDefault()} changeQuery={handleQueryChange} autoFocus />
-      {isError && <SearchMessage message="There was an error!" className="mt-10 text-destructive" />}
+      {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
 
       {/* if fetching show skeleton → */}
       {isFetching
         ? <LoadingSkeleton />
         //  if success & nothing found show message →
         : successNoItems
-          ? <SearchMessage message="No results were found!" className="mt-10" />
+          ? <Message message="No results were found!" className="flex-1 items-center" />
           // show results
           : isSuccess && (
             <SearchResults>

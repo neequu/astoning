@@ -4,6 +4,7 @@ import { useAppSelector } from '@/hooks/redux-hooks'
 import { CardWrapper } from '@/components/wrappers/CardWrapper'
 import { useGetFavoritesQuery } from '@/redux/apis/db-api'
 import { LikeButton } from '@/components/LikeButton'
+import { Message } from '@/components/search/Message'
 
 export default function Favorites() {
   const user = useAppSelector(state => state.auth.user)
@@ -17,8 +18,8 @@ export default function Favorites() {
   return (
     <PageWrapper>
       {isLoading && 'loading'}
-
-      {(favoritesData && isSuccess) && (
+      {isSuccess && favoritesData.length === 0 && <Message message="You have no favorites" className="flex-1 items-center" />}
+      {(isSuccess && favoritesData.length > 0) && (
         <MediaGrid>
           {/* @ts-expect-error database types currently not working todo: fix */}
           { favoritesData.map(itemId => (

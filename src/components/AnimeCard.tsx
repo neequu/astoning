@@ -22,7 +22,7 @@ export function AnimeCard({ item, isAuth }: Props) {
       <div className="flex flex-col flex-1">
         <div className="mb-6">
           <div className="flex items-center justify-between mb-1">
-            <Button asChild variant="link" className="font-bold text-2xl p-0">
+            <Button asChild variant="link" className="font-bold text-2xl p-0 pr-4">
               <a href={item.url} target="_blank" rel="noreferrer">
                 <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
               </a>

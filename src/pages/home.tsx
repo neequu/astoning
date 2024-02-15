@@ -6,7 +6,7 @@ import { transformQuery } from '@/lib/utils'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
-import { SearchMessage } from '@/components/search/SearchMessage'
+import { Message } from '@/components/search/Message'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { LikeButton } from '@/components/LikeButton'
@@ -35,15 +35,15 @@ export default function Home() {
     <PageWrapper>
       <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange} />
 
-      {isError && <SearchMessage message="There was an error :(" className="mt-10 text-destructive" />}
-      {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
+      {isError && <Message message="There was an error :(" className="mt-10 text-destructive" />}
+      {isSuccess && animeData.pagination.items.count === 0 && <Message message="No results were found!" className="mt-10" />}
 
       {/* if fetching show skeleton → */}
       {isFetching
         ? <LoadingSkeleton />
       //  if success & nothing found show message →
         : successNoItems
-          ? <SearchMessage message="No results were found!" className="mt-10" />
+          ? <Message message="No results were found!" className="mt-10" />
         // show results
           : isSuccess && (
             <MediaGrid>
