@@ -6,36 +6,30 @@ export function useCheckFavorite(itemId: number, isAuth: boolean) {
   const [isLoadingLike, setIsLoadingLike] = useState(false)
 
   useEffect(() => {
-    let isMounted = true
     const checkInitialLike = async () => {
       // skip check if no user
       if (!isAuth)
         return null
-      if (isMounted) {
+
+      try {
         setIsLoadingLike(true)
-        try {
-          const likedItem = await likeService.getFavoriteById(itemId)
+        const likedItem = await likeService.getFavoriteById(itemId)
 
-          if (!likedItem)
-            return null
-
-          setIsActive(!!likedItem)
-        }
-        catch (e) {
-          console.error(e)
+        if (!likedItem || !likedItem.length)
           return null
-        }
-        finally {
-          setIsLoadingLike(false)
-        }
+
+        setIsActive(!!likedItem)
+      }
+      catch (e) {
+        console.error(e)
+        return null
+      }
+      finally {
+        setIsLoadingLike(false)
       }
     }
 
     checkInitialLike()
-
-    return () => {
-      isMounted = false
-    }
   }, [])
 
   return { isActive, setIsActive, isLoadingLike }
