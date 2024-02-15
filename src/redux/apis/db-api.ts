@@ -13,7 +13,14 @@ export const dbApi = createApi({
         return { data }
       },
     }),
+    getFavoritesById: builder.query<Tables<'favorites'>, number>({
+      // @ts-expect-error database types currently not working todo: fix
+      queryFn: async (id) => {
+        const data = await likeService.getFavoriteById(id)
+        return { data }
+      },
+    }),
   }),
 })
 
-export const { useGetFavoritesQuery } = dbApi
+export const { useGetFavoritesQuery, useGetFavoritesByIdQuery } = dbApi
