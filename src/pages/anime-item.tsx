@@ -21,7 +21,7 @@ export default function AnimeItem() {
       navigate('/not-found', { replace: true })
   }, [animeId, navigate])
 
-  const { isActive, setIsActive } = useCheckFavorite(animeId)
+  const { isActive, setIsActive, isLoadingLike } = useCheckFavorite(animeId)
 
   const user = useAppSelector(state => state.auth.user)
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
@@ -38,7 +38,7 @@ export default function AnimeItem() {
 
       {isFetching
         ? <LoadingSkeleton />
-        : isSuccess && <AnimeCard item={animeData.data} handleLike={onLike} isActive={isActive} />}
+        : isSuccess && <AnimeCard item={animeData.data} handleLike={onLike} isActive={isActive} isLoadingLike={isLoadingLike} />}
 
     </PageWrapper>
   )

@@ -7,9 +7,10 @@ interface Props {
   item: Anime
   handleLike: () => void
   isActive: boolean
+  isLoadingLike: boolean
 }
 
-export function AnimeCard({ item, isActive, handleLike }: Props) {
+export function AnimeCard({ item, isActive, handleLike, isLoadingLike }: Props) {
   return (
     <section className="flex flex-column sm:flex-row gap-6 flex-wrap">
       <div className="flex flex-1 flex-col items-center gap-5 min-w-[300px]">
@@ -28,7 +29,7 @@ export function AnimeCard({ item, isActive, handleLike }: Props) {
                 <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
               </a>
             </Button>
-            <LikeButton className="justify-end flex-1 place-items-end mt-4" handleLike={handleLike} isActive={isActive} />
+            <LikeButton className="justify-end flex-1 place-items-end mt-4" handleLike={handleLike} isActive={isActive} isLoadingLike={isLoadingLike} />
           </div>
           <p className="text-muted-foreground line-clamp-1" title={item.title_japanese}>{item.title_japanese}</p>
         </div>

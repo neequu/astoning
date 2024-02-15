@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function MediaCard({ item, isAuth, handleLike }: Props) {
-  const { isActive, setIsActive } = useCheckFavorite(item.mal_id)
+  const { isActive, setIsActive, isLoadingLike } = useCheckFavorite(item.mal_id)
 
   function onLike() {
     setIsActive(p => !p)
@@ -31,7 +31,7 @@ export function MediaCard({ item, isAuth, handleLike }: Props) {
       <Link to={`/anime/${item.mal_id}`} className="max-h-72">
         <img src={item.images.webp.image_url} className="h-72 min-w-30 w-full max-w-56 mx-auto rounded" alt={item.title} />
       </Link>
-      <LikeButton className="justify-end flex-1 place-items-end mt-4" handleLike={onLike} isActive={isActive} />
+      <LikeButton className="justify-end flex-1 place-items-end mt-4" handleLike={onLike} isActive={isActive} isLoadingLike={isLoadingLike} />
 
     </div>
   )

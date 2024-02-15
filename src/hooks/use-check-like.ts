@@ -3,19 +3,27 @@ import { getFavorite } from '@/services/db'
 
 export function useCheckFavorite(itemId: number) {
   const [isActive, setIsActive] = useState(false)
+  const [isLoadingLike, setIsLoadingLike] = useState(false)
 
   useEffect(() => {
     const checkLike = async () => {
-      const likedItem = await getFavorite(itemId)
+      setIsLoadingLike(true)
+      try {
+        const likedItem = await getFavorite(itemId)
 
-      if (!likedItem || !likedItem.length)
-        return
+        if (!likedItem || !likedItem.length)
+          return
 
-      setIsActive(!!likedItem)
+        setIsActive(!!likedItem)
+      }
+      catch (e) {}
+      finally {
+        setIsLoadingLike(false)
+      }
     }
 
     checkLike()
   }, [])
 
-  return { isActive, setIsActive }
+  return { isActive, setIsActive, isLoadingLike }
 }
