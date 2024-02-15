@@ -81,7 +81,7 @@ export async function _addFavorite(id: number) {
   }
 
   handleSuccess('Added to your library')
-  return { success: true }
+  return id
 }
 
 export async function _removeFavorite(id: number) {
@@ -96,5 +96,5 @@ export async function _removeFavorite(id: number) {
   }
 
   handleSuccess('Removed from your library')
-  return { success: true }
+  return id
 }
