@@ -5,12 +5,10 @@ import { LikeButton } from '@/components/LikeButton'
 
 interface Props {
   item: Anime
-  handleLike: () => void
-  isActive: boolean
-  isLoadingLike: boolean
+  isAuth: boolean
 }
 
-export function AnimeCard({ item, isActive, handleLike, isLoadingLike }: Props) {
+export function AnimeCard({ item, isAuth }: Props) {
   return (
     <section className="flex flex-column sm:flex-row gap-6 flex-wrap">
       <div className="flex flex-1 flex-col items-center gap-5 min-w-[300px]">
@@ -23,13 +21,13 @@ export function AnimeCard({ item, isActive, handleLike, isLoadingLike }: Props) 
       </div>
       <div className="flex flex-col flex-1">
         <div className="mb-6">
-          <div className="flex items-start justify-between mb-1">
+          <div className="flex items-center justify-between mb-1">
             <Button asChild variant="link" className="font-bold text-2xl p-0">
               <a href={item.url} target="_blank" rel="noreferrer">
                 <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
               </a>
             </Button>
-            <LikeButton className="justify-end flex-1 place-items-end mt-4" handleLike={handleLike} isActive={isActive} isLoadingLike={isLoadingLike} />
+            <LikeButton isAuth={isAuth} id={item.mal_id} />
           </div>
           <p className="text-muted-foreground line-clamp-1" title={item.title_japanese}>{item.title_japanese}</p>
         </div>

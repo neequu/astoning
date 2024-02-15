@@ -1,14 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { handleLike } from '@/services/like'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { AnimeCard } from '@/components/AnimeCard'
-import { addFavorite } from '@/services/db'
-import { useCheckFavorite } from '@/hooks/use-check-like'
 
 export default function AnimeItem() {
   const navigate = useNavigate()
@@ -21,16 +18,9 @@ export default function AnimeItem() {
       navigate('/not-found', { replace: true })
   }, [animeId, navigate])
 
-  const { isActive, setIsActive, isLoadingLike } = useCheckFavorite(animeId)
-
   const user = useAppSelector(state => state.auth.user)
-  const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
-  function onLike() {
-    setIsActive(p => !p)
-    handleLike(!!user, animeId)
-    addFavorite(animeId)
-  }
+  const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
   return (
     <PageWrapper>
@@ -38,7 +28,7 @@ export default function AnimeItem() {
 
       {isFetching
         ? <LoadingSkeleton />
-        : isSuccess && <AnimeCard item={animeData.data} handleLike={onLike} isActive={isActive} isLoadingLike={isLoadingLike} />}
+        : isSuccess && <AnimeCard item={animeData.data} isAuth={!!user} />}
 
     </PageWrapper>
   )

@@ -9,7 +9,6 @@ import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { SearchMessage } from '@/components/search/SearchMessage'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
-import { handleLike } from '@/services/like'
 
 export default function Home() {
   const user = useAppSelector(state => state.auth.user)
@@ -35,7 +34,6 @@ export default function Home() {
     <PageWrapper>
       <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange} />
 
-      {isFetching && <LoadingSkeleton />}
       {isError && <SearchMessage message="There was an error :(" className="mt-10 text-destructive" />}
       {isSuccess && animeData.pagination.items.count === 0 && <SearchMessage message="No results were found!" className="mt-10" />}
 
@@ -49,7 +47,7 @@ export default function Home() {
           : isSuccess && (
             <MediaGrid>
               {animeData.data.map(item => (
-                <MediaCard key={item.mal_id} item={item} isAuth={!!user} handleLike={handleLike} />
+                <MediaCard key={item.mal_id} item={item} isAuth={!!user} />
               ))}
             </MediaGrid>
           )}
