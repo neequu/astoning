@@ -3,6 +3,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { CardWrapper } from '@/components/wrappers/CardWrapper'
 import { useGetFavoritesQuery } from '@/redux/apis/db-api'
+import { LikeButton } from '@/components/LikeButton'
 
 export default function Favorites() {
   const user = useAppSelector(state => state.auth.user)
@@ -20,8 +21,11 @@ export default function Favorites() {
       {(favoritesData && isSuccess) && (
         <MediaGrid>
           {/* @ts-expect-error database types currently not working todo: fix */}
-          { favoritesData.map(itemId =>
-            <CardWrapper key={itemId.item_id} isAuth={!!user} itemId={itemId.item_id} handleClick={handleRefetch} />,
+          { favoritesData.map(itemId => (
+            <CardWrapper key={itemId.item_id} isAuth={!!user} itemId={itemId.item_id} customMethod={handleRefetch}>
+              <LikeButton className="justify-end flex-1 place-items-end mt-4" isAuth={!!user} id={itemId.item_id} customMethod={handleRefetch} />
+            </CardWrapper>
+          ),
           )}
         </MediaGrid>
       )}
