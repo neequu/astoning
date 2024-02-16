@@ -43,7 +43,7 @@ export default function Home() {
         ? <LoadingSkeleton />
       //  if success & nothing found show message →
         : successNoItems
-          ? <Message message="No results were found!" className="mt-10" />
+          ? <Message message="No results were found!" className="flex-1 items-center" />
         // show results
           : isSuccess && (
             <MediaGrid className="grid-tmp">

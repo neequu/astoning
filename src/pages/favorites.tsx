@@ -6,28 +6,39 @@ import { useGetFavoritesQuery } from '@/redux/apis/db-api'
 import { LikeButton } from '@/components/LikeButton'
 import { Message } from '@/components/search/Message'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
+import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 
 export default function Favorites() {
   const user = useAppSelector(state => state.auth.user)
 
   const { data: favoritesData, isSuccess, isLoading } = useGetFavoritesQuery(user?.id)
 
+  const successNoItems = isSuccess && favoritesData.length === 0
+
   return (
     <PageWrapper>
-      {isLoading && 'loading'}
-      {isSuccess && favoritesData.length === 0 && <Message message="You have no favorites" className="flex-1 items-center" />}
-      {(isSuccess && favoritesData.length > 0) && (
-        <MediaGrid>
-          <AnimationWrapper className="grid-tmp">
-            { favoritesData.map(itemId => (
-              <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
-                <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
-              </CardWrapper>
-            ),
-            )}
-          </AnimationWrapper>
-        </MediaGrid>
-      )}
+      {isLoading && <LoadingSkeleton />}
+      {successNoItems && <Message message="You have no favorites" className="flex-1 items-center" />}
+
+      {/* if loading show skeleton → */}
+      {isLoading
+        ? <LoadingSkeleton />
+      //  if success & nothing found show message →
+        : successNoItems
+          ? <Message message="You have no favorites" className="flex-1 items-center" />
+        // show results
+          : isSuccess && (
+            <MediaGrid>
+              <AnimationWrapper className="grid-tmp">
+                { favoritesData.map(itemId => (
+                  <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
+                    <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
+                  </CardWrapper>
+                ),
+                )}
+              </AnimationWrapper>
+            </MediaGrid>
+          )}
 
     </PageWrapper>
   )
