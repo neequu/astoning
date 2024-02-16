@@ -2,11 +2,11 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { maxTextLengthForHiddenBlock } from '@/lib/constants'
+import { MAX__HIDDEN_BLOCK_TEXT_LEN } from '@/lib/constants'
 
 // @ts-expect-error Prop types cover these props
 export function HiddenTextBlock({ text, className }) {
-  const isTooLong = text.length >= maxTextLengthForHiddenBlock
+  const isTooLong = text.length >= MAX__HIDDEN_BLOCK_TEXT_LEN
   const [isHidden, setIsHidden] = useState(isTooLong)
 
   return (

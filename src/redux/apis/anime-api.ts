@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { ApiResponse, ApiResponseSingle } from '@/types/anime'
-import { baseUrl } from '@/lib/constants'
+import { BASE_API_URL } from '@/lib/constants'
 
 export const animeApi = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL }),
   endpoints: builder => ({
     getAnime: builder.query<ApiResponse, void>({
       query: () => 'anime',

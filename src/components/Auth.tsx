@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import type { User } from '@supabase/supabase-js'
 import { AuthForm } from '@/components/AuthForm'
 import { formSchema } from '@/lib/validations'
-import { validationFields } from '@/lib/constants'
+import { VALID_FIELDS } from '@/lib/constants'
 import type { Credentials } from '@/types/auth'
 
 import { useAppDispatch } from '@/hooks/redux-hooks'
@@ -16,7 +16,7 @@ import { handleAuthSuccess } from '@/lib/utils'
 import { GithubIcon } from '@/components/icons/github'
 
 interface Props {
-  handleAuth: (data: Credentials) => Promise<User | null>
+  handleAuth: (data: Credentials) => Promise<User | null >
   message?: string
 }
 
@@ -35,7 +35,7 @@ export function Auth({ handleAuth, message }: Props) {
   }
 
   return (
-    <AuthForm handleSubmit={onSubmit} form={authForm} fields={validationFields}>
+    <AuthForm handleSubmit={onSubmit} form={authForm} fields={VALID_FIELDS}>
       <OAuth provider="github" handleOAuth={authService.loginWithOath}>
         <GithubIcon className="ml-2 text-xl" />
       </OAuth>
