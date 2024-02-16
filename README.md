@@ -101,7 +101,9 @@ pnpm run dev
 
 - styled with [tailwind](https://tailwindcss.com)
 - ui library [shadcn](https://ui.shadcn.com)
-- input validatoin with [zod](https://zod.dev/)
+- input validation with [zod](https://zod.dev/)
 - forms with [useForm](https://react-hook-form.com/docs/useform)
 - backend service [supabase](https://supabase.com/) (alt to firebase)
 - [mobile responsive](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
+- toast with [sonner](https://sonner.emilkowal.ski/toast)
+- animation with [formkit-aa](https://auto-animate.formkit.com)
