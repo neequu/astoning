@@ -126,3 +126,56 @@ export async function _removeFavorite(id: number, userId: User['id'] | undefined
   handleSuccess('Removed from your library')
   return id
 }
+
+// __HISTORY__
+export async function _getHistory(userId: User['id'] | undefined) {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('history')
+    .select('*')
+    .eq('user_id', userId)
+
+  if (error) {
+    handleError(error.message || 'Couldn\t get history!')
+    return null
+  }
+
+  return data
+}
+
+export async function _deleteHistoryById(itemId: number, userId: User['id'] | undefined) {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('history')
+    .delete()
+    .eq('user_id', userId)
+    .eq('id', itemId)
+
+  if (error) {
+    handleError(error.message || 'Couldn\t delete history!')
+    return null
+  }
+
+  return data
+}
+
+export async function _deleteAllHistory(userId: User['id'] | undefined) {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('history')
+    .delete()
+    .eq('user_id', userId)
+
+  if (error) {
+    handleError(error.message || 'Couldn\t delete history!')
+    return null
+  }
+
+  return data
+}
