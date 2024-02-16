@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useGetFavoritesByIdQuery } from '@/redux/apis/db-api'
 
 export function useSetLike(itemId: number, isAuth: boolean) {
@@ -7,8 +7,8 @@ export function useSetLike(itemId: number, isAuth: boolean) {
   const { isLoading, data } = useGetFavoritesByIdQuery(itemId, {
     skip: !isAuth,
   })
-
-  useEffect(() => {
+  // review: use layout to remove animation from setting button active state
+  useLayoutEffect(() => {
     // only change the state if liked state is different from the current state
     const isLiked = !!data?.length
     if (isLiked !== isActive)
