@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
 import { useDebounce } from '@/hooks/use-debounce'
@@ -8,7 +8,7 @@ import { transformQuery } from '@/lib/utils'
 import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
-import { Message } from '@/components/search/Message'
+import { Message } from '@/components/misc/Message'
 import { SearchResults } from '@/components/search/SearchResults'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
@@ -40,12 +40,12 @@ export default function Search() {
 
   return (
     <PageWrapper>
-      <SearchForm value={query} changeQuery={handleQueryChange} autoFocus />
-      {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
-
-      {
-      //  if success & nothing found show message →
-        successNoItems
+      <SearchForm value={query} changeQuery={handleQueryChange} />
+      {/* allow this to load but show form ↑ */}
+      <Suspense>
+        {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
+        {/* if success & nothing found show message → */}
+        {successNoItems
           ? <Message message="No results were found!" className="flex-1 items-center" />
           // show results
           : isSuccess && (
@@ -60,8 +60,8 @@ export default function Search() {
                 </AnimationWrapper>
               </MediaGrid>
             </SearchResults>
-          )
-}
+          )}
+      </Suspense>
     </PageWrapper>
   )
 }

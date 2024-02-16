@@ -4,7 +4,7 @@ import { useAppSelector } from '@/hooks/redux-hooks'
 import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
-import { Message } from '@/components/search/Message'
+import { Message } from '@/components/misc/Message'
 import { AnimeCard } from '@/components/AnimeCard'
 
 export default function AnimeItem() {

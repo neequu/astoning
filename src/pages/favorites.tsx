@@ -4,7 +4,7 @@ import { useAppSelector } from '@/hooks/redux-hooks'
 import { CardWrapper } from '@/components/wrappers/CardWrapper'
 import { useGetFavoritesQuery } from '@/redux/apis/db-api'
 import { LikeButton } from '@/components/LikeButton'
-import { Message } from '@/components/search/Message'
+import { Message } from '@/components/misc/Message'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGetAnimeQuery } from '@/redux/apis/anime-api'
 import { SearchForm } from '@/components/search/SearchForm'
@@ -6,10 +6,11 @@ import { transformQuery } from '@/lib/utils'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
-import { Message } from '@/components/search/Message'
+import { Message } from '@/components/misc/Message'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { LikeButton } from '@/components/LikeButton'
+import { SearchSuggestions } from '@/components/search/SearchSuggestions'
 
 export default function Home() {
   const user = useAppSelector(state => state.auth.user)
@@ -32,28 +33,30 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange} />
+      <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange}>
+        <SearchSuggestions />
+      </SearchForm>
+      {/* allow this to load but show form ↑ */}
+      <Suspense>
+        {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
 
-      {isError && <Message message="There was an error :(" className="mt-10 text-destructive" />}
-      {isSuccess && animeData.pagination.items.count === 0 && <Message message="No results were found!" className="mt-10" />}
-
-      {/* if fetching show skeleton → */}
-      {isFetching
-        ? <LoadingSkeleton />
-      //  if success & nothing found show message →
-        : successNoItems
-          ? <Message message="No results were found!" className="flex-1 items-center" />
-        // show results
-          : isSuccess && (
-            <MediaGrid className="grid-tmp">
-              {animeData.data.map(item => (
-                <MediaCard key={item.mal_id} item={item}>
-                  <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
-                </MediaCard>
-              ))}
-            </MediaGrid>
-          )}
-
+        {/* if fetching show skeleton → */}
+        {isFetching
+          ? <LoadingSkeleton />
+        //  if success & nothing found show message →
+          : successNoItems
+            ? <Message message="No results were found!" className="flex-1 items-center" />
+          // show results
+            : isSuccess && (
+              <MediaGrid className="grid-tmp">
+                {animeData.data.map(item => (
+                  <MediaCard key={item.mal_id} item={item}>
+                    <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
+                  </MediaCard>
+                ))}
+              </MediaGrid>
+            )}
+      </Suspense>
     </PageWrapper>
   )
 }
