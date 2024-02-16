@@ -1,6 +1,7 @@
 import type { ValidAuthFormFields } from '@/types/auth'
 
 export const BASE_API_URL = 'https://api.jikan.moe/v4'
+export const MAX_SUGGESTIONS = 5
 
 export const MAX__HIDDEN_BLOCK_TEXT_LEN = 285
 

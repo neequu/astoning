@@ -21,10 +21,10 @@ export const animeApi = createApi({
         data: transformAnimeData(response.data),
       }),
     }),
-    getAnimeSearch: builder.query<ApiResponse, string>({
-      query: q => ({
+    getAnimeSearch: builder.query<ApiResponse, { q: string, limit?: number }>({
+      query: ({ q, limit }) => ({
         url: 'anime',
-        params: { q },
+        params: { q, limit },
       }),
       transformResponse: (response: ApiResponse) => ({
         ...response,
