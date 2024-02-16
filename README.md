@@ -48,17 +48,17 @@ pnpm run dev
 
 - [x] Реализована хотя бы одна [**форма**](https://github.com/neequu/astoning/blob/main/src/components/AuthForm.tsx)
 
-- [x] Есть применение [**Контекст API**]()
+- [x] Есть применение [**Контекст API**](https://github.com/neequu/astoning/blob/main/src/providers/theme-provider.tsx)
 
-- [x] Есть применение **предохранителя**
+- [x] Есть применение **предохранителя** [тут](https://github.com/neequu/astoning/blob/main/src/App.tsx) и [тут](https://github.com/neequu/astoning/blob/main/src/components/ErrorLayout.tsx)
 
-- [x] Есть хотя бы один **кастомный хук**
+- [x] Есть хотя бы один [**кастомный хук**](https://github.com/neequu/astoning/blob/main/src/hooks)
 
-- [x] Хотя бы несколько компонентов используют **PropTypes**
+- [x] Хотя бы несколько компонентов используют **PropTypes** [тут](https://github.com/neequu/astoning/blob/main/src/components/ui/spinner.tsx) и [тут](https://github.com/neequu/astoning/blob/main/src/components/misc/HiddenTextBlock.tsx)
 
-- [x] Поиск не должен триггерить много запросов к серверу (**debounce**)
+- [x] Поиск не должен триггерить много запросов к серверу [**debounce**](https://github.com/neequu/astoning/blob/main/src/hooks/use-debounce.ts)
 
-- [x] Есть применение lazy + Suspense
+- [x] Есть применение [lazy](https://github.com/neequu/astoning/blob/main/src/router/router-config.ts) + [Suspense](https://github.com/neequu/astoning/blob/main/src/router/index.tsx)
 
 **Redux**
 
