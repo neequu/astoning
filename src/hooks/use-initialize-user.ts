@@ -10,14 +10,9 @@ export function useInitializeUser(getUser: () => Promise<User | null>) {
     let isMounted = true
 
     const getInitialUser = async () => {
-      try {
-        const user = await getUser()
-        if (isMounted)
-          dispatch(setUser(user))
-      }
-      catch (error) {
-        console.error(error)
-      }
+      const user = await getUser()
+      if (isMounted)
+        dispatch(setUser(user))
     }
 
     getInitialUser()
