@@ -20,7 +20,7 @@ interface Props {
   message?: string
 }
 
-export function Auth({ handleAuth, message }: Props) {
+export function AuthPanel({ handleAuth, message }: Props) {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 

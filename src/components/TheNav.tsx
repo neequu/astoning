@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { Clock8Icon, HeartIcon } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/button'
-import { SignOut } from '@/components/SignOut'
+import { TheSignOut } from '@/components/TheSignOut'
 
 interface Props {
   children?: React.ReactNode
@@ -26,7 +26,7 @@ export function TheNav({ children, user }: Props) {
                 <Clock8Icon className="h-[1.2rem] w-[1.2rem] scale-100 transition-all " />
               </NavLink>
             </Button>
-            <SignOut />
+            <TheSignOut />
           </>
           )
         : (
