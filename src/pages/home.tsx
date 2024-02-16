@@ -46,7 +46,7 @@ export default function Home() {
           ? <Message message="No results were found!" className="mt-10" />
         // show results
           : isSuccess && (
-            <MediaGrid>
+            <MediaGrid className="grid-tmp">
               {animeData.data.map(item => (
                 <MediaCard key={item.mal_id} item={item}>
                   <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />

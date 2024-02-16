@@ -5,6 +5,7 @@ import { CardWrapper } from '@/components/wrappers/CardWrapper'
 import { useGetFavoritesQuery } from '@/redux/apis/db-api'
 import { LikeButton } from '@/components/LikeButton'
 import { Message } from '@/components/search/Message'
+import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 
 export default function Favorites() {
   const user = useAppSelector(state => state.auth.user)
@@ -17,12 +18,14 @@ export default function Favorites() {
       {isSuccess && favoritesData.length === 0 && <Message message="You have no favorites" className="flex-1 items-center" />}
       {(isSuccess && favoritesData.length > 0) && (
         <MediaGrid>
-          { favoritesData.map(itemId => (
-            <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
-              <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
-            </CardWrapper>
-          ),
-          )}
+          <AnimationWrapper className="grid-tmp">
+            { favoritesData.map(itemId => (
+              <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
+                <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
+              </CardWrapper>
+            ),
+            )}
+          </AnimationWrapper>
         </MediaGrid>
       )}
 
