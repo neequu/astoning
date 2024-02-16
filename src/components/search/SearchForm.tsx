@@ -1,4 +1,5 @@
 import { SearchIcon } from 'lucide-react'
+import React, { useState } from 'react'
 import { Button } from '../ui/button'
 import { Input } from '@/components/ui/input'
 import { handleError } from '@/lib/utils'
@@ -6,12 +7,13 @@ import { handleError } from '@/lib/utils'
 interface Props {
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
   changeQuery: (q: string) => void
-  value?: string
   children?: React.ReactElement
   query?: string
 }
 
-export function SearchForm({ handleSubmit, changeQuery, value, children }: Props) {
+export function SearchForm({ handleSubmit, changeQuery, query, children }: Props) {
+  const [isInputFocused, setIsInputFocused] = useState(false)
+
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     // using as here: typing event in parameters didn't pass down the types :(
@@ -25,23 +27,32 @@ export function SearchForm({ handleSubmit, changeQuery, value, children }: Props
       handleSubmit(e)
   }
 
+  const childrenWithProps = React.Children.map(children, (child) => {
+    if (React.isValidElement(child))
+      return React.cloneElement(child, { isInputFocused })
+
+    return child
+  })
+
   return (
     <div className="relative">
-      <form onSubmit={onSubmit} className="flex items-center rounded-md transition-[ring_ring-offset-background_50ms] has-[input:focus-visible]:ring-offset-background has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-ring has-[input:focus-visible]:ring-offset-2 ">
+      <form onSubmit={onSubmit} className="flex items-center rounded-md transition-[ring_ring-offset-background_50ms] has-[input:focus-visible]:ring-offset-background has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-ring has-[input:focus-visible]:ring-offset-2" autoComplete="off">
         <Input
           name="query"
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
           autoFocus
-          value={value}
+          value={query}
           className="text-md py-6 rounded-r-none border-r-none focus-visible:ring-offset-0 focus-visible:ring-0 "
           placeholder="Search!"
           type="text"
           onChange={e => changeQuery(e.target.value)}
         />
-        <Button type="submit" size="icon" className="rounded-l-none py-6 w-12">
+        <Button type="submit" size="icon" className="rounded-l-none py-6 w-16">
           <SearchIcon />
         </Button>
       </form>
-      {children}
+      {children && childrenWithProps}
     </div>
   )
 }

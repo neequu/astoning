@@ -35,13 +35,16 @@ export default function Search() {
     if (!debouncedQuery)
       return navigate(`/search`)
 
+    if (debouncedQuery === query)
+      return
+
     const encodedQuery = transformQuery(debouncedQuery)
-    navigate(`/search?q=${encodedQuery}`, { replace: true })
-  }, [debouncedQuery, navigate])
+    navigate(`/search?q=${encodedQuery}`)
+  }, [debouncedQuery, query, navigate])
 
   return (
     <PageWrapper>
-      <SearchForm value={query} changeQuery={handleQueryChange} />
+      <SearchForm query={query} changeQuery={handleQueryChange} />
       {/* allow this to load but show form ↑ */}
       <Suspense>
         {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}

@@ -30,7 +30,8 @@ export default function Home() {
   // on submit transform query and redirect to search page
   function handleSubmit() {
     const encodedQuery = transformQuery(query)
-    navigate(`/search?q=${encodedQuery}`)
+    const redirectUrl = `/search?q=${encodedQuery}`
+    navigate(redirectUrl)
   }
 
   return (

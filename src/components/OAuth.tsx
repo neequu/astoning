@@ -10,7 +10,7 @@ interface Props {
 
 export function OAuth({ provider, handleOAuth, children }: Props) {
   return (
-    <Button onClick={() => handleOAuth(provider)}>
+    <Button onClick={() => handleOAuth(provider)} variant="secondary">
       <span className="font-bold">{`Sign In with ${capitalizeWord(provider)}`}</span>
       {children}
     </Button>

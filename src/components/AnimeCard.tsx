@@ -33,7 +33,7 @@ export function AnimeCard({ item, userId }: Props) {
           <p className="text-muted-foreground line-clamp-1" title={item.title_japanese}>{item.title_japanese}</p>
         </div>
 
-        <HiddenTextBlock text={item.synopsis} className="mb-4" />
+        <HiddenTextBlock text={item.synopsis ?? 'No synopsys available'} className="mb-4" />
 
         <div>
           <p className="text-muted-foreground font-semibold text-xl mb-2">Info</p>
