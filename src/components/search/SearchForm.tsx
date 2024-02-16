@@ -29,7 +29,8 @@ export function SearchForm({ handleSubmit, changeQuery, query, children }: Props
 
   const childrenWithProps = React.Children.map(children, (child) => {
     if (React.isValidElement(child))
-      return React.cloneElement(child, { isInputFocused })
+    // using as here: need to clone children so explicitly tell ts these are jsx elements
+      return React.cloneElement(child as JSX.Element, { isInputFocused })
 
     return child
   })
@@ -37,6 +38,7 @@ export function SearchForm({ handleSubmit, changeQuery, query, children }: Props
   return (
     <div className="relative">
       <form onSubmit={onSubmit} className="flex items-center rounded-md transition-[ring_ring-offset-background_50ms] has-[input:focus-visible]:ring-offset-background has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-ring has-[input:focus-visible]:ring-offset-2" autoComplete="off">
+        {/* review: move state to custom input */}
         <Input
           name="query"
           onFocus={() => setIsInputFocused(true)}

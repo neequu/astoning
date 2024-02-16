@@ -16,12 +16,12 @@ export default function Router() {
       <Routes>
         {routesPublic.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) }
 
-        <Route element={<ProtectedRoute redirectUrl="/login" redirectCondition={!hasUser} />}>
-          {routesAuthOnly.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) }
-        </Route>
-
         <Route element={<ProtectedRoute redirectUrl="/" redirectCondition={hasUser} />}>
           {routesNoAuthOnly.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) }
+        </Route>
+
+        <Route element={<ProtectedRoute redirectUrl="/login" redirectCondition={!hasUser} />}>
+          {routesAuthOnly.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) }
         </Route>
 
       </Routes>

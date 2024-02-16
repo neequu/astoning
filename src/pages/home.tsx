@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <PageWrapper>
       <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange}>
-        <SearchSuggestions debouncedQuery={debouncedQuery} userId={user?.id} />
+        <SearchSuggestions debouncedQuery={debouncedQuery} />
       </SearchForm>
 
       {/* allow this to load but show form ↑ */}

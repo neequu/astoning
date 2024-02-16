@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import type { Anime } from '@/types/anime'
 

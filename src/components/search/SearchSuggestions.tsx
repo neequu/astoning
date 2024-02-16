@@ -1,6 +1,4 @@
 import { Suspense } from 'react'
-import type { User } from '@supabase/supabase-js'
-import { LikeButton } from '@/components/LikeButton'
 import { Message } from '@/components/misc/Message'
 import { MAX_SUGGESTIONS } from '@/lib/constants'
 import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
@@ -10,11 +8,10 @@ import { cn } from '@/lib/utils'
 
 interface Props {
   debouncedQuery: string
-  userId: User['id'] | undefined
   isInputFocused?: boolean
 }
 
-export function SearchSuggestions({ debouncedQuery, userId, isInputFocused }: Props) {
+export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
   const { data: searchData, isSuccess, isError } = useGetAnimeSearchQuery({ q: debouncedQuery, limit: MAX_SUGGESTIONS }, {
     skip: !debouncedQuery,
   })
