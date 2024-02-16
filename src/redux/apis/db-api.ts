@@ -1,4 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
+import type { User } from '@supabase/supabase-js'
 import { likeService } from '@/services/like'
 import type { Tables } from '@/types/db'
 
@@ -7,25 +8,25 @@ export const dbApi = createApi({
   baseQuery: fakeBaseQuery(),
   tagTypes: ['LikeById', 'Like'],
   endpoints: builder => ({
-    getFavorites: builder.query<Tables<'favorites'>[], void>({
+    getFavorites: builder.query<Tables<'favorites'>[], User['id'] | undefined>({
       // @ts-expect-error database types currently not working todo: fix
-      queryFn: async () => {
-        const data = await likeService.getFavorites()
+      queryFn: async (userId) => {
+        const data = await likeService.getFavorites(userId)
         return { data }
       },
       providesTags: ['Like'],
     }),
-    getFavoritesById: builder.query<Tables<'favorites'>[], number>({
+    getFavoritesById: builder.query<Tables<'favorites'>[], { itemId: number, userId: User['id'] | undefined }>({
       // @ts-expect-error database types currently not working todo: fix
-      queryFn: async (id) => {
-        const data = await likeService.getFavoriteById(id)
+      queryFn: async ({ itemId, userId }) => {
+        const data = await likeService.getFavoriteById(itemId, userId)
         return { data }
       },
       providesTags: ['LikeById'],
     }),
-    changeLike: builder.mutation<number | null, { id: number, initialState: boolean }>({
-      queryFn: async ({ id, initialState }) => {
-        const data = await likeService.changeLike(id, initialState)
+    changeLike: builder.mutation<number | null, { itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined }>({
+      queryFn: async ({ itemId, isCurrentStateActive, userId }) => {
+        const data = await likeService.changeLike(itemId, isCurrentStateActive, userId)
         return { data }
       },
       invalidatesTags: ['Like', 'LikeById'],

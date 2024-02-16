@@ -1,4 +1,5 @@
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
+import type { User } from '@supabase/supabase-js'
 import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
@@ -6,22 +7,22 @@ import { useChangeLikeMutation } from '@/redux/apis/db-api'
 
 interface Props {
   className?: string
-  isAuth: boolean
-  id: number
+  userId: User['id'] | undefined
+  itemId: number
 }
 
 // review: too much code for this component?
 
-export function LikeButton({ className, isAuth, id }: Props) {
-  const { isActive, setIsActive, isLoadingLike } = useSetLike(id, isAuth)
+export function LikeButton({ className, userId, itemId }: Props) {
+  const { isActive, setIsActive, isLoadingLike } = useSetLike(itemId, userId)
   const [changeLike] = useChangeLikeMutation()
 
   function handleLikeChange(initialState: boolean) {
-    return changeLike({ id, initialState })
+    return changeLike({ itemId, isCurrentStateActive: initialState, userId })
   }
 
   async function handleLike() {
-    if (!isAuth)
+    if (!userId)
       return handleError('You need to be logged in')
 
     const initialState = isActive

@@ -28,7 +28,7 @@ export default function AnimeItem() {
 
       {isFetching
         ? <LoadingSkeleton />
-        : isSuccess && <AnimeCard item={animeData.data} isAuth={!!user} />}
+        : isSuccess && <AnimeCard item={animeData.data} userId={user?.id} />}
 
     </PageWrapper>
   )

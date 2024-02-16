@@ -1,8 +1,9 @@
-import type { Provider } from '@supabase/supabase-js'
+import type { Provider, User } from '@supabase/supabase-js'
 import type { Credentials } from '@/types/auth'
 import { handleError, handleSuccess } from '@/lib/utils'
 import supabase from '@/services/db'
 
+// todo: create a universal function
 // __AUTH__
 export async function _loginWithCredentials(cred: Credentials) {
   const { data: { user }, error } = await supabase.auth.signInWithPassword(cred)
@@ -47,8 +48,15 @@ export async function _loginWithOath(provider: Provider) {
 }
 
 // __FAVORITES__
-export async function _getFavoriteById(id: number) {
-  const { data, error } = await supabase.from('favorites').select('*').eq('item_id', id)
+export async function _getFavoriteById(itemId: number, userId: User['id'] | undefined) {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('favorites')
+    .select('*')
+    .eq('item_id', itemId)
+    .eq('user_id', userId)
 
   if (error) {
     handleError(error.message || 'Couldn\t get favorites!')
@@ -58,8 +66,14 @@ export async function _getFavoriteById(id: number) {
   return data
 }
 
-export async function _getFavorites() {
-  const { data, error } = await supabase.from('favorites').select('item_id')
+export async function _getFavorites(userId: User['id'] | undefined) {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('favorites')
+    .select('item_id')
+    .eq('user_id', userId)
 
   if (error) {
     handleError(error.message || 'Couldn\t get favorites!')
@@ -69,7 +83,10 @@ export async function _getFavorites() {
   return data
 }
 
-export async function _addFavorite(id: number) {
+export async function _addFavorite(id: number, userId: User['id'] | undefined) {
+  if (!userId)
+    return null
+
   const { error } = await supabase
     .from('favorites')
     .insert({ item_id: id })
@@ -83,11 +100,15 @@ export async function _addFavorite(id: number) {
   return id
 }
 
-export async function _removeFavorite(id: number) {
+export async function _removeFavorite(id: number, userId: User['id'] | undefined) {
+  if (!userId)
+    return null
+
   const { error } = await supabase
     .from('favorites')
     .delete()
     .eq('item_id', id)
+    .eq('user_id', userId)
 
   if (error) {
     handleError(error.message)

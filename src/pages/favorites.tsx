@@ -9,7 +9,7 @@ import { Message } from '@/components/search/Message'
 export default function Favorites() {
   const user = useAppSelector(state => state.auth.user)
 
-  const { data: favoritesData, isSuccess, isLoading } = useGetFavoritesQuery()
+  const { data: favoritesData, isSuccess, isLoading } = useGetFavoritesQuery(user?.id)
 
   return (
     <PageWrapper>
@@ -19,7 +19,7 @@ export default function Favorites() {
         <MediaGrid>
           { favoritesData.map(itemId => (
             <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
-              <LikeButton className="justify-end flex-1 place-items-end mt-4" isAuth={!!user} id={itemId.item_id} />
+              <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
             </CardWrapper>
           ),
           )}
