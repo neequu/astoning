@@ -70,7 +70,6 @@ export async function _getFavorites() {
 }
 
 export async function _addFavorite(id: number) {
-  // @ts-expect-error database types currently not working todo: fix
   const { error } = await supabase
     .from('favorites')
     .insert({ item_id: id })
