@@ -42,13 +42,13 @@ pnpm run dev
 **React**
 
 - [x] **Функциональные компоненты c хуками** в приоритете над классовыми
-- [x] Есть разделение на **умные и глупые компоненты**
+- [x] Есть разделение на **[умные](https://github.com/neequu/astoning/blob/main/src/components/wrappers/PageWrapper.tsx)** и **[глупые](https://github.com/neequu/astoning/blob/main/src/pages/home.tsx)** компоненты
 
-- [x] Есть **рендеринг списков**
+- [x] Есть [**рендеринг списков**](https://github.com/neequu/astoning/blob/main/src/pages/search.tsx)
 
-- [x] Реализована хотя бы одна **форма**
+- [x] Реализована хотя бы одна [**форма**](https://github.com/neequu/astoning/blob/main/src/components/AuthForm.tsx)
 
-- [x] Есть применение Контекст API
+- [x] Есть применение [**Контекст API**]()
 
 - [x] Есть применение **предохранителя**
 

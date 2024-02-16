@@ -11,21 +11,23 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { LikeButton } from '@/components/LikeButton'
 import { SearchSuggestions } from '@/components/search/SearchSuggestions'
+import { useDebounce } from '@/hooks/use-debounce'
 
 export default function Home() {
   const user = useAppSelector(state => state.auth.user)
   const navigate = useNavigate()
-
-  const [query, setQuery] = useState('')
-
-  // rtk data fetch
+  // all anime data
   const { data: animeData, isError, isFetching, isSuccess } = useGetAnimeQuery()
   const successNoItems = isSuccess && animeData.pagination.items.count === 0
+  // search queries
+  const [query, setQuery] = useState('')
+  const debouncedQuery = useDebounce(query)
 
+  // update query
   function handleQueryChange(newQuery: string) {
     setQuery(newQuery)
   }
-
+  // on submit transform query and redirect to search page
   function handleSubmit() {
     const encodedQuery = transformQuery(query)
     navigate(`/search?q=${encodedQuery}`)
@@ -34,8 +36,9 @@ export default function Home() {
   return (
     <PageWrapper>
       <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange}>
-        <SearchSuggestions />
+        <SearchSuggestions debouncedQuery={debouncedQuery} userId={user?.id} />
       </SearchForm>
+
       {/* allow this to load but show form ↑ */}
       <Suspense>
         {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
@@ -45,7 +48,7 @@ export default function Home() {
           ? <LoadingSkeleton />
         //  if success & nothing found show message →
           : successNoItems
-            ? <Message message="No results were found!" className="flex-1 items-center" />
+            ? <Message message="No anime found!" className="flex-1 items-center" />
           // show results
             : isSuccess && (
               <MediaGrid className="grid-tmp">

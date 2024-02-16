@@ -22,8 +22,9 @@ export default function Search() {
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const debouncedQuery = useDebounce(query)
 
-  // rtk data fetch
-  const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery(debouncedQuery)
+  const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery({ q: debouncedQuery }, {
+    skip: !debouncedQuery,
+  })
   const successNoItems = isSuccess && animeData.pagination.items.count === 0
 
   function handleQueryChange(newQuery: string) {
@@ -48,11 +49,11 @@ export default function Search() {
         {successNoItems
           ? <Message message="No results were found!" className="flex-1 items-center" />
           // show results
-          : isSuccess && (
+          : (
             <SearchResults>
               <MediaGrid>
                 <AnimationWrapper className="grid-tmp">
-                  {animeData.data.map(item => (
+                  {animeData?.data.map(item => (
                     <MediaCard key={item.mal_id} item={item}>
                       <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
                     </MediaCard>
@@ -60,7 +61,7 @@ export default function Search() {
                 </AnimationWrapper>
               </MediaGrid>
             </SearchResults>
-          )}
+            )}
       </Suspense>
     </PageWrapper>
   )
