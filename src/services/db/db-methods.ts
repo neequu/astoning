@@ -62,7 +62,7 @@ export async function _getFavoriteById(itemId: number, userId: User['id'] | unde
 
   const { data, error } = await supabase
     .from('favorites')
-    .select('*')
+    .select('item_id')
     .eq('item_id', itemId)
     .eq('user_id', userId)
 
