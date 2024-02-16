@@ -25,8 +25,7 @@ export default function Home() {
     setQuery(newQuery)
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  function handleSubmit() {
     const encodedQuery = transformQuery(query)
     navigate(`/search?q=${encodedQuery}`)
   }

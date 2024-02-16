@@ -40,7 +40,7 @@ export default function Search() {
 
   return (
     <PageWrapper>
-      <SearchForm value={query} handleSubmit={e => e.preventDefault()} changeQuery={handleQueryChange} autoFocus />
+      <SearchForm value={query} changeQuery={handleQueryChange} autoFocus />
       {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
 
       {
