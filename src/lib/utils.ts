@@ -20,12 +20,10 @@ export function capitalizeWord(word: string) {
 
 export function handleError(errorMsg = 'There was an error') {
   toast.error(errorMsg)
-  return null
 }
 
 export function handleSuccess(errorMsg = 'Success!') {
   toast.success(errorMsg)
-  return null
 }
 
 export function handleAuthSuccess(user: User, navigate: NavigateFunction, dispatch: AppDispatch, successMsg = 'Success!', redirectUrl = '/') {
