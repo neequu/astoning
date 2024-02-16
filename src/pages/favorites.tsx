@@ -17,7 +17,6 @@ export default function Favorites() {
 
   return (
     <PageWrapper>
-      {successNoItems && <Message message="You have no favorites" className="flex-1 items-center" />}
       {/* if loading show skeleton → */}
       {isLoading
         ? <LoadingSkeleton />

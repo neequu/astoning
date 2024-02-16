@@ -17,7 +17,7 @@ export function AnimeCard({ item, userId }: Props) {
           <img className="block w-full h-full max-h-[500px]" src={item.images.webp.large_image_url} alt={item.title} />
         </div>
         <div className="border-2 border-muted-foreground rounded-full h-20 aspect-square grid place-content-center">
-          <p className="text-3xl font-bold text-muted-foreground">{item.score ?? 'N/D'}</p>
+          <p className="text-3xl font-bold text-muted-foreground">{item.score}</p>
         </div>
       </div>
       <div className="flex flex-col flex-1">
@@ -46,7 +46,7 @@ export function AnimeCard({ item, userId }: Props) {
         <p>
           <span className="text-muted-foreground font-semibold">Release year:</span>
           &nbsp;
-          {item.year ?? 'N/D'}
+          {item.year}
         </p>
 
         <p>

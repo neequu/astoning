@@ -20,8 +20,8 @@ export interface Anime {
   title_japanese: string
   episodes: number
   duration: string
-  score: number
-  year: number | null | string
+  score: number | string
+  year: number | string
   rating: string
   type: string
   synopsis: string

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { ApiResponse, ApiResponseSingle } from '@/types/anime'
 import { BASE_API_URL } from '@/lib/constants'
+import { transformAnimeData } from '@/lib/rtk/transforms'
 
 export const animeApi = createApi({
   reducerPath: 'api',
@@ -8,24 +9,26 @@ export const animeApi = createApi({
   endpoints: builder => ({
     getAnime: builder.query<ApiResponse, void>({
       query: () => 'anime',
-      transformResponse: (response: ApiResponse) => {
-        const transformedData = response.data.map(anime => ({
-          ...anime,
-          year: anime.year === null ? 'N/D' : anime.year,
-        }))
-        return {
-          ...response,
-          data: transformedData,
-        }
-      },
+      transformResponse: (response: ApiResponse) => ({
+        ...response,
+        data: response.data.map(transformAnimeData),
+      }),
     }),
     getAnimeById: builder.query<ApiResponseSingle, number>({
       query: id => `anime/${id}`,
+      transformResponse: (response: ApiResponseSingle) => ({
+        ...response,
+        data: transformAnimeData(response.data),
+      }),
     }),
     getAnimeSearch: builder.query<ApiResponse, string>({
       query: q => ({
         url: 'anime',
         params: { q },
+      }),
+      transformResponse: (response: ApiResponse) => ({
+        ...response,
+        data: response.data.map(transformAnimeData),
       }),
     }),
   }),
