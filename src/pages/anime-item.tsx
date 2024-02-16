@@ -12,15 +12,18 @@ export default function AnimeItem() {
   const { id } = useParams()
   // не parseInt тк при стринге может дать num ('1x' даст 1 например)
   const animeId = +(id!)
+  const isNotValidId = Number.isNaN(animeId)
 
   useEffect(() => {
-    if (Number.isNaN(animeId))
+    if (isNotValidId)
       navigate('/not-found', { replace: true })
-  }, [animeId, navigate])
+  }, [isNotValidId, navigate])
 
   const user = useAppSelector(state => state.auth.user)
 
-  const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
+  const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId, {
+    skip: isNotValidId,
+  })
 
   return (
     <PageWrapper>

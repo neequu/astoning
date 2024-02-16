@@ -5,7 +5,7 @@ import { useAppDispatch } from '@/hooks/redux-hooks'
 import { authService } from '@/services/auth'
 import { handleSuccess } from '@/lib/utils'
 import { setUser } from '@/redux/slices/auth-slice'
-import { protectedRoutes } from '@/router/router-config'
+import { routesAuthOnly } from '@/router/router-config'
 
 export function SignOut() {
   const location = useLocation()
@@ -15,7 +15,7 @@ export function SignOut() {
 
   function redirectAfterSignOut() {
     const currentRoute = location.pathname
-    if (protectedRoutes.find(route => route.path === currentRoute))
+    if (routesAuthOnly.find(route => route.path === currentRoute))
       navigate('/')
   }
 

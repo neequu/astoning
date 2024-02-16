@@ -9,7 +9,7 @@ const Login = lazy(() => import('@/pages/login'))
 const Favorites = lazy(() => import('@/pages/favorites'))
 const NotFound = lazy(() => import('@/pages/notFound'))
 
-export const regularRoutes = [
+export const routesPublic = [
   {
     path: '/',
     component: Home,
@@ -24,12 +24,16 @@ export const regularRoutes = [
     component: AnimeItem,
   },
   {
+    path: '/not-found',
+    component: NotFound,
+  },
+  {
     path: '*',
     component: NotFound,
   },
 ]
 
-export const protectedRoutes = [
+export const routesAuthOnly = [
   {
     path: '/history',
     component: History,
@@ -42,7 +46,7 @@ export const protectedRoutes = [
   },
 ]
 
-export const redirectedFromRotues = [
+export const routesNoAuthOnly = [
   {
     path: '/login',
     component: Login,
@@ -50,9 +54,5 @@ export const redirectedFromRotues = [
   {
     path: '/register',
     component: Register,
-  },
-  {
-    path: '/not-found',
-    component: NotFound,
   },
 ]
