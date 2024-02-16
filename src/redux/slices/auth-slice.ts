@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { User } from '@supabase/supabase-js'
-
-type UserOptional = User | null
+import type { UserOptional } from '@/types/auth'
 
 interface AuthSlice {
   user: UserOptional

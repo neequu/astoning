@@ -9,20 +9,11 @@ const Login = lazy(() => import('@/pages/login'))
 const Favorites = lazy(() => import('@/pages/favorites'))
 const NotFound = lazy(() => import('@/pages/notFound'))
 
-// Regular routes
 export const regularRoutes = [
   {
     path: '/',
     component: Home,
     exact: true,
-  },
-  {
-    path: '/login',
-    component: Login,
-  },
-  {
-    path: '/register',
-    component: Register,
   },
   {
     path: '/search',
@@ -33,16 +24,11 @@ export const regularRoutes = [
     component: AnimeItem,
   },
   {
-    path: '/not-found',
-    component: NotFound,
-  },
-  {
     path: '*',
     component: NotFound,
   },
 ]
 
-// Protected routes
 export const protectedRoutes = [
   {
     path: '/history',
@@ -53,5 +39,20 @@ export const protectedRoutes = [
     path: '/favorites',
     component: Favorites,
     exact: true,
+  },
+]
+
+export const redirectedFromRotues = [
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    component: Register,
+  },
+  {
+    path: '/not-found',
+    component: NotFound,
   },
 ]
