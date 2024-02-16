@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Toaster } from 'sonner'
+import { LoadingSkeleton } from './components/loadingState/LoadingSkeleton'
 import { useInitializeUser } from '@/hooks/use-initialize-user'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
@@ -9,12 +10,15 @@ import Router from '@/router'
 import { authService } from '@/services/auth'
 
 function App() {
-  useInitializeUser(authService.getUser)
+  const { isLoading } = useInitializeUser(authService.getUser)
 
   return (
-    <LayoutWrapper>
-      <Router />
-    </LayoutWrapper>
+    // review: is this ok?
+    // не тернарный чтобы не ругался еслинт
+    <>
+      {isLoading && <LoadingSkeleton /> }
+      {!isLoading && <LayoutWrapper><Router /></LayoutWrapper>}
+    </>
   )
 }
 
