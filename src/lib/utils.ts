@@ -23,8 +23,13 @@ export function handleError(errorMsg = 'There was an error') {
   return null
 }
 
+export function handleSuccess(errorMsg = 'Success!') {
+  toast.success(errorMsg)
+  return null
+}
+
 export function handleAuthSuccess(user: User, navigate: NavigateFunction, dispatch: AppDispatch, successMsg = 'Success!', redirectUrl = '/') {
   dispatch(setUser(user))
   navigate(redirectUrl)
-  toast.success(successMsg)
+  handleSuccess(successMsg)
 }

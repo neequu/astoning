@@ -23,7 +23,7 @@ export function TheHeader() {
 
   return (
     <header>
-      <div className="container py-3 mx-auto px-4 flex justify-between items-center">
+      <div className="container py-3 mx-auto px-4 min-h-16 flex justify-between items-center">
         <Button asChild variant="link" className="p-0">
           <NavLink to="/">
             <Logo />

@@ -1,28 +1,49 @@
-import { useState } from 'react'
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import type { User } from '@supabase/supabase-js'
+import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useSetLike } from '@/hooks/use-set-like'
+import { useChangeLikeMutation } from '@/redux/apis/db-api'
 
 interface Props {
   className?: string
-  isAuth: boolean
-  handleLike: (auth: boolean, id: number) => void
-  id: number
+  userId: User['id'] | undefined
+  itemId: number
 }
 
-export function LikeButton({ className, isAuth, handleLike, id }: Props) {
-  const [isActive, setIsActive] = useState(false)
+// review: too much code for this component?
 
-  function handleClick() {
-    setIsActive(p => !p)
-    handleLike(isAuth, id)
+export function LikeButton({ className, userId, itemId }: Props) {
+  const { isActive, setIsActive, isLoadingLike } = useSetLike(itemId, userId)
+  const [changeLike] = useChangeLikeMutation()
+
+  function handleLikeChange(initialState: boolean) {
+    return changeLike({ itemId, isCurrentStateActive: initialState, userId })
+  }
+
+  async function handleLike() {
+    if (!userId)
+      return handleError('You need to be logged in')
+
+    const initialState = isActive
+
+    // optimistically change state
+    setIsActive(!initialState)
+    const res = await handleLikeChange(initialState)
+    // if no res → set to initial state
+    if (!res)
+      setIsActive(initialState)
   }
 
   return (
     <div className={cn('flex', className)}>
-      <Button size="icon" variant="ghost" onClick={handleClick} className={cn(isActive && 'hover:text-destructive transition-all')}>
-        <HeartCrackIcon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all ', isActive && 'rotate-0 scale-100 ')} />
-        <HeartIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all', isActive && '-rotate-90 scale-0')} />
+      <Button size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
+        {!isLoadingLike && (
+          <>
+            <HeartCrackIcon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-20 scale-0 transition-[rotate_scale_300ms]', isActive && 'rotate-0 scale-100 ')} />
+            <HeartIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-[rotate_scale_300ms]', isActive && '-rotate-20 scale-0')} />
+          </>
+        )}
       </Button>
     </div>
   )

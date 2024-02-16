@@ -1,10 +1,13 @@
+import { cn } from '@/lib/utils'
+
 interface Props {
   children: React.ReactNode
+  className?: string
 }
 
-export function MediaGrid({ children }: Props) {
+export function MediaGrid({ children, className }: Props) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(215px,1fr))] gap-4 pt-6">
+    <div className={cn(className)}>
       {children}
     </div>
   )
