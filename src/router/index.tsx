@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { ProtectedRoute } from './private'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 
 const Home = lazy(() => import('@/pages/home'))
@@ -54,23 +55,24 @@ function Router() {
           </Suspense>
         )}
       />
-
-      <Route
-        path="/favorites"
-        element={(
-          <Suspense fallback={<LoadingSkeleton />}>
-            <Favorites />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/history"
-        element={(
-          <Suspense fallback={<LoadingSkeleton />}>
-            <History />
-          </Suspense>
-        )}
-      />
+      <Route element={<ProtectedRoute redirectUrl="/login" />}>
+        <Route
+          path="/favorites"
+          element={(
+            <Suspense fallback={<LoadingSkeleton />}>
+              <Favorites />
+            </Suspense>
+          )}
+        />
+        <Route
+          path="/history"
+          element={(
+            <Suspense fallback={<LoadingSkeleton />}>
+              <History />
+            </Suspense>
+          )}
+        />
+      </Route>
       <Route
         path="/not-found"
         element={(
