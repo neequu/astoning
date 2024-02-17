@@ -16,7 +16,7 @@ export default function Favorites() {
   const successNoItems = isSuccess && favoritesData?.length === 0
 
   return (
-    <PageWrapper>
+    <PageWrapper heading="Favorites">
       {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
       {/* if loading show skeleton → */}
       {isLoading

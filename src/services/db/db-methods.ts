@@ -2,6 +2,7 @@ import type { Provider, User } from '@supabase/supabase-js'
 import type { Credentials } from '@/types/auth'
 import { handleError, handleSuccess } from '@/lib/utils'
 import supabase from '@/services/db'
+import type { Tables } from '@/types/db'
 
 // todo: create a universal function
 // __AUTH__
@@ -62,7 +63,7 @@ export async function _getFavoriteById(itemId: number, userId: User['id'] | unde
 
   const { data, error } = await supabase
     .from('favorites')
-    .select('item_id')
+    .select('*')
     .eq('item_id', itemId)
     .eq('user_id', userId)
 
@@ -94,7 +95,6 @@ export async function _getFavorites(userId: User['id'] | undefined) {
 export async function _addFavorite(id: number, userId: User['id'] | undefined) {
   if (!userId)
     return null
-
   const { error } = await supabase
     .from('favorites')
     .insert({ item_id: id })
@@ -125,4 +125,75 @@ export async function _removeFavorite(id: number, userId: User['id'] | undefined
 
   handleSuccess('Removed from your library')
   return id
+}
+
+// __HISTORY__
+export async function _getHistory(userId: User['id'] | undefined): Promise<Tables<'history'>[] | null> {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('history')
+    .select('*')
+    .eq('user_id', userId)
+
+  if (error) {
+    handleError(error.message || 'Couldn\t get history!')
+    return null
+  }
+
+  return data
+}
+
+export async function _addHistory(query: string, userId: User['id'] | undefined): Promise<null> {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('history')
+    .insert({ query })
+
+  if (error) {
+    handleError(error.message || 'Couldn\t add history!')
+    return null
+  }
+
+  return data
+}
+
+export async function _deleteHistoryById(itemId: number, userId: User['id'] | undefined): Promise<null> {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('history')
+    .delete()
+    .eq('user_id', userId)
+    .eq('id', itemId)
+
+  if (error) {
+    handleError(error.message || 'Couldn\t delete history!')
+    return null
+  }
+
+  handleSuccess('History deleted')
+  return data
+}
+
+export async function _deleteAllHistory(userId: User['id'] | undefined): Promise<null> {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('history')
+    .delete()
+    .eq('user_id', userId)
+
+  if (error) {
+    handleError(error.message || 'Couldn\t delete history!')
+    return null
+  }
+
+  handleSuccess('All history deleted')
+  return data
 }

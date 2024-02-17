@@ -31,3 +31,13 @@ export function handleAuthSuccess(user: User, navigate: NavigateFunction, dispat
   navigate(redirectUrl)
   handleSuccess(successMsg)
 }
+
+export function transformDateFromString(date: string) {
+  return new Date(date).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
