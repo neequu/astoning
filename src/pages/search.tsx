@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useDebouncedCallback } from 'use-debounce'
 import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
-import { useDebounce } from '@/hooks/use-debounce'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformQuery } from '@/lib/utils'
 
@@ -23,37 +23,43 @@ export default function Search() {
   // search queries
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
-  const debouncedQuery = useDebounce(query)
+  const [currenstSearch, setCurrenstSearch] = useState(query)
 
   // search data
-  const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery({ q: debouncedQuery })
+  const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery({ q: currenstSearch })
   const successNoItems = isSuccess && animeData.pagination.items.count === 0
 
   function handleQueryChange(newQuery: string) {
     setQuery(newQuery)
   }
 
-  function redirectToQuery(q: string) {
-    const encodedQuery = transformQuery(q)
+  function search() {
+    if (currenstSearch === query)
+      return
+    setCurrenstSearch(query)
+
+    if (!query)
+      return navigate('/search')
+
+    const encodedQuery = transformQuery(query)
     const redirectUrl = `/search?q=${encodedQuery}`
+
+    addHistory({ query: encodedQuery, userId: user?.id })
     navigate(redirectUrl)
   }
 
+  const throttledSearch = useDebouncedCallback(search, 1000)
+
   // navigate on debounced query change
   useEffect(() => {
-    // if no query - remove query param from url and skip
-    if (!debouncedQuery)
-      return navigate(`/search`)
-
-    redirectToQuery(debouncedQuery)
-    addHistory({ query, userId: user?.id })
-  }, [debouncedQuery])
+    throttledSearch()
+  }, [navigate, query, throttledSearch])
 
   return (
     <>
       <SearchForm query={query} changeQuery={handleQueryChange} />
       <Suspense>
-        <PageWrapper heading={debouncedQuery ? `Results for ${debouncedQuery}` : 'Search any anime!'}>
+        <PageWrapper heading={currenstSearch ? `Results for ${currenstSearch}` : 'Search any anime!'}>
           {/* allow this to load but show form ↑ */}
           {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
           {/* if success & nothing found show message → */}

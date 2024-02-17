@@ -1,8 +1,11 @@
 import { Suspense, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppSelector } from '@/hooks/redux-hooks'
 import { useAddHistoryMutation } from '@/redux/apis/db-api'
 import { useGetAnimeQuery } from '@/redux/apis/anime-api'
+import { transformQuery } from '@/lib/utils'
+import { useAppSelector } from '@/hooks/redux-hooks'
+import { useDebounce } from '@/hooks/use-debounce'
+
 import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
@@ -11,8 +14,6 @@ import { Message } from '@/components/misc/Message'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { SearchSuggestions } from '@/components/search/SearchSuggestions'
-import { useDebounce } from '@/hooks/use-debounce'
-import { transformQuery } from '@/lib/utils'
 
 export default function Home() {
   const user = useAppSelector(state => state.auth.user)
