@@ -177,6 +177,7 @@ export async function _deleteHistoryById(itemId: number, userId: User['id'] | un
     return null
   }
 
+  handleSuccess('History deleted')
   return data
 }
 
@@ -194,5 +195,6 @@ export async function _deleteAllHistory(userId: User['id'] | undefined): Promise
     return null
   }
 
+  handleSuccess('All history deleted')
   return data
 }
