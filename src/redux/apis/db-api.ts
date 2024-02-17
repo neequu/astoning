@@ -62,4 +62,4 @@ export const dbApi = createApi({
   }),
 })
 
-export const { useGetFavoritesQuery, useGetFavoritesByIdQuery, useChangeLikeMutation } = dbApi
+export const { useGetFavoritesQuery, useGetFavoritesByIdQuery, useChangeLikeMutation, useDeleteAllHistoryMutation, useAddHistoryMutation, useDeleteHistoryByIdMutation, useGetHistoryQuery } = dbApi
