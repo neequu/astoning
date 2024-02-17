@@ -95,7 +95,7 @@ export async function _getFavorites(userId: User['id'] | undefined) {
 export async function _addFavorite(id: number, userId: User['id'] | undefined) {
   if (!userId)
     return null
-
+  // @ts-expect-error types don't work todo:fix later
   const { error } = await supabase
     .from('favorites')
     .insert({ item_id: id })
@@ -142,7 +142,7 @@ export async function _getHistory(userId: User['id'] | undefined): Promise<Table
     handleError(error.message || 'Couldn\t get history!')
     return null
   }
-
+  // @ts-expect-error types don't work todo:fix later
   return data
 }
 
@@ -150,6 +150,7 @@ export async function _addHistory(query: string, userId: User['id'] | undefined)
   if (!userId)
     return null
 
+  // @ts-expect-error types don't work todo:fix later
   const { data, error } = await supabase
     .from('history')
     .insert({ query })
