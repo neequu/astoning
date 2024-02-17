@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { XOctagonIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import type { Tables } from '@/types/db'
+import type { Tables } from '@/types/db/supabase'
 
 import {
   Tooltip,
@@ -17,11 +17,13 @@ interface Props {
 }
 
 export function HistoryCard({ item, onDelete }: Props) {
+  const decoudedQuery = decodeURIComponent(item.query)
+
   return (
     <div className="flex justify-between border-b border-muted py-4">
       <Button asChild variant="link" className="p-0">
         <Link to={`/search?q=${item.query}`}>
-          <p className="text-xl">{item.query}</p>
+          <p className="text-xl">{decoudedQuery}</p>
         </Link>
       </Button>
       <TooltipProvider>
