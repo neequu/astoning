@@ -19,12 +19,13 @@ export default function Home() {
   const [addHistory] = useAddHistoryMutation()
 
   const navigate = useNavigate()
-  // all anime data
-  const { data: animeData, isError, isFetching, isSuccess } = useGetAnimeQuery()
-  const successNoItems = isSuccess && animeData.pagination.items.count === 0
   // search queries
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query)
+
+  // all anime data
+  const { data: animeData, isError, isFetching, isSuccess } = useGetAnimeQuery()
+  const successNoItems = isSuccess && animeData.pagination.items.count === 0
 
   // update query
   function handleQueryChange(newQuery: string) {
@@ -33,6 +34,7 @@ export default function Home() {
   // on submit transform query and redirect to search page
   function handleSubmit() {
     const encodedQuery = transformQuery(query)
+
     addHistory({ query, userId: user?.id })
     const redirectUrl = `/search?q=${encodedQuery}`
     navigate(redirectUrl)

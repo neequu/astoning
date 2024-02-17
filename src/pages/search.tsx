@@ -13,40 +13,47 @@ import { SearchResults } from '@/components/search/SearchResults'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
+import { useAddHistoryMutation } from '@/redux/apis/db-api'
 
 export default function Search() {
   const user = useAppSelector(state => state.auth.user)
-  const navigate = useNavigate()
+  const [addHistory] = useAddHistoryMutation()
 
+  const navigate = useNavigate()
+  // search queries
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const debouncedQuery = useDebounce(query)
 
-  const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery({ q: debouncedQuery }, {
-    skip: !debouncedQuery,
-  })
+  // search data
+  const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery({ q: debouncedQuery })
   const successNoItems = isSuccess && animeData.pagination.items.count === 0
 
   function handleQueryChange(newQuery: string) {
     setQuery(newQuery)
   }
 
+  function redirectToQuery(q: string) {
+    const encodedQuery = transformQuery(q)
+    const redirectUrl = `/search?q=${encodedQuery}`
+    navigate(redirectUrl)
+  }
+
+  // navigate on debounced query change
   useEffect(() => {
+    // if no query - remove query param from url and skip
     if (!debouncedQuery)
       return navigate(`/search`)
 
-    if (debouncedQuery === query)
-      return
-
-    const encodedQuery = transformQuery(debouncedQuery)
-    navigate(`/search?q=${encodedQuery}`)
-  }, [debouncedQuery, query, navigate])
+    redirectToQuery(debouncedQuery)
+    addHistory({ query, userId: user?.id })
+  }, [debouncedQuery])
 
   return (
     <>
       <SearchForm query={query} changeQuery={handleQueryChange} />
       <Suspense>
-        <PageWrapper heading={`Results for ${debouncedQuery}`}>
+        <PageWrapper heading={debouncedQuery ? `Results for ${debouncedQuery}` : 'Search any anime!'}>
           {/* allow this to load but show form ↑ */}
           {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
           {/* if success & nothing found show message → */}
