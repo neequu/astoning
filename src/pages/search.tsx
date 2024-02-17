@@ -43,29 +43,31 @@ export default function Search() {
   }, [debouncedQuery, query, navigate])
 
   return (
-    <PageWrapper>
+    <>
       <SearchForm query={query} changeQuery={handleQueryChange} />
-      {/* allow this to load but show form ↑ */}
       <Suspense>
-        {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
-        {/* if success & nothing found show message → */}
-        {successNoItems
-          ? <Message message="No results were found!" className="flex-1 items-center" />
-          // show results
-          : (
-            <SearchResults>
-              <MediaGrid>
-                <AnimationWrapper className="grid-tmp">
-                  {animeData?.data.map(item => (
-                    <MediaCard key={item.mal_id} item={item}>
-                      <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
-                    </MediaCard>
-                  ))}
-                </AnimationWrapper>
-              </MediaGrid>
-            </SearchResults>
-            )}
+        <PageWrapper heading={`Results for ${debouncedQuery}`}>
+          {/* allow this to load but show form ↑ */}
+          {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
+          {/* if success & nothing found show message → */}
+          {successNoItems
+            ? <Message message="No results were found!" className="flex-1 items-center" />
+            // show results
+            : (
+              <SearchResults>
+                <MediaGrid>
+                  <AnimationWrapper className="grid-tmp">
+                    {animeData?.data.map(item => (
+                      <MediaCard key={item.mal_id} item={item}>
+                        <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
+                      </MediaCard>
+                    ))}
+                  </AnimationWrapper>
+                </MediaGrid>
+              </SearchResults>
+              )}
+        </PageWrapper>
       </Suspense>
-    </PageWrapper>
+    </>
   )
 }

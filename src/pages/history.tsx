@@ -13,7 +13,7 @@ export default function History() {
   const [deleteHistoryById] = useDeleteHistoryByIdMutation()
 
   return (
-    <PageWrapper>
+    <PageWrapper heading="History">
       {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
       {/* if loading show skeleton → */}
       {isLoading

@@ -39,32 +39,34 @@ export default function Home() {
   }
 
   return (
-    <PageWrapper>
+    <>
       <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange}>
         <SearchSuggestions debouncedQuery={debouncedQuery} />
       </SearchForm>
-
-      {/* allow this to load but show form ↑ */}
       <Suspense>
-        {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
+        <PageWrapper heading="Home Page">
 
-        {/* if fetching show skeleton → */}
-        {isFetching
-          ? <LoadingSkeleton />
-        //  if success & nothing found show message →
-          : successNoItems
-            ? <Message message="No anime found!" className="flex-1 items-center" />
-          // show results
-            : isSuccess && (
-              <MediaGrid className="grid-tmp">
-                {animeData.data.map(item => (
-                  <MediaCard key={item.mal_id} item={item}>
-                    <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
-                  </MediaCard>
-                ))}
-              </MediaGrid>
-            )}
+          {/* allow this to load but show form ↑ */}
+          {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
+
+          {/* if fetching show skeleton → */}
+          {isFetching
+            ? <LoadingSkeleton />
+          //  if success & nothing found show message →
+            : successNoItems
+              ? <Message message="No anime found!" className="flex-1 items-center" />
+            // show results
+              : isSuccess && (
+                <MediaGrid className="grid-tmp">
+                  {animeData.data.map(item => (
+                    <MediaCard key={item.mal_id} item={item}>
+                      <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
+                    </MediaCard>
+                  ))}
+                </MediaGrid>
+              )}
+        </PageWrapper>
       </Suspense>
-    </PageWrapper>
+    </>
   )
 }
