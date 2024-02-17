@@ -3,6 +3,14 @@ import { XOctagonIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { Tables } from '@/types/db'
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { transformDateFromString } from '@/lib/utils'
+
 interface Props {
   item: Tables<'history'>
   onDelete: (id: number) => void
@@ -10,15 +18,31 @@ interface Props {
 
 export function HistoryCard({ item, onDelete }: Props) {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between border-b border-muted py-4">
       <Button asChild variant="link" className="p-0">
         <Link to={`/search?q=${item.query}`}>
           <p className="text-xl">{item.query}</p>
         </Link>
       </Button>
-      <Button size="icon" className="w-8 h-8" variant="destructive" onClick={() => onDelete(item.id)}>
-        <XOctagonIcon size={20} />
-      </Button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <span>
+              <Button asChild className="hover:text-destructive w-10 h-10 p-2 inline-block" size="icon" variant="ghost" onClick={() => onDelete(item.id)}>
+                <XOctagonIcon size={20} />
+              </Button>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>
+              <span>Delete search from</span>
+              &nbsp;
+              <span className="font-medium">{transformDateFromString(item.created_at)}</span>
+            </p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
     </div>
   )
 }
