@@ -10,7 +10,6 @@ export const dbApi = createApi({
   tagTypes: ['LikeById', 'Like', 'History'],
   endpoints: builder => ({
     getFavorites: builder.query<{ item_id: number }[] | null, User['id'] | undefined>({
-      // @ts-expect-error types don't work todo:fix later
       queryFn: async (userId) => {
         const data = await likeService.getFavorites(userId)
         return { data }
@@ -18,7 +17,6 @@ export const dbApi = createApi({
       providesTags: ['Like'],
     }),
     getFavoritesById: builder.query<{ item_id: number }[] | null, { itemId: number, userId: User['id'] | undefined }>({
-      // @ts-expect-error types don't work todo:fix later
       queryFn: async ({ itemId, userId }) => {
         const data = await likeService.getFavoriteById(itemId, userId)
         return { data }
