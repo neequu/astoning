@@ -41,7 +41,7 @@ export default function History() {
                   <HistoryCard item={hist} key={hist.id} onDelete={handleDeleteSingle} />
                 ))}
               </AnimationWrapper>
-              <Button variant="destructive" className="mt-auto font-bold self-center" onClick={handleDeleteAll}>Delete all history</Button>
+              <Button variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeleteAll}>Delete all history</Button>
             </HistoryWrapper>
             )}
 

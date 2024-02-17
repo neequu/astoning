@@ -42,7 +42,6 @@ export function HistoryCard({ item, onDelete }: Props) {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-
     </div>
   )
 }
