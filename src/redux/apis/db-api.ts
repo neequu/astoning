@@ -2,21 +2,21 @@ import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { User } from '@supabase/supabase-js'
 import { likeService } from '@/services/like'
 import { historyService } from '@/services/history'
-import type { Tables } from '@/types/db'
+import type { Tables } from '@/types/db/supabase'
 
 export const dbApi = createApi({
   reducerPath: 'db',
   baseQuery: fakeBaseQuery(),
   tagTypes: ['LikeById', 'Like', 'History'],
   endpoints: builder => ({
-    getFavorites: builder.query<{ item_id: number }[] | null, User['id'] | undefined>({
+    getFavorites: builder.query<{ item_id: Tables<'favorites'>['item_id'] }[] | null, User['id'] | undefined>({
       queryFn: async (userId) => {
         const data = await likeService.getFavorites(userId)
         return { data }
       },
       providesTags: ['Like'],
     }),
-    getFavoritesById: builder.query<{ item_id: number }[] | null, { itemId: number, userId: User['id'] | undefined }>({
+    getFavoritesById: builder.query<{ item_id: Tables<'favorites'>['item_id'] } | null, { itemId: number, userId: User['id'] | undefined }>({
       queryFn: async ({ itemId, userId }) => {
         const data = await likeService.getFavoriteById(itemId, userId)
         return { data }
