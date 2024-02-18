@@ -15,11 +15,12 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
   const { data: searchData, isSuccess, isError } = useGetAnimeSearchQuery({ q: debouncedQuery, limit: MAX_SUGGESTIONS }, {
     skip: !debouncedQuery,
   })
-
-  if (!debouncedQuery || searchData === undefined)
+  // don't render anything initially
+  if (!searchData)
     return null
 
   const successNoItems = isSuccess && searchData.pagination.items.count === 0
+
   return (
     <div className={cn('flex flex-col bg-menu text-menu-foreground rounded-md shadow-lg border mt-3 overflow-hidden absolute top-full -left-20 -right-20 z-50 opacity-0 transition-all duration-500', isInputFocused && 'opacity-100 left-0 right-0')}>
       {/* allow this to load but show form ↑ */}
@@ -27,7 +28,7 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
       {/* if success & nothing found show message → */}
       {successNoItems
         ? <Message message="No results were found!" className="flex-1 text-md items-center" />
-      // show results
+        // show results
         : (
           <Suspense>
             <AnimationWrapper>

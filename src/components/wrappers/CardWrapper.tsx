@@ -8,11 +8,11 @@ interface Props {
 }
 
 export function CardWrapper({ itemId, children }: Props) {
-  const { data: animeData, isSuccess, isFetching } = useGetAnimeByIdQuery(itemId)
+  const { data: animeData, isSuccess, isError } = useGetAnimeByIdQuery(itemId)
 
   // review: ok?
   // api has rate limit, don't create card if blocked
-  if (!isSuccess && !isFetching)
+  if (isError)
     return <FailedCard />
 
   return (

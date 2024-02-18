@@ -11,6 +11,7 @@ interface Props {
 }
 
 export function SearchPanel({ handleSubmit, changeQuery, query, children, shouldKeepFocusState = false }: Props) {
+  // alternative: create another input with state and pass it conditionally
   const [isInputFocused, setIsInputFocused] = useState(false)
 
   const childrenWithProps = React.Children.map(children, (child) => {
@@ -21,13 +22,13 @@ export function SearchPanel({ handleSubmit, changeQuery, query, children, should
     return child
   })
 
-  function handleFocus() {
+  function handleFocus(): void {
     if (!shouldKeepFocusState)
       return
 
     setIsInputFocused(true)
   }
-  function handleBlur() {
+  function handleBlur(): void {
     if (!shouldKeepFocusState)
       return
 
