@@ -9,7 +9,7 @@ interface Props {
 export function PageWrapper({ children, className, heading }: Props) {
   return (
     <section className={cn('py-12 flex-1 flex flex-col', className)}>
-      {heading && <h1 className="font-bold text-2xl mb-4">{heading}</h1>}
+      {heading && <h1 className="font-bold text-2xl mb-4 line-clamp-1">{heading}</h1>}
       {children}
     </section>
   )

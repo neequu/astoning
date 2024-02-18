@@ -26,12 +26,13 @@ export default function Search() {
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
   // search data
-  const { data: animeData, isError } = useGetAnimeSearchQuery({ q: currenstSearch })
+  const { data: animeData, isError, isLoading } = useGetAnimeSearchQuery({ q: currenstSearch })
   const hasResults = animeData?.data.length
 
   const throttledSearch = useDebouncedCallback(search, 1000)
-
-  const searchHeading = currenstSearch ? `Showing ${animeData?.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
+  // todo: move from here
+  const searchMessage = currenstSearch && animeData?.data ? `Showing ${animeData.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
+  const searchHeading = isLoading ? 'Loading...' : searchMessage
 
   function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
