@@ -21,7 +21,7 @@ export function LikeButton({ className, userId, itemId }: Props) {
     return changeLike({ itemId, isCurrentStateActive: initialState, userId })
   }
 
-  async function handleLike() {
+  async function handleLike(): Promise<void> {
     if (!userId)
       return handleError('You need to be logged in')
 

@@ -22,7 +22,7 @@ export function handleError(errorMsg = 'There was an error'): void {
   toast.error(errorMsg)
 }
 
-export function handleSuccess(errorMsg = 'Success!') {
+export function handleSuccess(errorMsg = 'Success!'): void {
   toast.success(errorMsg)
 }
 

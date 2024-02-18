@@ -2,7 +2,13 @@ import { useLayoutEffect, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { useGetFavoritesByIdQuery } from '@/redux/apis/db-api'
 
-export function useSetLike(itemId: number, userId: User['id'] | undefined) {
+interface ReturnType {
+  isActive: boolean
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+  isLoadingLike: boolean
+}
+
+export function useSetLike(itemId: number, userId: User['id'] | undefined): ReturnType {
   const [isActive, setIsActive] = useState(false)
 
   const { isLoading, data } = useGetFavoritesByIdQuery({ itemId, userId }, {

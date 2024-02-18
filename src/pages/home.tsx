@@ -29,11 +29,11 @@ export default function Home() {
   const successNoItems = isSuccess && animeData.pagination.items.count === 0
 
   // update query
-  function handleQueryChange(newQuery: string) {
+  function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
   }
   // on submit transform query and redirect to search page
-  function handleSubmit() {
+  function handleSubmit(): void {
     const encodedQuery = transformQuery(query)
 
     addHistory({ query, userId: user?.id })

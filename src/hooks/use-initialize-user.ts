@@ -3,7 +3,11 @@ import type { User } from '@supabase/supabase-js'
 import { useAppDispatch } from '@/hooks/redux-hooks'
 import { setUser } from '@/redux/slices/auth-slice'
 
-export function useInitializeUser(getUser: () => Promise<User | null>) {
+interface ReturnType {
+  isLoading: boolean
+}
+
+export function useInitializeUser(getUser: () => Promise<User | null>): ReturnType {
   const dispatch = useAppDispatch()
   const [isLoading, setIsLoading] = useState(true)
 

@@ -17,10 +17,10 @@ export default function History() {
   const [deleteAllHistory] = useDeleteAllHistoryMutation()
   const [deleteHistoryById] = useDeleteHistoryByIdMutation()
 
-  function handleDeleteSingle(itemId: number) {
+  function handleDeleteSingle(itemId: number): void {
     deleteHistoryById({ itemId, userId: user?.id })
   }
-  function handleDeleteAll() {
+  function handleDeleteAll(): void {
     deleteAllHistory({ userId: user?.id })
   }
 

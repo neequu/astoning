@@ -7,7 +7,7 @@ import { setUser } from '@/redux/slices/auth-slice'
 export function TheSignOut() {
   const dispatch = useAppDispatch()
 
-  async function handleSignOut() {
+  async function handleSignOut(): Promise<void> {
     await authService.signOut()
     dispatch(setUser(null))
   }

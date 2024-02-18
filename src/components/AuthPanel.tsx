@@ -30,13 +30,13 @@ export function AuthPanel({ handleAuth, message }: Props) {
     resolver: zodResolver(formSchema),
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>): Promise<void> {
     const user = await handleAuth(values)
     if (user !== null)
       handleAuthSuccess(user, navigate, dispatch, message)
   }
 
-  async function handleOAuth(provider: Provider) {
+  async function handleOAuth(provider: Provider): Promise<void> {
     setIsFormDisabled(true)
     await authService.loginWithOAuth(provider)
     setIsFormDisabled(false)

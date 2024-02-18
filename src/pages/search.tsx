@@ -29,13 +29,13 @@ export default function Search() {
   const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery({ q: currenstSearch })
   const successNoItems = isSuccess && animeData.pagination.items.count === 0
 
-  function handleQueryChange(newQuery: string) {
+  function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
   }
 
-  function search() {
+  function search(): void | null {
     if (currenstSearch === query)
-      return
+      return null
     setCurrenstSearch(query)
 
     if (!query)
@@ -50,7 +50,7 @@ export default function Search() {
 
   const throttledSearch = useDebouncedCallback(search, 1000)
 
-  // navigate on debounced query change
+  // perform throttled search on query change
   useEffect(() => {
     throttledSearch()
   }, [navigate, query, throttledSearch])
