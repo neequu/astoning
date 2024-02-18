@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
-import { useGetFavoritesByIdQuery } from '@/redux/apis/db-api'
+import { useGetFavoritesByIdQuery } from '@/redux/api/db-api'
 
 interface ReturnType {
   isActive: boolean

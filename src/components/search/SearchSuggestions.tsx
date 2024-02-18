@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { Message } from '@/components/misc/Message'
 import { MAX_SUGGESTIONS } from '@/lib/constants'
-import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
+import { useGetAnimeSearchQuery } from '@/redux/api/anime-api'
 import SearchSuggestionCard from '@/components/search/SearchSuggestionCard'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { cn } from '@/lib/utils'

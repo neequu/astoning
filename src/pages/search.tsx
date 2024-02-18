@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
-import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
+import { useGetAnimeSearchQuery } from '@/redux/api/anime-api'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformQuery } from '@/lib/utils'
 
@@ -11,7 +11,7 @@ import { Message } from '@/components/misc/Message'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
-import { useAddHistoryMutation } from '@/redux/apis/db-api'
+import { useAddHistoryMutation } from '@/redux/api/db-api'
 import { selectUser } from '@/redux/slices/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
 

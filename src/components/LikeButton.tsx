@@ -3,7 +3,7 @@ import type { User } from '@supabase/supabase-js'
 import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
-import { useChangeLikeMutation } from '@/redux/apis/db-api'
+import { useChangeLikeMutation } from '@/redux/api/db-api'
 
 interface Props {
   className?: string

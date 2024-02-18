@@ -1,6 +1,6 @@
 import { FailedCard } from '../media/FailedCard'
 import { MediaCard } from '../media/MediaCard'
-import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
+import { useGetAnimeByIdQuery } from '@/redux/api/anime-api'
 
 interface Props {
   itemId: number
