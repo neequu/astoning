@@ -84,7 +84,7 @@
 
 @layer components {
   .grid-tmp {
-    @apply grid grid-cols-[repeat(auto-fill,minmax(215px,1fr))] gap-4 pt-6
+    @apply grid grid-cols-[repeat(auto-fill,minmax(215px,1fr))] gap-4 pt-4
   }
 }
 

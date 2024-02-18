@@ -27,7 +27,7 @@ export default function Home() {
 
   // all anime data
   const { data: animeData, isError, isFetching, isSuccess } = useGetAnimeQuery()
-  const successNoItems = isSuccess && animeData.pagination.items.count === 0
+  const hasResults = !animeData?.data.length
 
   // update query
   function handleQueryChange(newQuery: string): void {
@@ -48,8 +48,7 @@ export default function Home() {
         <SearchSuggestions debouncedQuery={debouncedQuery} />
       </SearchForm>
       <Suspense>
-        <PageWrapper heading="Home Page">
-
+        <PageWrapper className="pt-6" heading="Anime Collection">
           {/* allow this to load but show form ↑ */}
           {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
 
@@ -57,7 +56,7 @@ export default function Home() {
           {isFetching
             ? <LoadingSkeleton />
           //  if success & nothing found show message →
-            : successNoItems
+            : hasResults
               ? <Message message="No anime found!" className="flex-1 items-center" />
             // show results
               : isSuccess && (

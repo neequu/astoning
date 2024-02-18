@@ -9,7 +9,6 @@ import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { Message } from '@/components/misc/Message'
-import { SearchResults } from '@/components/search/SearchResults'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
@@ -27,8 +26,12 @@ export default function Search() {
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
   // search data
-  const { data: animeData, isError, isSuccess } = useGetAnimeSearchQuery({ q: currenstSearch })
-  const successNoItems = isSuccess && animeData.pagination.items.count === 0
+  const { data: animeData, isError } = useGetAnimeSearchQuery({ q: currenstSearch })
+  const hasResults = animeData?.data.length
+
+  const throttledSearch = useDebouncedCallback(search, 1000)
+
+  const searchHeading = currenstSearch ? `Showing ${animeData?.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
 
   function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
@@ -49,8 +52,6 @@ export default function Search() {
     navigate(redirectUrl)
   }
 
-  const throttledSearch = useDebouncedCallback(search, 1000)
-
   // perform throttled search on query change
   useEffect(() => {
     throttledSearch()
@@ -60,25 +61,23 @@ export default function Search() {
     <>
       <SearchForm query={query} changeQuery={handleQueryChange} />
       <Suspense>
-        <PageWrapper heading={currenstSearch ? `Results for ${currenstSearch}` : 'Search any anime!'}>
+        <PageWrapper className="pt-6" heading={searchHeading}>
           {/* allow this to load but show form ↑ */}
           {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
           {/* if success & nothing found show message → */}
-          {successNoItems
+          {!hasResults
             ? <Message message="No results were found!" className="flex-1 items-center" />
             // show results
             : (
-              <SearchResults>
-                <MediaGrid>
-                  <AnimationWrapper className="grid-tmp">
-                    {animeData?.data.map(item => (
-                      <MediaCard key={item.mal_id} item={item}>
-                        <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
-                      </MediaCard>
-                    ))}
-                  </AnimationWrapper>
-                </MediaGrid>
-              </SearchResults>
+              <MediaGrid>
+                <AnimationWrapper className="grid-tmp">
+                  {animeData?.data.map(item => (
+                    <MediaCard key={item.mal_id} item={item}>
+                      <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
+                    </MediaCard>
+                  ))}
+                </AnimationWrapper>
+              </MediaGrid>
               )}
         </PageWrapper>
       </Suspense>

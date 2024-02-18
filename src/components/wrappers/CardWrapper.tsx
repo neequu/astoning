@@ -1,3 +1,5 @@
+import { skip } from 'node:test'
+import { FailedCard } from '../media/FailedCard'
 import { MediaCard } from '../media/MediaCard'
 import { useGetAnimeByIdQuery } from '@/redux/apis/anime-api'
 
@@ -7,7 +9,13 @@ interface Props {
 }
 
 export function CardWrapper({ itemId, children }: Props) {
-  const { data: animeData, isSuccess } = useGetAnimeByIdQuery(itemId)
+  const { data: animeData, isSuccess, isFetching } = useGetAnimeByIdQuery(itemId, { skip: itemId !== 1 })
+
+  // review: ok?
+  // api has rate limit, don't create card if blocked
+  if (!isSuccess && !isFetching)
+    return <FailedCard />
+
   return (
     <div>
       {isSuccess && (
