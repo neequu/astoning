@@ -11,7 +11,9 @@ import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 export default function Favorites() {
   const user = useAppSelector(state => state.auth.user)
 
-  const { data: favoritesData, isSuccess, isLoading, isError } = useGetFavoritesQuery(user?.id)
+  const { data: favoritesData, isSuccess, isLoading, isError } = useGetFavoritesQuery(user?.id, {
+    skip: !user?.id,
+  })
 
   const successNoItems = isSuccess && favoritesData?.length === 0
 

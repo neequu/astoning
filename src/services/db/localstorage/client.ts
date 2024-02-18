@@ -1,16 +1,16 @@
-import { LS_KEYS } from '@/lib/constants'
+import { LS_KEY } from '@/lib/constants'
 
+// check if keys are present → set default values if not
 function initializeLocalStorage(): void {
-  // check if keys are present → set default values if not
-  Object.keys(LS_KEYS).forEach((key) => {
+  Object.keys(LS_KEY).forEach((key) => {
     if (!localStorage.getItem(key))
       localStorage.setItem(key, JSON.stringify([]))
   })
 }
 
-export function verifyLocalStorageByKey(key: string): void {
+export function verifyLocalStorageByKey(key: string, placeholder: unknown = []): void {
   if (!localStorage.getItem(key))
-    localStorage.setItem(key, JSON.stringify([]))
+    localStorage.setItem(key, JSON.stringify(placeholder))
 }
 
 initializeLocalStorage()

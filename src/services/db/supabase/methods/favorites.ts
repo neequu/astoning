@@ -27,7 +27,7 @@ export async function _getFavorites(userId: User['id'] | undefined) {
 
   const { data, error } = await supabase
     .from('favorites')
-    .select('item_id')
+    .select('*')
     .eq('user_id', userId)
 
   if (error) {
@@ -43,7 +43,7 @@ export async function _addFavorite(id: number, userId: User['id'] | undefined) {
     return null
   const { error } = await supabase
     .from('favorites')
-    .insert({ item_id: id })
+    .upsert({ item_id: id })
 
   if (error) {
     handleError(error.message || 'Couldn\t set like!')

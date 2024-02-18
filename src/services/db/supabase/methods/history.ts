@@ -26,7 +26,7 @@ export async function _addHistory(query: string, userId: User['id'] | undefined)
 
   const { data, error } = await supabase
     .from('history')
-    .insert({ query })
+    .upsert({ query })
 
   if (error) {
     handleError(error.message || 'Couldn\t add history!')
