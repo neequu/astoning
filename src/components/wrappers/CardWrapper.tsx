@@ -10,7 +10,6 @@ interface Props {
 export function CardWrapper({ itemId, children }: Props) {
   const { data: animeData, isSuccess, isError } = useGetAnimeByIdQuery(itemId)
 
-  // review: ok?
   // api has rate limit, don't create card if blocked
   if (isError)
     return <FailedCard />
