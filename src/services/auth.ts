@@ -1,16 +1,17 @@
 import type { Provider } from '@supabase/supabase-js'
-import _DBMethods from './db/db-methods'
+import _DB_METHODS from './db/db-methods-switch'
 import type { Credentials } from '@/types/auth'
+import type { Auth } from '@/types/db/db-methods'
 
 export const authService = {
 
-  loginWithCredentials: (cred: Credentials) => _DBMethods._loginWithCredentials(cred),
+  loginWithCredentials: (cred: Credentials): Promise<ReturnType<Auth['loginWithCredentials']>> => _DB_METHODS.loginWithCredentials(cred),
 
-  register: (cred: Credentials) => _DBMethods._register(cred),
+  register: (cred: Credentials): Promise<ReturnType<Auth['register']>> => _DB_METHODS.register(cred),
 
-  signOut: _DBMethods._signOut,
+  signOut: (): Promise<ReturnType<Auth['signOut']>> => _DB_METHODS.signOut(),
 
-  getUser: _DBMethods._getUser,
+  getUser: (): Promise<ReturnType<Auth['getUser']>> => _DB_METHODS.getUser(),
 
-  loginWithOath: (provider: Provider) => _DBMethods._loginWithOath(provider),
+  loginWithOAuth: (provider: Provider): Promise<ReturnType<Auth['loginWithOAuth']>> => _DB_METHODS.loginWithOAuth(provider),
 }

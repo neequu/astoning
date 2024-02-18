@@ -4,8 +4,9 @@ import { generateTimestampTz, handleError, handleSuccess } from '@/lib/utils'
 import { LS_KEY } from '@/lib/constants'
 import type { UserWithCredentials } from '@/types/db/localstorage'
 import type { Credentials } from '@/types/auth'
+import type { Auth } from '@/types/db/db-methods'
 
-export async function _getUser(): Promise<User | null> {
+export async function getUser(): Promise<ReturnType<Auth['getUser']>> {
   verifyLocalStorageByKey(LS_KEY.auth)
 
   const prevData: UserWithCredentials[] = JSON.parse(localStorage.getItem(LS_KEY.auth)!)
@@ -19,7 +20,7 @@ export async function _getUser(): Promise<User | null> {
   return currentUser.user
 }
 
-export async function _loginWithCredentials(cred: Credentials): Promise<User | null> {
+export async function loginWithCredentials(cred: Credentials): Promise<ReturnType<Auth['loginWithCredentials']>> {
   verifyLocalStorageByKey(LS_KEY.auth)
 
   const prevData: UserWithCredentials[] = JSON.parse(localStorage.getItem(LS_KEY.auth)!)
@@ -41,7 +42,7 @@ export async function _loginWithCredentials(cred: Credentials): Promise<User | n
   return user.user
 }
 
-export async function _register(cred: Credentials): Promise<User | null> {
+export async function register(cred: Credentials): Promise<ReturnType<Auth['register']>> {
   verifyLocalStorageByKey(LS_KEY.auth)
 
   const timestamptz = generateTimestampTz()
@@ -58,14 +59,12 @@ export async function _register(cred: Credentials): Promise<User | null> {
   return user
 }
 
-// reason: can't do that in LS
-// eslint-disable-next-line unused-imports/no-unused-vars
-export async function _loginWithOath(provider: Provider): Promise<null> {
-  handleError('This functionality is temporarily unavailable')
+export async function loginWithOAuth(provider: Provider): Promise<ReturnType<Auth['loginWithOAuth']>> {
+  handleError(`Loggin with ${provider} is temporarily unavailable`)
   return null
 }
 
-export async function _signOut(): Promise<null> {
+export async function signOut(): Promise<ReturnType<Auth['signOut']>> {
   verifyLocalStorageByKey(LS_KEY.auth)
 
   const prevData: UserWithCredentials[] = JSON.parse(localStorage.getItem(LS_KEY.auth)!)

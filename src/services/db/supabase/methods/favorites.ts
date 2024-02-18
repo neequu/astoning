@@ -1,8 +1,26 @@
 import type { User } from '@supabase/supabase-js'
 import { handleError, handleSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
+import type { Favorites } from '@/types/db/db-methods'
 
-export async function _getFavoriteById(itemId: number, userId: User['id'] | undefined) {
+export async function getFavorites(userId: User['id'] | undefined): Promise<ReturnType<Favorites['getFavorites']>> {
+  if (!userId)
+    return null
+
+  const { data, error } = await supabase
+    .from('favorites')
+    .select('*')
+    .eq('user_id', userId)
+
+  if (error) {
+    handleError(error.message || 'Couldn\t get favorites!')
+    return null
+  }
+
+  return data
+}
+
+export async function getFavoriteById(itemId: number, userId: User['id'] | undefined): Promise<ReturnType<Favorites['getFavoriteById']>> {
   if (!userId)
     return null
 
@@ -21,24 +39,7 @@ export async function _getFavoriteById(itemId: number, userId: User['id'] | unde
   return data
 }
 
-export async function _getFavorites(userId: User['id'] | undefined) {
-  if (!userId)
-    return null
-
-  const { data, error } = await supabase
-    .from('favorites')
-    .select('*')
-    .eq('user_id', userId)
-
-  if (error) {
-    handleError(error.message || 'Couldn\t get favorites!')
-    return null
-  }
-
-  return data
-}
-
-export async function _addFavorite(id: number, userId: User['id'] | undefined) {
+export async function addFavorite(id: number, userId: User['id'] | undefined): Promise<ReturnType<Favorites['addFavorite']>> {
   if (!userId)
     return null
   const { error } = await supabase
@@ -54,7 +55,7 @@ export async function _addFavorite(id: number, userId: User['id'] | undefined) {
   return id
 }
 
-export async function _removeFavorite(id: number, userId: User['id'] | undefined) {
+export async function removeFavorite(id: number, userId: User['id'] | undefined): Promise<ReturnType<Favorites['removeFavorite']>> {
   if (!userId)
     return null
 

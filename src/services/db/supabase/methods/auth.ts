@@ -2,8 +2,9 @@ import type { Provider } from '@supabase/supabase-js'
 import type { Credentials } from '@/types/auth'
 import { handleError, handleSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
+import type { Auth } from '@/types/db/db-methods'
 
-export async function _getUser() {
+export async function getUser(): Promise<ReturnType<Auth['getUser']>> {
   const { data: { session }, error } = await supabase.auth.getSession()
 
   const user = session?.user ?? null
@@ -16,7 +17,7 @@ export async function _getUser() {
   return user
 }
 
-export async function _loginWithCredentials(cred: Credentials) {
+export async function loginWithCredentials(cred: Credentials): Promise<ReturnType<Auth['loginWithCredentials']>> {
   const { data: { user }, error } = await supabase.auth.signInWithPassword(cred)
 
   if (error || !user) {
@@ -27,7 +28,7 @@ export async function _loginWithCredentials(cred: Credentials) {
   return user
 }
 
-export async function _register(cred: Credentials) {
+export async function register(cred: Credentials): Promise<ReturnType<Auth['register']>> {
   const { data: { user }, error } = await supabase.auth.signUp(cred)
 
   if (error || !user) {
@@ -38,13 +39,14 @@ export async function _register(cred: Credentials) {
   return user
 }
 
-export async function _loginWithOath(provider: Provider) {
+export async function loginWithOAuth(provider: Provider): Promise<ReturnType<Auth['loginWithOAuth']>> {
   await supabase.auth.signInWithOAuth({
     provider,
   })
+  return null
 }
 
-export async function _signOut() {
+export async function signOut(): Promise<ReturnType<Auth['signOut']>> {
   const { error } = await supabase.auth.signOut()
 
   if (error) {
