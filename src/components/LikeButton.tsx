@@ -11,8 +11,6 @@ interface Props {
   itemId: number
 }
 
-// review: too much code for this component?
-
 export function LikeButton({ className, userId, itemId }: Props) {
   const { isActive, setIsActive, isLoadingLike } = useSetLike(itemId, userId)
   const [changeLike] = useChangeLikeMutation()
@@ -40,7 +38,9 @@ export function LikeButton({ className, userId, itemId }: Props) {
       <Button size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
         {!isLoadingLike && (
           <>
+            {/* show if liked */}
             <HeartCrackIcon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-20 scale-0 transition-[rotate_scale_300ms]', isActive && 'rotate-0 scale-100 ')} />
+            {/* show if not liked */}
             <HeartIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-[rotate_scale_300ms]', isActive && '-rotate-20 scale-0')} />
           </>
         )}
