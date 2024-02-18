@@ -14,6 +14,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { useAddHistoryMutation } from '@/redux/apis/db-api'
+import { selectUser } from '@/redux/slices/selectors'
 
 export default function Search() {
   const user = useAppSelector(selectUser)
