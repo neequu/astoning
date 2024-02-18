@@ -40,9 +40,14 @@ export async function register(cred: Credentials): Promise<ReturnType<Auth['regi
 }
 
 export async function loginWithOAuth(provider: Provider): Promise<ReturnType<Auth['loginWithOAuth']>> {
-  await supabase.auth.signInWithOAuth({
-    provider,
-  })
+  try {
+    await supabase.auth.signInWithOAuth({
+      provider,
+    })
+  }
+  catch (e) {
+    handleError('Couldn\'t authorize with this method')
+  }
   return null
 }
 

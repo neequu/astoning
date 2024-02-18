@@ -37,9 +37,9 @@ export function AuthPanel({ handleAuth, message }: Props) {
   }
 
   async function handleOAuth(provider: Provider): Promise<void> {
-    // review: ok? oauth refreshes page and state resets
     setIsOAuthProcessing(true)
     await authService.loginWithOAuth(provider)
+    setIsOAuthProcessing(false)
   }
 
   return (
