@@ -22,7 +22,7 @@ interface Props {
 }
 
 export function AuthPanel({ handleAuth, message }: Props) {
-  const [isFormDisabled, setIsFormDisabled] = useState(false)
+  const [isOAuthProcessing, setIsOAuthProcessing] = useState(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -37,14 +37,14 @@ export function AuthPanel({ handleAuth, message }: Props) {
   }
 
   async function handleOAuth(provider: Provider): Promise<void> {
-    setIsFormDisabled(true)
+    // review: ok? oauth refreshes page and state resets
+    setIsOAuthProcessing(true)
     await authService.loginWithOAuth(provider)
-    setIsFormDisabled(false)
   }
 
   return (
-    <AuthForm handleSubmit={onSubmit} form={authForm} fields={VALID_FIELDS} isDisabled={isFormDisabled}>
-      <OAuth provider="github" handleOAuth={handleOAuth}>
+    <AuthForm handleSubmit={onSubmit} form={authForm} fields={VALID_FIELDS} isDisabled={isOAuthProcessing}>
+      <OAuth provider="github" handleOAuth={handleOAuth} isDisabled={isOAuthProcessing}>
         <GithubIcon className="ml-2 text-xl" />
       </OAuth>
     </AuthForm>
