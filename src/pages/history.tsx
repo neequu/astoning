@@ -12,7 +12,7 @@ import { selectUser } from '@/redux/slices/selectors'
 export default function History() {
   const user = useAppSelector(selectUser)
 
-  const { data: historyData, isLoading, isError } = useGetHistoryQuery(user?.id)
+  const { data: historyData, isLoading, isError } = useGetHistoryQuery(user?.id, { skip: !user?.id })
   const hasResults = !historyData?.length
 
   const [deleteAllHistory] = useDeleteAllHistoryMutation()
