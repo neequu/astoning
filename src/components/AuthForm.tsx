@@ -25,7 +25,7 @@ interface Props {
 export function AuthForm({ handleSubmit, form, fields, children, isDisabled }: Props) {
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4" autoComplete="off">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4" autoComplete="off" noValidate>
 
         { fields.map(item => (
           <FormField
