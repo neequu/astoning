@@ -16,7 +16,7 @@ import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { useAddHistoryMutation } from '@/redux/apis/db-api'
 
 export default function Search() {
-  const user = useAppSelector(state => state.auth.user)
+  const user = useAppSelector(selectUser)
   const [addHistory] = useAddHistoryMutation()
 
   const navigate = useNavigate()

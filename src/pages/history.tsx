@@ -7,9 +7,10 @@ import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { HistoryCard } from '@/components/history/HistoryCard'
 import { HistoryWrapper } from '@/components/history/HistoryWrapper'
 import { Button } from '@/components/ui/button'
+import { selectUser } from '@/redux/slices/selectors'
 
 export default function History() {
-  const user = useAppSelector(state => state.auth.user)
+  const user = useAppSelector(selectUser)
 
   const { data: historyData, isLoading, isError } = useGetHistoryQuery(user?.id)
   const hasResults = !historyData?.length

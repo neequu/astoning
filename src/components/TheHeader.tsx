@@ -4,9 +4,10 @@ import { TheNav } from '@/components/TheNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { useAppSelector } from '@/hooks/redux-hooks'
+import { selectUser } from '@/redux/slices/selectors'
 
 export function TheHeader() {
-  const user = useAppSelector(state => state.auth.user)
+  const user = useAppSelector(selectUser)
 
   return (
     <header>

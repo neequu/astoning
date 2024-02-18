@@ -7,9 +7,10 @@ import { LikeButton } from '@/components/LikeButton'
 import { Message } from '@/components/misc/Message'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
+import { selectUser } from '@/redux/slices/selectors'
 
 export default function Favorites() {
-  const user = useAppSelector(state => state.auth.user)
+  const user = useAppSelector(selectUser)
 
   const { data: favoritesData, isSuccess, isLoading, isError } = useGetFavoritesQuery(user?.id, {
     skip: !user?.id,

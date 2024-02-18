@@ -6,6 +6,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { Message } from '@/components/misc/Message'
 import { AnimeCard } from '@/components/AnimeCard'
+import { selectUser } from '@/redux/slices/selectors'
 
 export default function AnimeItem() {
   const navigate = useNavigate()
@@ -19,7 +20,7 @@ export default function AnimeItem() {
       navigate('/not-found', { replace: true })
   }, [isNotValidId, navigate])
 
-  const user = useAppSelector(state => state.auth.user)
+  const user = useAppSelector(selectUser)
 
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId, {
     skip: isNotValidId,

@@ -14,9 +14,10 @@ import { Message } from '@/components/misc/Message'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { SearchSuggestions } from '@/components/search/SearchSuggestions'
+import { selectUser } from '@/redux/slices/selectors'
 
 export default function Home() {
-  const user = useAppSelector(state => state.auth.user)
+  const user = useAppSelector(selectUser)
   const [addHistory] = useAddHistoryMutation()
 
   const navigate = useNavigate()
