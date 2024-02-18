@@ -6,7 +6,6 @@ import { transformQuery } from '@/lib/utils'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { useDebounce } from '@/hooks/use-debounce'
 
-import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
@@ -15,6 +14,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { SearchSuggestions } from '@/components/search/SearchSuggestions'
 import { selectUser } from '@/redux/slices/selectors'
+import { SearchPanel } from '@/components/search/SearchPanel'
 
 export default function Home() {
   const user = useAppSelector(selectUser)
@@ -44,9 +44,10 @@ export default function Home() {
 
   return (
     <>
-      <SearchForm handleSubmit={handleSubmit} changeQuery={handleQueryChange}>
+      <SearchPanel changeQuery={handleQueryChange} shouldKeepFocusState={true} handleSubmit={handleSubmit}>
         <SearchSuggestions debouncedQuery={debouncedQuery} />
-      </SearchForm>
+      </SearchPanel>
+
       <Suspense>
         <PageWrapper className="pt-6" heading="Anime Collection">
           {/* allow this to load but show form ↑ */}

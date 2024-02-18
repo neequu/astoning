@@ -5,7 +5,6 @@ import { useGetAnimeSearchQuery } from '@/redux/apis/anime-api'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformQuery } from '@/lib/utils'
 
-import { SearchForm } from '@/components/search/SearchForm'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { Message } from '@/components/misc/Message'
@@ -14,6 +13,7 @@ import { LikeButton } from '@/components/LikeButton'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { useAddHistoryMutation } from '@/redux/apis/db-api'
 import { selectUser } from '@/redux/slices/selectors'
+import { SearchPanel } from '@/components/search/SearchPanel'
 
 export default function Search() {
   const user = useAppSelector(selectUser)
@@ -60,7 +60,7 @@ export default function Search() {
 
   return (
     <>
-      <SearchForm query={query} changeQuery={handleQueryChange} />
+      <SearchPanel changeQuery={handleQueryChange} query={query} />
       <Suspense>
         <PageWrapper className="pt-6" heading={searchHeading}>
           {/* allow this to load but show form ↑ */}
