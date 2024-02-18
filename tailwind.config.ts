@@ -78,7 +78,7 @@ const config = {
       },
     },
   },
-  // reason: required for tailwind plugin
+  // using disable lint: required for tailwind plugin
   // eslint-disable-next-line ts/no-require-imports
   plugins: [require('tailwindcss-animate')],
 } satisfies Config

@@ -19,9 +19,10 @@ interface Props {
   form: UseFormReturn<{ [key in ValidAuthFormFields]: string }>
   fields: ValidAuthFormFields[]
   children?: React.ReactNode
+  isDisabled?: boolean
 }
 
-export function AuthForm({ handleSubmit, form, fields, children }: Props) {
+export function AuthForm({ handleSubmit, form, fields, children, isDisabled }: Props) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4" autoComplete="off">
@@ -35,7 +36,7 @@ export function AuthForm({ handleSubmit, form, fields, children }: Props) {
               <FormItem>
                 <FormLabel>{capitalizeWord(item)}</FormLabel>
                 <FormControl>
-                  <Input type={item} placeholder={`Enter ${item}`} {...field} />
+                  <Input type={item} placeholder={`Enter ${item}`} {...field} disabled={isDisabled} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -4,7 +4,7 @@ import { capitalizeWord } from '@/lib/utils'
 
 interface Props {
   provider: Provider
-  handleOAuth: (p: Provider) => Promise<void>
+  handleOAuth: (p: Provider) => void
   children: React.ReactNode
 }
 

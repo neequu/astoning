@@ -2,7 +2,8 @@ import type { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import type { User } from '@supabase/supabase-js'
+import type { Provider, User } from '@supabase/supabase-js'
+import { useState } from 'react'
 import { AuthForm } from '@/components/AuthForm'
 import { formSchema } from '@/lib/validations'
 import { VALID_FIELDS } from '@/lib/constants'
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export function AuthPanel({ handleAuth, message }: Props) {
+  const [isFormDisabled, setIsFormDisabled] = useState(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -34,9 +36,15 @@ export function AuthPanel({ handleAuth, message }: Props) {
       handleAuthSuccess(user, navigate, dispatch, message)
   }
 
+  async function handleOAuth(provider: Provider) {
+    setIsFormDisabled(true)
+    await authService.loginWithOAuth(provider)
+    setIsFormDisabled(false)
+  }
+
   return (
-    <AuthForm handleSubmit={onSubmit} form={authForm} fields={VALID_FIELDS}>
-      <OAuth provider="github" handleOAuth={authService.loginWithOath}>
+    <AuthForm handleSubmit={onSubmit} form={authForm} fields={VALID_FIELDS} isDisabled={isFormDisabled}>
+      <OAuth provider="github" handleOAuth={handleOAuth}>
         <GithubIcon className="ml-2 text-xl" />
       </OAuth>
     </AuthForm>
