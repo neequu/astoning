@@ -96,3 +96,20 @@ html, body, #root {
   display: flex;
   flex-flow: column;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+/* track */
+::-webkit-scrollbar-track {
+  background: #242424;
+}
+/* handle */
+::-webkit-scrollbar-thumb {
+  background: #111;
+}
+/* hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #171717;
+}
