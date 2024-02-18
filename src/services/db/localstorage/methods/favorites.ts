@@ -23,7 +23,7 @@ export async function getFavoriteById(itemId: number, userId: User['id'] | undef
 
   verifyLocalStorageByKey(LS_KEY.favorites)
 
-  // using any here: get favs can't return null - we have user
+  // using as here: get favs can't return null - we have user
   const userFavorites = await getFavorites(userId) as Tables<'favorites'>[]
   const userFavoriteItem = userFavorites.find(f => itemId === f.item_id)
 
@@ -40,7 +40,7 @@ export async function addFavorite(itemId: number, userId: User['id'] | undefined
   verifyLocalStorageByKey(LS_KEY.favorites)
   const allFavorites: Tables<'favorites'>[] = JSON.parse(localStorage.getItem(LS_KEY.favorites)!)
 
-  // using any here: get favs can't return null - we have user
+  // using as here: get favs can't return null - we have user
   const userFavorites = await getFavorites(userId) as Tables<'favorites'>[]
   const lastItem: Tables<'favorites'> | undefined = userFavorites[userFavorites.length - 1]
 

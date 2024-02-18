@@ -11,7 +11,7 @@
 
 ## deploy
 
-deployed on [vercel](https://astoning-eight.vercel.app/)
+deployed on [vercel](https://astoning-neequus-projects.vercel.app)
 
 ## local startup
 
@@ -65,7 +65,7 @@ pnpm run dev
 - [x] Используем **Modern Redux with Redux Toolkit**
 - [x] Используем **слайсы**
 
-- [ ] Есть хотя бы одна **кастомная мидлвара** или **createListenerMiddleware**
+- [x] Есть хотя бы одна **кастомная мидлвара** или **createListenerMiddleware**
 
 - [x] Используется **RTK Query**
 

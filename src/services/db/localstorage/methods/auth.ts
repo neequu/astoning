@@ -49,7 +49,7 @@ export async function register(cred: Credentials): Promise<ReturnType<Auth['regi
   const appMetadata = { app: 'neequu app' }
   const userMetadata = { about: 'very good user' }
 
-  const user: User = { id: cred.password + cred.email, created_at: timestamptz, app_metadata: appMetadata, user_metadata: userMetadata, aud: 'zxc' }
+  const user: User = { id: cred.password + cred.email, created_at: timestamptz, app_metadata: appMetadata, user_metadata: userMetadata, aud: 'authenticated' }
 
   const userObject: UserWithCredentials = { ...cred, user, activeSession: true }
   const prevData: UserWithCredentials[] = JSON.parse(localStorage.getItem(LS_KEY.auth)!)

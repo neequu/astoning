@@ -25,7 +25,7 @@ export async function addHistory(query: string, userId: User['id'] | undefined):
 
   const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEY.history)!)
 
-  // using any here: get history can't return null - we have user
+  // using as here: get history can't return null - we have user
   const userHistory = await getHistory(userId) as Tables<'history'>[]
   const lastItem: Tables<'history'> | undefined = userHistory[userHistory.length - 1]
 
