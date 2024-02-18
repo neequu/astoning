@@ -35,7 +35,7 @@ pnpm run dev
 
 ### **1 уровень (обязательный - необходимый минимум)**
 
-- [ ] Реализованы **Требования к функциональности**
+- [x] Реализованы **Требования к функциональности**
 
 - [x] Для хранения учетных записей пользователей, их Избранного и Истории поиска, используется [**Supabase**](https://github.com/neequu/astoning/blob/main/src/services/supabase.ts)
 
@@ -63,21 +63,21 @@ pnpm run dev
 **Redux**
 
 - [x] Используем **Modern Redux with Redux Toolkit**
-- [x] Используем **слайсы**
+- [x] Используем [**слайсы**](https://github.com/neequu/astoning/blob/main/src/redux/slices)
 
-- [x] Есть хотя бы одна **кастомная мидлвара** или **createListenerMiddleware**
+- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/middleware)
 
-- [x] Используется **RTK Query**
+- [x] Используется [**RTK Query**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/api)
 
-- [x] Используется **Transforming Responses**
+- [x] Используется [**Transforming Responses**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/transforms)
 
 ### **2 уровень (необязательный)**
 
-- [x] Использование **TypeScript**
+- [x] Использование [**TypeScript**](https://github.com/neequu/astoning/blob/main/tsconfig.json)
 - [ ] Подключен **storybook** и созданы два, три сториса с knobs, которые показывают разные состояния компонента
 - [x] Использование Supabase для учетных записей и их Избранного и Истории поиска
 
-- [ ] **Низная связанность клиентского кода**, использующего апи кода, работающего с внешним стором
+- [x] [**Низная связанность клиентского кода**](https://github.com/neequu/astoning/blob/main/src/services/db/db-methods-switch.ts), использующего апи кода, работающего с внешним стором **LS + Supabase с одним переключателем в .env файле**
 - [x] Настроен CI/CD:
     - [x] Настроен CI: [CI](https://github.com/neequu/astoning/blob/main/.github/workflows/ci.yml)
         - [x] [Readme Status Badge](#ci-cd-badges)
