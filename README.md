@@ -67,7 +67,7 @@ pnpm run dev
 
 - [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/middleware)
 
-- [x] Используется [**RTK Query**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/api)
+- [x] Используется [**RTK Query**](https://github.com/neequu/astoning/tree/main/src/redux/api)
 
 - [x] Используется [**Transforming Responses**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/transforms)
 
