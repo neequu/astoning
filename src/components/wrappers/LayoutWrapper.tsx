@@ -1,5 +1,5 @@
 import { TheFooter } from '../TheFooter'
-import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
+import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { TheHeader } from '@/components/TheHeader'
 import { useInitializeUser } from '@/hooks/use-initialize-user'
 import { authService } from '@/services/auth'

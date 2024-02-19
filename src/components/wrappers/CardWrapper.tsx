@@ -1,6 +1,10 @@
+import { Suspense } from 'react'
+import { lazily } from 'react-lazily'
 import { FailedCard } from '../media/FailedCard'
-import { MediaCard } from '../media/MediaCard'
+import CardSkeleton from '@/components/loading-state/CardSkeleton'
 import { useGetAnimeByIdQuery } from '@/redux/api/anime-api'
+
+const { MediaCard } = lazily(() => import('@/components/media/MediaCard'))
 
 interface Props {
   itemId: number
@@ -17,9 +21,11 @@ export function CardWrapper({ itemId, children }: Props) {
   return (
     <div>
       {isSuccess && (
-        <MediaCard item={animeData.data}>
-          {children}
-        </MediaCard>
+        <Suspense fallback={<CardSkeleton amount={5} />}>
+          <MediaCard item={animeData.data}>
+            {children}
+          </MediaCard>
+        </Suspense>
       ) }
     </div>
   )

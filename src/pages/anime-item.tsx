@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useAppSelector } from '@/hooks/redux-hooks'
+import { Suspense, useEffect } from 'react'
+import { lazily } from 'react-lazily'
 import { useGetAnimeByIdQuery } from '@/redux/api/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
-import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
+import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { Message } from '@/components/misc/Message'
-import { AnimeCard } from '@/components/AnimeCard'
-import { selectUser } from '@/redux/rtk/selectors'
+
+const { AnimeCard } = lazily(() => import('@/components/AnimeCard'))
 
 export default function AnimeItem() {
   const navigate = useNavigate()
@@ -20,8 +20,6 @@ export default function AnimeItem() {
       navigate('/not-found', { replace: true })
   }, [isNotValidId, navigate])
 
-  const user = useAppSelector(selectUser)
-
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId, {
     skip: isNotValidId,
   })
@@ -32,7 +30,12 @@ export default function AnimeItem() {
 
       {isFetching
         ? <LoadingSkeleton />
-        : isSuccess && <AnimeCard item={animeData.data} userId={user?.id} />}
+        : isSuccess
+        && (
+          <Suspense fallback={<LoadingSkeleton />}>
+            <AnimeCard item={animeData.data} />
+          </Suspense>
+        )}
 
     </PageWrapper>
   )

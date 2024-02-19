@@ -1,14 +1,17 @@
 import { Suspense, useCallback } from 'react'
 import { FixedSizeList as HistoryList } from 'react-window'
 import Autosizer from 'react-virtualized-auto-sizer'
-import { Message } from '@/components/misc/Message'
+import { lazily } from 'react-lazily'
+
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { useDeleteAllHistoryMutation, useDeleteHistoryByIdMutation, useGetHistoryQuery } from '@/redux/api/db-api'
-import { HistoryCard } from '@/components/history/HistoryCard'
 import { HistoryWrapper } from '@/components/history/HistoryWrapper'
-import { Button } from '@/components/ui/button'
 import { selectUser } from '@/redux/rtk/selectors'
+
+const { Message } = lazily(() => import('@/components/misc/Message'))
+const { HistoryCard } = lazily(() => import('@/components/history/HistoryCard'))
+const { Button } = lazily(() => import('@/components/ui/button'))
 
 export default function History() {
   const user = useAppSelector(selectUser)
@@ -32,13 +35,15 @@ export default function History() {
 
     return (
       <div style={style}>
-        <HistoryCard item={historyData[index]} onDelete={handleDeleteSingle} />
+        <Suspense fallback={<div className="h-[73] animate-pulse bg-neutral-800" />}>
+          <HistoryCard item={historyData[index]} onDelete={handleDeleteSingle} />
+        </Suspense>
       </div>
     )
   }, [historyData, handleDeleteSingle])
 
   return (
-    <PageWrapper heading="History">
+    <PageWrapper heading="Virtualized History">
       <Suspense>
         {hasResults && (
           <>

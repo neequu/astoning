@@ -22,7 +22,7 @@ export function HistoryCard({ item, onDelete }: Props) {
   }
 
   return (
-    <div className="flex justify-between border-b border-muted py-4 px-2 overflow-hidden">
+    <li className="flex justify-between border-b border-muted py-4 px-2 overflow-hidden">
       <Button asChild variant="link" className="p-0">
         <Link to={`/search?q=${item.query}`}>
           <p className="text-xl">{decoudedQuery}</p>
@@ -32,6 +32,6 @@ export function HistoryCard({ item, onDelete }: Props) {
       <Button title={title} className={cn('p-2 hover:text-destructive', isDeleting && 'text-destructive')} disabled={isDeleting} size="icon" variant="ghost" onClick={handleDelete}>
         <XOctagonIcon size={20} />
       </Button>
-    </div>
+    </li>
   )
 }
