@@ -1,15 +1,9 @@
 import { Link } from 'react-router-dom'
 import { XOctagonIcon } from 'lucide-react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import type { Tables } from '@/types/db/supabase'
-
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { transformDateFromString } from '@/lib/utils'
+import { cn, transformDateFromString } from '@/lib/utils'
 
 interface Props {
   item: Tables<'history'>
@@ -18,32 +12,26 @@ interface Props {
 
 export function HistoryCard({ item, onDelete }: Props) {
   const decoudedQuery = decodeURIComponent(item.query)
+  const title = `Delete search from ${transformDateFromString(item.created_at)}`
+
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  async function handleDelete() {
+    setIsDeleting(true)
+    onDelete(item.id)
+  }
 
   return (
-    <div className="flex justify-between border-b border-muted py-4">
+    <div className="flex justify-between border-b border-muted py-4 px-2 overflow-hidden">
       <Button asChild variant="link" className="p-0">
         <Link to={`/search?q=${item.query}`}>
           <p className="text-xl">{decoudedQuery}</p>
         </Link>
       </Button>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger>
-            <span>
-              <Button asChild className="hover:text-destructive w-10 h-10 p-2 inline-block" size="icon" variant="ghost" onClick={() => onDelete(item.id)}>
-                <XOctagonIcon size={20} />
-              </Button>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>
-              <span>Delete search from</span>
-              &nbsp;
-              <span className="font-medium">{transformDateFromString(item.created_at)}</span>
-            </p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+
+      <Button title={title} className={cn('p-2 hover:text-destructive', isDeleting && 'text-destructive')} disabled={isDeleting} size="icon" variant="ghost" onClick={handleDelete}>
+        <XOctagonIcon size={20} />
+      </Button>
     </div>
   )
 }

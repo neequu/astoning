@@ -1,7 +1,6 @@
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useCallback } from 'react'
 import { FixedSizeList as HistoryList } from 'react-window'
-import AutoSizer from 'react-virtualized-auto-sizer'
-
+import Autosizer from 'react-virtualized-auto-sizer'
 import { Message } from '@/components/misc/Message'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
@@ -10,44 +9,33 @@ import { HistoryCard } from '@/components/history/HistoryCard'
 import { HistoryWrapper } from '@/components/history/HistoryWrapper'
 import { Button } from '@/components/ui/button'
 import { selectUser } from '@/redux/slices/selectors'
-import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 
 export default function History() {
   const user = useAppSelector(selectUser)
-
-  const { data: historyData, isError, isSuccess } = useGetHistoryQuery(user?.id, { skip: !user?.id })
+  const { data: historyData, isError, isSuccess, isLoading } = useGetHistoryQuery(user?.id, { skip: !user?.id })
   const hasResults = isSuccess && historyData && historyData.length > 0
-
+  // rtk mutations
   const [deleteAllHistory] = useDeleteAllHistoryMutation()
   const [deleteHistoryById] = useDeleteHistoryByIdMutation()
-
-  function handleDeleteSingle(itemId: number): void {
-    deleteHistoryById({ itemId, userId: user?.id })
-  }
-  function handleDeleteAll(): void {
+  // rtk mutation handlers
+  const handleDeleteAll = (): void => {
     deleteAllHistory({ userId: user?.id })
   }
+  const handleDeleteSingle = useCallback((itemId: number) => {
+    deleteHistoryById({ itemId, userId: user?.id })
+  }, [deleteHistoryById, user?.id])
 
-  const [items, setItems] = useState(historyData || [])
-
-  useEffect(() => {
+  // row for virtualized list; usecallback to prevent retriggering delete button
+  const renderHistoryRow = useCallback(({ index, style }: { index: number, style: React.HTMLAttributes<HTMLDivElement>['style'] }) => {
     if (!historyData)
-      return
+      return null
 
-    setItems(historyData)
-  }, [historyData])
-
-  // can't move from here be
-  function HistoryItem({ index, style }: { index: number, style: React.HTMLAttributes<HTMLDivElement>['style'] }) {
-    if (!items)
-      return
-    const item = items[index]
     return (
       <div style={style}>
-        <HistoryCard item={item} key={item.id} onDelete={handleDeleteSingle} />
+        <HistoryCard item={historyData[index]} onDelete={handleDeleteSingle} />
       </div>
     )
-  }
+  }, [historyData, handleDeleteSingle])
 
   return (
     <PageWrapper heading="History">
@@ -55,26 +43,24 @@ export default function History() {
         {hasResults && (
           <>
             <HistoryWrapper>
-              <AutoSizer>
+              <Autosizer>
                 {({ height, width }) => (
-                  <AnimationWrapper>
-                    <HistoryList
-                      height={height}
-                      width={width}
-                      itemCount={items.length}
-                      itemSize={73}
-                    >
-                      {HistoryItem}
-                    </HistoryList>
-                  </AnimationWrapper>
+                  <HistoryList
+                    itemSize={73}
+                    height={height}
+                    width={width}
+                    itemCount={historyData.length}
+                  >
+                    {renderHistoryRow}
+                  </HistoryList>
                 )}
-              </AutoSizer>
+              </Autosizer>
             </HistoryWrapper>
             <Button variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeleteAll}>Delete all history</Button>
           </>
         )}
         {isError && <Message message="There was an error loading history!" className="flex-1 items-center text-destructive" />}
-        {!hasResults && <Message message="You have no favorites" className="flex-1 items-center" />}
+        {!hasResults && !isLoading && <Message message="You have no history" className="flex-1 items-center" />}
       </Suspense>
     </PageWrapper>
   )
