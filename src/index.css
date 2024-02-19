@@ -87,29 +87,27 @@
     @apply grid grid-cols-[repeat(auto-fill,minmax(215px,1fr))] gap-4 pt-4
   }
 }
+@layer base {
 
-html, body, #root {
-  height: 100%;
-}
 
-#root {
-  display: flex;
-  flex-flow: column;
-}
+  html, body, #root {
+    height: 100%;
+  }
 
-/* width */
-::-webkit-scrollbar {
-  width: 2px;
-}
-/* track */
-::-webkit-scrollbar-track {
-  background: #242424;
-}
-/* handle */
-::-webkit-scrollbar-thumb {
-  background: #111;
-}
-/* hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #171717;
+  #root {
+    display: flex;
+    flex-flow: column;
+  }
+
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: #fafafa; }
+  ::-webkit-scrollbar-thumb { background: #ccc; }
+  ::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+.dark {
+    ::-webkit-scrollbar-track { background: #242424; }
+    ::-webkit-scrollbar-thumb { background: #111; }
+    ::-webkit-scrollbar-thumb:hover { background: #171717; }
+  }
+
 }
