@@ -1,5 +1,6 @@
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
+import { useState } from 'react'
 import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
@@ -14,6 +15,7 @@ interface Props {
 export function LikeButton({ className, userId, itemId }: Props) {
   const { isActive, setIsActive, isLoadingLike } = useSetLike(itemId, userId)
   const [changeLike] = useChangeLikeMutation()
+  const [disabled, setDisabled] = useState(false)
 
   function handleLikeChange(initialState: boolean) {
     return changeLike({ itemId, isCurrentStateActive: initialState, userId })
@@ -22,7 +24,8 @@ export function LikeButton({ className, userId, itemId }: Props) {
   async function handleLike(): Promise<void> {
     if (!userId)
       return handleError('You need to be logged in')
-
+    // disable on click
+    setDisabled(true)
     const initialState = isActive
 
     // optimistically change state
@@ -31,11 +34,14 @@ export function LikeButton({ className, userId, itemId }: Props) {
     // if no res → set to initial state
     if (!res)
       setIsActive(initialState)
+
+    // enable in the end
+    setDisabled(false)
   }
 
   return (
     <div className={cn('flex', className)}>
-      <Button size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
+      <Button disabled={disabled} size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
         {!isLoadingLike && (
           <>
             {/* show if liked */}
