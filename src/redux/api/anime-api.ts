@@ -7,8 +7,11 @@ export const animeApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL }),
   endpoints: builder => ({
-    getAnime: builder.query<ApiResponse, void>({
-      query: () => 'anime',
+    getAnime: builder.query<ApiResponse, number>({
+      query: (page = 1) => ({
+        url: 'anime',
+        params: { page },
+      }),
       transformResponse: (response: ApiResponse) => ({
         ...response,
         data: response.data.map(transformAnimeData),
@@ -21,10 +24,10 @@ export const animeApi = createApi({
         data: transformAnimeData(response.data),
       }),
     }),
-    getAnimeSearch: builder.query<ApiResponse, { q: string, limit?: number }>({
-      query: ({ q, limit }) => ({
+    getAnimeSearch: builder.query<ApiResponse, { q: string, limit?: number, page?: number }>({
+      query: ({ q, limit, page = 1 }) => ({
         url: 'anime',
-        params: { q, limit },
+        params: { q, limit, page },
       }),
       transformResponse: (response: ApiResponse) => ({
         ...response,
