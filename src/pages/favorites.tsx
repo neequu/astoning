@@ -13,7 +13,7 @@ import { selectUser } from '@/redux/rtk/selectors'
 export default function Favorites() {
   const user = useAppSelector(selectUser)
 
-  const { data: favoritesData, isSuccess, isLoading, isError } = useGetFavoritesQuery(user?.id, {
+  const { data: favoritesData, isSuccess, isLoading, isError, isFetching } = useGetFavoritesQuery(user?.id, {
     skip: !user?.id,
   })
   const hasResults = isSuccess && favoritesData && favoritesData.length > 0
@@ -36,7 +36,7 @@ export default function Favorites() {
         )}
         {isError && <Message message="There was an error loading favorites!" className="flex-1 items-center text-destructive" />}
         {isLoading && <LoadingSkeleton />}
-        {!hasResults && <Message message="You have no favorites" className="flex-1 items-center" />}
+        {!hasResults && !isFetching && <Message message="You have no favorites" className="flex-1 items-center" />}
       </Suspense>
     </PageWrapper>
   )
