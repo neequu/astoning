@@ -71,7 +71,7 @@ npm run dev
 - [x] Используем **Modern Redux with Redux Toolkit**
 - [x] Используем [**слайсы**](https://github.com/neequu/astoning/blob/main/src/redux/slices)
 
-- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/middleware)
+- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/middleware/session.ts)
 
 - [x] Используется [**RTK Query**](https://github.com/neequu/astoning/tree/main/src/redux/api)
 
