@@ -18,7 +18,7 @@ export interface Favorites {
 export interface History {
   getHistory: (userId: User['id'] | undefined) => Tables<'history'>[] | null
   addHistory: (query: string, userId: User['id'] | undefined) => null
-  deleteHistoryById: (itemId: number, userId: User['id'] | undefined) => null
+  deleteHistoryById: (itemId: number, userId: User['id'] | undefined) => null | number
   deleteAllHistory: (userId: User['id'] | undefined) => null
 }
 

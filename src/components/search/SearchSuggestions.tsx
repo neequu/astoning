@@ -19,26 +19,19 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
   if (!searchData)
     return null
 
-  const successNoItems = isSuccess && searchData.pagination.items.count === 0
+  const noResults = isSuccess && searchData.pagination.items.count === 0
 
   return (
     <div className={cn('flex flex-col bg-menu text-menu-foreground rounded-md shadow-lg border mt-3 overflow-hidden absolute top-full -left-20 -right-20 z-50 opacity-0 transition-all duration-500', isInputFocused && 'opacity-100 left-0 right-0')}>
-      {/* allow this to load but show form ↑ */}
-      {isError && <Message message="There was an error!" className="flex-1 text-xl items-center text-destructive" />}
-      {/* if success & nothing found show message → */}
-      {successNoItems
-        ? <Message message="No results were found!" className="flex-1 text-md items-center" />
-        // show results
-        : (
-          <Suspense>
-            <AnimationWrapper>
-              {searchData.data.map(item => (
-                <SearchSuggestionCard key={item.mal_id} item={item} />
-              ),
-              )}
-            </AnimationWrapper>
-          </Suspense>
-          )}
+      <Suspense>
+        <AnimationWrapper>
+          {searchData.data.map(item => (
+            <SearchSuggestionCard key={item.mal_id} item={item} />
+          ))}
+        </AnimationWrapper>
+        {isError && <Message message="There was an error with your search!" className="flex-1 text-xl items-center text-destructive py-7" />}
+        {noResults && <Message message={`No results for ${debouncedQuery} found!`} className="flex-1 items-center py-7 text-md" />}
+      </Suspense>
     </div>
   )
 }

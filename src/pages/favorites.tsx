@@ -16,25 +16,27 @@ export default function Favorites() {
   const { data: favoritesData, isSuccess, isLoading, isError } = useGetFavoritesQuery(user?.id, {
     skip: !user?.id,
   })
-
-  const successNoItems = isSuccess && favoritesData?.length === 0
+  const hasResults = isSuccess && favoritesData && favoritesData.length > 0
 
   return (
     <PageWrapper heading="Favorites">
       <Suspense>
-        <MediaGrid>
-          <AnimationWrapper className="grid-tmp">
-            {favoritesData?.map(itemId => (
-              <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
-                <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
-              </CardWrapper>
-            ),
-            )}
-          </AnimationWrapper>
-        </MediaGrid>
+        {hasResults
+        && (
+          <MediaGrid>
+            <AnimationWrapper className="grid-tmp">
+              {favoritesData.map(itemId => (
+                <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
+                  <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
+                </CardWrapper>
+              ),
+              )}
+            </AnimationWrapper>
+          </MediaGrid>
+        )}
         {isError && <Message message="There was an error loading favorites!" className="flex-1 items-center text-destructive" />}
         {isLoading && <LoadingSkeleton />}
-        {successNoItems && <Message message="You have no favorites" className="flex-1 items-center" />}
+        {hasResults && <Message message="You have no favorites" className="flex-1 items-center" />}
       </Suspense>
     </PageWrapper>
   )

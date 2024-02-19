@@ -33,7 +33,7 @@ export async function addHistory(query: string, userId: User['id'] | undefined):
   const newId = lastItem ? generateItemId(lastItem.id) : 1
   const timestamptz = generateTimestampTz()
 
-  const newData: Tables<'history'>[] = [{ user_id: userId, created_at: timestamptz, id: newId, query }, ...allHistory]
+  const newData: Tables<'history'>[] = [...allHistory, { user_id: userId, created_at: timestamptz, id: newId, query }]
   localStorage.setItem(LS_KEY.history, JSON.stringify(newData))
 
   return null
@@ -51,7 +51,7 @@ export async function deleteHistoryById(itemId: number, userId: User['id'] | und
   localStorage.setItem(LS_KEY.history, JSON.stringify(newData))
 
   handleSuccess('History deleted')
-  return null
+  return itemId
 }
 
 export async function deleteAllHistory(userId: User['id'] | undefined): Promise<ReturnType<History['deleteAllHistory']>> {

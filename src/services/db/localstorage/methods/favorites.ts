@@ -48,7 +48,7 @@ export async function addFavorite(itemId: number, userId: User['id'] | undefined
   const newId = lastItem ? generateItemId(lastItem.id) : 1
   const timestamptz = generateTimestampTz()
 
-  const newData: Tables<'favorites'>[] = [{ item_id: itemId, user_id: userId, id: newId, created_at: timestamptz }, ...allFavorites]
+  const newData: Tables<'favorites'>[] = [...allFavorites, { item_id: itemId, user_id: userId, id: newId, created_at: timestamptz }]
   localStorage.setItem(LS_KEY.favorites, JSON.stringify(newData))
 
   handleSuccess('Added to your library')

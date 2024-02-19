@@ -26,7 +26,7 @@ export async function addHistory(query: string, userId: User['id'] | undefined):
 
   const { data, error } = await supabase
     .from('history')
-    .upsert({ query })
+    .insert({ query })
 
   if (error) {
     handleError(error.message || 'Couldn\t add history!')
@@ -52,7 +52,7 @@ export async function deleteHistoryById(itemId: number, userId: User['id'] | und
   }
 
   handleSuccess('History deleted')
-  return null
+  return itemId
 }
 
 export async function deleteAllHistory(userId: User['id'] | undefined): Promise<ReturnType<History['deleteAllHistory']>> {

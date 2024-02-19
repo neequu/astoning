@@ -27,13 +27,11 @@ export default function Search() {
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
   // search data
-  const { data: animeData, isError, isSuccess, isLoading } = useGetAnimeSearchQuery({ q: currenstSearch })
-  const noResults = isSuccess && animeData.pagination.items.count === 0
-
+  const { data: animeData, isError, isSuccess, isLoading, isFetching } = useGetAnimeSearchQuery({ q: currenstSearch })
+  const hasResults = isSuccess && animeData && animeData.data.length > 0
   const throttledSearch = useDebouncedCallback(search, 1000)
   // search msgs based on if the are results
-  const hasSearchAndData = currenstSearch && animeData?.data.length
-  const searchMessage = hasSearchAndData ? `Showing ${animeData.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
+  const searchMessage = currenstSearch ? `Showing ${animeData?.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
   function handleQueryChange(newQuery: string): void {
@@ -76,7 +74,7 @@ export default function Search() {
           </MediaGrid>
           {isError && <Message message="There was an error with your search!" className="flex-1 items-center text-destructive" />}
           {isLoading && <LoadingSkeleton />}
-          {noResults && <Message message={`No results for ${currenstSearch} found!`} className="flex-1 items-center" />}
+          {!hasResults && !isFetching && <Message message={`No results for ${currenstSearch} found!`} className="flex-1 items-center" />}
         </Suspense>
       </PageWrapper>
     </>

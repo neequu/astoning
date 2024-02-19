@@ -7,7 +7,7 @@ import type { Favorites, History } from '@/types/db/db-methods'
 export const dbApi = createApi({
   reducerPath: 'db',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['LikeById', 'Like', 'History'],
+  tagTypes: ['Like', 'History'],
   endpoints: builder => ({
     getFavorites: builder.query<ReturnType<Favorites['getFavorites']>, User['id'] | undefined>({
       queryFn: async (userId) => {
@@ -21,14 +21,14 @@ export const dbApi = createApi({
         const data = await likeService.getFavoriteById(itemId, userId)
         return { data }
       },
-      providesTags: ['LikeById'],
+      providesTags: ['Like'],
     }),
     changeLike: builder.mutation<ReturnType<Favorites['addFavorite']>, { itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined }>({
       queryFn: async ({ itemId, isCurrentStateActive, userId }) => {
         const data = await likeService.changeLike(itemId, isCurrentStateActive, userId)
         return { data }
       },
-      invalidatesTags: ['Like', 'LikeById'],
+      invalidatesTags: ['Like'],
     }),
     // history
     getHistory: builder.query<ReturnType<History['getHistory']>, User['id'] | undefined>({

@@ -44,7 +44,7 @@ export async function addFavorite(id: number, userId: User['id'] | undefined): P
     return null
   const { error } = await supabase
     .from('favorites')
-    .upsert({ item_id: id })
+    .insert({ item_id: id })
 
   if (error) {
     handleError(error.message || 'Couldn\t set like!')
