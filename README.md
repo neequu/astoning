@@ -115,3 +115,7 @@ npm run dev
 - useful hooks from [usehooks-ts](https://usehooks-ts.com)
 - virtualization [react-window](https://github.com/bvaughn/react-window)
 - auto sizing [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
+- lazy loading of named components with [react-lazily](https://github.com/JLarky/react-lazily)
+- icons [lucide-react](https://lucide.dev/)
+- [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
+- eslint config by [@antfu/eslint-config](https://github.com/antfu/eslint-config)
