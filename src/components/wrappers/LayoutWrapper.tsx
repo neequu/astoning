@@ -10,7 +10,6 @@ interface Props {
 
 export function LayoutWrapper({ children }: Props) {
   const { isLoading } = useInitializeUser(authService.getUser)
-
   return (
     <>
       {isLoading && <LoadingSkeleton /> }

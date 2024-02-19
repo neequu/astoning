@@ -16,9 +16,10 @@ export function useInitializeUser(getUser: () => Promise<User | null>): ReturnTy
     const getInitialUser = async () => {
       setIsLoading(true)
       const user = await getUser()
-      if (isMounted)
+      if (isMounted) {
         dispatch(setUser(user))
-      setIsLoading(false)
+        setIsLoading(false)
+      }
     }
 
     getInitialUser()
