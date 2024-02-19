@@ -8,7 +8,6 @@ import { selectUser } from '@/redux/rtk/selectors'
 
 export default function Router() {
   const user = useAppSelector(selectUser)
-
   const hasUser = !!user
 
   return (

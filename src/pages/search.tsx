@@ -67,7 +67,7 @@ export default function Search() {
             <AnimationWrapper className="grid-tmp">
               {animeData?.data.map(item => (
                 <MediaCard key={item.mal_id} item={item}>
-                  <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
+                  <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.mal_id} />
                 </MediaCard>
               ))}
             </AnimationWrapper>
