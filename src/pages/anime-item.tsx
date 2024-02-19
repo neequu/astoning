@@ -6,7 +6,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { Message } from '@/components/misc/Message'
 import { AnimeCard } from '@/components/AnimeCard'
-import { selectUser } from '@/redux/slices/selectors'
+import { selectUser } from '@/redux/rtk/selectors'
 
 export default function AnimeItem() {
   const navigate = useNavigate()

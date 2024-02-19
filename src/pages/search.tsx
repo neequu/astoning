@@ -12,7 +12,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { useAddHistoryMutation } from '@/redux/api/db-api'
-import { selectUser } from '@/redux/slices/selectors'
+import { selectUser } from '@/redux/rtk/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 

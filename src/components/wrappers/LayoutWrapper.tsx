@@ -1,3 +1,4 @@
+import { TheFooter } from '../TheFooter'
 import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { TheHeader } from '@/components/TheHeader'
 import { useInitializeUser } from '@/hooks/use-initialize-user'
@@ -20,6 +21,7 @@ export function LayoutWrapper({ children }: Props) {
           <main className="container mx-auto px-4 flex-1 flex flex-col">
             {children}
           </main>
+          <TheFooter />
         </>
       )}
 

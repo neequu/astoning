@@ -8,7 +8,7 @@ import { useDeleteAllHistoryMutation, useDeleteHistoryByIdMutation, useGetHistor
 import { HistoryCard } from '@/components/history/HistoryCard'
 import { HistoryWrapper } from '@/components/history/HistoryWrapper'
 import { Button } from '@/components/ui/button'
-import { selectUser } from '@/redux/slices/selectors'
+import { selectUser } from '@/redux/rtk/selectors'
 
 export default function History() {
   const user = useAppSelector(selectUser)

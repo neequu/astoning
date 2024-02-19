@@ -8,6 +8,7 @@ const Register = lazy(() => import('@/pages/register'))
 const Login = lazy(() => import('@/pages/login'))
 const Favorites = lazy(() => import('@/pages/favorites'))
 const NotFound = lazy(() => import('@/pages/notFound'))
+const Session = lazy(() => import('@/pages/session'))
 
 export const routesPublic = [
   {
@@ -37,6 +38,11 @@ export const routesAuthOnly = [
   {
     path: '/history',
     component: History,
+    exact: true,
+  },
+  {
+    path: '/session',
+    component: Session,
     exact: true,
   },
   {

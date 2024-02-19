@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { sessionMiddleware } from '@/redux/rtk/middleware/session'
 import authSlice from '@/redux/slices/auth-slice'
+import sessionSlice from '@/redux/slices/session-slice'
 import { animeApi } from '@/redux/api/anime-api'
 import { dbApi } from '@/redux/api/db-api'
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
+    session: sessionSlice,
     [animeApi.reducerPath]: animeApi.reducer,
     [dbApi.reducerPath]: dbApi.reducer,
   },
