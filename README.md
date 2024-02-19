@@ -19,9 +19,15 @@ Install dependencies:
 ```javascript
 pnpm install
 ```
+```javascript
+npm install
+```
 Start dev server:
 ```javascript
 pnpm run dev
+```
+```javascript
+npm run dev
 ```
 
 ## **functionality**
@@ -84,7 +90,7 @@ pnpm run dev
         - [x] Проверки Eslint, TS, build
 
     - [x] Настроен CD: [Deploy Link](#deploy)
-- [ ] Реализована **виртуализация списков**
+- [x] Реализована [**виртуализация списков**](https://github.com/neequu/astoning/blob/main/src/pages/history.tsx)
 - [ ] Используются **мемоизированные селекторы** (createSelector)
 - [ ] Используется **нормализованная структура стейта** (createEntityAdapter)
 - [ ] Проведена **оптимизация приложения**
@@ -104,6 +110,8 @@ pnpm run dev
 - input validation with [zod](https://zod.dev/)
 - forms with [useForm](https://react-hook-form.com/docs/useform)
 - backend service [supabase](https://supabase.com/) (alt to firebase)
-- [mobile responsive](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
 - toast with [sonner](https://sonner.emilkowal.ski/toast)
 - animation with [formkit-aa](https://auto-animate.formkit.com)
+- useful hooks from [usehooks-ts](https://usehooks-ts.com)
+- virtualization [react-window](https://github.com/bvaughn/react-window)
+- auto sizing [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
