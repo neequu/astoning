@@ -14,6 +14,7 @@ import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { useAddHistoryMutation } from '@/redux/api/db-api'
 import { selectUser } from '@/redux/slices/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
+import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 
 export default function Search() {
   const user = useAppSelector(selectUser)
@@ -26,12 +27,13 @@ export default function Search() {
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
   // search data
-  const { data: animeData, isError, isLoading } = useGetAnimeSearchQuery({ q: currenstSearch })
-  const hasResults = animeData?.data.length
+  const { data: animeData, isError, isSuccess, isLoading } = useGetAnimeSearchQuery({ q: currenstSearch })
+  const noResults = isSuccess && animeData.pagination.items.count === 0
 
   const throttledSearch = useDebouncedCallback(search, 1000)
-  // todo: move from here
-  const searchMessage = currenstSearch && animeData?.data ? `Showing ${animeData.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
+  // search msgs based on if the are results
+  const hasSearchAndData = currenstSearch && animeData?.data.length
+  const searchMessage = hasSearchAndData ? `Showing ${animeData.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
   function handleQueryChange(newQuery: string): void {
@@ -61,27 +63,22 @@ export default function Search() {
   return (
     <>
       <SearchPanel changeQuery={handleQueryChange} query={query} />
-      <Suspense>
-        <PageWrapper className="pt-6" heading={searchHeading}>
-          {/* allow this to load but show form ↑ */}
-          {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
-          {/* if success & nothing found show message → */}
-          {!hasResults
-            ? <Message message="No results were found!" className="flex-1 items-center" />
-            // show results
-            : (
-              <MediaGrid>
-                <AnimationWrapper className="grid-tmp">
-                  {animeData?.data.map(item => (
-                    <MediaCard key={item.mal_id} item={item}>
-                      <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
-                    </MediaCard>
-                  ))}
-                </AnimationWrapper>
-              </MediaGrid>
-              )}
-        </PageWrapper>
-      </Suspense>
+      <PageWrapper className="pt-6" heading={searchHeading}>
+        <Suspense>
+          <MediaGrid>
+            <AnimationWrapper className="grid-tmp">
+              {animeData?.data.map(item => (
+                <MediaCard key={item.mal_id} item={item}>
+                  <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
+                </MediaCard>
+              ))}
+            </AnimationWrapper>
+          </MediaGrid>
+          {isError && <Message message="There was an error with your search!" className="flex-1 items-center text-destructive" />}
+          {isLoading && <LoadingSkeleton />}
+          {noResults && <Message message={`No results for ${currenstSearch} found!`} className="flex-1 items-center" />}
+        </Suspense>
+      </PageWrapper>
     </>
   )
 }

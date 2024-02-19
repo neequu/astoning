@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
@@ -20,27 +21,21 @@ export default function Favorites() {
 
   return (
     <PageWrapper heading="Favorites">
-      {isError && <Message message="There was an error!" className="flex-1 items-center text-destructive" />}
-      {/* if loading show skeleton → */}
-      {isLoading
-        ? <LoadingSkeleton />
-      //  if success & nothing found show message →
-        : successNoItems
-          ? <Message message="You have no favorites" className="flex-1 items-center" />
-          // show results
-          : (
-            <MediaGrid>
-              <AnimationWrapper className="grid-tmp">
-                { favoritesData?.map(itemId => (
-                  <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
-                    <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
-                  </CardWrapper>
-                ),
-                )}
-              </AnimationWrapper>
-            </MediaGrid>
+      <Suspense>
+        <MediaGrid>
+          <AnimationWrapper className="grid-tmp">
+            {favoritesData?.map(itemId => (
+              <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
+                <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
+              </CardWrapper>
+            ),
             )}
-
+          </AnimationWrapper>
+        </MediaGrid>
+        {isError && <Message message="There was an error loading favorites!" className="flex-1 items-center text-destructive" />}
+        {isLoading && <LoadingSkeleton />}
+        {successNoItems && <Message message="You have no favorites" className="flex-1 items-center" />}
+      </Suspense>
     </PageWrapper>
   )
 }
