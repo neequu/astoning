@@ -31,7 +31,7 @@ export default function Search() {
   const hasResults = isSuccess && animeData && animeData.data.length > 0
   const throttledSearch = useDebouncedCallback(search, 1000)
   // search msgs based on if the are results
-  const searchMessage = currenstSearch ? `Showing ${animeData?.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
+  const searchMessage = currenstSearch && hasResults ? `Showing ${animeData?.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
   function handleQueryChange(newQuery: string): void {

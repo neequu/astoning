@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
-  const { data: searchData, isSuccess, isError } = useGetAnimeSearchQuery({ q: debouncedQuery, limit: MAX_SUGGESTIONS }, {
+  const { data: searchData, isSuccess, isError, isFetching } = useGetAnimeSearchQuery({ q: debouncedQuery, limit: MAX_SUGGESTIONS }, {
     skip: !debouncedQuery,
   })
   // don't render anything initially
@@ -30,7 +30,7 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
           ))}
         </AnimationWrapper>
         {isError && <Message message="There was an error with your search!" className="flex-1 text-xl items-center text-destructive py-7" />}
-        {noResults && <Message message={`No results for ${debouncedQuery} found!`} className="flex-1 items-center py-7 text-md" />}
+        {noResults && !isFetching && <Message message={`No results for ${debouncedQuery} found!`} className="flex-1 items-center py-7 text-md" />}
       </Suspense>
     </div>
   )
