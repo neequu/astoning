@@ -14,7 +14,7 @@ describe('card suggestions and card entity page for w/o auth', () => {
       cy.wrap($suggestLink).click()
       cy.url().should('include', `/anime/${cardId}`)
     })
-    // check that clicking the buttons removes it
+    // check content on the page to be visible
     cy.get('[data-testid="anime-card"]').should('be.visible')
     cy.get('[data-testid="anime-card"] h1').should('be.visible')
   })
