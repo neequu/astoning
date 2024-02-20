@@ -24,7 +24,7 @@ export default function History() {
   const handleDeleteAll = (): void => {
     deleteAllHistory({ userId: user?.id })
   }
-  const handleDeleteSingle = useCallback((itemId: number) => {
+  const handleDeleteSingle = useCallback((itemId: number): void => {
     deleteHistoryById({ itemId, userId: user?.id })
   }, [deleteHistoryById, user?.id])
 

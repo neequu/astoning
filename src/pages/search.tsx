@@ -14,7 +14,7 @@ import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { useAddHistoryMutation } from '@/redux/api/db-api'
 import { selectUser } from '@/redux/rtk/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
-import CardSkeleton from '@/components/loading-state/CardSkeleton'
+import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 

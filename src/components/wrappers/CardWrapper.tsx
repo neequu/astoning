@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { lazily } from 'react-lazily'
 import { FailedCard } from '../media/FailedCard'
-import CardSkeleton from '@/components/loading-state/CardSkeleton'
+import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 import { useGetAnimeByIdQuery } from '@/redux/api/anime-api'
 
 const { MediaCard } = lazily(() => import('@/components/media/MediaCard'))

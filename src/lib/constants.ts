@@ -10,4 +10,4 @@ export const VALID_FIELDS: ValidAuthFormFields[] = ['email', 'password']
 export const LOGIN_MSG = 'Successfully logged in!'
 export const REGISTER_MSG = 'Successfully signed up!'
 
-export const LS_KEY = { favorites: 'favorites', history: 'history', auth: 'auth' }
+export const LS_KEYS = { favorites: 'favorites', history: 'history', auth: 'auth' }

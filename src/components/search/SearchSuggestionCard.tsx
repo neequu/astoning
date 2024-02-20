@@ -8,7 +8,7 @@ interface Props {
   className?: string
 }
 
-export default function SearchSuggestionCard({ item, children, className }: Props) {
+export function SearchSuggestionCard({ item, children, className }: Props) {
   return (
     <Link to={`/anime/${item.mal_id}`} className="hover:bg-muted block transition-colors">
       <div className={cn('flex items-center justify-between border-b border-muted px-4 py-2', className)}>

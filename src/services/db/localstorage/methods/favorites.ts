@@ -1,7 +1,7 @@
 import type { User } from '@supabase/supabase-js'
 import { verifyLocalStorageByKey } from '../client'
 import { generateItemId, generateTimestampTz, handleSuccess } from '@/lib/utils'
-import { LS_KEY } from '@/lib/constants'
+import { LS_KEYS } from '@/lib/constants'
 import type { Favorites } from '@/types/db/db-methods'
 import type { Tables } from '@/types/db/supabase'
 
@@ -9,8 +9,8 @@ export async function getFavorites(userId: User['id'] | undefined): Promise<Retu
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.favorites)
-  const allFavorites: Tables<'favorites'>[] = JSON.parse(localStorage.getItem(LS_KEY.favorites)!)
+  verifyLocalStorageByKey(LS_KEYS.favorites)
+  const allFavorites: Tables<'favorites'>[] = JSON.parse(localStorage.getItem(LS_KEYS.favorites)!)
 
   const userFavoritesIds = allFavorites.filter(f => userId === f.user_id)
 
@@ -21,7 +21,7 @@ export async function getFavoriteById(itemId: number, userId: User['id'] | undef
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.favorites)
+  verifyLocalStorageByKey(LS_KEYS.favorites)
 
   // using as here: get favs can't return null - we have user
   const userFavorites = await getFavorites(userId) as Tables<'favorites'>[]
@@ -37,8 +37,8 @@ export async function addFavorite(itemId: number, userId: User['id'] | undefined
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.favorites)
-  const allFavorites: Tables<'favorites'>[] = JSON.parse(localStorage.getItem(LS_KEY.favorites)!)
+  verifyLocalStorageByKey(LS_KEYS.favorites)
+  const allFavorites: Tables<'favorites'>[] = JSON.parse(localStorage.getItem(LS_KEYS.favorites)!)
 
   // using as here: get favs can't return null - we have user
   const userFavorites = await getFavorites(userId) as Tables<'favorites'>[]
@@ -49,7 +49,7 @@ export async function addFavorite(itemId: number, userId: User['id'] | undefined
   const timestamptz = generateTimestampTz()
 
   const newData: Tables<'favorites'>[] = [...allFavorites, { item_id: itemId, user_id: userId, id: newId, created_at: timestamptz }]
-  localStorage.setItem(LS_KEY.favorites, JSON.stringify(newData))
+  localStorage.setItem(LS_KEYS.favorites, JSON.stringify(newData))
 
   handleSuccess('Added to your library')
   return itemId
@@ -59,13 +59,13 @@ export async function removeFavorite(itemId: number, userId: User['id'] | undefi
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.favorites)
+  verifyLocalStorageByKey(LS_KEYS.favorites)
 
-  const allFavorites: Tables<'favorites'>[] = JSON.parse(localStorage.getItem(LS_KEY.favorites)!)
+  const allFavorites: Tables<'favorites'>[] = JSON.parse(localStorage.getItem(LS_KEYS.favorites)!)
   const newData = allFavorites
     .filter(f => ((f.user_id === userId) && (f.item_id !== itemId)))
 
-  localStorage.setItem(LS_KEY.favorites, JSON.stringify(newData))
+  localStorage.setItem(LS_KEYS.favorites, JSON.stringify(newData))
 
   handleSuccess('Removed from your library')
   return itemId

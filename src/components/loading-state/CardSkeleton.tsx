@@ -5,7 +5,7 @@ interface Props {
   className?: string
 }
 
-export default function CardSkeleton({ amount = 1, className }: Props) {
+export function CardSkeleton({ amount = 1, className }: Props) {
   const dummyArray = Array.from({ length: amount }).fill('')
   return (
     <>

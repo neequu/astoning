@@ -9,15 +9,15 @@ import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
-import { SearchSuggestions } from '@/components/search/SearchSuggestions'
 import { selectUser } from '@/redux/rtk/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
 import { Message } from '@/components/misc/Message'
 import { transformQuery } from '@/lib/utils'
-import CardSkeleton from '@/components/loading-state/CardSkeleton'
+import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 import type { Anime } from '@/types/anime'
 
 const { TailElement } = lazily(() => import('@/components/misc/TailElement'))
+const { SearchSuggestions } = lazily(() => import('@/components/search/SearchSuggestions'))
 
 export default function Home() {
   const user = useAppSelector(selectUser)

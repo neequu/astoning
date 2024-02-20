@@ -1,7 +1,7 @@
 import type { User } from '@supabase/supabase-js'
 import { verifyLocalStorageByKey } from '../client'
 import { generateItemId, generateTimestampTz, handleSuccess } from '@/lib/utils'
-import { LS_KEY } from '@/lib/constants'
+import { LS_KEYS } from '@/lib/constants'
 import type { Tables } from '@/types/db/supabase'
 import type { History } from '@/types/db/db-methods'
 
@@ -9,9 +9,9 @@ export async function getHistory(userId: User['id'] | undefined): Promise<Return
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.history)
+  verifyLocalStorageByKey(LS_KEYS.history)
 
-  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEY.history)!)
+  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEYS.history)!)
   const userHistory = allHistory.filter(h => userId === h.user_id)
 
   return userHistory
@@ -21,9 +21,9 @@ export async function addHistory(query: string, userId: User['id'] | undefined):
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.history)
+  verifyLocalStorageByKey(LS_KEYS.history)
 
-  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEY.history)!)
+  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEYS.history)!)
 
   // using as here: get history can't return null - we have user
   const userHistory = await getHistory(userId) as Tables<'history'>[]
@@ -34,7 +34,7 @@ export async function addHistory(query: string, userId: User['id'] | undefined):
   const timestamptz = generateTimestampTz()
 
   const newData: Tables<'history'>[] = [...allHistory, { user_id: userId, created_at: timestamptz, id: newId, query }]
-  localStorage.setItem(LS_KEY.history, JSON.stringify(newData))
+  localStorage.setItem(LS_KEYS.history, JSON.stringify(newData))
 
   return null
 }
@@ -43,12 +43,12 @@ export async function deleteHistoryById(itemId: number, userId: User['id'] | und
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.history)
+  verifyLocalStorageByKey(LS_KEYS.history)
 
-  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEY.history)!)
+  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEYS.history)!)
   const newData = allHistory.filter(prevItem => prevItem.id !== itemId)
 
-  localStorage.setItem(LS_KEY.history, JSON.stringify(newData))
+  localStorage.setItem(LS_KEYS.history, JSON.stringify(newData))
 
   handleSuccess('History deleted')
   return itemId
@@ -58,12 +58,12 @@ export async function deleteAllHistory(userId: User['id'] | undefined): Promise<
   if (!userId)
     return null
 
-  verifyLocalStorageByKey(LS_KEY.history)
+  verifyLocalStorageByKey(LS_KEYS.history)
 
-  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEY.favorites)!)
+  const allHistory: Tables<'history'>[] = JSON.parse(localStorage.getItem(LS_KEYS.favorites)!)
   const newData = allHistory.filter(h => h.user_id !== userId)
 
-  localStorage.setItem(LS_KEY.history, JSON.stringify(newData))
+  localStorage.setItem(LS_KEYS.history, JSON.stringify(newData))
 
   handleSuccess('All history deleted')
   return null

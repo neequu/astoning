@@ -5,7 +5,7 @@ import { useAppSelector } from '@/hooks/redux-hooks'
 import { useGetFavoritesQuery } from '@/redux/api/db-api'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { selectUser } from '@/redux/rtk/selectors'
-import CardSkeleton from '@/components/loading-state/CardSkeleton'
+import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 const { CardWrapper } = lazily(() => import('@/components/wrappers/CardWrapper'))

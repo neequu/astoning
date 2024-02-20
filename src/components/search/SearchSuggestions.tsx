@@ -2,11 +2,11 @@ import { Suspense } from 'react'
 import { lazily } from 'react-lazily'
 import { MAX_SUGGESTIONS } from '@/lib/constants'
 import { useGetAnimeSearchQuery } from '@/redux/api/anime-api'
-import SearchSuggestionCard from '@/components/search/SearchSuggestionCard'
-import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { cn } from '@/lib/utils'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
+const { SearchSuggestionCard } = lazily(() => import('@/components/search/SearchSuggestionCard'))
+const { AnimationWrapper } = lazily(() => import('@/components/wrappers/AnimationWrapper'))
 
 interface Props {
   debouncedQuery: string
@@ -18,7 +18,7 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
     skip: !debouncedQuery,
   })
   // don't render anything initially
-  if (!searchData)
+  if (!searchData || !debouncedQuery)
     return null
 
   const noResults = isSuccess && searchData.pagination.items.count === 0
