@@ -8,7 +8,7 @@ interface Props {
   breakPoint?: number
 }
 
-export default function TailElement({ callback, breakCheck, ms = 700, breakPoint = 200 }: Props) {
+export function TailElement({ callback, breakCheck, ms = 700, breakPoint = 200 }: Props) {
   const tailEl = useRef<HTMLDivElement>(null)
   useInterval(() => {
     if (!tailEl.current)

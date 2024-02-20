@@ -1,18 +1,21 @@
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
-import type { User } from '@supabase/supabase-js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
 import { useChangeLikeMutation } from '@/redux/api/db-api'
+import { useAppSelector } from '@/hooks/redux-hooks'
+import { selectUser } from '@/redux/rtk/selectors'
 
 interface Props {
   className?: string
-  userId: User['id'] | undefined
   itemId: number
 }
 
-export function LikeButton({ className, userId, itemId }: Props) {
+export function LikeButton({ className, itemId }: Props) {
+  const user = useAppSelector(selectUser)
+  const userId = user?.id
+
   const { isActive, setIsActive, isLoadingLike } = useSetLike(itemId, userId)
   const [changeLike] = useChangeLikeMutation()
   const [disabled, setDisabled] = useState(false)
@@ -38,6 +41,11 @@ export function LikeButton({ className, userId, itemId }: Props) {
     // enable in the end
     setDisabled(false)
   }
+
+  useEffect(() => {
+    if (!user)
+      setIsActive(false)
+  }, [user, setIsActive])
 
   return (
     <div className={cn('flex', className)}>

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
-import type { User } from '@supabase/supabase-js'
+import type { User } from '@/types/db/db'
 import { useGetFavoritesByIdQuery } from '@/redux/api/db-api'
 
 interface ReturnType {
@@ -17,7 +17,7 @@ export function useSetLike(itemId: number, userId: User['id'] | undefined): Retu
   // use layout to remove animation from setting button active state
   useLayoutEffect(() => {
     // only change the state if liked state is different from the current state
-    const isLiked = !!data?.item_id
+    const isLiked = !!data?.itemId
     if (isLiked !== isActive)
       setIsActive(isLiked)
   }, [data])

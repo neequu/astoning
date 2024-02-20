@@ -1,6 +1,5 @@
-import type { Provider, User } from '@supabase/supabase-js'
-import type { Credentials } from '../auth'
-import type { Tables } from './supabase'
+import type { Credentials, Provider, User } from '../db/db'
+import type { Tables } from './db'
 
 export interface Auth {
   getUser: () => User | null
@@ -11,7 +10,7 @@ export interface Auth {
 }
 export interface Favorites {
   getFavorites: (userId: User['id'] | undefined) => Tables<'favorites'>[] | null
-  getFavoriteById: (itemId: number, userId: User['id'] | undefined) => Pick<Tables<'favorites'>, 'item_id'> | null
+  getFavoriteById: (itemId: number, userId: User['id'] | undefined) => Tables<'favorites'> | null
   addFavorite: (itemId: number, userId: User['id'] | undefined) => number | null
   removeFavorite: (itemId: number, userId: User['id'] | undefined) => number | null
 }

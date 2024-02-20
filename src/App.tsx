@@ -4,7 +4,7 @@ import { Toaster } from 'sonner'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
 import { ErrorLayout } from '@/components/ErrorLayout'
-import Router from '@/router'
+import { Router } from '@/router'
 
 function App() {
   return (

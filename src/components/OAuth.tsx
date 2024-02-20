@@ -1,4 +1,4 @@
-import type { Provider } from '@supabase/supabase-js'
+import type { Provider } from '@/types/db/db'
 import { Button } from '@/components/ui/button'
 import { capitalizeWord } from '@/lib/utils'
 

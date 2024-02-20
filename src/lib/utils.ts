@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from 'clsx'
 import { toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
-import type { User } from '@supabase/supabase-js'
 import type { NavigateFunction } from 'react-router-dom'
+import type { User } from '@/types/db/db'
 import { setUser } from '@/redux/slices/auth-slice'
 import type { AppDispatch } from '@/redux'
 
@@ -51,7 +51,6 @@ export function generateTimestampTz(): string {
   const minutes = String(now.getMinutes()).padStart(2, '0')
   const seconds = String(now.getSeconds()).padStart(2, '0')
   const milliseconds = String(now.getMilliseconds()).padStart(3, '0')
-  // const microseconds = String(now.getMilliseconds() * 1000).padStart(6, '0');
   const timezoneOffset = `${getTimezoneOffset(now)}`
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}${timezoneOffset}`
@@ -66,5 +65,6 @@ export function getTimezoneOffset(date: Date): string {
 }
 
 export function generateItemId(lastItemId: number): number {
-  return lastItemId ? lastItemId + 1 : 1
+  const newId = lastItemId + 1
+  return newId
 }

@@ -1,43 +1,46 @@
-import { Suspense } from 'react'
+import { lazily } from 'react-lazily'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
-import { CardWrapper } from '@/components/wrappers/CardWrapper'
 import { useGetFavoritesQuery } from '@/redux/api/db-api'
-import { LikeButton } from '@/components/LikeButton'
-import { Message } from '@/components/misc/Message'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
-import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
 import { selectUser } from '@/redux/rtk/selectors'
+import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 
-export default function Favorites() {
+const { Message } = lazily(() => import('@/components/misc/Message'))
+const { CardWrapper } = lazily(() => import('@/components/wrappers/CardWrapper'))
+const { LikeButton } = lazily(() => import('@/components/LikeButton'))
+
+export function Favorites() {
   const user = useAppSelector(selectUser)
 
-  const { data: favoritesData, isSuccess, isLoading, isError } = useGetFavoritesQuery(user?.id, {
+  const { data: favoritesData, isError, isFetching, isLoading } = useGetFavoritesQuery(user?.id, {
     skip: !user?.id,
   })
-  const hasResults = isSuccess && favoritesData && favoritesData.length > 0
+  const hasResults = favoritesData && favoritesData.length > 0
 
   return (
     <PageWrapper heading="Favorites">
-      <Suspense>
-        {hasResults
-        && (
-          <MediaGrid>
-            <AnimationWrapper className="grid-tmp">
-              {favoritesData.map(itemId => (
-                <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
-                  <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={itemId.item_id} />
-                </CardWrapper>
-              ),
+      <MediaGrid>
+        <AnimationWrapper className="grid-tmp">
+          {isLoading
+            ? <CardSkeleton amount={5} />
+            : (
+          // reason: can't render with no fragment
+          // eslint-disable-next-line react/jsx-no-useless-fragment
+              <>
+                {favoritesData?.map(item => (
+                  <CardWrapper key={item.itemId} itemId={item.itemId}>
+                    <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.itemId} />
+                  </CardWrapper>
+                ),
+                )}
+              </>
               )}
-            </AnimationWrapper>
-          </MediaGrid>
-        )}
-        {isError && <Message message="There was an error loading favorites!" className="flex-1 items-center text-destructive" />}
-        {isLoading && <LoadingSkeleton />}
-        {!hasResults && <Message message="You have no favorites" className="flex-1 items-center" />}
-      </Suspense>
+        </AnimationWrapper>
+      </MediaGrid>
+      {isError && <Message message="There was an error loading favorites!" className="flex-1 items-center text-destructive" />}
+      {!hasResults && !isFetching && <Message message="You have no favorites" className="flex-1 items-center" />}
     </PageWrapper>
   )
 }

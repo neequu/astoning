@@ -1,15 +1,13 @@
-import type { User } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/button'
 import { HiddenTextBlock } from '@/components/misc/HiddenTextBlock'
-import type { Anime } from '@/types/anime'
+import type { Anime } from '@/types/api/anime'
 import { LikeButton } from '@/components/LikeButton'
 
 interface Props {
   item: Anime
-  userId: User['id'] | undefined
 }
 
-export function AnimeCard({ item, userId }: Props) {
+export function AnimeCard({ item }: Props) {
   return (
     <section className="flex flex-column sm:flex-row gap-6 flex-wrap">
       <div className="flex flex-1 flex-col items-center gap-5 min-w-[300px]">
@@ -28,9 +26,9 @@ export function AnimeCard({ item, userId }: Props) {
                 <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
               </a>
             </Button>
-            <LikeButton userId={userId} itemId={item.mal_id} />
+            <LikeButton itemId={item.malId} />
           </div>
-          <p className="text-muted-foreground line-clamp-1" title={item.title_japanese}>{item.title_japanese}</p>
+          <p className="text-muted-foreground line-clamp-1" title={item.titleJapanese}>{item.titleJapanese}</p>
         </div>
 
         <HiddenTextBlock text={item.synopsis ?? 'No synopsys available'} className="mb-4" />

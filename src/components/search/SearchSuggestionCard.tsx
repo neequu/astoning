@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { cn } from '@/lib/utils'
-import type { Anime } from '@/types/anime'
+import type { Anime } from '@/types/api/anime'
 
 interface Props {
   item: Anime
@@ -8,9 +8,9 @@ interface Props {
   className?: string
 }
 
-export default function SearchSuggestionCard({ item, children, className }: Props) {
+export function SearchSuggestionCard({ item, children, className }: Props) {
   return (
-    <Link to={`/anime/${item.mal_id}`} className="hover:bg-muted block transition-colors">
+    <Link to={`/anime/${item.malId}`} className="hover:bg-muted block transition-colors">
       <div className={cn('flex items-center justify-between border-b border-muted px-4 py-2', className)}>
         <div className="flex items-center gap-2 font-medium">
           <div className="min-h-16 min-w-12">

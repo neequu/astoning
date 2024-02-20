@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import type { Anime } from '@/types/anime'
+import type { Anime } from '@/types/api/anime'
 
 interface Props {
   item: Anime
@@ -16,7 +16,7 @@ export function MediaCard({ item, children }: Props) {
           <p className="text-sm">{item.year}</p>
         </div>
       </div>
-      <Link to={`/anime/${item.mal_id}`} className="max-h-72">
+      <Link to={`/anime/${item.malId}`} className="max-h-72">
         <img src={item.images.webp.image_url} className="h-72 min-w-30 w-full max-w-56 mx-auto rounded" alt={item.title} />
       </Link>
       {children}

@@ -1,22 +1,24 @@
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
+import { lazily } from 'react-lazily'
 import { useGetAnimeSearchQuery } from '@/redux/api/anime-api'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformQuery } from '@/lib/utils'
 
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
-import { Message } from '@/components/misc/Message'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeButton } from '@/components/LikeButton'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { useAddHistoryMutation } from '@/redux/api/db-api'
 import { selectUser } from '@/redux/rtk/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
-import { LoadingSkeleton } from '@/components/loadingState/LoadingSkeleton'
+import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 
-export default function Search() {
+const { Message } = lazily(() => import('@/components/misc/Message'))
+
+export function Search() {
   const user = useAppSelector(selectUser)
   const [addHistory] = useAddHistoryMutation()
 
@@ -29,9 +31,9 @@ export default function Search() {
   // search data
   const { data: animeData, isError, isSuccess, isLoading, isFetching } = useGetAnimeSearchQuery({ q: currenstSearch })
   const hasResults = isSuccess && animeData && animeData.data.length > 0
-  const throttledSearch = useDebouncedCallback(search, 1000)
+  const throttledSearch = useDebouncedCallback(search, 666)
   // search msgs based on if the are results
-  const searchMessage = currenstSearch && hasResults ? `Showing ${animeData?.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
+  const searchMessage = currenstSearch && hasResults ? `Showing ${animeData.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
   function handleQueryChange(newQuery: string): void {
@@ -62,20 +64,18 @@ export default function Search() {
     <>
       <SearchPanel changeQuery={handleQueryChange} query={query} />
       <PageWrapper className="pt-6" heading={searchHeading}>
-        <Suspense>
-          <MediaGrid>
-            <AnimationWrapper className="grid-tmp">
-              {animeData?.data.map(item => (
-                <MediaCard key={item.mal_id} item={item}>
-                  <LikeButton className="justify-end flex-1 place-items-end mt-4" userId={user?.id} itemId={item.mal_id} />
-                </MediaCard>
-              ))}
-            </AnimationWrapper>
-          </MediaGrid>
-          {isError && <Message message="There was an error with your search!" className="flex-1 items-center text-destructive" />}
-          {isLoading && <LoadingSkeleton />}
-          {!hasResults && !isFetching && <Message message={`No results for ${currenstSearch} found!`} className="flex-1 items-center" />}
-        </Suspense>
+        <MediaGrid>
+          <AnimationWrapper className="grid-tmp">
+            {isLoading && <CardSkeleton amount={20} />}
+            {animeData?.data.map(item => (
+              <MediaCard key={item.malId} item={item}>
+                <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.malId} />
+              </MediaCard>
+            ))}
+          </AnimationWrapper>
+        </MediaGrid>
+        {isError && <Message message="There was an error with your search!" className="flex-1 items-center text-destructive" />}
+        {!hasResults && !isFetching && <Message message={`No results for ${currenstSearch} found!`} className="flex-1 items-center" />}
       </PageWrapper>
     </>
   )

@@ -48,7 +48,7 @@ npm run dev
 **React**
 
 - [x] **Функциональные компоненты c хуками** в приоритете над классовыми
-- [x] Есть разделение на **[умные](https://github.com/neequu/astoning/blob/main/src/components/wrappers/PageWrapper.tsx)** и **[глупые](https://github.com/neequu/astoning/blob/main/src/pages/home.tsx)** компоненты
+- [x] Есть разделение на **[глупые](https://github.com/neequu/astoning/blob/main/src/components/wrappers/PageWrapper.tsx)** и **[умные](https://github.com/neequu/astoning/blob/main/src/pages/home.tsx)** компоненты
 
 - [x] Есть [**рендеринг списков**](https://github.com/neequu/astoning/blob/main/src/pages/search.tsx)
 
@@ -115,3 +115,7 @@ npm run dev
 - useful hooks from [usehooks-ts](https://usehooks-ts.com)
 - virtualization [react-window](https://github.com/bvaughn/react-window)
 - auto sizing [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
+- lazy loading of named components with [react-lazily](https://github.com/JLarky/react-lazily)
+- icons [lucide-react](https://lucide.dev/)
+- [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
+- eslint config by [@antfu/eslint-config](https://github.com/antfu/eslint-config)
