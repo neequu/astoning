@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { ApiResponse, ApiResponseSingle } from '@/types/api/anime'
+import type { ApiResponse, ApiResponseSingle, QueryResponse, QueryResponseSingle } from '@/types/api/anime'
 import { BASE_API_URL } from '@/lib/constants'
-import { transformAnimeData } from '@/redux/rtk/transforms/transform-anime-data'
+import { transformAnimeData, transformPaginationData } from '@/redux/rtk/transforms/transform-api-data'
 
 export const animeApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL }),
   endpoints: builder => ({
-    getAnime: builder.query<ApiResponse, number>({
+    getAnime: builder.query<QueryResponse, number>({
       query: (page = 1) => ({
         url: 'anime',
         params: { page },
@@ -15,16 +15,18 @@ export const animeApi = createApi({
       transformResponse: (response: ApiResponse) => ({
         ...response,
         data: response.data.map(transformAnimeData),
+        pagination: transformPaginationData(response.pagination),
       }),
+
     }),
-    getAnimeById: builder.query<ApiResponseSingle, number>({
+    getAnimeById: builder.query<QueryResponseSingle, number>({
       query: id => `anime/${id}`,
       transformResponse: (response: ApiResponseSingle) => ({
         ...response,
         data: transformAnimeData(response.data),
       }),
     }),
-    getAnimeSearch: builder.query<ApiResponse, { q: string, limit?: number, page?: number }>({
+    getAnimeSearch: builder.query<QueryResponse, { q: string, limit?: number, page?: number }>({
       query: ({ q, limit, page = 1 }) => ({
         url: 'anime',
         params: { q, limit, page },
@@ -32,6 +34,7 @@ export const animeApi = createApi({
       transformResponse: (response: ApiResponse) => ({
         ...response,
         data: response.data.map(transformAnimeData),
+        pagination: transformPaginationData(response.pagination),
       }),
     }),
   }),

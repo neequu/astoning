@@ -26,9 +26,9 @@ export function AnimeCard({ item }: Props) {
                 <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
               </a>
             </Button>
-            <LikeButton itemId={item.mal_id} />
+            <LikeButton itemId={item.malId} />
           </div>
-          <p className="text-muted-foreground line-clamp-1" title={item.title_japanese}>{item.title_japanese}</p>
+          <p className="text-muted-foreground line-clamp-1" title={item.titleJapanese}>{item.titleJapanese}</p>
         </div>
 
         <HiddenTextBlock text={item.synopsis ?? 'No synopsys available'} className="mb-4" />

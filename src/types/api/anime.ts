@@ -1,15 +1,19 @@
-export interface Pagination {
+export interface PaginationApi {
   last_visible_page: number
   has_next_page: boolean
   current_page: number
   items: {
     count: number
     total: number
-    per_page: number
   }
 }
+export type Pagination = Omit<PaginationApi, 'last_visible_page' | 'has_next_page' | 'current_page'> & {
+  lastVisiblePage: number
+  hasNextPage: boolean
+  currentPage: number
+}
 
-export interface Anime {
+export interface AnimeApi {
   mal_id: number
   url: string
   images: {
@@ -27,13 +31,24 @@ export interface Anime {
   synopsis: string | null
 }
 
-export interface ApiResponse {
+export type Anime = Omit<AnimeApi, 'mal_id' | 'title_japanese'> & {
+  malId: number
+  titleJapanese: string
+}
+
+export interface QueryResponse {
   pagination: Pagination
   data: Anime[]
 }
-
-export interface ApiResponseSingle {
+export interface QueryResponseSingle {
   data: Anime
+}
+export interface ApiResponse {
+  pagination: PaginationApi
+  data: AnimeApi[]
+}
+export interface ApiResponseSingle {
+  data: AnimeApi
 }
 
 export interface Image {

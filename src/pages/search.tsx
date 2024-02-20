@@ -68,8 +68,8 @@ export function Search() {
           <AnimationWrapper className="grid-tmp">
             {isLoading && <CardSkeleton amount={20} />}
             {animeData?.data.map(item => (
-              <MediaCard key={item.mal_id} item={item}>
-                <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.mal_id} />
+              <MediaCard key={item.malId} item={item}>
+                <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.malId} />
               </MediaCard>
             ))}
           </AnimationWrapper>

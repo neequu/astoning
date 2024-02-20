@@ -28,7 +28,7 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
       <Suspense>
         <AnimationWrapper>
           {searchData.data.map(item => (
-            <SearchSuggestionCard key={item.mal_id} item={item} />
+            <SearchSuggestionCard key={item.malId} item={item} />
           ))}
         </AnimationWrapper>
         {isError && <Message message="There was an error with your search!" className="flex-1 text-xl items-center text-destructive py-7" />}
