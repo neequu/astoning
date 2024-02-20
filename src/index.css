@@ -91,7 +91,8 @@
 
 
   html, body, #root {
-    height: 100%;
+    height: max-content;
+    min-height: 100vh;
   }
 
   #root {

@@ -42,7 +42,6 @@ export function SearchPanel({ handleSubmit, changeQuery, query, children, should
           name="query"
           onFocus={handleFocus}
           onBlur={handleBlur}
-          autoFocus
           value={query}
           className="text-md py-6 rounded-r-none border-r-none focus-visible:ring-offset-0 focus-visible:ring-0"
           placeholder="Search!"
