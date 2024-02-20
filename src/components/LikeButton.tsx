@@ -49,7 +49,7 @@ export function LikeButton({ className, itemId }: Props) {
 
   return (
     <div className={cn('flex', className)}>
-      <Button disabled={disabled} size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
+      <Button data-testid="like-button" disabled={disabled} size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
         {!isLoadingLike && (
           <>
             {/* show if liked */}
