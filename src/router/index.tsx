@@ -6,7 +6,7 @@ import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { selectUser } from '@/redux/rtk/selectors'
 
-export default function Router() {
+export function Router() {
   const user = useAppSelector(selectUser)
   const hasUser = !!user
 

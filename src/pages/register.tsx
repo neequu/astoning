@@ -3,7 +3,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { REGISTER_MSG } from '@/lib/constants'
 import { authService } from '@/services/auth'
 
-export default function Register() {
+export function Register() {
   return (
     <PageWrapper className="mt-12">
       <div className="sm:w-1/3 sm:min-w-96 sm:mx-auto rounded-md border border-muted sm:p-10 p-4 shadow-md">

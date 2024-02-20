@@ -3,7 +3,7 @@ import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformDateFromString } from '@/lib/utils'
 import { selectSession } from '@/redux/rtk/selectors'
 
-export default function Session() {
+export function Session() {
   const session = useAppSelector(selectSession)
   const convertedTime = session.timestamptz ? transformDateFromString(session.timestamptz) : 'No data available :('
 

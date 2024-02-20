@@ -11,7 +11,7 @@ const { Message } = lazily(() => import('@/components/misc/Message'))
 const { CardWrapper } = lazily(() => import('@/components/wrappers/CardWrapper'))
 const { LikeButton } = lazily(() => import('@/components/LikeButton'))
 
-export default function Favorites() {
+export function Favorites() {
   const user = useAppSelector(selectUser)
 
   const { data: favoritesData, isError, isFetching, isLoading } = useGetFavoritesQuery(user?.id, {

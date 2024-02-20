@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { Button } from '@/components/ui/button'
 
-export default function NotFound() {
+export function NotFound() {
   return (
     <PageWrapper className="place-content-center text-center items-center">
       <div>

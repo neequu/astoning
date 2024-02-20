@@ -8,7 +8,7 @@ import { Message } from '@/components/misc/Message'
 
 const { AnimeCard } = lazily(() => import('@/components/AnimeCard'))
 
-export default function AnimeItem() {
+export function AnimeItem() {
   const navigate = useNavigate()
   const { id } = useParams()
   // не parseInt тк при стринге может дать num ('1x' даст 1 например)

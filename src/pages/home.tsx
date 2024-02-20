@@ -19,7 +19,7 @@ import type { Anime } from '@/types/anime'
 const { TailElement } = lazily(() => import('@/components/misc/TailElement'))
 const { SearchSuggestions } = lazily(() => import('@/components/search/SearchSuggestions'))
 
-export default function Home() {
+export function Home() {
   const user = useAppSelector(selectUser)
   const [addHistory] = useAddHistoryMutation()
 

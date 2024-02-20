@@ -18,7 +18,7 @@ import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 
-export default function Search() {
+export function Search() {
   const user = useAppSelector(selectUser)
   const [addHistory] = useAddHistoryMutation()
 

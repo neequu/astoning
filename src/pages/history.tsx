@@ -13,7 +13,7 @@ const { Message } = lazily(() => import('@/components/misc/Message'))
 const { HistoryCard } = lazily(() => import('@/components/history/HistoryCard'))
 const { Button } = lazily(() => import('@/components/ui/button'))
 
-export default function History() {
+export function History() {
   const user = useAppSelector(selectUser)
   const { data: historyData, isError, isSuccess, isLoading } = useGetHistoryQuery(user?.id, { skip: !user?.id })
   const hasResults = isSuccess && historyData && historyData.length > 0

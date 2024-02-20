@@ -3,7 +3,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LOGIN_MSG } from '@/lib/constants'
 import { authService } from '@/services/auth'
 
-export default function Login() {
+export function Login() {
   return (
     <PageWrapper className="mt-12">
       <div className="sm:w-1/3 sm:min-w-96 sm:mx-auto rounded-md border border-muted p-10 shadow-md">
