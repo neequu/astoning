@@ -1,6 +1,6 @@
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { cn, handleError } from '@/lib/utils'
+import { cn, showNotificationError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
 import { useChangeLikeMutation } from '@/store/api/db-api'
@@ -26,7 +26,7 @@ export function LikeButton({ className, itemId }: Props) {
 
   async function handleLike(): Promise<void> {
     if (!userId)
-      return handleError('You need to be logged in')
+      return showNotificationError('You need to be logged in')
     // disable on click
     setDisabled(true)
     const initialState = isActive

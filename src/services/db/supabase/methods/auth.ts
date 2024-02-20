@@ -1,5 +1,5 @@
 import type { Credentials, Provider } from '@/types/db/db'
-import { handleError, handleSuccess } from '@/lib/utils'
+import { showNotificationError, showNotificationSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
 import type { Auth } from '@/types/db/db-methods'
 
@@ -9,7 +9,7 @@ export async function getUser(): Promise<ReturnType<Auth['getUser']>> {
   const user = session?.user ?? null
 
   if (error) {
-    handleError(error?.message)
+    showNotificationError(error?.message)
     return null
   }
 
@@ -20,7 +20,7 @@ export async function loginWithCredentials(cred: Credentials): Promise<ReturnTyp
   const { data: { user }, error } = await supabase.auth.signInWithPassword(cred)
 
   if (error || !user) {
-    handleError(error?.message)
+    showNotificationError(error?.message)
     return null
   }
 
@@ -31,7 +31,7 @@ export async function register(cred: Credentials): Promise<ReturnType<Auth['regi
   const { data: { user }, error } = await supabase.auth.signUp(cred)
 
   if (error || !user) {
-    handleError(error?.message)
+    showNotificationError(error?.message)
     return null
   }
 
@@ -45,7 +45,7 @@ export async function loginWithOAuth(provider: Provider): Promise<ReturnType<Aut
     })
   }
   catch (e) {
-    handleError('Couldn\'t authorize with this method')
+    showNotificationError('Couldn\'t authorize with this method')
   }
   return null
 }
@@ -54,10 +54,10 @@ export async function signOut(): Promise<ReturnType<Auth['signOut']>> {
   const { error } = await supabase.auth.signOut()
 
   if (error) {
-    handleError(error?.message)
+    showNotificationError(error?.message)
     return null
   }
 
-  handleSuccess('Signed out!')
+  showNotificationSuccess('Signed out!')
   return null
 }

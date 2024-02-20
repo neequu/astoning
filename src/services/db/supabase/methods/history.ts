@@ -1,5 +1,5 @@
 import type { User } from '@/types/db/db'
-import { handleError, handleSuccess } from '@/lib/utils'
+import { showNotificationError, showNotificationSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
 import type { History } from '@/types/db/db-methods'
 
@@ -13,7 +13,7 @@ export async function getHistory(userId: User['id'] | undefined): Promise<Return
     .eq('user_id', userId)
 
   if (error) {
-    handleError(error.message || 'Couldn\t get history!')
+    showNotificationError(error.message || 'Couldn\t get history!')
     return null
   }
 
@@ -29,7 +29,7 @@ export async function addHistory(query: string, userId: User['id'] | undefined):
     .insert({ query })
 
   if (error) {
-    handleError(error.message || 'Couldn\t add history!')
+    showNotificationError(error.message || 'Couldn\t add history!')
     return null
   }
 
@@ -47,11 +47,11 @@ export async function deleteHistoryById(itemId: number, userId: User['id'] | und
     .eq('id', itemId)
 
   if (error) {
-    handleError(error.message || 'Couldn\t delete history!')
+    showNotificationError(error.message || 'Couldn\t delete history!')
     return null
   }
 
-  handleSuccess('History deleted')
+  showNotificationSuccess('History deleted')
   return itemId
 }
 
@@ -65,10 +65,10 @@ export async function deleteAllHistory(userId: User['id'] | undefined): Promise<
     .eq('user_id', userId)
 
   if (error) {
-    handleError(error.message || 'Couldn\t delete history!')
+    showNotificationError(error.message || 'Couldn\t delete history!')
     return null
   }
 
-  handleSuccess('All history deleted')
+  showNotificationSuccess('All history deleted')
   return null
 }

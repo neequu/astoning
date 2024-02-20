@@ -1,5 +1,5 @@
 import { verifyLocalStorageByKey } from '../client'
-import { generateTimestampTz, handleError, handleSuccess } from '@/lib/utils'
+import { generateTimestampTz, showNotificationError, showNotificationSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
 import type { Auth } from '@/types/db/db-methods'
 import type { Credentials, Provider, User, UserWithCredentials } from '@/types/db/db'
@@ -11,7 +11,7 @@ export async function getUser(): Promise<ReturnType<Auth['getUser']>> {
   const currentUser = prevData.find(user => user.activeSession)
 
   if (!currentUser) {
-    handleError('No user!')
+    showNotificationError('No user!')
     return null
   }
 
@@ -25,7 +25,7 @@ export async function loginWithCredentials(cred: Credentials): Promise<ReturnTyp
   const user = prevData.find(user => ((user.email === cred.email) && (user.password === cred.password)))
 
   if (!user) {
-    handleError('Invalid credentials')
+    showNotificationError('Invalid credentials')
     return null
   }
 
@@ -58,7 +58,7 @@ export async function register(cred: Credentials): Promise<ReturnType<Auth['regi
 }
 
 export async function loginWithOAuth(provider: Provider): Promise<ReturnType<Auth['loginWithOAuth']>> {
-  handleError(`Loggin with ${provider} is temporarily unavailable`)
+  showNotificationError(`Loggin with ${provider} is temporarily unavailable`)
   return null
 }
 
@@ -75,6 +75,6 @@ export async function signOut(): Promise<ReturnType<Auth['signOut']>> {
 
   localStorage.setItem(LS_KEYS.auth, JSON.stringify(newData))
 
-  handleSuccess('Signed out!')
+  showNotificationSuccess('Signed out!')
   return null
 }

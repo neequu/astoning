@@ -1,6 +1,6 @@
 import { SearchIcon } from 'lucide-react'
 import { Button } from '../ui/button'
-import { handleError } from '@/lib/utils'
+import { showNotificationError } from '@/lib/utils'
 
 interface Props {
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
@@ -15,7 +15,7 @@ export function SearchForm({ handleSubmit, children }: Props) {
     const inputValue = (formElements[0] as HTMLInputElement).value
 
     if (inputValue.trim() === '')
-      return handleError('You need to type something')
+      return showNotificationError('You need to type something')
 
     if (handleSubmit)
       handleSubmit(e)

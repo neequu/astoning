@@ -1,6 +1,6 @@
 import { verifyLocalStorageByKey } from '../client'
 import type { Tables, User } from '@/types/db/db'
-import { generateItemId, generateTimestampTz, handleSuccess } from '@/lib/utils'
+import { generateItemId, generateTimestampTz, showNotificationSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
 
 import type { History } from '@/types/db/db-methods'
@@ -50,7 +50,7 @@ export async function deleteHistoryById(itemId: number, userId: User['id'] | und
 
   localStorage.setItem(LS_KEYS.history, JSON.stringify(newData))
 
-  handleSuccess('History deleted')
+  showNotificationSuccess('History deleted')
   return itemId
 }
 
@@ -65,6 +65,6 @@ export async function deleteAllHistory(userId: User['id'] | undefined): Promise<
 
   localStorage.setItem(LS_KEYS.history, JSON.stringify(newData))
 
-  handleSuccess('All history deleted')
+  showNotificationSuccess('All history deleted')
   return null
 }

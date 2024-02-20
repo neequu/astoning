@@ -1,5 +1,5 @@
 import type { User } from '@/types/db/db'
-import { handleError, handleSuccess } from '@/lib/utils'
+import { showNotificationError, showNotificationSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
 import type { Favorites } from '@/types/db/db-methods'
 
@@ -13,7 +13,7 @@ export async function getFavorites(userId: User['id'] | undefined): Promise<Retu
     .eq('user_id', userId)
 
   if (error) {
-    handleError(error.message || 'Couldn\t get favorites!')
+    showNotificationError(error.message || 'Couldn\t get favorites!')
     return null
   }
 
@@ -32,7 +32,7 @@ export async function getFavoriteById(itemId: number, userId: User['id'] | undef
     .maybeSingle()
 
   if (error) {
-    handleError(error.message || 'Couldn\t get favorites!')
+    showNotificationError(error.message || 'Couldn\t get favorites!')
     return null
   }
 
@@ -47,11 +47,11 @@ export async function addFavorite(id: number, userId: User['id'] | undefined): P
     .insert({ item_id: id })
 
   if (error) {
-    handleError(error.message || 'Couldn\t set like!')
+    showNotificationError(error.message || 'Couldn\t set like!')
     return null
   }
 
-  handleSuccess('Added to your library')
+  showNotificationSuccess('Added to your library')
   return id
 }
 
@@ -66,10 +66,10 @@ export async function removeFavorite(id: number, userId: User['id'] | undefined)
     .eq('user_id', userId)
 
   if (error) {
-    handleError(error.message)
+    showNotificationError(error.message)
     return null
   }
 
-  handleSuccess('Removed from your library')
+  showNotificationSuccess('Removed from your library')
   return id
 }

@@ -18,18 +18,18 @@ export function capitalizeWord(word: string): string {
   return `${word[0].toUpperCase()}${word.slice(1)}`
 }
 
-export function handleError(errorMsg = 'There was an error'): void {
+export function showNotificationError(errorMsg = 'There was an error'): void {
   toast.error(errorMsg)
 }
 
-export function handleSuccess(errorMsg = 'Success!'): void {
+export function showNotificationSuccess(errorMsg = 'Success!'): void {
   toast.success(errorMsg)
 }
 
 export function handleAuthSuccess(user: User, navigate: NavigateFunction, dispatch: AppDispatch, successMsg = 'Success!', redirectUrl = '/'): void {
   dispatch(setUser(user))
   navigate(redirectUrl)
-  handleSuccess(successMsg)
+  showNotificationSuccess(successMsg)
 }
 
 export function transformDateFromString(date: string): string {

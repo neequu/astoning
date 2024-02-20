@@ -1,6 +1,6 @@
 import { verifyLocalStorageByKey } from '../client'
 import type { Tables, User } from '@/types/db/db'
-import { generateItemId, generateTimestampTz, handleSuccess } from '@/lib/utils'
+import { generateItemId, generateTimestampTz, showNotificationSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
 import type { Favorites } from '@/types/db/db-methods'
 
@@ -50,7 +50,7 @@ export async function addFavorite(itemId: number, userId: User['id'] | undefined
   const newData: Tables<'favorites'>[] = [...allFavorites, { item_id: itemId, user_id: userId, id: newId, created_at: timestamptz }]
   localStorage.setItem(LS_KEYS.favorites, JSON.stringify(newData))
 
-  handleSuccess('Added to your library')
+  showNotificationSuccess('Added to your library')
   return itemId
 }
 
@@ -66,6 +66,6 @@ export async function removeFavorite(itemId: number, userId: User['id'] | undefi
 
   localStorage.setItem(LS_KEYS.favorites, JSON.stringify(newData))
 
-  handleSuccess('Removed from your library')
+  showNotificationSuccess('Removed from your library')
   return itemId
 }
