@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { XOctagonIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import type { Tables } from '@/types/db/supabase'
+import type { Tables } from '@/types/db/db'
 import { cn, transformDateFromString } from '@/lib/utils'
 
 interface Props {

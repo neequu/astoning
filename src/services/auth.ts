@@ -1,6 +1,5 @@
-import type { Provider } from '@supabase/supabase-js'
 import _DB_METHODS from './db/db-methods-switch'
-import type { Credentials } from '@/types/auth'
+import type { Credentials, Provider } from '@/types/db/db'
 import type { Auth } from '@/types/db/db-methods'
 
 export const authService = {

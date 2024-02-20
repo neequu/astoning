@@ -1,4 +1,4 @@
-import type { User } from '@supabase/supabase-js'
+import type { User } from '@/types/db/db'
 import _DB_METHODS from '@/services/db/db-methods-switch'
 import type { Favorites } from '@/types/db/db-methods'
 

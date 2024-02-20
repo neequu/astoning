@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { User } from '@supabase/supabase-js'
+import type { User } from '@/types/db/db'
 import { useAppDispatch } from '@/hooks/redux-hooks'
 import { setUser } from '@/redux/slices/auth-slice'
 

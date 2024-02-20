@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
-import type { User } from '@supabase/supabase-js'
+import type { User } from '@/types/db/db'
 import { useGetFavoritesByIdQuery } from '@/redux/api/db-api'
 
 interface ReturnType {

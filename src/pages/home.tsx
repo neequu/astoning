@@ -14,7 +14,7 @@ import { SearchPanel } from '@/components/search/SearchPanel'
 import { Message } from '@/components/misc/Message'
 import { transformQuery } from '@/lib/utils'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
-import type { Anime } from '@/types/anime'
+import type { Anime } from '@/types/api/anime'
 
 const { TailElement } = lazily(() => import('@/components/misc/TailElement'))
 const { SearchSuggestions } = lazily(() => import('@/components/search/SearchSuggestions'))

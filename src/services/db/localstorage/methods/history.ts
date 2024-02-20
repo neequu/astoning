@@ -1,8 +1,8 @@
-import type { User } from '@supabase/supabase-js'
 import { verifyLocalStorageByKey } from '../client'
+import type { Tables, User } from '@/types/db/db'
 import { generateItemId, generateTimestampTz, handleSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
-import type { Tables } from '@/types/db/supabase'
+
 import type { History } from '@/types/db/db-methods'
 
 export async function getHistory(userId: User['id'] | undefined): Promise<ReturnType<History['getHistory']>> {

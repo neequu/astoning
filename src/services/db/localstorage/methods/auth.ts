@@ -1,10 +1,8 @@
-import type { Provider, User } from '@supabase/supabase-js'
 import { verifyLocalStorageByKey } from '../client'
 import { generateTimestampTz, handleError, handleSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
-import type { UserWithCredentials } from '@/types/db/localstorage'
-import type { Credentials } from '@/types/auth'
 import type { Auth } from '@/types/db/db-methods'
+import type { Credentials, Provider, User, UserWithCredentials } from '@/types/db/db'
 
 export async function getUser(): Promise<ReturnType<Auth['getUser']>> {
   verifyLocalStorageByKey(LS_KEYS.auth)

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { ApiResponse, ApiResponseSingle } from '@/types/anime'
+import type { ApiResponse, ApiResponseSingle } from '@/types/api/anime'
 import { BASE_API_URL } from '@/lib/constants'
 import { transformAnimeData } from '@/redux/rtk/transforms/transform-anime-data'
 

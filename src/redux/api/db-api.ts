@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { User } from '@supabase/supabase-js'
+import type { User } from '@/types/db/db'
 import { likeService } from '@/services/like'
 import { historyService } from '@/services/history'
 import type { Favorites, History } from '@/types/db/db-methods'

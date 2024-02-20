@@ -1,9 +1,8 @@
-import type { User } from '@supabase/supabase-js'
 import { verifyLocalStorageByKey } from '../client'
+import type { Tables, User } from '@/types/db/db'
 import { generateItemId, generateTimestampTz, handleSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
 import type { Favorites } from '@/types/db/db-methods'
-import type { Tables } from '@/types/db/supabase'
 
 export async function getFavorites(userId: User['id'] | undefined): Promise<ReturnType<Favorites['getFavorites']>> {
   if (!userId)

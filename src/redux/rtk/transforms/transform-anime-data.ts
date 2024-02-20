@@ -1,4 +1,4 @@
-import type { Anime } from '@/types/anime'
+import type { Anime } from '@/types/api/anime'
 
 export function transformAnimeData(anime: Anime): Anime {
   return {

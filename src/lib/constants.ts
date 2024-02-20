@@ -1,4 +1,4 @@
-import type { ValidAuthFormFields } from '@/types/auth'
+import type { ValidAuthFormFields } from '@/types/db/db'
 
 export const BASE_API_URL = 'https://api.jikan.moe/v4'
 export const MAX_SUGGESTIONS = 5

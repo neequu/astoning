@@ -1,5 +1,4 @@
-import type { Provider } from '@supabase/supabase-js'
-import type { Credentials } from '@/types/auth'
+import type { Credentials, Provider } from '@/types/db/db'
 import { handleError, handleSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
 import type { Auth } from '@/types/db/db-methods'
