@@ -29,9 +29,9 @@ export function Favorites() {
           // reason: can't render with no fragment
           // eslint-disable-next-line react/jsx-no-useless-fragment
               <>
-                {favoritesData?.map(itemId => (
-                  <CardWrapper key={itemId.item_id} itemId={itemId.item_id}>
-                    <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={itemId.item_id} />
+                {favoritesData?.map(item => (
+                  <CardWrapper key={item.itemId} itemId={item.itemId}>
+                    <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.itemId} />
                   </CardWrapper>
                 ),
                 )}

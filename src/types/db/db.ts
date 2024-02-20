@@ -14,6 +14,16 @@ export interface Credentials {
 export interface User extends SupabaseUser {}
 export type Provider = SupabaseProvider
 
+export type FavoritesTransformed = Omit<Tables<'favorites'>, 'created_at' | 'item_id' | 'user_id'> & {
+  createdAt: string
+  itemId: number
+  userId: string
+}
+export type HistoryTransformed = Omit<Tables<'history'>, 'created_at' | 'user_id'> & {
+  createdAt: string
+  userId: string
+}
+
 export type Json =
   | string
   | number

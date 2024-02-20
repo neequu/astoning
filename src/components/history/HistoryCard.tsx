@@ -2,17 +2,17 @@ import { Link } from 'react-router-dom'
 import { XOctagonIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import type { Tables } from '@/types/db/db'
 import { cn, transformDateFromString } from '@/lib/utils'
+import type { HistoryTransformed } from '@/types/db/db'
 
 interface Props {
-  item: Tables<'history'>
+  item: HistoryTransformed
   onDelete: (id: number) => void
 }
 
 export function HistoryCard({ item, onDelete }: Props) {
   const decoudedQuery = decodeURIComponent(item.query)
-  const title = `Delete search from ${transformDateFromString(item.created_at)}`
+  const title = `Delete search from ${transformDateFromString(item.createdAt)}`
 
   const [isDeleting, setIsDeleting] = useState(false)
 

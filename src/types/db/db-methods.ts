@@ -10,7 +10,7 @@ export interface Auth {
 }
 export interface Favorites {
   getFavorites: (userId: User['id'] | undefined) => Tables<'favorites'>[] | null
-  getFavoriteById: (itemId: number, userId: User['id'] | undefined) => Pick<Tables<'favorites'>, 'item_id'> | null
+  getFavoriteById: (itemId: number, userId: User['id'] | undefined) => Tables<'favorites'> | null
   addFavorite: (itemId: number, userId: User['id'] | undefined) => number | null
   removeFavorite: (itemId: number, userId: User['id'] | undefined) => number | null
 }

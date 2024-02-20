@@ -12,13 +12,14 @@ export const animeApi = createApi({
         url: 'anime',
         params: { page },
       }),
+
       transformResponse: (response: ApiResponse) => ({
         ...response,
         data: response.data.map(transformAnimeData),
         pagination: transformPaginationData(response.pagination),
       }),
-
     }),
+
     getAnimeById: builder.query<QueryResponseSingle, number>({
       query: id => `anime/${id}`,
       transformResponse: (response: ApiResponseSingle) => ({
@@ -26,6 +27,7 @@ export const animeApi = createApi({
         data: transformAnimeData(response.data),
       }),
     }),
+
     getAnimeSearch: builder.query<QueryResponse, { q: string, limit?: number, page?: number }>({
       query: ({ q, limit, page = 1 }) => ({
         url: 'anime',

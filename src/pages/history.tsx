@@ -17,9 +17,11 @@ export function History() {
   const user = useAppSelector(selectUser)
   const { data: historyData, isError, isSuccess, isLoading } = useGetHistoryQuery(user?.id, { skip: !user?.id })
   const hasResults = isSuccess && historyData && historyData.length > 0
+
   // rtk mutations
   const [deleteAllHistory] = useDeleteAllHistoryMutation()
   const [deleteHistoryById] = useDeleteHistoryByIdMutation()
+
   // rtk mutation handlers
   const handleDeleteAll = (): void => {
     deleteAllHistory({ userId: user?.id })

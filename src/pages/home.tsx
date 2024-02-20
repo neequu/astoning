@@ -78,7 +78,7 @@ export function Home() {
           ))}
         </MediaGrid>
         {isError && <Message message="There was an error loading anime!" className="flex-1 items-center text-destructive" />}
-        <TailElement breakCheck={!animeData || !animeData.pagination.has_next_page} callback={handlePageChange} />
+        <TailElement breakCheck={!animeData || !animeData.pagination.hasNextPage} callback={handlePageChange} />
       </PageWrapper>
     </>
   )

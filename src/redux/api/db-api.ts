@@ -1,24 +1,28 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { User } from '@/types/db/db'
+import type { FavoritesTransformed, HistoryTransformed, User } from '@/types/db/db'
 import { likeService } from '@/services/like'
 import { historyService } from '@/services/history'
 import type { Favorites, History } from '@/types/db/db-methods'
+import { transformFavoritesData, transformHistoryData } from '@/redux/rtk/transforms/transform-db-data'
 
 export const dbApi = createApi({
   reducerPath: 'db',
   baseQuery: fakeBaseQuery(),
   tagTypes: ['Like', 'History'],
   endpoints: builder => ({
-    getFavorites: builder.query<ReturnType<Favorites['getFavorites']>, User['id'] | undefined>({
+    // likes
+    getFavorites: builder.query<FavoritesTransformed[] | null, User['id'] | undefined>({
       queryFn: async (userId) => {
-        const data = await likeService.getFavorites(userId)
+        const res = await likeService.getFavorites(userId)
+        const data = res ? res.map(transformFavoritesData) : null
         return { data }
       },
       providesTags: ['Like'],
     }),
-    getFavoritesById: builder.query<ReturnType<Favorites['getFavoriteById']>, { itemId: number, userId: User['id'] | undefined }>({
+    getFavoritesById: builder.query<FavoritesTransformed | null, { itemId: number, userId: User['id'] | undefined }>({
       queryFn: async ({ itemId, userId }) => {
-        const data = await likeService.getFavoriteById(itemId, userId)
+        const res = await likeService.getFavoriteById(itemId, userId)
+        const data = res ? transformFavoritesData(res) : null
         return { data }
       },
       providesTags: ['Like'],
@@ -30,10 +34,12 @@ export const dbApi = createApi({
       },
       invalidatesTags: ['Like'],
     }),
+
     // history
-    getHistory: builder.query<ReturnType<History['getHistory']>, User['id'] | undefined>({
+    getHistory: builder.query<HistoryTransformed[] | null, User['id'] | undefined>({
       queryFn: async (userId) => {
-        const data = await historyService.getHistory(userId)
+        const res = await historyService.getHistory(userId)
+        const data = res ? res.map(transformHistoryData) : null
         return { data }
       },
       providesTags: ['History'],
