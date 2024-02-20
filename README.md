@@ -48,7 +48,7 @@ npm run dev
 **React**
 
 - [x] **Функциональные компоненты c хуками** в приоритете над классовыми
-- [x] Есть разделение на **[умные](https://github.com/neequu/astoning/blob/main/src/components/wrappers/PageWrapper.tsx)** и **[глупые](https://github.com/neequu/astoning/blob/main/src/pages/home.tsx)** компоненты
+- [x] Есть разделение на **[глупые](https://github.com/neequu/astoning/blob/main/src/components/wrappers/PageWrapper.tsx)** и **[умные](https://github.com/neequu/astoning/blob/main/src/pages/home.tsx)** компоненты
 
 - [x] Есть [**рендеринг списков**](https://github.com/neequu/astoning/blob/main/src/pages/search.tsx)
 
