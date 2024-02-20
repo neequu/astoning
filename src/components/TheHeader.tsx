@@ -3,7 +3,7 @@ import { Logo } from '@/components/misc/Logo'
 import { TheNav } from '@/components/TheNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
-import { useAppSelector } from '@/hooks/redux-hooks'
+import { useAppSelector } from '@/hooks/store-hooks'
 import { selectUser } from '@/store/utils/selectors'
 
 export function TheHeader() {

@@ -1,7 +1,7 @@
 import { lazily } from 'react-lazily'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
-import { useAppSelector } from '@/hooks/redux-hooks'
+import { useAppSelector } from '@/hooks/store-hooks'
 import { useGetFavoritesQuery } from '@/store/api/db-api'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { selectUser } from '@/store/utils/selectors'

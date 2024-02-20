@@ -1,5 +1,5 @@
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
-import { useAppSelector } from '@/hooks/redux-hooks'
+import { useAppSelector } from '@/hooks/store-hooks'
 import { transformDateFromString } from '@/lib/utils'
 import { selectSession } from '@/store/utils/selectors'
 

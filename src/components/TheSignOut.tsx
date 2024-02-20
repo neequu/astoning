@@ -1,6 +1,6 @@
 import { LogOutIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useAppDispatch } from '@/hooks/redux-hooks'
+import { useAppDispatch } from '@/hooks/store-hooks'
 import { authService } from '@/services/auth'
 import { setUser } from '@/store/slices/auth-slice'
 

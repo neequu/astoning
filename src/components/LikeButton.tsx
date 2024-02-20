@@ -4,7 +4,7 @@ import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
 import { useChangeLikeMutation } from '@/store/api/db-api'
-import { useAppSelector } from '@/hooks/redux-hooks'
+import { useAppSelector } from '@/hooks/store-hooks'
 import { selectUser } from '@/store/utils/selectors'
 
 interface Props {

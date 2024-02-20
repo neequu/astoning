@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 import { lazily } from 'react-lazily'
 import { useGetAnimeSearchQuery } from '@/store/api/anime-api'
-import { useAppSelector } from '@/hooks/redux-hooks'
+import { useAppSelector } from '@/hooks/store-hooks'
 import { transformQuery } from '@/lib/utils'
 
 import { MediaGrid } from '@/components/media/MediaGrid'
