@@ -43,7 +43,7 @@ export function Home() {
       setItems([])
 
     setItems(p => [...p, ...animeData.data])
-  }, [animeData, page])
+  }, [animeData])
 
   // update page
   function handlePageChange(): void {
