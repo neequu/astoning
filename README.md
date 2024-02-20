@@ -97,7 +97,9 @@ npm run dev
 
 - [ ] Feature Flags. Реализовать фичу “Поделиться в телеграм”, закрытую под фича флагом.
 
-- [ ] Добавить **тесты** через jest, react-testing-library или Playwright
+- [x] Добавить **e2e тесты** через cypress
+    - [x] [Гость. Поиск. Единица информации.](https://github.com/neequu/astoning/blob/main/cypress/e2e/search-card-redirect.cy.ts)
+    - [x] [**Пользователь. Поиск. Единица информации. Избранное**](https://github.com/neequu/astoning/blob/main/cypress/e2e/favorites.cy.ts)
 
 - [ ] Связь UI и бизнес-логики построена не через команды, а через **события**
 
