@@ -11,9 +11,10 @@ import { VALID_FIELDS } from '@/lib/constants'
 import { useAppDispatch } from '@/hooks/store-hooks'
 import { OAuth } from '@/components/OAuth'
 import { authService } from '@/services/auth'
-import { handleAuthSuccess } from '@/lib/utils'
+import { showNotificationSuccess } from '@/lib/utils'
 
 import { GithubIcon } from '@/components/icons/github'
+import { setUser } from '@/store/slices/auth-slice'
 
 interface Props {
   handleAuth: (data: Credentials) => Promise<User | null >
@@ -29,10 +30,16 @@ export function AuthPanel({ handleAuth, message }: Props) {
     resolver: zodResolver(formSchema),
   })
 
+  function handleAuthSuccess(user: User): void {
+    dispatch(setUser(user))
+    navigate('/')
+    showNotificationSuccess(message)
+  }
+
   async function onSubmit(values: z.infer<typeof formSchema>): Promise<void> {
     const user = await handleAuth(values)
     if (user !== null)
-      handleAuthSuccess(user, navigate, dispatch, message)
+      handleAuthSuccess(user)
   }
 
   async function handleOAuth(provider: Provider): Promise<void> {
