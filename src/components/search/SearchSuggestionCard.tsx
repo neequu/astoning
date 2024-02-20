@@ -10,7 +10,7 @@ interface Props {
 
 export function SearchSuggestionCard({ item, children, className }: Props) {
   return (
-    <Link to={`/anime/${item.malId}`} className="hover:bg-muted block transition-colors">
+    <Link data-testid={`suggestion-card-${item.malId}`} to={`/anime/${item.malId}`} className="hover:bg-muted block transition-colors">
       <div className={cn('flex items-center justify-between border-b border-muted px-4 py-2', className)}>
         <div className="flex items-center gap-2 font-medium">
           <div className="min-h-16 min-w-12">

@@ -25,7 +25,7 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
   const noResults = isSuccess && searchData.pagination.items.count === 0
 
   return (
-    <div className={cn('flex flex-col bg-menu text-menu-foreground rounded-md shadow-lg border mt-3 overflow-hidden absolute top-full -left-20 -right-20 z-50 opacity-0 transition-all duration-500', isInputFocused && 'opacity-100 left-0 right-0')}>
+    <div data-testid="suggestions" className={cn('flex flex-col bg-menu text-menu-foreground rounded-md shadow-lg border mt-3 overflow-hidden absolute top-full -left-20 -right-20 z-50 opacity-0 transition-all duration-500', isInputFocused && 'opacity-100 left-0 right-0')}>
       <Suspense fallback={<CardSkeleton amount={5} className="h-[81px]" />}>
         {isLoading
           ? <CardSkeleton amount={5} className="h-[80px]" />
