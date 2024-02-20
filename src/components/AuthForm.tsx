@@ -36,7 +36,7 @@ export function AuthForm({ handleSubmit, form, fields, children, isDisabled }: P
               <FormItem>
                 <FormLabel>{capitalizeWord(item)}</FormLabel>
                 <FormControl>
-                  <Input type={item} placeholder={`Enter ${item}`} {...field} disabled={isDisabled} value={undefined} />
+                  <Input data-testid={item} type={item} placeholder={`Enter ${item}`} {...field} disabled={isDisabled} value={undefined} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -45,7 +45,7 @@ export function AuthForm({ handleSubmit, form, fields, children, isDisabled }: P
         ),
         )}
         <div className="flex flex-col">
-          <Button className="font-bold mt-6" disabled={form.formState.isSubmitting || isDisabled} type="submit">Submit</Button>
+          <Button data-testid="submit" className="font-bold mt-6" disabled={form.formState.isSubmitting || isDisabled} type="submit">Submit</Button>
         </div>
       </form>
       {children && (
