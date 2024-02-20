@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { sessionMiddleware } from '@/redux/rtk/middleware/session'
-import authSlice from '@/redux/slices/auth-slice'
-import sessionSlice from '@/redux/slices/session-slice'
-import { animeApi } from '@/redux/api/anime-api'
-import { dbApi } from '@/redux/api/db-api'
+import { sessionMiddleware } from '@/store/utils/middleware/session'
+import authSlice from '@/store/slices/auth-slice'
+import sessionSlice from '@/store/slices/session-slice'
+import { animeApi } from '@/store/api/anime-api'
+import { dbApi } from '@/store/api/db-api'
 
 export const store = configureStore({
   reducer: {

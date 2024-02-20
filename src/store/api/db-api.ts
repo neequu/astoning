@@ -3,7 +3,7 @@ import type { FavoritesTransformed, HistoryTransformed, User } from '@/types/db/
 import { likeService } from '@/services/like'
 import { historyService } from '@/services/history'
 import type { Favorites, History } from '@/types/db/db-methods'
-import { transformFavoritesData, transformHistoryData } from '@/redux/rtk/transforms/transform-db-data'
+import { transformFavoritesData, transformHistoryData } from '@/store/utils/transforms/transform-db-data'
 
 export const dbApi = createApi({
   reducerPath: 'db',

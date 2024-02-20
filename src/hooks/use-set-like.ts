@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
 import type { User } from '@/types/db/db'
-import { useGetFavoritesByIdQuery } from '@/redux/api/db-api'
+import { useGetFavoritesByIdQuery } from '@/store/api/db-api'
 
 interface ReturnType {
   isActive: boolean

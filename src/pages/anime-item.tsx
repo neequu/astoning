@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
 import { lazily } from 'react-lazily'
-import { useGetAnimeByIdQuery } from '@/redux/api/anime-api'
+import { useGetAnimeByIdQuery } from '@/store/api/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { Message } from '@/components/misc/Message'

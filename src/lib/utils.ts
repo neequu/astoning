@@ -3,8 +3,8 @@ import { toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
 import type { NavigateFunction } from 'react-router-dom'
 import type { User } from '@/types/db/db'
-import { setUser } from '@/redux/slices/auth-slice'
-import type { AppDispatch } from '@/redux'
+import { setUser } from '@/store/slices/auth-slice'
+import type { AppDispatch } from '@/store'
 
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))

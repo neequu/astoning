@@ -2,7 +2,7 @@ import { LogOutIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAppDispatch } from '@/hooks/redux-hooks'
 import { authService } from '@/services/auth'
-import { setUser } from '@/redux/slices/auth-slice'
+import { setUser } from '@/store/slices/auth-slice'
 
 export function TheSignOut() {
   const dispatch = useAppDispatch()

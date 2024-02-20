@@ -5,9 +5,9 @@ import { lazily } from 'react-lazily'
 
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
-import { useDeleteAllHistoryMutation, useDeleteHistoryByIdMutation, useGetHistoryQuery } from '@/redux/api/db-api'
+import { useDeleteAllHistoryMutation, useDeleteHistoryByIdMutation, useGetHistoryQuery } from '@/store/api/db-api'
 import { HistoryWrapper } from '@/components/history/HistoryWrapper'
-import { selectUser } from '@/redux/rtk/selectors'
+import { selectUser } from '@/store/utils/selectors'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 const { HistoryCard } = lazily(() => import('@/components/history/HistoryCard'))

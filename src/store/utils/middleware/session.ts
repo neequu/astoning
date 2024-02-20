@@ -1,7 +1,7 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { setUser } from '../../slices/auth-slice'
 import { generateTimestampTz } from '@/lib/utils'
-import { setSession } from '@/redux/slices/session-slice'
+import { setSession } from '@/store/slices/session-slice'
 
 export const sessionMiddleware = createListenerMiddleware()
 

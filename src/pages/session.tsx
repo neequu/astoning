@@ -1,7 +1,7 @@
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
 import { transformDateFromString } from '@/lib/utils'
-import { selectSession } from '@/redux/rtk/selectors'
+import { selectSession } from '@/store/utils/selectors'
 
 export function Session() {
   const session = useAppSelector(selectSession)

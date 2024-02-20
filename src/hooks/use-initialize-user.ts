@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { User } from '@/types/db/db'
 import { useAppDispatch } from '@/hooks/redux-hooks'
-import { setUser } from '@/redux/slices/auth-slice'
+import { setUser } from '@/store/slices/auth-slice'
 
 interface ReturnType {
   isLoading: boolean

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { cn, handleError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
-import { useChangeLikeMutation } from '@/redux/api/db-api'
+import { useChangeLikeMutation } from '@/store/api/db-api'
 import { useAppSelector } from '@/hooks/redux-hooks'
-import { selectUser } from '@/redux/rtk/selectors'
+import { selectUser } from '@/store/utils/selectors'
 
 interface Props {
   className?: string

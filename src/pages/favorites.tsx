@@ -2,9 +2,9 @@ import { lazily } from 'react-lazily'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppSelector } from '@/hooks/redux-hooks'
-import { useGetFavoritesQuery } from '@/redux/api/db-api'
+import { useGetFavoritesQuery } from '@/store/api/db-api'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
-import { selectUser } from '@/redux/rtk/selectors'
+import { selectUser } from '@/store/utils/selectors'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))

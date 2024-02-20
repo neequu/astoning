@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { ApiResponse, ApiResponseSingle, QueryResponse, QueryResponseSingle } from '@/types/api/anime'
 import { BASE_API_URL } from '@/lib/constants'
-import { transformAnimeData, transformPaginationData } from '@/redux/rtk/transforms/transform-api-data'
+import { transformAnimeData, transformPaginationData } from '@/store/utils/transforms/transform-api-data'
 
 export const animeApi = createApi({
   reducerPath: 'api',

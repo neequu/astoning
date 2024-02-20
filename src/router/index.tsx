@@ -4,7 +4,7 @@ import { ProtectedRoute } from '@/router/private'
 import { routesAuthOnly, routesNoAuthOnly, routesPublic } from '@/router/router-config'
 import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { useAppSelector } from '@/hooks/redux-hooks'
-import { selectUser } from '@/redux/rtk/selectors'
+import { selectUser } from '@/store/utils/selectors'
 
 export function Router() {
   const user = useAppSelector(selectUser)

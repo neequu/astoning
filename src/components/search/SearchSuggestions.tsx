@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { lazily } from 'react-lazily'
 import { CardSkeleton } from '../loading-state/CardSkeleton'
 import { MAX_SUGGESTIONS } from '@/lib/constants'
-import { useGetAnimeSearchQuery } from '@/redux/api/anime-api'
+import { useGetAnimeSearchQuery } from '@/store/api/anime-api'
 import { cn } from '@/lib/utils'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
