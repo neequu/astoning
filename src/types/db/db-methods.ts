@@ -1,6 +1,5 @@
-import type { Provider, User } from '@supabase/supabase-js'
-import type { Credentials } from '../auth'
-import type { Tables } from './supabase'
+import type { Credentials, Provider, User } from '../db/db'
+import type { Tables } from './db'
 
 export interface Auth {
   getUser: () => User | null
