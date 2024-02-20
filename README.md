@@ -71,16 +71,16 @@ npm run dev
 - [x] Используем **Modern Redux with Redux Toolkit**
 - [x] Используем [**слайсы**](https://github.com/neequu/astoning/blob/main/src/redux/slices)
 
-- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/middleware/session.ts)
+- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/redux/utils/middleware/session.ts)
 
 - [x] Используется [**RTK Query**](https://github.com/neequu/astoning/tree/main/src/redux/api)
 
-- [x] Используется [**Transforming Responses**](https://github.com/neequu/astoning/blob/main/src/redux/rtk/transforms)
+- [x] Используется [**Transforming Responses**](https://github.com/neequu/astoning/blob/main/src/redux/utils/transforms)
 
 ### **2 уровень (необязательный)**
 
 - [x] Использование [**TypeScript**](https://github.com/neequu/astoning/blob/main/tsconfig.json)
-- [ ] Подключен **storybook** и созданы два, три сториса с knobs, которые показывают разные состояния компонента
+- [x] Подключен **storybook** и созданы два, три сториса с knobs, которые показывают разные состояния компонента [тут](https://github.com/neequu/astoning/blob/main/src/stories/Button.stories.tsx) и [тут](https://github.com/neequu/astoning/blob/main/src/stories/Spinner.stories.tsx)
 - [x] Использование Supabase для учетных записей и их Избранного и Истории поиска
 
 - [x] [**Низная связанность клиентского кода**](https://github.com/neequu/astoning/blob/main/src/services/db/db-methods-switch.ts), использующего апи кода, работающего с внешним стором **LS + Supabase с одним переключателем в .env файле**
