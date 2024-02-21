@@ -1,5 +1,5 @@
 import { HeartCrackIcon, HeartIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { cn, showNotificationError } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useSetLike } from '@/hooks/use-set-like'
@@ -41,16 +41,11 @@ export function LikeButton({ className, itemId }: Props) {
     // enable in the end
     setDisabled(false)
   }
-
-  useEffect(() => {
-    if (!user)
-      setIsActive(false)
-  }, [user, setIsActive])
-
   return (
     <div className={cn('flex', className)}>
       <Button data-testid="like-button" disabled={disabled} size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
-        {!isLoadingLike && (
+        {/* if not loading and user exists */}
+        {!isLoadingLike && user && (
           <>
             {/* show if liked */}
             <HeartCrackIcon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-20 scale-0 transition-[rotate_scale_300ms]', isActive && 'rotate-0 scale-100 ')} />
@@ -58,6 +53,8 @@ export function LikeButton({ className, itemId }: Props) {
             <HeartIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-[rotate_scale_300ms]', isActive && '-rotate-20 scale-0')} />
           </>
         )}
+        {/* if user logs out show this */}
+        {!user && <HeartIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-[rotate_scale_300ms]')} />}
       </Button>
     </div>
   )

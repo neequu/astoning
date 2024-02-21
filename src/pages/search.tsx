@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 import { lazily } from 'react-lazily'
@@ -21,23 +21,27 @@ const { Message } = lazily(() => import('@/components/misc/Message'))
 export function Search() {
   const user = useAppSelector(selectUser)
   const [addHistory] = useAddHistoryMutation()
-
   const navigate = useNavigate()
+
   // search queries
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
+  // search fn
+  const throttledSearch = useDebouncedCallback(search, 666)
+
   // search data
   const { data: animeData, isError, isSuccess, isLoading, isFetching } = useGetAnimeSearchQuery({ q: currenstSearch })
   const hasResults = isSuccess && animeData && animeData.data.length > 0
-  const throttledSearch = useDebouncedCallback(search, 666)
+
   // search msgs based on if the are results
   const searchMessage = currenstSearch && hasResults ? `Showing ${animeData.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
   function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
+    throttledSearch()
   }
 
   function search(): void | null {
@@ -54,11 +58,6 @@ export function Search() {
     addHistory({ query: encodedQuery, userId: user?.id })
     navigate(redirectUrl)
   }
-
-  // perform throttled search on query change
-  useEffect(() => {
-    throttledSearch()
-  }, [navigate, query, throttledSearch])
 
   return (
     <>

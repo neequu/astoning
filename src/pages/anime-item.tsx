@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
 import { lazily } from 'react-lazily'
 import { useGetAnimeByIdQuery } from '@/store/api/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
@@ -18,16 +17,12 @@ export function AnimeItem() {
   const animeId = +(id!)
   const isNotValidId = Number.isNaN(animeId)
 
-  useEffect(() => {
-    if (isNotValidId)
-      navigate('/not-found', { replace: true })
-    else
-      dispatch(setVisit(animeId))
-  }, [])
+  if (isNotValidId)
+    navigate('/not-found', { replace: true })
+  else
+    dispatch(setVisit(animeId))
 
-  const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId, {
-    skip: isNotValidId,
-  })
+  const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
   return (
     <PageWrapper>
