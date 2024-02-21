@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/store-hooks'
 import { setFilter } from '@/store/slices/visit-slice'
 import { getFilter, getVisitedCards } from '@/store/utils/selectors'
 
-import { cn, transformDateFromString } from '@/lib/utils'
+import { cn, showNotificationError, transformDateFromString } from '@/lib/utils'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { Message } from '@/components/misc/Message'
 
@@ -13,6 +13,13 @@ export function Visit() {
   const dispatch = useAppDispatch()
   const visitedCards = useAppSelector(getVisitedCards)
   const filter = useAppSelector(getFilter)
+
+  function handleFilter(): void {
+    if (visitedCards.length <= 1)
+      return showNotificationError('Not enough items to filter')
+    const newFilter = filter === 'asc' ? 'desc' : 'asc'
+    dispatch(setFilter(newFilter))
+  }
 
   return (
     <PageWrapper heading="Your visits" className="place-contnet-center">
@@ -31,7 +38,7 @@ export function Visit() {
                     </div>
                   ))}
                 </AnimationWrapper>
-                <Button title="filter by date" className="w-full" onClick={() => dispatch(setFilter(filter === 'asc' ? 'desc' : 'asc'))} variant="outline" size="icon">
+                <Button title="filter by date" className="w-full" onClick={handleFilter} variant="outline" size="icon">
                   <ArrowDown01Icon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all', filter === 'desc' && '-rotate-90 scale-0')} />
                   <ArrowUp01Icon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all', filter === 'desc' && 'rotate-0 scale-100')} />
                 </Button>

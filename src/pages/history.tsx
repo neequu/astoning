@@ -4,9 +4,9 @@ import Autosizer from 'react-virtualized-auto-sizer'
 import { lazily } from 'react-lazily'
 
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
+import { HistoryWrapper } from '@/components/history/HistoryWrapper'
 import { useAppSelector } from '@/hooks/store-hooks'
 import { useDeleteAllHistoryMutation, useDeleteHistoryByIdMutation, useGetHistoryQuery } from '@/store/api/db-api'
-import { HistoryWrapper } from '@/components/history/HistoryWrapper'
 import { selectUser } from '@/store/utils/selectors'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))

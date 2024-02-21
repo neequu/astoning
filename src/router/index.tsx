@@ -8,7 +8,6 @@ import { selectUser } from '@/store/utils/selectors'
 
 export function Router() {
   const user = useAppSelector(selectUser)
-  const hasUser = !!user
 
   return (
     <Suspense fallback={<LoadingSkeleton />}>
@@ -16,11 +15,11 @@ export function Router() {
       <Routes>
         {routesPublic.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) }
 
-        <Route element={<ProtectedRoute redirectUrl="/" redirectCondition={hasUser} />}>
+        <Route element={<ProtectedRoute redirectUrl="/" redirectCondition={!!user} />}>
           {routesNoAuthOnly.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) }
         </Route>
 
-        <Route element={<ProtectedRoute redirectUrl="/login" redirectCondition={!hasUser} />}>
+        <Route element={<ProtectedRoute redirectUrl="/login" redirectCondition={!user} />}>
           {routesAuthOnly.map(route => <Route key={route.path} path={route.path} element={<route.component />} />) }
         </Route>
 

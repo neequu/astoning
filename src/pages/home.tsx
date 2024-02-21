@@ -22,17 +22,15 @@ const { SearchSuggestions } = lazily(() => import('@/components/search/SearchSug
 export function Home() {
   const user = useAppSelector(selectUser)
   const [addHistory] = useAddHistoryMutation()
-
   const navigate = useNavigate()
+
   // search queries
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query)
-
   const [page, setPage] = useState(1)
 
   // all anime data
   const { data: animeData, isLoading, isError } = useGetAnimeQuery(page)
-
   const [items, setItems] = useState<Anime[]>([])
 
   useEffect(() => {
@@ -49,12 +47,10 @@ export function Home() {
   function handlePageChange(): void {
     setPage(p => p + 1)
   }
-
   // update query
   function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
   }
-
   // on submit transform query and redirect to search page
   function handleSubmit(): void {
     const encodedQuery = transformQuery(query)
