@@ -14,7 +14,7 @@ export function TheSignOut() {
 
   return (
     <Button onClick={handleSignOut} variant="outline" size="icon">
-      <LogOutIcon className="h-[1.2rem] w-[1.2rem] scale-100 transition-all " />
+      <LogOutIcon className="h-[1.2rem] w-[1.2rem] transition-all" />
     </Button>
   )
 }
