@@ -1,4 +1,4 @@
-import { Suspense, useCallback } from 'react'
+import { useCallback } from 'react'
 import { FixedSizeList as HistoryList } from 'react-window'
 import Autosizer from 'react-virtualized-auto-sizer'
 import { lazily } from 'react-lazily'
