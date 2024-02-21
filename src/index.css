@@ -78,7 +78,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground min-w-[250px];
+    @apply bg-background text-foreground min-w-[350px];
   }
 }
 

@@ -107,6 +107,7 @@ npm run dev
 
 ## **additional**
 
+- mobile adaptive
 - styled with [tailwind](https://tailwindcss.com)
 - ui library [shadcn](https://ui.shadcn.com)
 - input validation with [zod](https://zod.dev/)
