@@ -4,4 +4,16 @@ import * as LSMethods from './localstorage/methods'
 
 const isDbSupabase = import.meta.env.VITE_REMOTE_STORE === 'SUPABASE'
 
-export default isDbSupabase ? supabaseMethods : LSMethods
+const databaseMethods = isDbSupabase
+  ? {
+      ...supabaseMethods.supabaseHistory,
+      ...supabaseMethods.supabaseFavorites,
+      ...supabaseMethods.supabaseAuth,
+    }
+  : {
+      ...LSMethods.localStorageHistory,
+      ...LSMethods.localStorageFavorites,
+      ...LSMethods.localStorageAuth,
+    }
+
+export default databaseMethods

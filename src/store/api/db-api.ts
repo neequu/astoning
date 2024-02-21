@@ -3,7 +3,6 @@ import type { FavoritesTransformed, HistoryTransformed } from '@/types/db/db'
 import type { User } from '@/types/auth'
 import { likeService } from '@/services/like'
 import { historyService } from '@/services/history'
-import type { Favorites, History } from '@/types/db/db-methods'
 import { transformFavoritesData, transformHistoryData } from '@/store/utils/transforms/transform-db-data'
 
 export const dbApi = createApi({
@@ -28,7 +27,7 @@ export const dbApi = createApi({
       },
       providesTags: ['Like'],
     }),
-    changeLike: builder.mutation<ReturnType<Favorites['addFavorite']>, { itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined }>({
+    changeLike: builder.mutation<number | null, { itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined }>({
       queryFn: async ({ itemId, isCurrentStateActive, userId }) => {
         const data = await likeService.changeLike(itemId, isCurrentStateActive, userId)
         return { data }
@@ -45,21 +44,21 @@ export const dbApi = createApi({
       },
       providesTags: ['History'],
     }),
-    addHistory: builder.mutation<ReturnType<History['addHistory']>, { query: string, userId: User['id'] | undefined }>({
+    addHistory: builder.mutation<null, { query: string, userId: User['id'] | undefined }>({
       queryFn: async ({ query, userId }) => {
         const data = await historyService.addHistory(query, userId)
         return { data }
       },
       invalidatesTags: ['History'],
     }),
-    deleteHistoryById: builder.mutation<ReturnType<History['deleteHistoryById']>, { itemId: number, userId: User['id'] | undefined }>({
+    deleteHistoryById: builder.mutation<number | null, { itemId: number, userId: User['id'] | undefined }>({
       queryFn: async ({ itemId, userId }) => {
         const data = await historyService.deleteHistoryById(itemId, userId)
         return { data }
       },
       invalidatesTags: ['History'],
     }),
-    deleteAllHistory: builder.mutation<ReturnType<History['deleteAllHistory']>, { userId: User['id'] | undefined }>({
+    deleteAllHistory: builder.mutation<null, { userId: User['id'] | undefined }>({
       queryFn: async ({ userId }) => {
         const data = await historyService.deleteAllHistory(userId)
         return { data }

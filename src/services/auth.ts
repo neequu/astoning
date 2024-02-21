@@ -2,15 +2,15 @@ import _DB_METHODS from './db/db-methods-switch'
 import type { Credentials, Provider } from '@/types/auth'
 import type { Auth } from '@/types/db/db-methods'
 
-export const authService = {
+export const authService: Auth = {
 
-  loginWithCredentials: (cred: Credentials): Promise<ReturnType<Auth['loginWithCredentials']>> => _DB_METHODS.loginWithCredentials(cred),
+  loginWithCredentials: (cred: Credentials): ReturnType<Auth['loginWithCredentials']> => _DB_METHODS.loginWithCredentials(cred),
 
-  register: (cred: Credentials): Promise<ReturnType<Auth['register']>> => _DB_METHODS.register(cred),
+  register: (cred: Credentials): ReturnType<Auth['register']> => _DB_METHODS.register(cred),
 
-  signOut: (): Promise<ReturnType<Auth['signOut']>> => _DB_METHODS.signOut(),
+  signOut: (): ReturnType<Auth['signOut']> => _DB_METHODS.signOut(),
 
-  getUser: (): Promise<ReturnType<Auth['getUser']>> => _DB_METHODS.getUser(),
+  getUser: (): ReturnType<Auth['getUser']> => _DB_METHODS.getUser(),
 
-  loginWithOAuth: (provider: Provider): Promise<ReturnType<Auth['loginWithOAuth']>> => _DB_METHODS.loginWithOAuth(provider),
+  loginWithOAuth: (provider: Provider): ReturnType<Auth['loginWithOAuth']> => _DB_METHODS.loginWithOAuth(provider),
 }
