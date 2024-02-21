@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { Suspense, useEffect } from 'react'
+import { useEffect } from 'react'
 import { lazily } from 'react-lazily'
 import { useGetAnimeByIdQuery } from '@/store/api/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
@@ -36,11 +36,7 @@ export function AnimeItem() {
       {isFetching
         ? <LoadingSkeleton />
         : isSuccess
-        && (
-          <Suspense fallback={<LoadingSkeleton />}>
-            <AnimeCard item={animeData.data} />
-          </Suspense>
-        )}
+        && <AnimeCard item={animeData.data} />}
 
     </PageWrapper>
   )
