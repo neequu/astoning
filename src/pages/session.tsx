@@ -8,7 +8,7 @@ export function Session() {
   const convertedTime = session.timestamptz ? transformDateFromString(session.timestamptz) : 'No data available :('
 
   return (
-    <PageWrapper heading="Information about your session" className="place-contnet-center">
+    <PageWrapper heading="Your session info" className="place-contnet-center">
       <div className="flex flex-1 my-auto place-content-center items-center text-center text-2xl">
         <div>
           <h2 className="animate-bounce bg-gradient-to-r from-pink-400 via-emerald-500 to-purple-600 block text-transparent bg-clip-text">

@@ -1,5 +1,6 @@
 import { verifyLocalStorageByKey } from '../client'
-import type { Tables, User } from '@/types/db/db'
+import type { Tables } from '@/types/db/db'
+import type { User } from '@/types/auth'
 import { generateItemId, generateTimestampTz, showNotificationSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
 

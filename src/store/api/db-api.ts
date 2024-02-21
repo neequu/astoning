@@ -1,5 +1,6 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { FavoritesTransformed, HistoryTransformed, User } from '@/types/db/db'
+import type { FavoritesTransformed, HistoryTransformed } from '@/types/db/db'
+import type { User } from '@/types/auth'
 import { likeService } from '@/services/like'
 import { historyService } from '@/services/history'
 import type { Favorites, History } from '@/types/db/db-methods'

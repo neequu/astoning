@@ -2,7 +2,7 @@ import { verifyLocalStorageByKey } from '../client'
 import { generateTimestampTz, showNotificationError, showNotificationSuccess } from '@/lib/utils'
 import { LS_KEYS } from '@/lib/constants'
 import type { Auth } from '@/types/db/db-methods'
-import type { Credentials, Provider, User, UserWithCredentials } from '@/types/db/db'
+import type { Credentials, Provider, User, UserWithCredentials } from '@/types/auth'
 
 export async function getUser(): Promise<ReturnType<Auth['getUser']>> {
   verifyLocalStorageByKey(LS_KEYS.auth)

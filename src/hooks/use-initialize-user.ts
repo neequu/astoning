@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { User } from '@/types/db/db'
+import type { User } from '@/types/auth'
 import { useAppDispatch } from '@/hooks/store-hooks'
 import { setUser } from '@/store/slices/auth-slice'
 

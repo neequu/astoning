@@ -1,5 +1,5 @@
 import _DB_METHODS from './db/db-methods-switch'
-import type { Credentials, Provider } from '@/types/db/db'
+import type { Credentials, Provider } from '@/types/auth'
 import type { Auth } from '@/types/db/db-methods'
 
 export const authService = {

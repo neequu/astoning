@@ -1,5 +1,5 @@
-import type { Credentials, Provider, User } from '../db/db'
-import type { Tables } from './db'
+import type { Credentials, Provider, User } from '@/types/auth'
+import type { Tables } from '@/types/db/db'
 
 export interface Auth {
   getUser: () => User | null

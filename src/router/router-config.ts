@@ -9,6 +9,7 @@ const { Login } = lazily(() => import('@/pages/login'))
 const { Favorites } = lazily(() => import('@/pages/favorites'))
 const { NotFound } = lazily(() => import('@/pages/notFound'))
 const { Session } = lazily(() => import('@/pages/session'))
+const { Visit } = lazily(() => import('@/pages/visit'))
 
 export const routesPublic = [
   {
@@ -27,6 +28,10 @@ export const routesPublic = [
   {
     path: '/not-found',
     component: NotFound,
+  },
+  {
+    path: '/visit',
+    component: Visit,
   },
   {
     path: '*',

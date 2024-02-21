@@ -1,4 +1,4 @@
-import type { User } from '@/types/db/db'
+import type { User } from '@/types/auth'
 import { showNotificationError, showNotificationSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
 import type { Favorites } from '@/types/db/db-methods'

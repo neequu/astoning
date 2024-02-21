@@ -1,4 +1,4 @@
-import type { Provider } from '@/types/db/db'
+import type { Provider } from '@/types/auth'
 import { Button } from '@/components/ui/button'
 import { capitalizeWord } from '@/lib/utils'
 

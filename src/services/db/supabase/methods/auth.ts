@@ -1,4 +1,4 @@
-import type { Credentials, Provider } from '@/types/db/db'
+import type { Credentials, Provider } from '@/types/auth'
 import { showNotificationError, showNotificationSuccess } from '@/lib/utils'
 import supabase from '@/services/db/supabase/client'
 import type { Auth } from '@/types/db/db-methods'

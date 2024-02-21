@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { Clock8Icon, HeartIcon } from 'lucide-react'
-import type { User } from '@/types/db/db'
+import type { User } from '@/types/auth'
 import { Button } from '@/components/ui/button'
 import { TheSignOut } from '@/components/TheSignOut'
 

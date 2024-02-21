@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
-import type { User } from '@/types/db/db'
+import type { User } from '@/types/auth'
 import { useGetFavoritesByIdQuery } from '@/store/api/db-api'
 
 interface Return {

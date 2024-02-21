@@ -5,11 +5,14 @@ import { useGetAnimeByIdQuery } from '@/store/api/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { Message } from '@/components/misc/Message'
+import { useAppDispatch } from '@/hooks/store-hooks'
+import { setVisit } from '@/store/slices/visit-slice'
 
 const { AnimeCard } = lazily(() => import('@/components/AnimeCard'))
 
 export function AnimeItem() {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const { id } = useParams()
   // не parseInt тк при стринге может дать num ('1x' даст 1 например)
   const animeId = +(id!)
@@ -18,7 +21,9 @@ export function AnimeItem() {
   useEffect(() => {
     if (isNotValidId)
       navigate('/not-found', { replace: true })
-  }, [isNotValidId, navigate])
+    else
+      dispatch(setVisit(animeId))
+  }, [])
 
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId, {
     skip: isNotValidId,

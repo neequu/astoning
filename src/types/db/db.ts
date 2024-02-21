@@ -1,19 +1,3 @@
-import type { Provider as SupabaseProvider, User as SupabaseUser } from '@supabase/supabase-js'
-
-export type UserWithCredentials = { user: SupabaseUser, activeSession: boolean } & Credentials
-
-export type UserOptional = SupabaseUser | null
-
-export type ValidAuthFormFields = 'email' | 'password'
-
-export interface Credentials {
-  email: string
-  password: string
-}
-
-export interface User extends SupabaseUser {}
-export type Provider = SupabaseProvider
-
 export type FavoritesTransformed = Omit<Tables<'favorites'>, 'created_at' | 'item_id' | 'user_id'> & {
   createdAt: string
   itemId: number

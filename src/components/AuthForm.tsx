@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { capitalizeWord } from '@/lib/utils'
-import type { ValidAuthFormFields } from '@/types/db/db'
+import type { ValidAuthFormFields } from '@/types/auth'
 
 interface Props {
   handleSubmit: (values: z.infer<typeof formSchema>) => void

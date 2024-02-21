@@ -1,4 +1,4 @@
-import type { User } from '@/types/db/db'
+import type { User } from '@/types/auth'
 import _DB_METHODS from '@/services/db/db-methods-switch'
 import type { History } from '@/types/db/db-methods'
 
