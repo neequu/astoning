@@ -1,4 +1,4 @@
-import { ArrowDownAZIcon, ArrowUpAZIcon } from 'lucide-react'
+import { ArrowDown01Icon, ArrowUp01Icon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { useAppDispatch, useAppSelector } from '@/hooks/store-hooks'
@@ -32,8 +32,8 @@ export function Visit() {
                   ))}
                 </AnimationWrapper>
                 <Button title="filter by date" className="w-full" onClick={() => dispatch(setFilter(filter === 'asc' ? 'desc' : 'asc'))} variant="outline" size="icon">
-                  <ArrowDownAZIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all', filter === 'desc' && '-rotate-90 scale-0')} />
-                  <ArrowUpAZIcon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all', filter === 'desc' && 'rotate-0 scale-100')} />
+                  <ArrowDown01Icon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all', filter === 'desc' && '-rotate-90 scale-0')} />
+                  <ArrowUp01Icon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all', filter === 'desc' && 'rotate-0 scale-100')} />
                 </Button>
               </>
               )}
