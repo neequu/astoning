@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function SearchForm({ handleSubmit, children }: Props) {
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault()
     // using as here: typing event in parameters didn't pass down the types :(
     const formElements = (e.target as HTMLFormElement).elements

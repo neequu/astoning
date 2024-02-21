@@ -1,4 +1,4 @@
-import { createContext, memo, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 type Theme = 'dark' | 'light' | 'system'
 
@@ -20,13 +20,12 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
-// eslint-disable-next-line react/display-name
-export const ThemeProvider = memo(({
+export function ThemeProvider({
   children,
   defaultTheme = 'dark',
   storageKey = 'vite-ui-theme',
   ...props
-}: ThemeProviderProps) => {
+}: ThemeProviderProps) {
   // using as here: according to ui lib docs
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
@@ -63,9 +62,9 @@ export const ThemeProvider = memo(({
       {children}
     </ThemeProviderContext.Provider>
   )
-})
+}
 
-export function useTheme() {
+export function useTheme(): ThemeProviderState {
   const context = useContext(ThemeProviderContext)
 
   if (context === undefined)

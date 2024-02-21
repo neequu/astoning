@@ -16,7 +16,7 @@ export function HistoryCard({ item, onDelete }: Props) {
 
   const [isDeleting, setIsDeleting] = useState(false)
 
-  async function handleDelete() {
+  async function handleDelete(): Promise<void> {
     setIsDeleting(true)
     onDelete(item.id)
   }
