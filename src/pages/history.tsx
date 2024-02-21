@@ -37,38 +37,34 @@ export function History() {
 
     return (
       <div style={style}>
-        <Suspense fallback={<div className="h-[73] animate-pulse bg-neutral-800" />}>
-          <HistoryCard item={historyData[index]} onDelete={handleDeleteSingle} />
-        </Suspense>
+        <HistoryCard item={historyData[index]} onDelete={handleDeleteSingle} />
       </div>
     )
   }, [historyData, handleDeleteSingle])
 
   return (
     <PageWrapper heading="Virtualized History">
-      <Suspense>
-        {hasResults && (
-          <>
-            <HistoryWrapper>
-              <Autosizer>
-                {({ height, width }) => (
-                  <HistoryList
-                    itemSize={73}
-                    height={height}
-                    width={width}
-                    itemCount={historyData.length}
-                  >
-                    {renderHistoryRow}
-                  </HistoryList>
-                )}
-              </Autosizer>
-            </HistoryWrapper>
-            <Button variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeleteAll}>Delete all history</Button>
-          </>
-        )}
-        {isError && <Message message="There was an error loading history!" className="flex-1 items-center text-destructive" />}
-        {!hasResults && !isLoading && <Message message="You have no history" className="flex-1 items-center" />}
-      </Suspense>
+      {hasResults && (
+        <>
+          <HistoryWrapper>
+            <Autosizer>
+              {({ height, width }) => (
+                <HistoryList
+                  itemSize={73}
+                  height={height}
+                  width={width}
+                  itemCount={historyData.length}
+                >
+                  {renderHistoryRow}
+                </HistoryList>
+              )}
+            </Autosizer>
+          </HistoryWrapper>
+          <Button variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeleteAll}>Delete all history</Button>
+        </>
+      )}
+      {isError && <Message message="There was an error loading history!" className="flex-1 items-center text-destructive" />}
+      {!hasResults && !isLoading && <Message message="You have no history" className="flex-1 items-center" />}
     </PageWrapper>
   )
 }
