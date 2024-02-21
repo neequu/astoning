@@ -69,13 +69,13 @@ npm run dev
 **Redux**
 
 - [x] Используем **Modern Redux with Redux Toolkit**
-- [x] Используем [**слайсы**](https://github.com/neequu/astoning/blob/main/src/redux/slices)
+- [x] Используем [**слайсы**](https://github.com/neequu/astoning/blob/main/src/store/slices)
 
-- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/redux/utils/middleware/session.ts)
+- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/store/utils/middleware/session.ts)
 
-- [x] Используется [**RTK Query**](https://github.com/neequu/astoning/tree/main/src/redux/api)
+- [x] Используется [**RTK Query**](https://github.com/neequu/astoning/tree/main/src/store/api)
 
-- [x] Используется [**Transforming Responses**](https://github.com/neequu/astoning/blob/main/src/redux/utils/transforms)
+- [x] Используется [**Transforming Responses**](https://github.com/neequu/astoning/blob/main/src/store/utils/transforms)
 
 ### **2 уровень (необязательный)**
 
@@ -83,7 +83,7 @@ npm run dev
 - [x] Подключен **storybook** и созданы два, три сториса с knobs, которые показывают разные состояния компонента [тут](https://github.com/neequu/astoning/blob/main/src/stories/Button.stories.tsx) и [тут](https://github.com/neequu/astoning/blob/main/src/stories/Spinner.stories.tsx)
 - [x] Использование Supabase для учетных записей и их Избранного и Истории поиска
 
-- [x] [**Низная связанность клиентского кода**](https://github.com/neequu/astoning/blob/main/src/services/db/db-methods-switch.ts), использующего апи кода, работающего с внешним стором **LS + Supabase с одним переключателем в .env файле**
+- [x] [**Низкая связанность клиентского кода**](https://github.com/neequu/astoning/blob/main/src/services/db/db-methods-switch.ts), использующего апи кода, работающего с внешним стором **LS + Supabase с одним переключателем в .env файле**
 - [x] Настроен CI/CD:
     - [x] Настроен CI: [CI](https://github.com/neequu/astoning/blob/main/.github/workflows/ci.yml)
         - [x] [Readme Status Badge](#ci-cd-badges)
@@ -91,7 +91,7 @@ npm run dev
 
     - [x] Настроен CD: [Deploy Link](#deploy)
 - [x] Реализована [**виртуализация списков**](https://github.com/neequu/astoning/blob/main/src/pages/history.tsx)
-- [ ] Используются **мемоизированные селекторы** (createSelector)
+- [x] Используются [**мемоизированные селекторы** (createSelector)](https://github.com/neequu/astoning/blob/main/src/store/slices/visit-slice.ts) [пример](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
 - [ ] Используется **нормализованная структура стейта** (createEntityAdapter)
 - [ ] Проведена **оптимизация приложения**
 
