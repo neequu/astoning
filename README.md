@@ -91,7 +91,7 @@ npm run dev
 
     - [x] Настроен CD: [Deploy Link](#deploy)
 - [x] Реализована [**виртуализация списков**](https://github.com/neequu/astoning/blob/main/src/pages/history.tsx)
-- [x] Используются [**мемоизированные селекторы** (createSelector)](https://github.com/neequu/astoning/blob/main/src/store/slices/visit-slice.ts) [пример](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
+- [x] Используются [**мемоизированные селекторы** (createSelector)](https://github.com/neequu/astoning/blob/main/src/store/utils/selectors.ts) [пример использования](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
 - [ ] Используется **нормализованная структура стейта** (createEntityAdapter)
 - [ ] Проведена **оптимизация приложения**
 
