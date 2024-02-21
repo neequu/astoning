@@ -7,5 +7,6 @@ export default antfu({
     'react/jsx-no-useless-fragment': 'error',
     'no-unused-expressions': 'error',
     'ts/no-explicit-any': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
   },
 })
