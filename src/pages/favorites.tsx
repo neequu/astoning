@@ -9,38 +9,34 @@ import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 const { CardWrapper } = lazily(() => import('@/components/wrappers/CardWrapper'))
-const { LikeButton } = lazily(() => import('@/components/LikeButton'))
+const { LikeComponent } = lazily(() => import('@/components/like/LikeComponent'))
 
 export function Favorites() {
   const user = useAppSelector(selectUser)
 
-  const { data: favoritesData, isError, isFetching, isLoading } = useGetFavoritesQuery(user?.id, {
+  const { data: favoritesData, isError, isLoading } = useGetFavoritesQuery(user?.id, {
     skip: !user?.id,
   })
   const hasResults = favoritesData && favoritesData.length > 0
-
   return (
     <PageWrapper heading="Favorites">
       <MediaGrid>
+        {isLoading && (
+          <AnimationWrapper className="grid-tmp">
+            <CardSkeleton amount={5} />
+          </AnimationWrapper>
+        )}
         <AnimationWrapper className="grid-tmp">
-          {isLoading
-            ? <CardSkeleton amount={5} />
-            : (
-          // reason: can't render with no fragment
-          // eslint-disable-next-line react/jsx-no-useless-fragment
-              <>
-                {favoritesData?.map(item => (
-                  <CardWrapper key={item.itemId} itemId={item.itemId}>
-                    <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.itemId} />
-                  </CardWrapper>
-                ),
-                )}
-              </>
-              )}
+          {favoritesData?.map(item => (
+            <CardWrapper key={item.itemId} itemId={item.itemId}>
+              <LikeComponent className="justify-end flex-1 place-items-end mt-4" itemId={item.itemId} />
+            </CardWrapper>
+          ),
+          )}
         </AnimationWrapper>
       </MediaGrid>
       {isError && <Message message="There was an error loading favorites!" className="flex-1 items-center text-destructive" />}
-      {!hasResults && !isFetching && <Message message="You have no favorites" className="flex-1 items-center" />}
+      {!hasResults && !isLoading && <Message message="You have no favorites" className="flex-1 items-center" />}
     </PageWrapper>
   )
 }

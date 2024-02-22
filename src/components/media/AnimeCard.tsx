@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { HiddenTextBlock } from '@/components/misc/HiddenTextBlock'
 import type { Anime } from '@/types/api/anime'
-import { LikeButton } from '@/components/LikeButton'
+import { LikeComponent } from '@/components/like/LikeComponent'
 
 interface Props {
   item: Anime
@@ -26,7 +26,7 @@ export function AnimeCard({ item }: Props) {
                 <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
               </a>
             </Button>
-            <LikeButton itemId={item.malId} />
+            <LikeComponent itemId={item.malId} />
           </div>
           <p className="text-muted-foreground line-clamp-1" title={item.titleJapanese}>{item.titleJapanese}</p>
         </div>

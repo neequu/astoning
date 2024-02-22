@@ -8,7 +8,7 @@ import { useDebounce } from '@/hooks/use-debounce'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
-import { LikeButton } from '@/components/LikeButton'
+import { LikeComponent } from '@/components/like/LikeComponent'
 import { selectUser } from '@/store/utils/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
 import { Message } from '@/components/misc/Message'
@@ -32,7 +32,7 @@ export function Home() {
   // all anime data
   const { data: animeData, isLoading, isError } = useGetAnimeQuery(page)
   const [items, setItems] = useState<Anime[]>([])
-
+  // using use effect to sync data from api with state
   useEffect(() => {
     if (!animeData)
       return
@@ -69,7 +69,7 @@ export function Home() {
           {isLoading && <CardSkeleton amount={20} />}
           {items.map(item => (
             <MediaCard key={item.malId} item={item}>
-              <LikeButton className="justify-end flex-1 place-items-end mt-4" itemId={item.malId} />
+              <LikeComponent className="justify-end flex-1 place-items-end mt-4" itemId={item.malId} />
             </MediaCard>
           ))}
         </MediaGrid>

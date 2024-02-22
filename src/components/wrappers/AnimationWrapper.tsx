@@ -9,7 +9,7 @@ interface Props {
 
 export function AnimationWrapper({ children, className }: Props) {
   const parent = useRef(null)
-
+  // use effect usage according to lib docs
   useEffect(() => {
     parent.current && autoAnimate(parent.current, {
       duration: 330,

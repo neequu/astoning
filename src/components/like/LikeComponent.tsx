@@ -1,7 +1,7 @@
-import { HeartCrackIcon, HeartIcon } from 'lucide-react'
 import { useState } from 'react'
+import { LikeButton } from './LikeButton'
 import { cn, showNotificationError } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+
 import { useSetLike } from '@/hooks/use-set-like'
 import { useChangeLikeMutation } from '@/store/api/db-api'
 import { useAppSelector } from '@/hooks/store-hooks'
@@ -12,7 +12,7 @@ interface Props {
   itemId: number
 }
 
-export function LikeButton({ className, itemId }: Props) {
+export function LikeComponent({ className, itemId }: Props) {
   const user = useAppSelector(selectUser)
   const userId = user?.id
 
@@ -43,19 +43,7 @@ export function LikeButton({ className, itemId }: Props) {
   }
   return (
     <div className={cn('flex', className)}>
-      <Button data-testid="like-button" disabled={disabled} size="icon" variant="ghost" onClick={handleLike} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
-        {/* if not loading and user exists */}
-        {!isLoadingLike && user && (
-          <>
-            {/* show if liked */}
-            <HeartCrackIcon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-20 scale-0 transition-[rotate_scale_300ms]', isActive && 'rotate-0 scale-100 ')} />
-            {/* show if not liked */}
-            <HeartIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-[rotate_scale_300ms]', isActive && '-rotate-20 scale-0')} />
-          </>
-        )}
-        {/* if user logs out show this */}
-        {!user && <HeartIcon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-[rotate_scale_300ms]')} />}
-      </Button>
+      <LikeButton isDisabled={disabled} handleClick={handleLike} isActive={isActive} isLoadingLike={isLoadingLike} hasUser={!!user} />
     </div>
   )
 }

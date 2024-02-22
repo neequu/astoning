@@ -1,4 +1,4 @@
-import { AuthPanel } from '@/components/AuthPanel'
+import { AuthPanel } from '@/components/auth/AuthPanel'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LOGIN_MSG } from '@/lib/constants'
 import { authService } from '@/services/auth'

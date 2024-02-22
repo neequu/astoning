@@ -4,7 +4,7 @@ import { Toaster } from 'sonner'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
-import { ErrorLayout } from '@/components/ErrorLayout'
+import { ErrorLayout } from '@/components/misc/ErrorLayout'
 import { Router } from '@/router'
 import { store } from '@/store'
 
