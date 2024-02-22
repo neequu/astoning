@@ -1,9 +1,11 @@
-import { createListenerMiddleware } from '@reduxjs/toolkit'
+import { addListener, createListenerMiddleware } from '@reduxjs/toolkit'
 import { setUser } from '../../slices/auth-slice'
 import { generateTimestampTz } from '@/lib/utils'
 import { setSession } from '@/store/slices/session-slice'
+import type { AppDispatch, RootState } from '@/store'
 
 export const sessionMiddleware = createListenerMiddleware()
+export const addAppListener = addListener.withTypes<RootState, AppDispatch>()
 
 sessionMiddleware.startListening({
   actionCreator: setUser,
