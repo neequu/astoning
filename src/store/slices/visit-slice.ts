@@ -22,8 +22,9 @@ const visitSlice = createSlice({
       if (cardId && !hasCard)
         state.cards.push({ id: cardId, timestamptz: generateTimestampTz() })
     },
-    setFilter(state, action: PayloadAction<'asc' | 'desc'>) {
-      state.filter = action.payload
+    setFilter(state) {
+      const newFilter = state.filter === 'asc' ? 'desc' : 'asc'
+      state.filter = newFilter
     },
   },
 })

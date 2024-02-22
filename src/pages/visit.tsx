@@ -17,8 +17,7 @@ export function Visit() {
   function handleFilter(): void {
     if (visitedCards.length <= 1)
       return showNotificationError('Not enough items to filter')
-    const newFilter = filter === 'asc' ? 'desc' : 'asc'
-    dispatch(setFilter(newFilter))
+    dispatch(setFilter())
   }
 
   return (
