@@ -101,7 +101,7 @@ npm run dev
     - [x] [Гость. Поиск. Единица информации.](https://github.com/neequu/astoning/blob/main/cypress/e2e/search-card-redirect.cy.ts)
     - [x] [**Пользователь. Поиск. Единица информации. Избранное**](https://github.com/neequu/astoning/blob/main/cypress/e2e/favorites.cy.ts)
 
-- [ ] Связь UI и бизнес-логики построена не через команды, а через **события**
+- [ ] Связь UI и бизнес-логики построена не через команды, а через [**события**](https://github.com/neequu/astoning/blob/main/src/components/like/LikeComponent.tsx) компонент (и кнопка) не знают о том, что за мутацию они совершают, они передают текущий стейт, на основании которого проиводится соответствующий запрос
 
 - [ ] **Project Console API**
 
