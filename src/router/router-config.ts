@@ -32,6 +32,7 @@ export const routesPublic = [
   {
     path: '/visit',
     component: Visit,
+    exact: true,
   },
   {
     path: '*',
@@ -61,9 +62,11 @@ export const routesNoAuthOnly = [
   {
     path: '/login',
     component: Login,
+    exact: true,
   },
   {
     path: '/register',
     component: Register,
+    exact: true,
   },
 ]
