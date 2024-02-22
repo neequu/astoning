@@ -11,18 +11,17 @@ import { MediaCard } from '@/components/media/MediaCard'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeComponent } from '@/components/like/LikeComponent'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
-import { useAddHistoryMutation } from '@/store/api/db-api'
 import { selectUser } from '@/store/utils/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
+import { useHistory } from '@/hooks/use-history'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 
 export function Search() {
   const user = useAppSelector(selectUser)
-  const [addHistory] = useAddHistoryMutation()
   const navigate = useNavigate()
-
+  const { handleAddHistory } = useHistory()
   // search queries
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
@@ -55,7 +54,7 @@ export function Search() {
     const encodedQuery = transformQuery(query)
     const redirectUrl = `/search?q=${encodedQuery}`
 
-    addHistory({ query: encodedQuery, userId: user?.id })
+    handleAddHistory(user?.id, encodedQuery)
     navigate(redirectUrl)
   }
 

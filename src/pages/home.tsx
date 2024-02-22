@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { lazily } from 'react-lazily'
-import { useAddHistoryMutation } from '@/store/api/db-api'
+
 import { useGetAnimeQuery } from '@/store/api/anime-api'
 import { useAppSelector } from '@/hooks/store-hooks'
 import { useDebounce } from '@/hooks/use-debounce'
@@ -15,13 +15,14 @@ import { Message } from '@/components/misc/Message'
 import { transformQuery } from '@/lib/utils'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 import type { Anime } from '@/types/api/anime'
+import { useHistory } from '@/hooks/use-history'
 
 const { TailElement } = lazily(() => import('@/components/misc/TailElement'))
 const { SearchSuggestions } = lazily(() => import('@/components/search/SearchSuggestions'))
 
 export function Home() {
   const user = useAppSelector(selectUser)
-  const [addHistory] = useAddHistoryMutation()
+  const { handleAddHistory } = useHistory()
   const navigate = useNavigate()
 
   // search queries
@@ -54,7 +55,7 @@ export function Home() {
   // on submit transform query and redirect to search page
   function handleSubmit(): void {
     const encodedQuery = transformQuery(query)
-    addHistory({ query, userId: user?.id })
+    handleAddHistory(user?.id, query)
     const redirectUrl = `/search?q=${encodedQuery}`
     navigate(redirectUrl)
   }

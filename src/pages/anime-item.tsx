@@ -21,11 +21,12 @@ export function AnimeItem() {
 
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
+  // dispatch id after render
   useEffect(() => {
     if (isNotValidId)
       return
     dispatch(setVisit(animeId))
-  }, [isNotValidId])
+  }, [])
 
   return (
     <PageWrapper>
