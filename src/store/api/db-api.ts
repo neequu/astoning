@@ -1,7 +1,7 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { FavoritesTransformed, HistoryTransformed } from '@/types/db/db'
 import type { User } from '@/types/auth'
-import { likeService } from '@/services/like'
+import { favoritesService } from '@/services/favorites'
 import { historyService } from '@/services/history'
 import { transformFavoritesData, transformHistoryData } from '@/store/utils/transforms/transform-db-data'
 
@@ -13,7 +13,7 @@ export const dbApi = createApi({
     // likes
     getFavorites: builder.query<FavoritesTransformed[] | null, User['id'] | undefined>({
       queryFn: async (userId) => {
-        const res = await likeService.getFavorites(userId)
+        const res = await favoritesService.getFavorites(userId)
         const data = res ? res.map(transformFavoritesData) : null
         return { data }
       },
@@ -21,7 +21,7 @@ export const dbApi = createApi({
     }),
     getFavoritesById: builder.query<FavoritesTransformed | null, { itemId: number, userId: User['id'] | undefined }>({
       queryFn: async ({ itemId, userId }) => {
-        const res = await likeService.getFavoriteById(itemId, userId)
+        const res = await favoritesService.getFavoriteById(itemId, userId)
         const data = res ? transformFavoritesData(res) : null
         return { data }
       },
@@ -29,7 +29,7 @@ export const dbApi = createApi({
     }),
     changeLike: builder.mutation<number | null, { itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined }>({
       queryFn: async ({ itemId, isCurrentStateActive, userId }) => {
-        const data = await likeService.changeLike(itemId, isCurrentStateActive, userId)
+        const data = await favoritesService.changeLike(itemId, isCurrentStateActive, userId)
         return { data }
       },
       invalidatesTags: ['Like'],

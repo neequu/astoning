@@ -8,8 +8,8 @@ export function TheSignOut() {
   const dispatch = useAppDispatch()
 
   async function handleSignOut(): Promise<void> {
-    await authService.signOut()
-    dispatch(setUser(null))
+    const res = await authService.signOut()
+    dispatch(setUser(res))
   }
 
   return (

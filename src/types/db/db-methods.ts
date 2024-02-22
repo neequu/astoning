@@ -6,7 +6,7 @@ export interface Auth {
   loginWithCredentials: (cred: Credentials) => Promise<User | null>
   register: (cred: Credentials) => Promise<User | null>
   loginWithOAuth: (provider: Provider) => Promise<User | null>
-  signOut: () => Promise<User | null>
+  signOut: () => Promise<null>
 }
 export interface Favorites {
   getFavorites: (userId: User['id'] | undefined) => Promise<Tables<'favorites'>[] | null>

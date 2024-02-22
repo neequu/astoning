@@ -2,7 +2,7 @@ import type { User } from '@/types/auth'
 import _DB_METHODS from '@/services/db/db-methods-switch'
 import type { Favorites } from '@/types/db/db-methods'
 
-export const likeService: Favorites = {
+export const favoritesService: Favorites = {
 
   getFavorites: (userId: User['id'] | undefined): ReturnType<Favorites['getFavorites']> => _DB_METHODS.getFavorites(userId),
   getFavoriteById: (itemId: number, userId: User['id'] | undefined): ReturnType<Favorites['getFavoriteById']> => _DB_METHODS.getFavoriteById(itemId, userId),
