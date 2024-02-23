@@ -71,7 +71,7 @@ npm run dev
 - [x] Используем **Modern Redux with Redux Toolkit**
 - [x] Используем [**слайсы**](https://github.com/neequu/astoning/blob/main/src/store/slices)
 
-- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/store/utils/middleware/session.ts)
+- [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/store/utils/middleware/console.ts)
 
 - [x] Используется [**RTK Query**](https://github.com/neequu/astoning/tree/main/src/store/api)
 
@@ -102,24 +102,23 @@ npm run dev
     - [x] [Гость. Поиск. Единица информации.](https://github.com/neequu/astoning/blob/main/cypress/e2e/search-card-redirect.cy.ts)
     - [x] [**Пользователь. Поиск. Единица информации. Избранное**](https://github.com/neequu/astoning/blob/main/cypress/e2e/favorites.cy.ts)
 
-- [x] Связь UI и бизнес-логики построена не через команды, а через **события** [тут](https://github.com/neequu/astoning/blob/main/src/components/like/LikeComponent.tsx) [тут](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx) [тут](https://github.com/neequu/astoning/blob/main/src/components/auth/TheSignOut.tsx)
-
-- [ ] **Project Console API**
+- [x] Связь UI и бизнес-логики построена не через команды, а через **события** [тут](https://github.com/neequu/astoning/blob/main/src/components/like/LikeComponent.tsx) [тут](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
+- [x] [**Project Console API**](https://github.com/neequu/astoning/blob/main/src/services/console)
 
 ## **additional**
 
 - mobile adaptive
-- styled with [tailwind](https://tailwindcss.com)
-- ui library [shadcn](https://ui.shadcn.com)
-- input validation with [zod](https://zod.dev/)
-- forms with [useForm](https://react-hook-form.com/docs/useform)
-- backend service [supabase](https://supabase.com/) (alt to firebase)
-- toast with [sonner](https://sonner.emilkowal.ski/toast)
-- animation with [formkit-aa](https://auto-animate.formkit.com)
-- useful hooks from [usehooks-ts](https://usehooks-ts.com)
-- virtualization [react-window](https://github.com/bvaughn/react-window)
-- auto sizing [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)
-- lazy loading of named components with [react-lazily](https://github.com/JLarky/react-lazily)
-- icons [lucide-react](https://lucide.dev/)
+- [tailwind](https://tailwindcss.com) for styling
+- [shadcn](https://ui.shadcn.com) ui library
+- [zod](https://zod.dev/) input validation with
+- [useForm](https://react-hook-form.com/docs/useform) forms
+- [supabase](https://supabase.com/) backend service
+- [sonner](https://sonner.emilkowal.ski/toast) toast
+- [formkit-aa](https://auto-animate.formkit.com) animation
+- [usehooks-ts](https://usehooks-ts.com) hooks
+- [react-window](https://github.com/bvaughn/react-window) virtualization
+- [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer) auto sizing
+- [react-lazily](https://github.com/JLarky/react-lazily) lazy loading of named components
+- [lucide-react](https://lucide.dev/) icons
 - [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
-- eslint config by [@antfu/eslint-config](https://github.com/antfu/eslint-config)
+- [@antfu/eslint-config](https://github.com/antfu/eslint-config)
