@@ -4,7 +4,7 @@ import { historyService } from '@/services/history'
 
 export async function getHistory(): Promise<void> {
   const user = await getUser()
-  const res = historyService.getHistory(user?.id)
+  const res = await historyService.getHistory(user?.id)
   console.table(res)
 }
 export async function addHistory(params: string[]): Promise<void> {
