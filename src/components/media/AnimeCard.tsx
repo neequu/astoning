@@ -2,12 +2,16 @@ import { Button } from '@/components/ui/button'
 import { HiddenTextBlock } from '@/components/misc/HiddenTextBlock'
 import type { Anime } from '@/types/api/anime'
 import { LikeComponent } from '@/components/like/LikeComponent'
+import { ShareLink } from '@/components/feat/ShareLink'
+import { useFeature } from '@/providers/feature-flag-provider'
 
 interface Props {
   item: Anime
 }
 
 export function AnimeCard({ item }: Props) {
+  const { isTelegramShareEnabled } = useFeature()
+
   return (
     <section data-testid="anime-card" className="flex flex-column sm:flex-row gap-6 flex-wrap">
       <div className="flex flex-1 flex-col items-center gap-5 min-w-[300px]">
@@ -26,7 +30,10 @@ export function AnimeCard({ item }: Props) {
                 <h1 className="line-clamp-1" title={item.title}>{item.title}</h1>
               </a>
             </Button>
-            <LikeComponent itemId={item.malId} />
+            <div className="flex items-center">
+              <LikeComponent itemId={item.malId} />
+              {isTelegramShareEnabled && <ShareLink url={item.url} />}
+            </div>
           </div>
           <p className="text-muted-foreground line-clamp-1" title={item.titleJapanese}>{item.titleJapanese}</p>
         </div>

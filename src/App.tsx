@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Toaster } from 'sonner'
 import { Provider } from 'react-redux'
+import { FeatureProvider } from './providers/feature-flag-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
 import { ErrorLayout } from '@/components/misc/ErrorLayout'
@@ -22,7 +23,9 @@ function WrappedApp() {
       <BrowserRouter>
         <ErrorBoundary FallbackComponent={ErrorLayout}>
           <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            <App />
+            <FeatureProvider>
+              <App />
+            </FeatureProvider>
           </ThemeProvider>
         </ErrorBoundary>
         <Toaster />
