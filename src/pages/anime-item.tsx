@@ -7,6 +7,8 @@ import { Message } from '@/components/misc/Message'
 import { useAppDispatch } from '@/hooks/store-hooks'
 import { setVisit } from '@/store/slices/visit-slice'
 import { AnimeCard } from '@/components/media/AnimeCard'
+import { visitAdded } from '@/store/entity'
+import { generateTimestampTz } from '@/lib/utils'
 
 export function AnimeItem() {
   const navigate = useNavigate()
@@ -21,11 +23,12 @@ export function AnimeItem() {
 
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
-  // dispatch id after render
+  // sync dispatch with rendered component
   useEffect(() => {
     if (isNotValidId)
       return
     dispatch(setVisit(animeId))
+    dispatch(visitAdded({ id: animeId, timestamptz: generateTimestampTz() }))
   }, [])
 
   return (
