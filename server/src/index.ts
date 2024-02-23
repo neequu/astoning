@@ -1,3 +1,4 @@
+import type { Request, Response } from 'express'
 import express from 'express'
 import cors from 'cors'
 
@@ -8,7 +9,7 @@ const PORT = 3000
 
 app.use(cors())
 
-app.get(TELEGRAM_FEAT_URL, (_, res) => {
+app.get(TELEGRAM_FEAT_URL, (_: Request, res: Response) => {
   const isTelegramShareEnabled = true
   res.json({ isTelegramShareEnabled })
 })
