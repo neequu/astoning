@@ -10,12 +10,6 @@ export function TheFooter() {
         </Button>
       </a>
       &nbsp;|&nbsp;
-      <Link to="/session">
-        <Button variant="link" className="p-0">
-          check middleware
-        </Button>
-      </Link>
-      &nbsp;|&nbsp;
       <Link to="/visit">
         <Button variant="link" className="p-0">
           check visits

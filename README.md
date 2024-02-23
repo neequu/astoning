@@ -82,6 +82,7 @@ npm run dev
 - [x] Использование [**TypeScript**](https://github.com/neequu/astoning/blob/main/tsconfig.json)
 - [x] Подключен **storybook** и созданы два, три сториса с knobs, которые показывают разные состояния компонента [тут](https://github.com/neequu/astoning/blob/main/src/stories/Button.stories.tsx) и [тут](https://github.com/neequu/astoning/blob/main/src/stories/Spinner.stories.tsx)
 - [x] Использование Supabase для учетных записей и их Избранного и Истории поиска
+    - [x] [Инвалидация кеша](https://github.com/neequu/astoning/blob/main/src/store/api/db-api.ts)
 
 - [x] [**Низкая связанность клиентского кода**](https://github.com/neequu/astoning/blob/main/src/services/db/db-methods-switch.ts), использующего апи кода, работающего с внешним стором **LS + Supabase с одним переключателем в .env файле**
 - [x] Настроен CI/CD:

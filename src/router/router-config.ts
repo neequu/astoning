@@ -8,7 +8,6 @@ const { Register } = lazily(() => import('@/pages/register'))
 const { Login } = lazily(() => import('@/pages/login'))
 const { Favorites } = lazily(() => import('@/pages/favorites'))
 const { NotFound } = lazily(() => import('@/pages/notFound'))
-const { Session } = lazily(() => import('@/pages/session'))
 const { Visit } = lazily(() => import('@/pages/visit'))
 
 export const routesPublic = [
@@ -44,11 +43,6 @@ export const routesAuthOnly = [
   {
     path: '/history',
     component: History,
-    exact: true,
-  },
-  {
-    path: '/session',
-    component: Session,
     exact: true,
   },
   {

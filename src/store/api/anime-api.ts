@@ -7,7 +7,7 @@ export const animeApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL }),
   endpoints: builder => ({
-    getAnime: builder.query<QueryResponse, number>({
+    getAnime: builder.query<QueryResponse, number | undefined>({
       query: (page = 1) => ({
         url: 'anime',
         params: { page },

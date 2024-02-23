@@ -1,29 +1,22 @@
 import { useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 import { lazily } from 'react-lazily'
 import { useGetAnimeSearchQuery } from '@/store/api/anime-api'
-import { useAppSelector } from '@/hooks/store-hooks'
-import { transformQuery } from '@/lib/utils'
 
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeComponent } from '@/components/like/LikeComponent'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
-import { selectUser } from '@/store/utils/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
-import { useHistory } from '@/hooks/use-history'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 
 export function Search() {
-  const user = useAppSelector(selectUser)
-  const navigate = useNavigate()
-  const { handleAddHistory } = useHistory()
   // search queries
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
@@ -43,19 +36,18 @@ export function Search() {
     throttledSearch()
   }
 
-  function search(): void | null {
+  function search(): void {
     if (currenstSearch === query)
-      return null
+      return
+
     setCurrenstSearch(query)
+    const newSearchParams = new URLSearchParams(searchParams)
+    if (query === '')
+      newSearchParams.delete('q')
+    else
+      newSearchParams.set('q', query)
 
-    if (!query)
-      return navigate('/search')
-
-    const encodedQuery = transformQuery(query)
-    const redirectUrl = `/search?q=${encodedQuery}`
-
-    handleAddHistory(user?.id, encodedQuery)
-    navigate(redirectUrl)
+    setSearchParams(newSearchParams.toString())
   }
 
   return (
