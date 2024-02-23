@@ -1,13 +1,12 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '@/store'
 
 interface Visit {
   id: number
   timestamptz: string
 }
 
-const entityVisitAdapter = createEntityAdapter({
+export const entityVisitAdapter = createEntityAdapter({
   selectId: (visit: Visit) => visit.id,
   sortComparer: (a, b) =>
     a.timestamptz > b.timestamptz ? 1 : -1,
@@ -34,11 +33,3 @@ const entityVisitSlice = createSlice({
 export const { visitAdded, visitRemoved, visitsRemoved } = entityVisitSlice.actions
 
 export default entityVisitSlice.reducer
-
-export const entityVisitsSelector = entityVisitAdapter.getSelectors<RootState>(
-  state => state.entityVisit,
-)
-
-export function selectAllVisits(state: RootState) {
-  return entityVisitAdapter.getSelectors().selectAll(state.entityVisit)
-}

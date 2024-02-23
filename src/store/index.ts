@@ -4,7 +4,7 @@ import authSlice from '@/store/slices/auth-slice'
 import { animeApi } from '@/store/api/anime-api'
 import { dbApi } from '@/store/api/db-api'
 import visitSlice from '@/store/slices/visit-slice'
-import entityVisitSlice from '@/store/entity'
+import entityVisitSlice from '@/store/slices/entity-visit-slice'
 
 export const store = configureStore({
   reducer: {

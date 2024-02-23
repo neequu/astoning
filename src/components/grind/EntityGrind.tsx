@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/store-hooks'
 import { transformDateFromString } from '@/lib/utils'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { Message } from '@/components/misc/Message'
-import { selectAllVisits, visitRemoved, visitsRemoved } from '@/store/entity'
+import { selectAllVisits } from '@/store/utils/selectors'
+import { visitRemoved, visitsRemoved } from '@/store/slices/entity-visit-slice'
 
 export default function EntityGrind() {
   const dispatch = useAppDispatch()

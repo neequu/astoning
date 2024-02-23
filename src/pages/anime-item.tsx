@@ -7,7 +7,7 @@ import { Message } from '@/components/misc/Message'
 import { useAppDispatch } from '@/hooks/store-hooks'
 import { setVisit } from '@/store/slices/visit-slice'
 import { AnimeCard } from '@/components/media/AnimeCard'
-import { visitAdded } from '@/store/entity'
+import { visitAdded } from '@/store/slices/entity-visit-slice'
 import { generateTimestampTz } from '@/lib/utils'
 
 export function AnimeItem() {
