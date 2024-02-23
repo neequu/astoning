@@ -16,6 +16,9 @@ devDependencies:
   '@types/express':
     specifier: ^4.17.21
     version: 4.17.21
+  '@types/node':
+    specifier: ^20.11.20
+    version: 20.11.20
   typescript:
     specifier: ^5.3.3
     version: 5.3.3

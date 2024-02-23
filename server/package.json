@@ -1,10 +1,12 @@
 {
+  "name": "server",
   "type": "module",
   "strict": true,
-  "esModuleInterop": true,
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ."
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -12,9 +14,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/node": "^20.11.20",
     "typescript": "^5.3.3"
-  },
-  "include": [
-    "src/**/*"
-  ]
+  }
 }
