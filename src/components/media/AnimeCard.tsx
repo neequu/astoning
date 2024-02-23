@@ -16,7 +16,7 @@ export function AnimeCard({ item }: Props) {
     <section data-testid="anime-card" className="flex flex-column sm:flex-row gap-6 flex-wrap">
       <div className="flex flex-1 flex-col items-center gap-5 min-w-[300px]">
         <div className="h-[500px] rounded-md overflow-hidden">
-          <img className="block w-full h-full max-h-[500px]" src={item.images.webp.large_image_url} alt={item.title} loading="lazy" />
+          <img className="block w-full h-full max-h-[500px]" src={item.images.webp.large_image_url} alt={item.title} />
         </div>
         <div className="border-2 border-muted-foreground rounded-full h-20 aspect-square grid place-content-center">
           <p className="text-3xl font-bold text-muted-foreground">{item.score}</p>

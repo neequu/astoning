@@ -11,7 +11,7 @@ interface Props {
 
 export function OAuth({ provider, handleOAuth, children, isDisabled }: Props) {
   return (
-    <Button onClick={() => handleOAuth(provider)} variant="secondary" disabled={isDisabled}>
+    <Button name={`use ${provider} to sign in`} onClick={() => handleOAuth(provider)} variant="secondary" disabled={isDisabled}>
       <span className="font-bold">{`Sign In with ${capitalizeWord(provider)}`}</span>
       {children}
     </Button>

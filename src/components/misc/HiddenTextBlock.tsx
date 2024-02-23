@@ -17,7 +17,7 @@ export function HiddenTextBlock({ text, className }) {
       </p>
       {
         isTooLong
-        && <Button variant="link" className="p-0 text-muted-foreground font-" onClick={() => setIsHidden(p => !p)}>{isHidden ? 'Show more' : 'Show less'}</Button>
+        && <Button name="reveal" variant="link" className="p-0 text-muted-foreground font-" onClick={() => setIsHidden(p => !p)}>{isHidden ? 'Show more' : 'Show less'}</Button>
       }
     </div>
   )

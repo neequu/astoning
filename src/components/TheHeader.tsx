@@ -12,7 +12,7 @@ export function TheHeader() {
   return (
     <header>
       <div className="container py-3 mx-auto px-4 min-h-16 flex flex-col sm:flex-row gap-4 justify-between items-center">
-        <Button asChild variant="link" className="p-0">
+        <Button asChild variant="link" className="p-0" name="home">
           <NavLink to="/">
             <Logo />
           </NavLink>

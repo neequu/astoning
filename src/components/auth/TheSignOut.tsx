@@ -13,7 +13,7 @@ export function TheSignOut() {
   }
 
   return (
-    <Button onClick={handleSignOut} variant="outline" size="icon">
+    <Button name="sign out" onClick={handleSignOut} variant="outline" size="icon">
       <LogOutIcon className="h-[1.2rem] w-[1.2rem] transition-all" />
     </Button>
   )
