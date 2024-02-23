@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext } from 'react'
 import { useGetFeatureFlagQuery } from '@/features/api/telegram'
 import type { FeatureState } from '@/types/features'
 
