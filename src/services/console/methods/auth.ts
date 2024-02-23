@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import type { ZodError } from 'zod'
 import { formSchema } from '@/lib/validations'
-import databaseMethods from '@/services/db/db-methods-switch'
 import type { Credentials } from '@/types/auth'
+import { authService } from '@/services/auth'
 
 function validateCredentials(data: Credentials) {
   try {
@@ -18,8 +18,8 @@ export function register(params: string[]) {
   const [email, password] = params
   const res = validateCredentials({ email, password })
   if (res.success) {
-    databaseMethods.register({ email, password })
-      .then(res => console.log(res))
+    authService.register({ email, password })
+      .then(res => console.log(res?.email))
   }
   else {
     const er = res.error as ZodError
@@ -31,8 +31,8 @@ export function login(params: string[]) {
 
   const res = validateCredentials({ email, password })
   if (res.success) {
-    databaseMethods.loginWithCredentials({ email, password })
-      .then(res => console.log(res))
+    authService.loginWithCredentials({ email, password })
+      .then(res => console.log(res?.email))
   }
   else {
     const er = res.error as ZodError
@@ -40,10 +40,10 @@ export function login(params: string[]) {
   }
 }
 export function signOut() {
-  databaseMethods.signOut()
+  authService.signOut()
     .then(res => console.log(res))
 }
 export async function getUser() {
-  const user = await databaseMethods.getUser()
+  const user = await authService.getUser()
   return user
 }

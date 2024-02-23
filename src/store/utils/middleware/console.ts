@@ -2,7 +2,7 @@ import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { commands } from '@/services/console/commands'
 import { getAnime, getAnimeById, searchAnime } from '@/services/console/methods/api'
 import { login, register, signOut } from '@/services/console/methods/auth'
-import { addFavorite, getFavorites, removeFavorite } from '@/services/console/methods/favorites'
+import { changeLike, getFavorites } from '@/services/console/methods/favorites'
 import { addHistory, deleteAllHistory, deleteHistoryById, getHistory } from '@/services/console/methods/history'
 import { showError } from '@/services/console/utils'
 import { setConsoleCommand } from '@/store/utils/actionts'
@@ -22,10 +22,10 @@ startConsoleMiddleware({
         getAnime(params, dispatch)
         break
       case commands['anime-get-one']:
-        searchAnime(params, dispatch)
+        getAnimeById(params, dispatch)
         break
       case commands['anime-search']:
-        getAnimeById(params, dispatch)
+        searchAnime(params, dispatch)
         break
       case commands.register:
         register(params)
@@ -37,10 +37,10 @@ startConsoleMiddleware({
         signOut()
         break
       case commands['like-add']:
-        addFavorite(params)
+        changeLike(params)
         break
       case commands['like-remove']:
-        removeFavorite(params)
+        changeLike(params)
         break
       case commands['likes-get-all']:
         getFavorites()
