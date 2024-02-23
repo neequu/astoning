@@ -93,10 +93,11 @@ npm run dev
     - [x] Настроен CD: [Deploy Link](#deploy)
 - [x] Реализована [**виртуализация списков**](https://github.com/neequu/astoning/blob/main/src/pages/history.tsx)
 - [x] Используются [**мемоизированные селекторы** (createSelector)](https://github.com/neequu/astoning/blob/main/src/store/utils/selectors.ts) [пример использования](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
-- [ ] Используется **нормализованная структура стейта** (createEntityAdapter)
+- [x] Используется **нормализованная структура стейта** [createEntityAdapter](https://github.com/neequu/astoning/blob/main/src/store/slices/entity-visit-slice.ts)
+
 - [ ] Проведена **оптимизация приложения**
 
-- [ ] Feature Flags. Реализовать фичу “Поделиться в телеграм”, закрытую под фича флагом.
+- [x] Feature Flags. Реализовать фичу “Поделиться в телеграм”, закрытую под фича флагом. [тут](https://github.com/neequu/astoning/blob/main/server) и [тут](https://github.com/neequu/astoning/tree/main/src/features)
 
 - [x] Добавить **e2e тесты** через cypress
     - [x] [Гость. Поиск. Единица информации.](https://github.com/neequu/astoning/blob/main/cypress/e2e/search-card-redirect.cy.ts)
