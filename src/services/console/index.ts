@@ -1,7 +1,8 @@
 import type { AppDispatch } from '@/store'
+import { setConsoleCommand } from '@/store/utils/actionts'
 import { setConsoleCommand } from '@/store/utils/actions'
 
-export function nn(dispatch: AppDispatch) {
+export function nn(dispatch: AppDispatch): (cmd: string) => void {
   return (input: string) => {
     const [command, ...rest] = input.trim().split(' ')
     const params = rest.filter(p => p !== '')

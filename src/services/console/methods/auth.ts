@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 import type { ZodError } from 'zod'
 import { formSchema } from '@/lib/validations'
-import databaseMethods from '@/services/db/db-methods-switch'
-import type { Credentials } from '@/types/auth'
+import type { Credentials, User } from '@/types/auth'
+import { authService } from '@/services/auth'
 
-function validateCredentials(data: Credentials) {
+type ValidationResponse = { success: boolean, data: Credentials, error?: undefined } | { success: boolean, error: unknown, data?: undefined }
+
+function validateCredentials(data: Credentials): ValidationResponse {
   try {
     const validatedData = formSchema.parse(data)
     return { success: true, data: validatedData }
@@ -14,36 +16,37 @@ function validateCredentials(data: Credentials) {
   }
 }
 
-export function register(params: string[]) {
+export async function register(params: string[]): Promise<void> {
   const [email, password] = params
   const res = validateCredentials({ email, password })
   if (res.success) {
-    databaseMethods.register({ email, password })
-      .then(res => console.log(res))
+    await authService.register({ email, password })
+    console.log('✅')
   }
   else {
+    // using as here to specify error type
     const er = res.error as ZodError
     er.issues.forEach(e => console.warn(`${e.message} → fix ${e.path}`))
   }
 }
-export function login(params: string[]) {
+export async function login(params: string[]): Promise<void> {
   const [email, password] = params
 
-  const res = validateCredentials({ email, password })
-  if (res.success) {
-    databaseMethods.loginWithCredentials({ email, password })
-      .then(res => console.log(res))
+  const validation = validateCredentials({ email, password })
+  if (validation.success) {
+    await authService.loginWithCredentials({ email, password })
+    console.log('✅')
   }
   else {
-    const er = res.error as ZodError
+    const er = validation.error as ZodError
     er.issues.forEach(e => console.warn(`${e.message} → fix ${e.path}`))
   }
 }
-export function signOut() {
-  databaseMethods.signOut()
-    .then(res => console.log(res))
+export async function signOut(): Promise<void> {
+  await authService.signOut()
+  console.log('✅')
 }
-export async function getUser() {
-  const user = await databaseMethods.getUser()
+export async function getUser(): Promise<User | null> {
+  const user = await authService.getUser()
   return user
 }

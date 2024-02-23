@@ -1,38 +1,34 @@
 /* eslint-disable no-console */
-import type { ThunkDispatch, UnknownAction } from '@reduxjs/toolkit'
 import { addHistory } from './history'
 import { animeApi as api } from '@/store/api/anime-api'
+import type { AppDispatch } from '@/store'
 
-export function getAnime(params: string[], dispatch: ThunkDispatch<unknown, unknown, UnknownAction>) {
-  const page = +params[0]
-  if (page) {
-    dispatch(api.endpoints.getAnime.initiate(page))
-      .unwrap()
-      .then(res => console.log(res))
-      .catch(e => console.warn(e))
-  }
-  else {
-    console.warn('bad params')
-  }
+export function getAnime(params: string[], dispatch: AppDispatch): void {
+  const page = +params[0] || 1
+  dispatch(api.endpoints.getAnime.initiate(page))
+    .unwrap()
+    .then(res => console.table(res.data))
+    .catch(e => console.warn(e))
 }
-export function getAnimeById(params: string[], dispatch: ThunkDispatch<unknown, unknown, UnknownAction>) {
+export function getAnimeById(params: string[], dispatch: AppDispatch): void {
   const id = +params[0]
   if (id) {
     dispatch(api.endpoints.getAnimeById.initiate(id))
       .unwrap()
-      .then(res => console.log(res.data))
+      .then(res => console.table(res.data))
       .catch(e => console.warn(e.data.message))
   }
   else {
     console.warn('bad params')
   }
 }
-export function searchAnime(params: string[], dispatch: ThunkDispatch<unknown, unknown, UnknownAction>): void {
-  const query = params[0]
+export function searchAnime(params: string[], dispatch: AppDispatch): void {
+  const query = params.join(' ')
   if (query) {
     dispatch(api.endpoints.getAnimeSearch.initiate({ q: query }))
       .unwrap()
       .then(res => console.table(res.data))
+      .catch(e => console.warn(e.data.message))
       .then(() => addHistory(params))
   }
   else {

@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export function initializeConsole() {
+export function initializeConsole(): void {
   if (!window.nn) {
     window.nn = nn(store.dispatch)
     showCommands()
