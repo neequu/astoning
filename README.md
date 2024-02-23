@@ -95,7 +95,7 @@ npm run dev
 - [x] Используются [**мемоизированные селекторы** (createSelector)](https://github.com/neequu/astoning/blob/main/src/store/utils/selectors.ts) [пример использования](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
 - [x] Используется **нормализованная структура стейта** [createEntityAdapter](https://github.com/neequu/astoning/blob/main/src/store/slices/entity-visit-slice.ts)
 
-- [ ] Проведена **оптимизация приложения**
+- [x] Проведена [**оптимизация приложения**](#optimization)
 
 - [x] Feature Flags. Реализовать фичу “Поделиться в телеграм”, закрытую под фича флагом. [тут](https://github.com/neequu/astoning/blob/main/server) и [тут](https://github.com/neequu/astoning/tree/main/src/features)
 
@@ -123,3 +123,24 @@ npm run dev
 - [lucide-react](https://lucide.dev/) icons
 - [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 - [@antfu/eslint-config](https://github.com/antfu/eslint-config)
+
+
+
+<a id="optimization"></a>
+
+## оптимизация
+
+- использование хуков usecallback, usememo etc. для избежания лишних ререндеров
+  
+https://github.com/neequu/astoning/assets/69749247/ca0cb02c-befd-48be-8931-94ece768ccfd
+
+- кеширование результатов, как api так и данных из базы данных и инвалидация кеша по тегам + мутациям
+  
+https://github.com/neequu/astoning/assets/69749247/b7083ac2-69b7-4efd-b6ae-b7f309bc4763
+
+- code splitting - lazy loading - импорт компонентов, которые отображаются по условию чере lazily
+
+- анализ репортов перформанса, исправление моментов, которые были помечены, как плохо влияющие на производительность
+ ![unl](https://github.com/neequu/astoning/assets/69749247/f9186aff-bf92-4a6e-bca1-8a54eafb8207)
+
+  
