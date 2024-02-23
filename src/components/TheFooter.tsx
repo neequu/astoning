@@ -5,13 +5,13 @@ export function TheFooter() {
   return (
     <footer className="font-extralight text-sm flex items-baseline justify-center">
       <a href="https://github.com/neequu/astoning" target="_blank" rel="noreferrer">
-        <Button name="github link" variant="link" className="p-0">
+        <Button aria-label="github link" name="github link" variant="link" className="p-0">
           github
         </Button>
       </a>
       &nbsp;|&nbsp;
       <Link to="/visit">
-        <Button name="visits page" variant="link" className="p-0">
+        <Button aria-label="visits page" name="visits page" variant="link" className="p-0">
           check visits
         </Button>
       </Link>

@@ -17,7 +17,7 @@ export function MediaCard({ item, children }: Props) {
         </div>
       </div>
       <Link to={`/anime/${item.malId}`} className="max-h-72">
-        <img src={item.images.webp.image_url} className="h-72 min-w-30 w-full max-w-56 mx-auto rounded" alt={item.title} loading="lazy" />
+        <img src={item.images.webp.image_url} className="h-72 min-w-30 w-full max-w-56 mx-auto rounded" alt={item.title} />
       </Link>
       {children}
     </div>

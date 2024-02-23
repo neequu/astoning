@@ -45,7 +45,7 @@ export function AuthForm({ handleSubmit, form, fields, children, isDisabled }: P
         ),
         )}
         <div className="flex flex-col">
-          <Button name="authenticate" data-testid="submit" className="font-bold mt-6" disabled={form.formState.isSubmitting || isDisabled} type="submit">Submit</Button>
+          <Button aria-label="authenticate" name="authenticate" data-testid="submit" className="font-bold mt-6" disabled={form.formState.isSubmitting || isDisabled} type="submit">Submit</Button>
         </div>
       </form>
       {children && (

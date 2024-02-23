@@ -58,7 +58,7 @@ export function History() {
               )}
             </Autosizer>
           </HistoryWrapper>
-          <Button name="delete all" variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeleteAll}>Delete all history</Button>
+          <Button aria-label="delete all" name="delete all" variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeleteAll}>Delete all history</Button>
         </>
       )}
       {isError && <Message message="There was an error loading history!" className="flex-1 items-center text-destructive" />}

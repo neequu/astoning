@@ -7,7 +7,7 @@ export function NotFound() {
     <PageWrapper className="place-content-center text-center items-center">
       <div>
         <h1 className="text-2xl sm:text-5xl font-bold mb-4">The page wasnt found</h1>
-        <Button name="home" asChild variant="link">
+        <Button aria-label="home" name="home" asChild variant="link">
           <Link to="/" className="text-xl">
             Go Home
           </Link>

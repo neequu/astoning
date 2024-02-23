@@ -33,7 +33,7 @@ export default function SelectorGrind() {
                 </div>
               ))}
             </AnimationWrapper>
-            <Button name="filter by date" title="filter by date" className="w-full" onClick={handleFilter} variant="outline" size="icon">
+            <Button aria-label="filter by date" name="filter by date" title="filter by date" className="w-full" onClick={handleFilter} variant="outline" size="icon">
               <ArrowDown01Icon className={cn('h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all', filter === 'desc' && '-rotate-90 scale-0')} />
               <ArrowUp01Icon className={cn('absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all', filter === 'desc' && 'rotate-0 scale-100')} />
             </Button>

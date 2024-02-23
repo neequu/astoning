@@ -16,12 +16,12 @@ export function TheNav({ children, user }: Props) {
       {user
         ? (
           <>
-            <Button name="go to likes" asChild variant="outline" size="icon">
+            <Button aria-label="go to likes" name="go to likes" asChild variant="outline" size="icon">
               <NavLink to="/favorites">
                 <HeartIcon className="h-[1.2rem] w-[1.2rem] scale-100 transition-all " />
               </NavLink>
             </Button>
-            <Button name="go to history" asChild variant="outline" size="icon">
+            <Button aria-label="go to history" name="go to history" asChild variant="outline" size="icon">
               <NavLink to="/history">
                 <Clock8Icon className="h-[1.2rem] w-[1.2rem] scale-100 transition-all " />
               </NavLink>
@@ -31,12 +31,12 @@ export function TheNav({ children, user }: Props) {
           )
         : (
           <>
-            <Button name="go register" asChild className="font-bold" variant="outline">
+            <Button aria-label="go register" name="go register" asChild className="font-bold" variant="outline">
               <NavLink to="/register">
                 Register
               </NavLink>
             </Button>
-            <Button name="go login" asChild className="font-bold">
+            <Button aria-label="go login" name="go login" asChild className="font-bold">
               <NavLink to="/login">
                 Log In
               </NavLink>

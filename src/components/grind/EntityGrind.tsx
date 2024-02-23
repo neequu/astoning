@@ -28,7 +28,7 @@ export default function EntityGrind() {
             <AnimationWrapper className="border border-muted sm:w-80">
               {allEntityVisits.map(card => (
                 <div key={card.id} className="border-b border-muted py-10 flex items-center gap-1">
-                  <Button name="delete one" onClick={() => handleEntityRemoved(card.id)} variant="ghost" className="hover:text-destructive" size="icon">
+                  <Button aria-label="delete one" name="delete one" onClick={() => handleEntityRemoved(card.id)} variant="ghost" className="hover:text-destructive" size="icon">
                     <XIcon className="h-[1.2rem] w-[1.2rem]" />
                   </Button>
                   {card.id}
@@ -37,7 +37,7 @@ export default function EntityGrind() {
                 </div>
               ))}
             </AnimationWrapper>
-            <Button name="delete all" title="delete all" className="w-full" onClick={handleEntitiesRemoved} variant="outline" size="icon">
+            <Button aria-label="delete all" name="delete all" title="delete all" className="w-full" onClick={handleEntitiesRemoved} variant="outline" size="icon">
               <TrashIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
             </Button>
           </div>

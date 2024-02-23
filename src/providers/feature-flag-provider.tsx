@@ -12,8 +12,14 @@ export function FeatureProvider({ children }: { children: React.ReactNode }) {
   const [featureFlag, setFeatureFlag] = useState(false)
 
   useMemo(async () => {
-    const flag = await getTelegramFeatureFlag()
-    setFeatureFlag(flag.isTelegramShareEnabled)
+    try {
+      const flag = await getTelegramFeatureFlag()
+      setFeatureFlag(flag.isTelegramShareEnabled)
+    }
+    catch (error) {
+      console.error('error fetching feature flag:', error)
+      setFeatureFlag(false)
+    }
   }, [])
 
   return (

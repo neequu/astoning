@@ -29,7 +29,7 @@ export function ShareLink({ url }: Props) {
   return (
     <div>
       <a target="_blank" href={sharedUrl} rel="noreferrer">
-        <Button name="share" onClick={handleCopy(localUrl)} variant="ghost" size="icon" title="share on telegram">
+        <Button aria-label="share" name="share" onClick={handleCopy(localUrl)} variant="ghost" size="icon" title="share on telegram">
           <ArrowUpRightFromSquareIcon className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </a>
