@@ -1,5 +1,7 @@
 import type { ValidAuthFormFields } from '@/types/auth'
 
+export const BASE_URL = import.meta.env.DEV ? 'http://localhost:5173' : 'https://astoning-neequus-projects.vercel.app/'
+
 export const SERVER_URL = 'http://localhost:3000'
 export const TELEGRAM_FEAT_URL = '/api/tg-feat-flag'
 
