@@ -1,18 +1,16 @@
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-
-interface FeatureState {
-  isTelegramShareEnabled: boolean
-}
+import type { FeatureState } from '@/types/features'
 
 const initialState: FeatureState = {
   isTelegramShareEnabled: false,
 }
 
 export const telegramSlice = createSlice({
-  name: 'telegram',
+  name: 'tg-feature',
   initialState,
   reducers: {
-    setTelegramShareEnabled: (state, action) => {
+    setTelegramShareEnabled: (state, action: PayloadAction<boolean>) => {
       state.isTelegramShareEnabled = action.payload
     },
   },

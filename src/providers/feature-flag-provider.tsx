@@ -1,8 +1,6 @@
-import { createContext, useContext } from 'react'
-
-interface FeatureState {
-  isTelegramShareEnabled: boolean
-}
+import { createContext, useContext, useEffect, useState } from 'react'
+import { useGetFeatureFlagQuery } from '@/features/api/telegram'
+import type { FeatureState } from '@/types/features'
 
 const initialState: FeatureState = {
   isTelegramShareEnabled: false,
@@ -11,12 +9,10 @@ const initialState: FeatureState = {
 const FeatureProviderContext = createContext<FeatureState>(initialState)
 
 export function FeatureProvider({ children }: { children: React.ReactNode }) {
-  const value = {
-    isTelegramShareEnabled: false,
-  }
+  const { data } = useGetFeatureFlagQuery()
 
   return (
-    <FeatureProviderContext.Provider value={value}>
+    <FeatureProviderContext.Provider value={{ isTelegramShareEnabled: !!data?.isTelegramShareEnabled }}>
       {children}
     </FeatureProviderContext.Provider>
   )
