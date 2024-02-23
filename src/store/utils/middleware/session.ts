@@ -1,13 +1,13 @@
-import { addListener, createListenerMiddleware } from '@reduxjs/toolkit'
+import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { setUser } from '../../slices/auth-slice'
 import { generateTimestampTz } from '@/lib/utils'
 import { setSession } from '@/store/slices/session-slice'
 import type { AppDispatch, RootState } from '@/store'
 
 export const sessionMiddleware = createListenerMiddleware()
-export const addAppListener = addListener.withTypes<RootState, AppDispatch>()
+export const startSessionListening = sessionMiddleware.startListening.withTypes<RootState, AppDispatch>()
 
-sessionMiddleware.startListening({
+startSessionListening({
   actionCreator: setUser,
   effect: (action, listenerApi) => {
     const email = action.payload?.email ?? ''

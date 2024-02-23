@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { sessionMiddleware } from '@/store/utils/middleware/session'
+import { sessionMiddleware } from './utils/middleware/session'
+import { consoleMiddleware } from './utils/middleware/console'
 import authSlice from '@/store/slices/auth-slice'
 import sessionSlice from '@/store/slices/session-slice'
 import { animeApi } from '@/store/api/anime-api'
@@ -14,7 +15,8 @@ export const store = configureStore({
     [animeApi.reducerPath]: animeApi.reducer,
     [dbApi.reducerPath]: dbApi.reducer,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(sessionMiddleware.middleware).concat(animeApi.middleware).concat(dbApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(animeApi.middleware).concat(dbApi.middleware).prepend(sessionMiddleware.middleware).prepend(consoleMiddleware.middleware),
+
 })
 
 export type RootState = ReturnType<typeof store.getState>
