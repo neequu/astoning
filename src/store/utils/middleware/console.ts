@@ -5,7 +5,7 @@ import { login, register, signOut } from '@/services/console/methods/auth'
 import { changeLike, getFavorites } from '@/services/console/methods/favorites'
 import { addHistory, deleteAllHistory, deleteHistoryById, getHistory } from '@/services/console/methods/history'
 import { showError } from '@/services/console/utils'
-import { setConsoleCommand } from '@/store/utils/actionts'
+import { setConsoleCommand } from '@/store/utils/actions'
 import type { AppDispatch, RootState } from '@/store'
 
 export const consoleMiddleware = createListenerMiddleware()
