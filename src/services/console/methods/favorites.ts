@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import { getUser } from './auth'
 import { favoritesService } from '@/services/favorites'
 
 export async function getFavorites() {
   const user = await getUser()
   const res = await favoritesService.getFavorites(user?.id)
+  console.table(res)
   return res
 }
 export async function changeLike(params: string[]) {

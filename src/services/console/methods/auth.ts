@@ -22,6 +22,7 @@ export function register(params: string[]) {
       .then(res => console.log(res?.email))
   }
   else {
+    // using as here to specify error type
     const er = res.error as ZodError
     er.issues.forEach(e => console.warn(`${e.message} → fix ${e.path}`))
   }
