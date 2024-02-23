@@ -8,11 +8,14 @@ import { getFilter, getVisitedCards } from '@/store/utils/selectors'
 import { cn, showNotificationError, transformDateFromString } from '@/lib/utils'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { Message } from '@/components/misc/Message'
+import { useFeature } from '@/providers/feature-flag-provider'
 
 export function Visit() {
   const dispatch = useAppDispatch()
   const visitedCards = useAppSelector(getVisitedCards)
   const filter = useAppSelector(getFilter)
+
+  const { isTelegramShareEnabled } = useFeature()
 
   function handleFilter(): void {
     if (visitedCards.length <= 1)
@@ -24,6 +27,7 @@ export function Visit() {
     <PageWrapper heading="Your visits" className="place-contnet-center">
       <div className="flex flex-1 flex-col gap-5 my-auto place-content-center items-center text-center text-2xl">
         <div>
+          {JSON.stringify(isTelegramShareEnabled)}
           {visitedCards.length === 0
             ? <Message message="You haven't visited any card yet" />
             : (
