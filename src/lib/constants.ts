@@ -2,10 +2,6 @@ import type { ValidAuthFormFields } from '@/types/auth'
 
 export const BASE_URL = import.meta.env.DEV ? 'http://localhost:5173' : 'https://astoning-neequus-projects.vercel.app/'
 
-export const SERVER_URL = 'http://localhost:3000'
-export const TELEGRAM_FEAT_URL = '/api/tg-feat-flag'
-export const TELEGRAM_SHARED_URL = 'https://t.me/share/url?url='
-
 export const BASE_API_URL = 'https://api.jikan.moe/v4'
 export const MAX_SUGGESTIONS = 5
 

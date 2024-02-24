@@ -1,9 +1,11 @@
+import { lazily } from 'react-lazily'
 import { Button } from '@/components/ui/button'
 import { HiddenTextBlock } from '@/components/misc/HiddenTextBlock'
 import type { Anime } from '@/types/api/anime'
 import { LikeComponent } from '@/components/like/LikeComponent'
-import { ShareLink } from '@/components/feat/ShareLink'
 import { useFeature } from '@/providers/feature-flag-provider'
+
+const { ShareLink } = lazily(() => import('@/components/feat/ShareLink'))
 
 interface Props {
   item: Anime

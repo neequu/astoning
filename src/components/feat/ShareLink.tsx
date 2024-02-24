@@ -3,7 +3,7 @@ import { ArrowUpRightFromSquareIcon } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { showNotificationError, showNotificationSuccess } from '@/lib/utils'
-import { BASE_URL, TELEGRAM_SHARED_URL } from '@/lib/constants'
+import { BASE_URL } from '@/lib/constants'
 
 interface Props {
   url: string
@@ -13,7 +13,7 @@ export function ShareLink({ url }: Props) {
   const location = useLocation()
   const [_, copy] = useCopyToClipboard()
 
-  const sharedUrl = `${TELEGRAM_SHARED_URL}${url}`
+  const sharedUrl = `${import.meta.env.VITE_TELEGRAM_SHARED_URL}${url}`
   const localUrl = BASE_URL + location.pathname
 
   const handleCopy = (text: string) => () => {

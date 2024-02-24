@@ -1,11 +1,15 @@
+/* eslint-disable node/prefer-global/process */
 import type { Request, Response } from 'express'
 import express from 'express'
 import cors from 'cors'
 
-const TELEGRAM_FEAT_URL = '/api/tg-feat-flag'
+import { config } from 'dotenv'
+
+config({ path: '../.env.local' })
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.VITE_PORT || 3002
+const TELEGRAM_FEAT_URL = process.env.VITE_TELEGRAM_FEAT_URL
 
 app.use(cors())
 
