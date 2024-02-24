@@ -3,16 +3,16 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface Props {
-  handleClick: () => void
+  handleClicked: () => void
   isDisabled: boolean
   isActive: boolean
   isLoadingLike: boolean
   hasUser: boolean
 }
 
-export function LikeButton({ isDisabled, handleClick, isActive, isLoadingLike, hasUser }: Props) {
+export function LikeButton({ isDisabled, handleClicked, isActive, isLoadingLike, hasUser }: Props) {
   return (
-    <Button data-liked={isActive && !isDisabled} aria-label="like item" name="like item" data-testid="like-button" disabled={isDisabled} size="icon" variant="ghost" onClick={handleClick} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
+    <Button data-liked={isActive && !isDisabled} aria-label="like item" name="like item" data-testid="like-button" disabled={isDisabled} size="icon" variant="ghost" onClick={handleClicked} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
       {/* if not loading and user exists */}
       {!isLoadingLike && hasUser && (
         <>

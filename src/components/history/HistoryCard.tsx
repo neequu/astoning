@@ -16,7 +16,7 @@ export function HistoryCard({ item, onDelete }: Props) {
 
   const [isDeleting, setIsDeleting] = useState(false)
 
-  async function handleDelete(): Promise<void> {
+  async function handleDeleted(): Promise<void> {
     setIsDeleting(true)
     onDelete(item.id)
   }
@@ -29,7 +29,7 @@ export function HistoryCard({ item, onDelete }: Props) {
         </Link>
       </Button>
 
-      <Button name={`delete ${decoudedQuery}`} title={title} className={cn('p-2 hover:text-destructive', isDeleting && 'text-destructive')} disabled={isDeleting} size="icon" variant="ghost" onClick={handleDelete}>
+      <Button name={`delete ${decoudedQuery}`} title={title} className={cn('p-2 hover:text-destructive', isDeleting && 'text-destructive')} disabled={isDeleting} size="icon" variant="ghost" onClick={handleDeleted}>
         <XOctagonIcon size={20} />
       </Button>
     </div>

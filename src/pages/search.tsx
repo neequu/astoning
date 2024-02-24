@@ -22,7 +22,7 @@ export function Search() {
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
-  const { handleAddHistory } = useHistory()
+  const { handleHistoryAdded } = useHistory()
   const user = useAppSelector(selectUser)
 
   // search data
@@ -33,7 +33,7 @@ export function Search() {
   const searchMessage = currenstSearch ? `Showing ${animeData?.pagination.items.count || '...'} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
-  function handleQueryChange(newQuery: string): void {
+  function handleQueryChanged(newQuery: string): void {
     setQuery(newQuery)
   }
   // note: not extracting this, because there might be a page that works not on submit (like i had in ver.1)
@@ -46,13 +46,13 @@ export function Search() {
     else
       newSearchParams.set('q', query)
 
-    handleAddHistory(user?.id, query)
+    handleHistoryAdded(user?.id, query)
     setSearchParams(newSearchParams.toString())
   }
 
   return (
     <>
-      <SearchPanel handleSubmit={handleSubmit} changeQuery={handleQueryChange} query={query} />
+      <SearchPanel handleSubmit={handleSubmit} onChangeQuery={handleQueryChanged} query={query} />
       <PageWrapper className="pt-6" heading={searchHeading}>
         <MediaGrid>
           <AnimationWrapper className="grid-tmp">

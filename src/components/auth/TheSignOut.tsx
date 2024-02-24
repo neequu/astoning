@@ -7,13 +7,13 @@ import { userSet } from '@/store/slices/auth-slice'
 export function TheSignOut() {
   const dispatch = useAppDispatch()
 
-  async function handleSignOut(): Promise<void> {
+  async function handleSignedOut(): Promise<void> {
     const res = await authService.signOut()
     dispatch(userSet(res))
   }
 
   return (
-    <Button aria-label="sign out" name="sign out" onClick={handleSignOut} variant="outline" size="icon">
+    <Button aria-label="sign out" name="sign out" onClick={handleSignedOut} variant="outline" size="icon">
       <LogOutIcon className="h-[1.2rem] w-[1.2rem] transition-all" />
     </Button>
   )

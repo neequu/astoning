@@ -18,15 +18,15 @@ export function History() {
   const user = useAppSelector(selectUser)
   const { data: historyData, isError, isSuccess, isLoading } = useGetHistoryQuery(user?.id, { skip: !user?.id })
   const hasResults = isSuccess && historyData && historyData.length > 0
-  const { handleDeleteAllHistory, handleDeleteHistoryById } = useHistory()
+  const { handleAllHistoryDeleted, handleHistoryDeletedById } = useHistory()
 
   // rtk mutation handlers
-  const handleDeleteAll = (): void => {
-    handleDeleteAllHistory(user?.id)
+  const handleDeletedAll = (): void => {
+    handleAllHistoryDeleted(user?.id)
   }
-  const handleDeleteSingle = useCallback((itemId: number): void => {
-    handleDeleteHistoryById(user?.id, itemId)
-  }, [handleDeleteHistoryById])
+  const handleDeletedSingle = useCallback((itemId: number): void => {
+    handleHistoryDeletedById(user?.id, itemId)
+  }, [handleHistoryDeletedById])
 
   // row for virtualized list; usecallback to prevent retriggering delete button
   const renderHistoryRow = useCallback(({ index, style }: { index: number, style: React.HTMLAttributes<HTMLDivElement>['style'] }) => {
@@ -35,10 +35,10 @@ export function History() {
 
     return (
       <div style={style}>
-        <HistoryCard item={historyData[index]} onDelete={handleDeleteSingle} />
+        <HistoryCard item={historyData[index]} onDelete={handleDeletedSingle} />
       </div>
     )
-  }, [historyData, handleDeleteSingle])
+  }, [historyData, handleDeletedAll])
 
   return (
     <PageWrapper heading="Virtualized History">
@@ -58,7 +58,7 @@ export function History() {
               )}
             </Autosizer>
           </HistoryWrapper>
-          <Button aria-label="delete all" name="delete all" variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeleteAll}>Delete all history</Button>
+          <Button aria-label="delete all" name="delete all" variant="destructive" className="mt-auto font-bold px-20 sm:self-center" onClick={handleDeletedAll}>Delete all history</Button>
         </>
       )}
       {isError && <Message message="There was an error loading history!" className="flex-1 items-center text-destructive" />}

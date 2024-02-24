@@ -16,7 +16,7 @@ export function ShareLink({ url }: Props) {
   const sharedUrl = `${import.meta.env.VITE_TELEGRAM_SHARED_URL}${url}`
   const localUrl = BASE_URL + location.pathname
 
-  const handleCopy = (text: string) => () => {
+  const handleCopied = (text: string) => () => {
     copy(text)
       .then(() => {
         showNotificationSuccess('Copied!')
@@ -29,7 +29,7 @@ export function ShareLink({ url }: Props) {
   return (
     <div>
       <a target="_blank" href={sharedUrl} rel="noreferrer">
-        <Button aria-label="share" name="share" onClick={handleCopy(localUrl)} variant="ghost" size="icon" title="share on telegram">
+        <Button aria-label="share" name="share" onClick={handleCopied(localUrl)} variant="ghost" size="icon" title="share on telegram">
           <ArrowUpRightFromSquareIcon className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </a>

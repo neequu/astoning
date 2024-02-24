@@ -14,11 +14,11 @@ interface Props {
 export function LikeComponent({ className, itemId }: Props) {
   const user = useAppSelector(selectUser)
   const userId = user?.id
-  const { isActive, setIsActive, isLoadingLike, handleChangeLike } = useSetLike(itemId, userId)
+  const { isActive, setIsActive, isLoadingLike, handleLikeChanged } = useSetLike(itemId, userId)
 
   const [disabled, setDisabled] = useState(false)
 
-  async function handleLike(): Promise<void> {
+  async function handleLiked(): Promise<void> {
     if (!userId)
       return showNotificationError('You need to be logged in')
     // disable on click
@@ -27,7 +27,7 @@ export function LikeComponent({ className, itemId }: Props) {
 
     // optimistically change state
     setIsActive(!initialState)
-    const res = await handleChangeLike(itemId, initialState, userId)
+    const res = await handleLikeChanged(itemId, initialState, userId)
     // if no res → set to initial state
     if (!res)
       setIsActive(initialState)
@@ -37,7 +37,7 @@ export function LikeComponent({ className, itemId }: Props) {
   }
   return (
     <div className={cn('flex', className)}>
-      <LikeButton isDisabled={disabled} handleClick={handleLike} isActive={isActive} isLoadingLike={isLoadingLike} hasUser={!!user} />
+      <LikeButton isDisabled={disabled} handleClicked={handleLiked} isActive={isActive} isLoadingLike={isLoadingLike} hasUser={!!user} />
     </div>
   )
 }

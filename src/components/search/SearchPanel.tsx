@@ -4,13 +4,13 @@ import { SearchForm } from '@/components/search/SearchForm'
 
 interface Props {
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
-  changeQuery: (q: string) => void
+  onChangeQuery: (q: string) => void
   children?: React.ReactElement
   query?: string
   shouldKeepFocusState?: boolean
 }
 
-export function SearchPanel({ handleSubmit, changeQuery, query, children, shouldKeepFocusState = false }: Props) {
+export function SearchPanel({ handleSubmit, onChangeQuery, query, children, shouldKeepFocusState = false }: Props) {
   // alternative: create another input with state and pass it conditionally
   const [isInputFocused, setIsInputFocused] = useState(false)
 
@@ -22,13 +22,13 @@ export function SearchPanel({ handleSubmit, changeQuery, query, children, should
     return child
   })
 
-  function handleFocus(): void {
+  function handleFocused(): void {
     if (!shouldKeepFocusState)
       return
 
     setIsInputFocused(true)
   }
-  function handleBlur(): void {
+  function handleBlured(): void {
     if (!shouldKeepFocusState)
       return
 
@@ -41,13 +41,13 @@ export function SearchPanel({ handleSubmit, changeQuery, query, children, should
         <Input
           name="query"
           autoFocus
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onFocus={handleFocused}
+          onBlur={handleBlured}
           value={query}
           className="text-md py-6 rounded-r-none border-r-none focus-visible:ring-offset-0 focus-visible:ring-0"
           placeholder="Search!"
           type="text"
-          onChange={e => changeQuery(e.target.value)}
+          onChange={e => onChangeQuery(e.target.value)}
         />
       </SearchForm>
       {children && childrenWithProps}

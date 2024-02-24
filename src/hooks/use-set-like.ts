@@ -17,9 +17,9 @@ export function useSetLike(itemId: number, userId: User['id'] | undefined) {
       setIsActive(isLiked)
   }, [favoritesData])
 
-  const handleChangeLike = (itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined) => {
+  const handleLikeChanged = (itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined) => {
     return changeLike({ itemId, isCurrentStateActive, userId })
   }
 
-  return { isActive, setIsActive, isLoadingLike: isLoading, handleChangeLike }
+  return { isActive, setIsActive, isLoadingLike: isLoading, handleLikeChanged }
 }

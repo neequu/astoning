@@ -17,11 +17,11 @@ import { GithubIcon } from '@/components/icons/github'
 import { userSet } from '@/store/slices/auth-slice'
 
 interface Props {
-  handleAuth: (data: Credentials) => Promise<User | null >
+  authEvent: (data: Credentials) => Promise<User | null >
   message?: string
 }
 
-export function AuthPanel({ handleAuth, message }: Props) {
+export function AuthPanel({ authEvent, message }: Props) {
   const [isOAuthProcessing, setIsOAuthProcessing] = useState(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ export function AuthPanel({ handleAuth, message }: Props) {
   }
 
   async function onSubmit(values: z.infer<typeof formSchema>): Promise<void> {
-    const user = await handleAuth(values)
+    const user = await authEvent(values)
     if (user !== null)
       handleAuthSuccess(user)
   }

@@ -22,7 +22,7 @@ const { SearchSuggestions } = lazily(() => import('@/components/search/SearchSug
 
 export function Home() {
   const user = useAppSelector(selectUser)
-  const { handleAddHistory } = useHistory()
+  const { handleHistoryAdded } = useHistory()
   const navigate = useNavigate()
 
   // search queries
@@ -33,6 +33,7 @@ export function Home() {
   // all anime data
   const { data: animeData, isLoading, isError } = useGetAnimeQuery(page)
   const [items, setItems] = useState<Anime[]>([])
+
   // using use effect to sync data from api with state
   useEffect(() => {
     if (!animeData)
@@ -45,24 +46,24 @@ export function Home() {
   }, [animeData])
 
   // update page
-  function handlePageChange(): void {
+  function handlePageChanged(): void {
     setPage(p => p + 1)
   }
   // update query
-  function handleQueryChange(newQuery: string): void {
+  function handleQueryChanged(newQuery: string): void {
     setQuery(newQuery)
   }
   // on submit transform query and redirect to search page
   function handleSubmit(): void {
     const encodedQuery = transformQuery(query)
-    handleAddHistory(user?.id, query)
+    handleHistoryAdded(user?.id, query)
     const redirectUrl = `/search?q=${encodedQuery}`
     navigate(redirectUrl)
   }
 
   return (
     <>
-      <SearchPanel changeQuery={handleQueryChange} shouldKeepFocusState={true} handleSubmit={handleSubmit}>
+      <SearchPanel onChangeQuery={handleQueryChanged} shouldKeepFocusState={true} handleSubmit={handleSubmit}>
         <SearchSuggestions debouncedQuery={debouncedQuery} />
       </SearchPanel>
       <PageWrapper className="pt-6" heading="Anime Collection">
@@ -75,7 +76,7 @@ export function Home() {
           ))}
         </MediaGrid>
         {isError && <Message message="There was an error loading anime!" className="flex-1 items-center text-destructive" />}
-        <TailElement breakCheck={!animeData || !animeData.pagination.hasNextPage} callback={handlePageChange} />
+        <TailElement breakCheck={!animeData || !animeData.pagination.hasNextPage} callback={handlePageChanged} />
       </PageWrapper>
     </>
   )

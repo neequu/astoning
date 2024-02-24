@@ -23,7 +23,7 @@ export function AnimeItem() {
 
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
 
-  // sync dispatch with rendered component
+  // sync dispatch with rendered component; naimg is bad - just testing
   useEffect(() => {
     if (isNotValidId)
       return
