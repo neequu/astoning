@@ -79,6 +79,10 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.0"
   },
+  "overrides": {
+    "glob": "8.1.0",
+    "minimatch": "5.1.2"
+  },
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
