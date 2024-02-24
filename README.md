@@ -17,10 +17,10 @@ deployed on [vercel](https://astoning-neequus-projects.vercel.app)
 
 Install dependencies:
 ```javascript
-pnpm run prepare
+pnpm run go
 ```
 ```javascript
-npm run prepare
+npm run go
 ```
 Start dev server:
 ```javascript
