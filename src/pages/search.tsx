@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useDebouncedCallback } from 'use-debounce'
 import { lazily } from 'react-lazily'
 import { useGetAnimeSearchQuery } from '@/store/api/anime-api'
+import { selectUser } from '@/store/utils/selectors'
+import { useHistory } from '@/hooks/use-history'
+import { useAppSelector } from '@/hooks/store-hooks'
 
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
@@ -20,39 +22,37 @@ export function Search() {
   const [query, setQuery] = useState(searchParams.get('q') || '')
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
-  // search fn
-  const throttledSearch = useDebouncedCallback(search, 666)
+  const { handleAddHistory } = useHistory()
+  const user = useAppSelector(selectUser)
 
   // search data
   const { data: animeData, isError, isSuccess, isLoading, isFetching } = useGetAnimeSearchQuery({ q: currenstSearch })
   const hasResults = isSuccess && animeData && animeData.data.length > 0
 
   // search msgs based on if the are results
-  const searchMessage = currenstSearch && hasResults ? `Showing ${animeData.pagination.items.count} results for ${currenstSearch}` : 'Search any anime!'
+  const searchMessage = currenstSearch ? `Showing ${animeData?.pagination.items.count || '...'} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
   function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
-    throttledSearch()
   }
-
-  function search(): void {
-    if (currenstSearch === query)
-      return
-
+  // note: not extracting this, because there might be a page that works not on submit (like i had in ver.1)
+  function handleSubmit(): void {
     setCurrenstSearch(query)
     const newSearchParams = new URLSearchParams(searchParams)
+
     if (query === '')
       newSearchParams.delete('q')
     else
       newSearchParams.set('q', query)
 
+    handleAddHistory(user?.id, query)
     setSearchParams(newSearchParams.toString())
   }
 
   return (
     <>
-      <SearchPanel changeQuery={handleQueryChange} query={query} />
+      <SearchPanel handleSubmit={handleSubmit} changeQuery={handleQueryChange} query={query} />
       <PageWrapper className="pt-6" heading={searchHeading}>
         <MediaGrid>
           <AnimationWrapper className="grid-tmp">

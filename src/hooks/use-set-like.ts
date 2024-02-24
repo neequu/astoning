@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import type { User } from '@/types/auth'
 import { useChangeLikeMutation, useGetFavoritesByIdQuery } from '@/store/api/db-api'
 
@@ -17,9 +17,9 @@ export function useSetLike(itemId: number, userId: User['id'] | undefined) {
       setIsActive(isLiked)
   }, [favoritesData])
 
-  const handleChangeLike = useCallback((itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined) => {
+  const handleChangeLike = (itemId: number, isCurrentStateActive: boolean, userId: User['id'] | undefined) => {
     return changeLike({ itemId, isCurrentStateActive, userId })
-  }, [changeLike])
+  }
 
   return { isActive, setIsActive, isLoadingLike: isLoading, handleChangeLike }
 }

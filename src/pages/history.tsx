@@ -24,9 +24,9 @@ export function History() {
   const handleDeleteAll = (): void => {
     handleDeleteAllHistory(user?.id)
   }
-  const handleDeleteSingle = useCallback((itemId: number): void => {
+  const handleDeleteSingle = (itemId: number): void => {
     handleDeleteHistoryById(user?.id, itemId)
-  }, [handleDeleteHistoryById, user?.id])
+  }
 
   // row for virtualized list; usecallback to prevent retriggering delete button
   const renderHistoryRow = useCallback(({ index, style }: { index: number, style: React.HTMLAttributes<HTMLDivElement>['style'] }) => {
