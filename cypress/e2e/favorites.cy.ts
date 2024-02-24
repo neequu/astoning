@@ -2,13 +2,13 @@ describe('card suggestions and card entity page w/ auth', () => {
   beforeEach(() => {
     // register before each test
     // if using supabase - change to login
-    cy.visit('/register')
+    cy.visit('/login')
     cy.get('[data-testid="email"]').type('nn@nn.nn')
     cy.get('[data-testid="password"]').type('nnnnnn')
     cy.get('[data-testid="submit"]').click()
 
     // wait for the register process to complete
-    cy.url().should('not.include', '/register')
+    cy.url().should('not.include', '/login')
   })
 
   it('should add, view, and remove a card from favorites', () => {
@@ -31,11 +31,16 @@ describe('card suggestions and card entity page w/ auth', () => {
     cy.get('[data-testid="anime-card"] h1').should('be.visible')
     // like the card
     cy.get('[data-testid="anime-card"] [data-testid="like-button"]').should('exist').click()
+
+    cy.get('[data-testid="anime-card"] [data-testid="like-button"]', { timeout: 20000 }).should('have.attr', 'data-liked', 'true')
     // go to the likes url
     cy.visit('/favorites')
     // check that clicking the buttons removes it
-    cy.get('[data-testid="media-card"]').should('exist')
-    cy.get('[data-testid="media-card"] [data-testid="like-button"]').should('be.visible').click()
+    cy.get('[data-testid="media-card"]', { timeout: 20000 }).should('exist')
+    cy.get('[data-testid="media-card"] [data-testid="like-button"]').should('be.visible', { timeout: 20000 })
+    cy.get('[data-testid="media-card"] [data-testid="like-button"]', { timeout: 20000 }).should('have.attr', 'data-liked', 'true')
+    cy.get('[data-testid="media-card"] [data-testid="like-button"]').click()
+    cy.get('[data-testid="media-card"] [data-testid="like-button"]', { timeout: 20000 }).should('have.attr', 'data-liked', 'false')
     cy.get('[data-testid="media-card"]').should('not.exist')
   })
 })

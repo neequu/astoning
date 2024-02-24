@@ -12,7 +12,7 @@ interface Props {
 
 export function LikeButton({ isDisabled, handleClick, isActive, isLoadingLike, hasUser }: Props) {
   return (
-    <Button aria-label="like item" name="like item" data-testid="like-button" disabled={isDisabled} size="icon" variant="ghost" onClick={handleClick} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
+    <Button data-liked={isActive && !isDisabled} aria-label="like item" name="like item" data-testid="like-button" disabled={isDisabled} size="icon" variant="ghost" onClick={handleClick} className={cn(isActive && 'hover:text-destructive transition-all', isLoadingLike && 'animate-pulse rounded-md bg-muted')}>
       {/* if not loading and user exists */}
       {!isLoadingLike && hasUser && (
         <>
