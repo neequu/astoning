@@ -52,11 +52,11 @@ npm run dev
 
 - [x] Есть [**рендеринг списков**](https://github.com/neequu/astoning/blob/main/src/pages/search.tsx)
 
-- [x] Реализована хотя бы одна [**форма**](https://github.com/neequu/astoning/blob/main/src/components/AuthForm.tsx)
+- [x] Реализована хотя бы одна [**форма**](https://github.com/neequu/astoning/blob/main/src/components/auth/AuthForm.tsx)
 
 - [x] Есть применение [**Контекст API**](https://github.com/neequu/astoning/blob/main/src/providers/theme-provider.tsx)
 
-- [x] Есть применение **предохранителя** [тут](https://github.com/neequu/astoning/blob/main/src/App.tsx) и [тут](https://github.com/neequu/astoning/blob/main/src/components/ErrorLayout.tsx)
+- [x] Есть применение **предохранителя** [тут](https://github.com/neequu/astoning/blob/main/src/App.tsx) и [тут](https://github.com/neequu/astoning/blob/main/src/components/misc/ErrorLayout.tsx)
 
 - [x] Есть хотя бы один [**кастомный хук**](https://github.com/neequu/astoning/blob/main/src/hooks)
 
@@ -68,7 +68,7 @@ npm run dev
 
 **Redux**
 
-- [x] Используем **Modern Redux with Redux Toolkit**
+- [x] Используем [**Modern Redux with Redux Toolkit**](https://github.com/neequu/astoning/blob/main/src/store/index.ts)
 - [x] Используем [**слайсы**](https://github.com/neequu/astoning/blob/main/src/store/slices)
 
 - [x] Есть хотя бы одна **кастомная мидлвара** или [**createListenerMiddleware**](https://github.com/neequu/astoning/blob/main/src/store/utils/middleware/console.ts)
