@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useAddHistoryMutation, useDeleteAllHistoryMutation, useDeleteHistoryByIdMutation } from '@/store/api/db-api'
 import type { User } from '@/types/auth'
 
@@ -10,9 +11,9 @@ export function useHistory() {
     addHistory({ query, userId })
   }
 
-  const handleDeleteHistoryById = (userId: User['id'] | undefined, itemId: number) => {
+  const handleDeleteHistoryById = useCallback((userId: User['id'] | undefined, itemId: number) => {
     deleteHistoryById({ itemId, userId })
-  }
+  }, [deleteHistoryById])
 
   const handleDeleteAllHistory = (userId: User['id'] | undefined) => {
     deleteAllHistory({ userId })

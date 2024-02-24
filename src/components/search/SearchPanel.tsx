@@ -40,6 +40,7 @@ export function SearchPanel({ handleSubmit, changeQuery, query, children, should
       <SearchForm handleSubmit={handleSubmit}>
         <Input
           name="query"
+          autoFocus
           onFocus={handleFocus}
           onBlur={handleBlur}
           value={query}

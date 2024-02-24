@@ -19,7 +19,7 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
     skip: !debouncedQuery,
   })
   // don't render anything initially
-  if (!searchData || !debouncedQuery)
+  if (!debouncedQuery)
     return null
 
   const noResults = isSuccess && searchData.pagination.items.count === 0
@@ -31,7 +31,7 @@ export function SearchSuggestions({ debouncedQuery, isInputFocused }: Props) {
           ? <CardSkeleton amount={5} className="h-[80px]" />
           : (
             <AnimationWrapper>
-              {searchData.data.map(item => (
+              {searchData?.data.map(item => (
                 <SearchSuggestionCard key={item.malId} item={item} />
               ))}
             </AnimationWrapper>
