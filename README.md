@@ -129,21 +129,21 @@ npm run dev
 
 ## console examples
 ```javascript
-  all anime: /anime 
-  anime by id: /anime/ 144 
+  all anime: /anime
+  anime by id: /anime/ 144
   search for anime: /search kanon
 
   like anime: /like 144
   unlike anime: /like/rm 144
-  get your likes: /likes 
+  get your likes: /likes
 
   login: /login email password
   register: /register email password
-  signout: /signout 
+  signout: /signout
 
-  get all history: /history 
+  get all history: /history
   remove history entry: /history/rm 4
-  clear all history: /history/clear 
+  clear all history: /history/clear
 ```
 <a id="optimization"></a>
 
