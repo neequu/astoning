@@ -7,7 +7,7 @@
     "dev:omit": "vite",
     "dev": "concurrently \"cd server && tsc && node dist/index.js\" \"vite\"",
     "build": "tsc && vite build",
-    "go": "npm i concurrently && concurrently \"npm i\" \"cd server npm i\" ",
+    "go": "npm i concurrently && concurrently \"npm i\" \"cd server && npm i\" ",
     "server": "cd server && tsc && node dist/index.js",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
