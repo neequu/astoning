@@ -13,7 +13,7 @@ export function useInitializeUser(getUser: () => Promise<User | null>): ReturnTy
 
   useEffect(() => {
     let isMounted = true
-    const getInitialUser = async () => {
+    const getInitialUser = async (): Promise<void> => {
       setIsLoading(true)
       const user = await getUser()
       if (isMounted) {

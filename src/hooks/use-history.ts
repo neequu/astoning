@@ -7,15 +7,15 @@ export function useHistory() {
   const [deleteHistoryById] = useDeleteHistoryByIdMutation()
   const [deleteAllHistory] = useDeleteAllHistoryMutation()
 
-  const handleHistoryAdded = (userId: User['id'] | undefined, query: string) => {
+  const handleHistoryAdded = (userId: User['id'] | undefined, query: string): void => {
     addHistory({ query, userId })
   }
 
-  const handleHistoryDeletedById = useCallback((userId: User['id'] | undefined, itemId: number) => {
+  const handleHistoryDeletedById = useCallback((userId: User['id'] | undefined, itemId: number): void => {
     deleteHistoryById({ itemId, userId })
   }, [deleteHistoryById])
 
-  const handleAllHistoryDeleted = (userId: User['id'] | undefined) => {
+  const handleAllHistoryDeleted = (userId: User['id'] | undefined): void => {
     deleteAllHistory({ userId })
   }
 
