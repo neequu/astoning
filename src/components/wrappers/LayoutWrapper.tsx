@@ -1,17 +1,13 @@
 import { TheFooter } from '../TheFooter'
 import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { TheHeader } from '@/components/TheHeader'
-import { useInitializeUser } from '@/hooks/use-initialize-user'
-import { authService } from '@/services/auth'
-import { initializeConsole } from '@/services/console/init'
 
 interface Props {
   children: React.ReactNode
+  isLoading: boolean
 }
 
-export function LayoutWrapper({ children }: Props) {
-  const { isLoading } = useInitializeUser(authService.getUser)
-  initializeConsole()
+export function LayoutWrapper({ children, isLoading }: Props) {
   return (
     <>
       {isLoading && <LoadingSkeleton /> }

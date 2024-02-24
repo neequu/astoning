@@ -8,10 +8,16 @@ import { LayoutWrapper } from '@/components/wrappers/LayoutWrapper'
 import { ErrorLayout } from '@/components/misc/ErrorLayout'
 import { Router } from '@/router'
 import { store } from '@/store'
+import { useInitializeUser } from '@/hooks/use-initialize-user'
+import { authService } from '@/services/auth'
+import { initializeConsole } from '@/services/console/init'
 
 function App() {
+  // initialization in here for clarity of initialization flow + single entry point
+  const { isLoading } = useInitializeUser(authService.getUser)
+  initializeConsole()
   return (
-    <LayoutWrapper>
+    <LayoutWrapper isLoading={isLoading}>
       <Router />
     </LayoutWrapper>
   )
