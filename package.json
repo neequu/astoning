@@ -56,7 +56,6 @@
     "@storybook/react": "^7.6.16",
     "@storybook/react-vite": "^7.6.16",
     "@storybook/test": "^7.6.16",
-    "@types/cors": "^2.8.17",
     "@types/node": "^20.11.17",
     "@types/prop-types": "^15.7.11",
     "@types/react": "^18.2.55",
