@@ -44,7 +44,7 @@ export const dbApi = createApi({
       },
       providesTags: ['History'],
     }),
-    addHistory: builder.mutation<null, { query: string, userId: User['id'] | undefined }>({
+    addHistory: builder.mutation<string | null, { query: string, userId: User['id'] | undefined }>({
       queryFn: async ({ query, userId }) => {
         const data = await historyService.addHistory(query, userId)
         return { data }

@@ -12,5 +12,7 @@ export function initializeConsole(): void {
   if (!window.nn) {
     window.nn = nn(store.dispatch)
     showCommands()
+    // eslint-disable-next-line no-console
+    console.log('use commands with "nn(...)"')
   }
 }
