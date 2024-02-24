@@ -38,7 +38,7 @@ export const localStorageHistory: History = {
     const newData: Tables<'history'>[] = [...allHistory, { user_id: userId, created_at: timestamptz, id: newId, query }]
     localStorage.setItem(LS_KEYS.history, JSON.stringify(newData))
 
-    return null
+    return query
   },
 
   deleteHistoryById: async (itemId: number, userId: User['id'] | undefined) => {

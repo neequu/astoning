@@ -20,17 +20,13 @@ export async function register(params: string[]): Promise<void> {
   const [email, password] = params
   const res = validateCredentials({ email, password })
   if (res.success) {
-    const res = await authService.register({ email, password })
-
-    if (!res)
-      throw new Error('error registering')
-    else
-      console.log('✅')
+    const user = await authService.register({ email, password })
+    user ? console.log('✅') : console.log('❎')
   }
   else {
     // using as here to specify error type
     const er = res.error as ZodError
-    er.issues.forEach(e => console.warn(`${e.message} → fix ${e.path}`))
+    er.issues.forEach(e => console.log(`${e.message} → fix ${e.path}`))
   }
 }
 export async function login(params: string[]): Promise<void> {
@@ -38,17 +34,18 @@ export async function login(params: string[]): Promise<void> {
 
   const validation = validateCredentials({ email, password })
   if (validation.success) {
-    await authService.loginWithCredentials({ email, password })
-    console.log('✅')
+    const user = await authService.loginWithCredentials({ email, password })
+    // there is no check for multiple logins: this will always show
+    user ? console.log('✅') : console.log('❎')
   }
   else {
+    // using as here to specify error type
     const er = validation.error as ZodError
-    er.issues.forEach(e => console.warn(`${e.message} → fix ${e.path}`))
+    er.issues.forEach(e => console.log(`${e.message} → fix ${e.path}`))
   }
 }
-export async function signOut(): Promise<void> {
-  await authService.signOut()
-  console.log('✅')
+export function signOut(): void {
+  authService.signOut().then(() => console.log('✅'))
 }
 export async function getUser(): Promise<User | null> {
   const user = await authService.getUser()

@@ -26,7 +26,7 @@ export const supabaseHistory: History = {
     if (!userId)
       return null
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('history')
       .insert({ query })
 
@@ -35,7 +35,7 @@ export const supabaseHistory: History = {
       return null
     }
 
-    return data
+    return query
   },
 
   deleteHistoryById: async (itemId: number, userId: User['id'] | undefined) => {

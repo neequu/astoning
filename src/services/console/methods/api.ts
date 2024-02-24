@@ -8,7 +8,7 @@ export function getAnime(params: string[], dispatch: AppDispatch): void {
   dispatch(api.endpoints.getAnime.initiate(page))
     .unwrap()
     .then(res => console.table(res.data))
-    .catch(e => console.warn(e))
+    .catch(e => console.log(e))
 }
 export function getAnimeById(params: string[], dispatch: AppDispatch): void {
   const id = +params[0]
@@ -16,10 +16,10 @@ export function getAnimeById(params: string[], dispatch: AppDispatch): void {
     dispatch(api.endpoints.getAnimeById.initiate(id))
       .unwrap()
       .then(res => console.table(res.data))
-      .catch(e => console.warn(e.data.message))
+      .catch(e => console.log(e.data.message))
   }
   else {
-    console.warn('bad params')
+    console.log('bad params')
   }
 }
 export function searchAnime(params: string[], dispatch: AppDispatch): void {
@@ -28,10 +28,10 @@ export function searchAnime(params: string[], dispatch: AppDispatch): void {
     dispatch(api.endpoints.getAnimeSearch.initiate({ q: query }))
       .unwrap()
       .then(res => console.table(res.data))
-      .catch(e => console.warn(e.data.message))
+      .catch(e => console.log(e.data.message))
       .then(() => addHistory(params))
   }
   else {
-    console.warn('bad params')
+    console.log('bad params')
   }
 }

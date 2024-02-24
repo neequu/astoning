@@ -17,7 +17,7 @@ export interface Favorites {
 }
 export interface History {
   getHistory: (userId: User['id'] | undefined) => Promise<Tables<'history'>[] | null>
-  addHistory: (query: string, userId: User['id'] | undefined) => Promise<null>
+  addHistory: (query: string, userId: User['id'] | undefined) => Promise<string | null>
   deleteHistoryById: (itemId: number, userId: User['id'] | undefined) => Promise<null | number>
   deleteAllHistory: (userId: User['id'] | undefined) => Promise<null>
 }

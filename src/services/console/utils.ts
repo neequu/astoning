@@ -5,7 +5,7 @@ export function showCommands(): void {
   console.table(availableCommands)
 }
 export function showError(): void {
-  console.warn('😡😡😡😡😡')
+  console.log('😡😡😡😡😡')
   showCommands()
-  console.warn('😡😡😡😡😡')
+  console.log('😡😡😡😡😡')
 }
