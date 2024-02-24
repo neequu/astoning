@@ -9,8 +9,8 @@ import { useAppSelector } from '@/hooks/store-hooks'
 import { useGetHistoryQuery } from '@/store/api/db-api'
 import { selectUser } from '@/store/utils/selectors'
 import { useHistory } from '@/hooks/use-history'
+import { Message } from '@/components/misc/Message'
 
-const { Message } = lazily(() => import('@/components/misc/Message'))
 const { HistoryCard } = lazily(() => import('@/components/history/HistoryCard'))
 const { Button } = lazily(() => import('@/components/ui/button'))
 

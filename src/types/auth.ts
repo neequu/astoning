@@ -2,8 +2,6 @@ import type { Provider as SupabaseProvider, User as SupabaseUser } from '@supaba
 
 export type UserWithCredentials = { user: User, activeSession: boolean } & Credentials
 
-export type UserOptional = User | null
-
 export type ValidAuthFormFields = 'email' | 'password'
 
 export interface Credentials {
@@ -11,5 +9,5 @@ export interface Credentials {
   password: string
 }
 
-export interface User extends SupabaseUser {}
+export interface User extends Omit<SupabaseUser, 'app_metadata' | 'user_metadata' | 'aud'> {}
 export type Provider = SupabaseProvider

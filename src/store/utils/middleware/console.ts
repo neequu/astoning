@@ -3,7 +3,7 @@ import { commands } from '@/services/console/commands'
 import { getAnime, getAnimeById, searchAnime } from '@/services/console/methods/api'
 import { login, register, signOut } from '@/services/console/methods/auth'
 import { changeLike, getFavorites } from '@/services/console/methods/favorites'
-import { addHistory, deleteAllHistory, deleteHistoryById, getHistory } from '@/services/console/methods/history'
+import { deleteAllHistory, deleteHistoryById, getHistory } from '@/services/console/methods/history'
 import { showError } from '@/services/console/utils'
 import { setConsoleCommand } from '@/store/utils/actions'
 import type { AppDispatch, RootState } from '@/store'
@@ -47,9 +47,6 @@ startConsoleMiddleware({
         break
       case commands['history-get-all']:
         getHistory()
-        break
-      case commands['history-add']:
-        addHistory(params)
         break
       case commands['history-remove-one']:
         deleteHistoryById(params)

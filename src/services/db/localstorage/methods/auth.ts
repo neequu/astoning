@@ -45,14 +45,16 @@ export const localStorageAuth: Auth = {
   register: async (cred: Credentials) => {
     verifyLocalStorageByKey(LS_KEYS.auth)
 
-    const timestamptz = generateTimestampTz()
-    const appMetadata = { app: 'neequu app' }
-    const userMetadata = { about: 'very good user' }
-
-    const user: User = { id: cred.password + cred.email, created_at: timestamptz, app_metadata: appMetadata, user_metadata: userMetadata, aud: 'authenticated' }
-
-    const userObject: UserWithCredentials = { ...cred, user, activeSession: true }
     const prevData: UserWithCredentials[] = JSON.parse(localStorage.getItem(LS_KEYS.auth)!)
+    const existingUser = prevData.find(u => u.email === cred.email)
+    if (existingUser) {
+      showNotificationError('Already exists')
+      return null
+    }
+
+    const timestamptz = generateTimestampTz()
+    const user: User = { id: cred.password + cred.email, created_at: timestamptz }
+    const userObject: UserWithCredentials = { ...cred, user, activeSession: true }
 
     localStorage.setItem(LS_KEYS.auth, JSON.stringify([...prevData, userObject]))
 

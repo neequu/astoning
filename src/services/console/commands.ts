@@ -12,7 +12,6 @@ export const commands = {
   'signout': '/signout',
 
   'history-get-all': '/history',
-  'history-add': '/history/new',
   'history-remove-one': '/history/rm',
   'history-remove-all': '/history/clear',
 }

@@ -20,8 +20,12 @@ export async function register(params: string[]): Promise<void> {
   const [email, password] = params
   const res = validateCredentials({ email, password })
   if (res.success) {
-    await authService.register({ email, password })
-    console.log('✅')
+    const res = await authService.register({ email, password })
+
+    if (!res)
+      throw new Error('error registering')
+    else
+      console.log('✅')
   }
   else {
     // using as here to specify error type
