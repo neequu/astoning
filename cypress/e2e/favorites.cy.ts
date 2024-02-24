@@ -2,13 +2,13 @@ describe('card suggestions and card entity page w/ auth', () => {
   beforeEach(() => {
     // register before each test
     // if using supabase - change to login
-    cy.visit('/login')
+    cy.visit('/register')
     cy.get('[data-testid="email"]').type('nn@nn.nn')
     cy.get('[data-testid="password"]').type('nnnnnn')
     cy.get('[data-testid="submit"]').click()
 
     // wait for the register process to complete
-    cy.url().should('not.include', '/login')
+    cy.url().should('not.include', '/register')
   })
 
   it('should add, view, and remove a card from favorites', () => {
