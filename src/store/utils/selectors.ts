@@ -24,6 +24,7 @@ export const entityVisitsSelector = entityVisitAdapter.getSelectors<RootState>(
   state => state.entityVisit,
 )
 
-export function selectAllVisits(state: RootState) {
-  return entityVisitAdapter.getSelectors().selectAll(state.entityVisit)
-}
+export const selectAllVisits = createSelector(
+  (state: RootState) => state.entityVisit,
+  entityVisit => entityVisitAdapter.getSelectors().selectAll(entityVisit),
+)
