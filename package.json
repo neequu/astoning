@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev:omit": "vite",
+    "prepare": "concurrently \"npm i\" \"cd server npm i\" ",
     "dev": "concurrently \"cd server && tsc && node dist/index.js\" \"vite\"",
     "server": "cd server && tsc && node dist/index.js",
     "build": "tsc && vite build",

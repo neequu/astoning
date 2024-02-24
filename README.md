@@ -17,10 +17,10 @@ deployed on [vercel](https://astoning-neequus-projects.vercel.app)
 
 Install dependencies:
 ```javascript
-pnpm install
+pnpm run prepare
 ```
 ```javascript
-npm install
+npm run prepare
 ```
 Start dev server:
 ```javascript
@@ -92,7 +92,7 @@ npm run dev
 
     - [x] Настроен CD: [Deploy Link](#deploy)
 - [x] Реализована [**виртуализация списков**](https://github.com/neequu/astoning/blob/main/src/pages/history.tsx)
-- [x] Используются [**мемоизированные селекторы** (createSelector)](https://github.com/neequu/astoning/blob/main/src/store/utils/selectors.ts) [пример использования](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
+- [x] Используются [**мемоизированные селекторы** (createSelector)](https://github.com/neequu/astoning/blob/main/src/store/utils/selectors.ts) [пример использования](https://github.com/neequu/astoning/blob/main/src/components/grind/SelectorGrind.tsx)
 - [x] Используется **нормализованная структура стейта** [createEntityAdapter](https://github.com/neequu/astoning/blob/main/src/store/slices/entity-visit-slice.ts)
 
 - [x] Проведена [**оптимизация приложения**](#optimization)
