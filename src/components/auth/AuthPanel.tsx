@@ -14,7 +14,7 @@ import { authService } from '@/services/auth'
 import { showNotificationSuccess } from '@/lib/utils'
 
 import { GithubIcon } from '@/components/icons/github'
-import { setUser } from '@/store/slices/auth-slice'
+import { userSet } from '@/store/slices/auth-slice'
 
 interface Props {
   handleAuth: (data: Credentials) => Promise<User | null >
@@ -31,7 +31,7 @@ export function AuthPanel({ handleAuth, message }: Props) {
   })
 
   function handleAuthSuccess(user: User): void {
-    dispatch(setUser(user))
+    dispatch(userSet(user))
     navigate('/')
     showNotificationSuccess(message)
   }

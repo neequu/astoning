@@ -16,19 +16,19 @@ const visitSlice = createSlice({
   name: 'visit',
   initialState,
   reducers: {
-    setVisit(state, action: PayloadAction<number>) {
+    visitSet(state, action: PayloadAction<number>) {
       const cardId = action.payload
       const hasCard = state.cards.find(c => c.id === cardId)
       if (cardId && !hasCard)
         state.cards.push({ id: cardId, timestamptz: generateTimestampTz() })
     },
-    setFilter(state) {
+    filterSet(state) {
       const newFilter = state.filter === 'asc' ? 'desc' : 'asc'
       state.filter = newFilter
     },
   },
 })
 
-export const { setVisit, setFilter } = visitSlice.actions
+export const { visitSet, filterSet } = visitSlice.actions
 
 export default visitSlice.reducer

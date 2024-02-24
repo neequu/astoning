@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { cn, showNotificationError, transformDateFromString } from '@/lib/utils'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { Message } from '@/components/misc/Message'
-import { setFilter } from '@/store/slices/visit-slice'
+import { filterSet } from '@/store/slices/visit-slice'
 import { getFilter, getVisitedCards } from '@/store/utils/selectors'
 import { useAppDispatch, useAppSelector } from '@/hooks/store-hooks'
 
@@ -15,7 +15,7 @@ export default function SelectorGrind() {
   function handleFilter(): void {
     if (visitedCards.length <= 1)
       return showNotificationError('Not enough items to filter')
-    dispatch(setFilter())
+    dispatch(filterSet())
   }
   return (
     <div>

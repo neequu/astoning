@@ -5,7 +5,7 @@ import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { Message } from '@/components/misc/Message'
 import { useAppDispatch } from '@/hooks/store-hooks'
-import { setVisit } from '@/store/slices/visit-slice'
+import { visitSet } from '@/store/slices/visit-slice'
 import { AnimeCard } from '@/components/media/AnimeCard'
 import { visitAdded } from '@/store/slices/entity-visit-slice'
 import { generateTimestampTz } from '@/lib/utils'
@@ -27,7 +27,7 @@ export function AnimeItem() {
   useEffect(() => {
     if (isNotValidId)
       return
-    dispatch(setVisit(animeId))
+    dispatch(visitSet(animeId))
     dispatch(visitAdded({ id: animeId, timestamptz: generateTimestampTz() }))
   }, [])
 

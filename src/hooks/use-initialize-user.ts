@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { User } from '@/types/auth'
 import { useAppDispatch } from '@/hooks/store-hooks'
-import { setUser } from '@/store/slices/auth-slice'
+import { userSet } from '@/store/slices/auth-slice'
 
 interface ReturnType {
   isLoading: boolean
@@ -17,7 +17,7 @@ export function useInitializeUser(getUser: () => Promise<User | null>): ReturnTy
       setIsLoading(true)
       const user = await getUser()
       if (isMounted) {
-        dispatch(setUser(user))
+        dispatch(userSet(user))
         setIsLoading(false)
       }
     }
