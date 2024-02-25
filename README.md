@@ -103,7 +103,7 @@ npm run dev
     - [x] [Гость. Поиск. Единица информации.](https://github.com/neequu/astoning/blob/main/cypress/e2e/search-card-redirect.cy.ts)
     - [x] [**Пользователь. Поиск. Единица информации. Избранное**](https://github.com/neequu/astoning/blob/main/cypress/e2e/favorites.cy.ts)
 
-- [x] Связь UI и бизнес-логики построена не через команды, а через **события** [тут](https://github.com/neequu/astoning/blob/main/src/components/like/LikeComponent.tsx) [тут](https://github.com/neequu/astoning/blob/main/src/pages/visit.tsx)
+- [x] Связь UI и бизнес-логики построена не через [команды](https://github.com/neequu/astoning/blob/main/src/components/like/LikeComponent.tsx), а через  [**события**](https://github.com/neequu/astoning/blob/main/src/components/grind/EntityGrind.tsx)
 - [x] [**Project Console API**](https://github.com/neequu/astoning/blob/main/src/services/console)
 
 ## **additional**
@@ -129,21 +129,21 @@ npm run dev
 
 ## console examples
 ```javascript
-  all anime: /anime
-  anime by id: /anime/ 144
-  search for anime: /search kanon
+  all anime: anime/all
+  anime by id: anime/ 144
+  search for anime: search kanon
 
-  like anime: /like 144
-  unlike anime: /like/rm 144
-  get your likes: /likes
+  like anime: like 144
+  unlike anime: like/rm 144
+  get your likes: likes
 
-  login: /login email password
-  register: /register email password
-  signout: /signout
+  login: login email password
+  register: register email password
+  signout: signout
 
-  get all history: /history
-  remove history entry: /history/rm 4
-  clear all history: /history/clear
+  get all history: history
+  remove history entry: history/rm 4
+  clear all history: history/clear
 ```
 <a id="optimization"></a>
 
