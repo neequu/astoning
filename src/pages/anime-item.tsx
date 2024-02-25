@@ -1,35 +1,23 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
 import { useGetAnimeByIdQuery } from '@/store/api/anime-api'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
 import { Message } from '@/components/misc/Message'
-import { useAppDispatch } from '@/hooks/store-hooks'
-import { visitSet } from '@/store/slices/visit-slice'
 import { AnimeCard } from '@/components/media/AnimeCard'
-import { visitAdded } from '@/store/slices/entity-visit-slice'
-import { generateTimestampTz } from '@/lib/utils'
+import { useVisitSet } from '@/hooks/use-visit-set'
 
 export function AnimeItem() {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
   const { id } = useParams()
   // не parseInt тк при стринге может дать num ('1x' даст 1 например)
   const animeId = +(id!)
-  const isNotValidId = Number.isNaN(animeId)
+  const isInvalidId = Number.isNaN(animeId)
 
-  if (isNotValidId)
+  if (isInvalidId)
     navigate('/not-found', { replace: true })
 
   const { isError, isFetching, data: animeData, isSuccess } = useGetAnimeByIdQuery(animeId)
-
-  // sync dispatch with rendered component; naimg is bad - just testing
-  useEffect(() => {
-    if (isNotValidId)
-      return
-    dispatch(visitSet(animeId))
-    dispatch(visitAdded({ id: animeId, timestamptz: generateTimestampTz() }))
-  }, [])
+  useVisitSet(animeId, isInvalidId)
 
   return (
     <PageWrapper>

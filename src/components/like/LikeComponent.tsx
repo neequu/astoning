@@ -15,13 +15,9 @@ export function LikeComponent({ className, itemId }: Props) {
   const userId = user?.id
   const { isActive, isDisabled, isLoadingLike, handleLikeChange } = useSetLike(itemId, userId)
 
-  function handleLike(): void {
-    handleLikeChange(itemId, userId)
-  }
-
   return (
     <div className={cn('flex', className)}>
-      <LikeButton isDisabled={isDisabled} handleClicked={handleLike} isActive={isActive} isLoadingLike={isLoadingLike} hasUser={!!user} />
+      <LikeButton isDisabled={isDisabled} handleClicked={() => handleLikeChange(itemId, userId)} isActive={isActive} isLoadingLike={isLoadingLike} hasUser={!!user} />
     </div>
   )
 }
