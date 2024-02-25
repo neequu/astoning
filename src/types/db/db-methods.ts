@@ -22,4 +22,4 @@ export interface History {
   deleteAllHistory: (userId: User['id'] | undefined) => Promise<null>
 }
 
-export type DBMethods = Auth & Favorites & History
+export type DBMethods = Auth & Omit<Favorites, 'changeLike'> & History
