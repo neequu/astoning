@@ -5,27 +5,26 @@ import { lazily } from 'react-lazily'
 
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { HistoryWrapper } from '@/components/history/HistoryWrapper'
-import { useAppSelector } from '@/hooks/store-hooks'
 import { useGetHistoryQuery } from '@/store/api/db-api'
-import { selectUser } from '@/store/utils/selectors'
 import { useHistory } from '@/hooks/use-history'
 import { Message } from '@/components/misc/Message'
+import { useUser } from '@/hooks/use-user'
 
 const { HistoryCard } = lazily(() => import('@/components/history/HistoryCard'))
 const { Button } = lazily(() => import('@/components/ui/button'))
 
 export function History() {
-  const user = useAppSelector(selectUser)
-  const { data: historyData, isError, isSuccess, isLoading } = useGetHistoryQuery(user?.id, { skip: !user?.id })
+  const { userId } = useUser()
+  const { data: historyData, isError, isSuccess, isLoading } = useGetHistoryQuery(userId, { skip: !userId })
   const hasResults = isSuccess && historyData && historyData.length > 0
   const { handleAllHistoryDeleted, handleHistoryDeletedById } = useHistory()
 
   // rtk mutation handlers
   const handleDeletedAll = (): void => {
-    handleAllHistoryDeleted(user?.id)
+    handleAllHistoryDeleted(userId)
   }
   const handleDeletedSingle = useCallback((itemId: number): void => {
-    handleHistoryDeletedById(user?.id, itemId)
+    handleHistoryDeletedById(userId, itemId)
   }, [handleHistoryDeletedById])
 
   // row for virtualized list; usecallback to prevent retriggering delete button

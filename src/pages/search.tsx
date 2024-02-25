@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { lazily } from 'react-lazily'
 import { useGetAnimeSearchQuery } from '@/store/api/anime-api'
-import { selectUser } from '@/store/utils/selectors'
 import { useHistory } from '@/hooks/use-history'
-import { useAppSelector } from '@/hooks/store-hooks'
 
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
@@ -13,6 +11,7 @@ import { LikeComponent } from '@/components/like/LikeComponent'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
 import { SearchPanel } from '@/components/search/SearchPanel'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
+import { useUser } from '@/hooks/use-user'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 
@@ -23,7 +22,7 @@ export function Search() {
   const [currenstSearch, setCurrenstSearch] = useState(query)
 
   const { handleHistoryAdded } = useHistory()
-  const user = useAppSelector(selectUser)
+  const { userId } = useUser()
 
   // search data
   const { data: animeData, isError, isSuccess, isLoading, isFetching } = useGetAnimeSearchQuery({ q: currenstSearch })
@@ -33,7 +32,7 @@ export function Search() {
   const searchMessage = currenstSearch ? `Showing ${animeData?.pagination.items.count || '...'} results for ${currenstSearch}` : 'Search any anime!'
   const searchHeading = isLoading ? 'Loading...' : searchMessage
 
-  function handleQueryChanged(newQuery: string): void {
+  function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
   }
   // note: not extracting this, because there might be a page that works not on submit (like i had in ver.1)
@@ -46,13 +45,13 @@ export function Search() {
     else
       newSearchParams.set('q', query)
 
-    handleHistoryAdded(user?.id, query)
+    handleHistoryAdded(userId, query)
     setSearchParams(newSearchParams.toString())
   }
 
   return (
     <>
-      <SearchPanel handleSubmit={handleSubmit} onChangeQuery={handleQueryChanged} query={query} />
+      <SearchPanel handleSubmit={handleSubmit} onChangeQuery={handleQueryChange} query={query} />
       <PageWrapper className="pt-6" heading={searchHeading}>
         <MediaGrid>
           <AnimationWrapper className="grid-tmp">

@@ -3,11 +3,10 @@ import { Logo } from '@/components/misc/Logo'
 import { TheNav } from '@/components/TheNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
-import { useAppSelector } from '@/hooks/store-hooks'
-import { selectUser } from '@/store/utils/selectors'
+import { useUser } from '@/hooks/use-user'
 
 export function TheHeader() {
-  const user = useAppSelector(selectUser)
+  const { user } = useUser()
 
   return (
     <header>

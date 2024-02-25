@@ -3,25 +3,24 @@ import { useNavigate } from 'react-router-dom'
 import { lazily } from 'react-lazily'
 
 import { useGetAnimeQuery } from '@/store/api/anime-api'
-import { useAppSelector } from '@/hooks/store-hooks'
 import { useDebounce } from '@/hooks/use-debounce'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { MediaCard } from '@/components/media/MediaCard'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
 import { LikeComponent } from '@/components/like/LikeComponent'
-import { selectUser } from '@/store/utils/selectors'
 import { SearchPanel } from '@/components/search/SearchPanel'
 import { Message } from '@/components/misc/Message'
 import { transformQuery } from '@/lib/utils'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
 import type { Anime } from '@/types/api/anime'
 import { useHistory } from '@/hooks/use-history'
+import { useUser } from '@/hooks/use-user'
 
 const { TailElement } = lazily(() => import('@/components/misc/TailElement'))
 const { SearchSuggestions } = lazily(() => import('@/components/search/SearchSuggestions'))
 
 export function Home() {
-  const user = useAppSelector(selectUser)
+  const { userId } = useUser()
   const { handleHistoryAdded } = useHistory()
   const navigate = useNavigate()
 
@@ -46,24 +45,24 @@ export function Home() {
   }, [animeData])
 
   // update page
-  function handlePageChanged(): void {
+  function handlePageChange(): void {
     setPage(p => p + 1)
   }
   // update query
-  function handleQueryChanged(newQuery: string): void {
+  function handleQueryChange(newQuery: string): void {
     setQuery(newQuery)
   }
   // on submit transform query and redirect to search page
   function handleSubmit(): void {
     const encodedQuery = transformQuery(query)
-    handleHistoryAdded(user?.id, query)
+    handleHistoryAdded(userId, query)
     const redirectUrl = `/search?q=${encodedQuery}`
     navigate(redirectUrl)
   }
 
   return (
     <>
-      <SearchPanel onChangeQuery={handleQueryChanged} shouldKeepFocusState={true} handleSubmit={handleSubmit}>
+      <SearchPanel onChangeQuery={handleQueryChange} shouldKeepFocusState={true} handleSubmit={handleSubmit}>
         <SearchSuggestions debouncedQuery={debouncedQuery} />
       </SearchPanel>
       <PageWrapper className="pt-6" heading="Anime Collection">
@@ -76,7 +75,7 @@ export function Home() {
           ))}
         </MediaGrid>
         {isError && <Message message="There was an error loading anime!" className="flex-1 items-center text-destructive" />}
-        <TailElement breakCheck={!animeData || !animeData.pagination.hasNextPage} callback={handlePageChanged} />
+        <TailElement breakCheck={!animeData || !animeData.pagination.hasNextPage} callback={handlePageChange} />
       </PageWrapper>
     </>
   )

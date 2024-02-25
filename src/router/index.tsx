@@ -3,11 +3,10 @@ import { Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from '@/router/private'
 import { routesAuthOnly, routesNoAuthOnly, routesPublic } from '@/router/router-config'
 import { LoadingSkeleton } from '@/components/loading-state/LoadingSkeleton'
-import { useAppSelector } from '@/hooks/store-hooks'
-import { selectUser } from '@/store/utils/selectors'
+import { useUser } from '@/hooks/use-user'
 
 export function Router() {
-  const user = useAppSelector(selectUser)
+  const { user } = useUser()
 
   return (
     <Suspense fallback={<LoadingSkeleton />}>

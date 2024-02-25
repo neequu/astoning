@@ -22,13 +22,13 @@ export function SearchPanel({ handleSubmit, onChangeQuery, query, children, shou
     return child
   })
 
-  function handleFocused(): void {
+  function handleFocus(): void {
     if (!shouldKeepFocusState)
       return
 
     setIsInputFocused(true)
   }
-  function handleBlured(): void {
+  function handleBlur(): void {
     if (!shouldKeepFocusState)
       return
 
@@ -41,8 +41,8 @@ export function SearchPanel({ handleSubmit, onChangeQuery, query, children, shou
         <Input
           name="query"
           autoFocus
-          onFocus={handleFocused}
-          onBlur={handleBlured}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           value={query}
           className="text-md py-6 rounded-r-none border-r-none focus-visible:ring-offset-0 focus-visible:ring-0"
           placeholder="Search!"

@@ -1,21 +1,20 @@
 import { lazily } from 'react-lazily'
 import { MediaGrid } from '@/components/media/MediaGrid'
 import { PageWrapper } from '@/components/wrappers/PageWrapper'
-import { useAppSelector } from '@/hooks/store-hooks'
 import { useGetFavoritesQuery } from '@/store/api/db-api'
 import { AnimationWrapper } from '@/components/wrappers/AnimationWrapper'
-import { selectUser } from '@/store/utils/selectors'
 import { CardSkeleton } from '@/components/loading-state/CardSkeleton'
+import { useUser } from '@/hooks/use-user'
 
 const { Message } = lazily(() => import('@/components/misc/Message'))
 const { CardWrapper } = lazily(() => import('@/components/wrappers/CardWrapper'))
 const { LikeComponent } = lazily(() => import('@/components/like/LikeComponent'))
 
 export function Favorites() {
-  const user = useAppSelector(selectUser)
+  const { userId } = useUser()
 
-  const { data: favoritesData, isError, isLoading } = useGetFavoritesQuery(user?.id, {
-    skip: !user?.id,
+  const { data: favoritesData, isError, isLoading } = useGetFavoritesQuery(userId, {
+    skip: !userId,
   })
   const hasResults = favoritesData && favoritesData.length > 0
   return (
