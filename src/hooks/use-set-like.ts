@@ -6,9 +6,10 @@ import { showNotificationError } from '@/lib/utils'
 export function useSetLike(itemId: number, userId: User['id'] | undefined) {
   const [isActive, setIsActive] = useState(false)
   const [changeLike] = useChangeLikeMutation()
+  const [isDisabled, setIsDisabled] = useState(false)
 
-  const { isLoading, data: favoritesData, isFetching } = useGetFavoritesByIdQuery({ itemId, userId }, {
-    skip: !userId,
+  const { isLoading, data: favoritesData } = useGetFavoritesByIdQuery({ itemId, userId }, {
+    skip: !userId || !itemId,
   })
 
   // use layout to remove animation from setting button active state
@@ -25,12 +26,15 @@ export function useSetLike(itemId: number, userId: User['id'] | undefined) {
 
     const initialState = isActive
     setIsActive(!initialState)
+    setIsDisabled(true)
 
     const res = await changeLike({ itemId, isCurrentStateActive: initialState, userId })
 
     if (!res)
       setIsActive(initialState)
+
+    setIsDisabled(false)
   }
 
-  return { isActive, setIsActive, isLoadingLike: isLoading, handleLikeChange, isDisabled: isFetching }
+  return { isActive, setIsActive, isLoadingLike: isLoading, handleLikeChange, isDisabled }
 }
