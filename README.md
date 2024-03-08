@@ -111,14 +111,13 @@ npm run dev
 - mobile adaptive
 - [tailwind](https://tailwindcss.com) for styling
 - [shadcn](https://ui.shadcn.com) ui library
-- [zod](https://zod.dev/) input validation with
+- [zod](https://zod.dev/) input validation
 - [useForm](https://react-hook-form.com/docs/useform) forms
 - [supabase](https://supabase.com/) backend service
 - [sonner](https://sonner.emilkowal.ski/toast) toast
 - [formkit-aa](https://auto-animate.formkit.com) animation
 - [usehooks-ts](https://usehooks-ts.com) hooks
 - [react-window](https://github.com/bvaughn/react-window) virtualization
-- [infinite scroll](https://github.com/neequu/astoning/blob/main/src/pages/home.tsx)
 - [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer) auto sizing
 - [react-lazily](https://github.com/JLarky/react-lazily) lazy loading of named components
 - [concurrently](https://www.npmjs.com/package/concurrently) run multiple commands
